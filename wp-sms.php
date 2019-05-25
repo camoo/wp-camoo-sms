@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: WP SMS
- * Plugin URI: http://wp-sms-pro.com/
+ * Plugin Name: Camoo SMS
+ * Plugin URI: ''
  * Description: Camoo SMS plugin for WordPress
  * Version: 5.1.5
  * Author: Camoo Sarl

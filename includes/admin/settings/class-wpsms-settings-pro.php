@@ -35,11 +35,11 @@ class Settings_Pro
     }
 
     /**
-     * Add Professional Package options
+     * Add Camoo SMS Plus Package options
      * */
     public function add_settings_menu()
     {
-        add_submenu_page('wp-sms', __('Professional', 'wp-sms'), '<span style="color:#FF7600">' . __('Professional', 'wp-sms') . '</span>', 'wpsms_setting', 'wp-sms-pro', array(
+        add_submenu_page('wp-sms', __('Camoo SMS Plus', 'wp-sms'), '<span style="color:#FF7600">' . __('Camoo SMS Plus', 'wp-sms') . '</span>', 'wpsms_setting', 'wp-sms-pro', array(
             $this,
             'render_settings'
         ));
@@ -125,12 +125,9 @@ class Settings_Pro
             'wp'      => __('WordPress', 'wp-sms'),
             'bp'      => __('BuddyPress', 'wp-sms'),
             'wc'      => __('WooCommerce', 'wp-sms'),
-            'gf'      => __('Gravity Forms', 'wp-sms'),
-            'qf'      => __('Quform', 'wp-sms'),
             'edd'     => __('Easy Digital Downloads', 'wp-sms'),
             'job'     => __('WP Job Manager', 'wp-sms'),
             'as'      => __('Awesome Support', 'wp-sms'),
-            'um'      => __('Ultimate Members', 'wp-sms'),
         );
 
         // Check what version of WP-Pro using? if not new version, don't show tabs
@@ -439,20 +436,9 @@ class Settings_Pro
             // Options for general tab
             'general' => apply_filters('wp_sms_pro_general_settings', array(
                 'license'     => array(
-                    'id'   => 'license',
-                    'name' => __('License', 'wp-sms'),
-                    'type' => 'header'
-                ),
-                'license_key' => array(
-                    'id'          => 'license_key',
-                    'name'        => __('License Key', 'wp-sms'),
-                    'type'        => 'text',
-                    'after_input' => $this->activate_icon(),
-                    'desc'        => sprintf(
-                        __('The license key is used for access to automatic update and support, to get the license, please go to %1$syour account%2$s', 'wp-sms'),
-                        '<a href="' . esc_url(WP_SMS_SITE . '/checkout/purchase-history/') . '" target="_blank">',
-                        '</a>'
-                    ),
+                    'id'   => 'sms_plus',
+                    'name'        => __('Camoo SMS Plus'),
+                    'type' => 'header',
                 ),
             )),
             // Options for wordpress tab
@@ -1347,7 +1333,11 @@ class Settings_Pro
                             do_settings_fields('wps_pp_settings_' . $active_tab, 'wps_pp_settings_' . $active_tab);
                             ?>
                         </table>
-                        <?php submit_button(); ?>
+                        <?php 
+                            if ($active_tab !== 'general' ) {
+                                submit_button(); 
+                            }
+                        ?>
                     </form>
                 </div>
             </div>

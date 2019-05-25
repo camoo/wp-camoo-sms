@@ -23,11 +23,6 @@ class Version
         if ($this->pro_is_active()) {
             add_action('wp_sms_pro_after_setting_logo', array( $this, 'pro_setting_title' ));
 
-            // Check what version of WP-Pro using? if not new version, َShow the notice in admin area
-            if (defined('WP_SMS_PRO_VERSION') and version_compare(WP_SMS_PRO_VERSION, "2.4.2", "<=")) {
-                add_action('admin_notices', array( $this, 'version_notice' ));
-            }
-
             // Check license key.
             if (Option::getOption('license_key_status', true) == 'no') {
                 add_action('admin_notices', array( $this, 'license_notice' ));
@@ -81,7 +76,7 @@ class Version
      */
     public function pro_setting_title()
     {
-        echo sprintf(__('<p>WP-SMS-Pro v%s</p>', 'wp-sms'), WP_SMS_PRO_VERSION);
+        echo ' SMS';
     }
 
     /**

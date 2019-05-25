@@ -27,3 +27,7 @@ Temporary Items
 
 #Netbeans project
 nbproject
+
+
+vendor
+*.swp

@@ -8,10 +8,13 @@ class Camoo extends \WP_SMS\Gateway
     private $client = null;
     private $http;
     public $tariff = "";
-    public $unitrial = true;
+    public $unitrial = false;
     public $unit;
     public $flash = "enable";
     public $isflash = false;
+    public $clearObject = [\Camoo\Sms\Base::class, 'clear'];
+    public $oBalance = [\Camoo\Sms\Balance::class, 'create'];
+    public $oMessage = [\Camoo\Sms\Message::class, 'create'];
 
     public function __construct()
     {
@@ -52,21 +55,7 @@ class Camoo extends \WP_SMS\Gateway
          * @param string $this ->msg text message.
          */
         $this->msg = apply_filters('wp_sms_msg', $this->msg);
-
-        // Get the credit.
-        $credit = $this->GetCredit();
-
-        // Check gateway credit
-        if (is_wp_error($credit)) {
-            // Log the result
-            $this->log($this->from, $this->msg, $this->to, $credit->get_error_message(), 'error');
-
-            return $credit;
-        }
-
-
-        $oMessage = \Camoo\Sms\Message::create($this->username, $this->password);
-
+        $oMessage = call_user_func_array($this->oMessage,[$this->username, $this->password]);
         try {
 
             $oMessage->from = $this->from;
@@ -100,8 +89,11 @@ class Camoo extends \WP_SMS\Gateway
         if (! $this->username or ! $this->password) {
             return new \WP_Error('account-credit', __('Username/Password does not set for this gateway', 'wp-sms-pro'));
         }
-        $oBalance = \Camoo\Sms\Balance::create($this->username, $this->password);
+        if (property_exists($this,'clearObject')) {
+            call_user_func($this->clearObject);
+        }
 
+        $oBalance = call_user_func_array($this->oBalance,[$this->username, $this->password]);
         try {
             $ohBalance = $oBalance->get();
             return $ohBalance->balance->balance;

@@ -113,6 +113,9 @@ class Gateway
             $sms->from = Option::getOption('gateway_sender_id');
         }
 
+        // SET encryption setting
+        $sms->encrypt_sms = Option::getOption('encrypt_sms') == 1;
+
         // Unset gateway key field if not available in the current gateway class.
         add_filter('wp_sms_gateway_settings', function ($filter) {
             global $sms;
@@ -297,8 +300,6 @@ class Gateway
     public static function credit()
     {
         global $sms;
-
-        // Get credit
         $result = $sms->GetCredit();
 
         if (is_wp_error($result)) {
