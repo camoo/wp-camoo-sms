@@ -1,5 +1,4 @@
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/veronalabs/wp-sms.svg)](http://isitmaintained.com/project/veronalabs/wp-sms "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/veronalabs/wp-sms.svg)](http://isitmaintained.com/project/veronalabs/wp-sms "Percentage of issues still open")
+
 
 # WP-SMS Plugin
 A simple and powerful texting plugin for WordPress
@@ -9,8 +8,6 @@ You can add to WordPress, the ability to send SMS, member of SMS newsletter and 
 To every events in WordPress, you can send sms through this plugin.
 
 The usage of this plugin is completely free. You have to just have an account from service in the gateway lists that we support them.
-
-Don't worry, we have tried to add the best and the most gateways to the plugin. 
 
 Very easy Send SMS by PHP code:
 
@@ -23,7 +20,6 @@ wp_sms_send( $to, $msg );
 
 # Features
 
-* Supported +180 sms gateways. [(List all gateways)](https://github.com/veronalabs/wp-sms/tree/master/includes/gateways)
 * Send SMS to number(s), subscribers and wordpress users.
 * Subscribe newsletter SMS.
 * Send activation code to subscribe for complete subscription.
@@ -64,7 +60,7 @@ wp_sms_send
 ```
 
 Example: Send mail when send sms.
-```sh
+```php
 function send_mail_when_send_sms($message_info) {
 	wp_mail('you@mail.com', 'Send SMS', $message_info);
 }
@@ -72,12 +68,12 @@ add_action('wp_sms_send', 'send_mail_when_send_sms');
 ```
 
 Run the following action when subscribing a new user.
-```sh
+```php
 wp_sms_add_subscriber
 ```
 
 Example: Send sms to user when register a new subscriber.
-```sh
+```php
 function send_sms_when_subscribe_new_user($name, $mobile) {
     $to = array($mobile);
     $msg = "Hi {$name}, Thanks for subscribe.";
@@ -88,12 +84,12 @@ add_action('wp_sms_add_subscriber', 'send_sms_when_subscribe_new_user', 10, 2);
 
 # Filters
 You can use the following filter for modifying from the number.
-```sh
+```php
 wp_sms_from
 ```
 
 Example: Add 0 to the end sender number.
-```sh
+```php
 function wp_sms_modify_from($from) {
 	$from = $from . ' 0';
 	
@@ -103,7 +99,7 @@ add_filter('wp_sms_from', 'wp_sms_modify_from');
 ```
 
 You can use the following filter for modifying receivers number.
-```sh
+```php
 wp_sms_to
 ```
 
@@ -123,7 +119,7 @@ wp_sms_msg
 ```
 
 Example: Add signature to messages that are sent.
-```sh
+```php
 function wp_sms_modify_message($message) {
 	$message = $message . ' /n Powerby: WP-SMS';
 	
