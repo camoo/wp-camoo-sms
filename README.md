@@ -13,7 +13,7 @@ Very easy Send SMS by PHP code:
 
 ```php
 $to = array('01000000000');
-$msg = "Hello World!";
+$msg = "Hello kmer World! Déjà vu!";
 wp_sms_send( $to, $msg );
 ```
 
@@ -34,6 +34,8 @@ wp_sms_send( $to, $msg );
 * Support Wordpress Hooks.
 * Support WP REST API
 * Import/Export Subscribers.
+* Support GPG encyption to ensure an end  to end encryption between your server and ours.
+
 
 # Internationalization
 WP SMS has been translated in to many languages, for the current list and contributors, please visit the [translate page](https://translate.wordpress.org/projects/wp-plugins/wp-sms).
@@ -106,7 +108,7 @@ wp_sms_to
 Example: Add new number to get message.
 ```sh
 function wp_sms_modify_receiver($numbers) {
-	$numbers[] = '09xxxxxxxx';
+	$numbers[] = '67xxxxxxxx';
 	
 	return $numbers;
 }
@@ -121,7 +123,7 @@ wp_sms_msg
 Example: Add signature to messages that are sent.
 ```php
 function wp_sms_modify_message($message) {
-	$message = $message . ' /n Powerby: WP-SMS';
+	$message = $message . ' /n Powerby: WP-CAMOO-SMS';
 	
 	return $message;
 }
