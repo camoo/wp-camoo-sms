@@ -1,6 +1,6 @@
 
 
-# WP-SMS Plugin
+# WP-CAMOO-SMS Plugin
 A simple and powerful texting plugin for WordPress
 
 You can add to WordPress, the ability to send SMS, member of SMS newsletter and send to the SMS.
