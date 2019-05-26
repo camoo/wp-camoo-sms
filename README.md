@@ -135,7 +135,3 @@ Add new subscribe to SMS newsletter
 ```sh
 POST /wpsms/v1/subscriber/add
 ```
-
-# Community Links
-* [WordPress plugin page](http://wordpress.org/plugins/wp-sms/)
-* [Plugin Website](http://wp-sms-pro.com)
