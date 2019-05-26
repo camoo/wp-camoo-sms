@@ -37,12 +37,6 @@ wp_sms_send( $to, $msg );
 * Support GPG encyption to ensure an end  to end encryption between your server and ours.
 
 
-# Internationalization
-WP SMS has been translated in to many languages, for the current list and contributors, please visit the [translate page](https://translate.wordpress.org/projects/wp-plugins/wp-sms).
-
-Translations are done by people just like you, help make WP SMS available to more people around the world and [do a translation](http://wp-sms-pro.com/localization/) today!
-
-
 # Installation
 1. Upload `wp-sms` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
@@ -57,7 +51,7 @@ or using this Shortcode `[wp-sms-subscriber-form]` in Posts pages or Widget.
 
 # Actions
 Run the following action when sending SMS with this plugin.
-```sh
+```php
 wp_sms_send
 ```
 
@@ -106,7 +100,7 @@ wp_sms_to
 ```
 
 Example: Add new number to get message.
-```sh
+```php
 function wp_sms_modify_receiver($numbers) {
 	$numbers[] = '67xxxxxxxx';
 	
@@ -116,7 +110,7 @@ add_filter('wp_sms_to', 'wp_sms_modify_receiver');
 ```
 
 You can use the following filter for modifying text message.
-```sh
+```php
 wp_sms_msg
 ```
 

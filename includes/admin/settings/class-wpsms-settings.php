@@ -213,13 +213,13 @@ class Settings
                     'id'   => 'admin_mobile_number',
                     'name' => __('Admin mobile number', 'wp-camoo-sms'),
                     'type' => 'text',
-                    'desc' => __('Admin mobile number for get any sms notifications', 'wp-camoo-sms')
+                    'desc' => __('Admin mobile number for get any sms notifications. eg: 671234568', 'wp-camoo-sms')
                 ),
                 'mobile_county_code'  => array(
                     'id'   => 'mobile_county_code',
                     'name' => __('Mobile country code', 'wp-camoo-sms'),
                     'type' => 'text',
-                    'desc' => __('Enter your mobile country code for prefix numbers. For example if you enter +1 The final number will be +19999999999', 'wp-camoo-sms')
+                    'desc' => __('Enter your mobile country code for prefix numbers. For example if you enter +237 The final number will be +237671234568', 'wp-camoo-sms')
                 ),
                 'admin_title_privacy' => array(
                     'id'   => 'admin_title_privacy',
