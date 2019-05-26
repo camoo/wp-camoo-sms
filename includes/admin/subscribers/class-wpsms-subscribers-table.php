@@ -53,7 +53,7 @@ class Subscribers_List_Table extends \WP_List_Table
                 }
 
             case 'date':
-                return sprintf(__('%s <span class="wpsms-time">Time: %s</span>', 'wp-sms'), date_i18n('Y-m-d', strtotime($item[ $column_name ])), date_i18n('H:i:s', strtotime($item[ $column_name ])));
+                return sprintf(__('%s <span class="wpsms-time">Time: %s</span>', 'wp-camoo-sms'), date_i18n('Y-m-d', strtotime($item[ $column_name ])), date_i18n('H:i:s', strtotime($item[ $column_name ])));
 
             case 'status':
                 return ( $item[ $column_name ] == '1' ? '<span class="dashicons dashicons-yes wpsms-color-green"></span>' : '<span class="dashicons dashicons-no-alt wpsms-color-red"></span>' );
@@ -71,8 +71,8 @@ class Subscribers_List_Table extends \WP_List_Table
 
         //Build row actions
         $actions = array(
-            'edit'   => sprintf('<a href="#" onclick="wp_sms_edit_subscriber(%s)">' . __('Edit', 'wp-sms') . '</a>', $item['ID']),
-            'delete' => sprintf('<a href="?page=%s&action=%s&ID=%s">' . __('Delete', 'wp-sms') . '</a>', $_REQUEST['page'], 'delete', $item['ID']),
+            'edit'   => sprintf('<a href="#" onclick="wp_sms_edit_subscriber(%s)">' . __('Edit', 'wp-camoo-sms') . '</a>', $item['ID']),
+            'delete' => sprintf('<a href="?page=%s&action=%s&ID=%s">' . __('Delete', 'wp-camoo-sms') . '</a>', $_REQUEST['page'], 'delete', $item['ID']),
         );
 
         //Return the title contents
@@ -102,12 +102,12 @@ class Subscribers_List_Table extends \WP_List_Table
     {
         $columns = array(
             'cb'           => '<input type="checkbox" />', //Render a checkbox instead of text
-            'name'         => __('Name', 'wp-sms'),
-            'mobile'       => __('Mobile', 'wp-sms'),
-            'group_ID'     => __('Group', 'wp-sms'),
-            'date'         => __('Date', 'wp-sms'),
-            'status'       => __('Status', 'wp-sms'),
-            'activate_key' => __('Activate code', 'wp-sms'),
+            'name'         => __('Name', 'wp-camoo-sms'),
+            'mobile'       => __('Mobile', 'wp-camoo-sms'),
+            'group_ID'     => __('Group', 'wp-camoo-sms'),
+            'date'         => __('Date', 'wp-camoo-sms'),
+            'status'       => __('Status', 'wp-camoo-sms'),
+            'activate_key' => __('Activate code', 'wp-camoo-sms'),
         );
 
         return $columns;
@@ -131,7 +131,7 @@ class Subscribers_List_Table extends \WP_List_Table
     function get_bulk_actions()
     {
         $actions = array(
-            'bulk_delete' => __('Delete', 'wp-sms')
+            'bulk_delete' => __('Delete', 'wp-camoo-sms')
         );
 
         return $actions;
@@ -155,7 +155,7 @@ class Subscribers_List_Table extends \WP_List_Table
             }
             $this->data  = $this->get_data();
             $this->count = $this->get_total();
-            echo '<div class="notice notice-success is-dismissible"><p>' . __('Items removed.', 'wp-sms') . '</p></div>';
+            echo '<div class="notice notice-success is-dismissible"><p>' . __('Items removed.', 'wp-camoo-sms') . '</p></div>';
         }
 
         // Single delete action
@@ -163,7 +163,7 @@ class Subscribers_List_Table extends \WP_List_Table
             $this->db->delete($this->tb_prefix . "sms_subscribes", array( 'ID' => $_GET['ID'] ));
             $this->data  = $this->get_data();
             $this->count = $this->get_total();
-            echo '<div class="notice notice-success is-dismissible"><p>' . __('Item removed.', 'wp-sms') . '</p></div>';
+            echo '<div class="notice notice-success is-dismissible"><p>' . __('Item removed.', 'wp-camoo-sms') . '</p></div>';
         }
     }
 

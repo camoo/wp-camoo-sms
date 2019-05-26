@@ -111,7 +111,7 @@ class Features
      */
     public function add_mobile_field_to_profile_form($fields)
     {
-        $fields['mobile'] = __('Mobile', 'wp-sms');
+        $fields['mobile'] = __('Mobile', 'wp-camoo-sms');
 
         return $fields;
     }
@@ -132,11 +132,11 @@ class Features
     public function registration_errors($errors, $sanitized_user_login, $user_email)
     {
         if (empty($_POST['mobile'])) {
-            $errors->add('first_name_error', __('<strong>ERROR</strong>: You must include a mobile number.', 'wp-sms'));
+            $errors->add('first_name_error', __('<strong>ERROR</strong>: You must include a mobile number.', 'wp-camoo-sms'));
         }
 
         if ($this->check_mobile_number($_POST['mobile'])) {
-            $errors->add('duplicate_mobile_number', __('<strong>ERROR</strong>: This mobile is already registered, please choose another one.', 'wp-sms'));
+            $errors->add('duplicate_mobile_number', __('<strong>ERROR</strong>: This mobile is already registered, please choose another one.', 'wp-camoo-sms'));
         }
 
         return $errors;

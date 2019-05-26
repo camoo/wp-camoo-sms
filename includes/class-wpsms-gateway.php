@@ -68,8 +68,8 @@ class Gateway
 
         if (is_file(WP_SMS_DIR . 'includes/gateways/class-wpsms-gateway-' . $gateway_name . '.php')) {
             include_once WP_SMS_DIR . 'includes/gateways/class-wpsms-gateway-' . $gateway_name . '.php';
-        } else if (is_file(WP_PLUGIN_DIR . '/wp-sms/includes/gateways/class-wpsms-pro-gateway-' . $gateway_name . '.php')) {
-            include_once(WP_PLUGIN_DIR . '/wp-sms/includes/gateways/class-wpsms-pro-gateway-' . $gateway_name . '.php');
+        } else if (is_file(WP_PLUGIN_DIR . '/wp-camoo-sms/includes/gateways/class-wpsms-pro-gateway-' . $gateway_name . '.php')) {
+            include_once(WP_PLUGIN_DIR . '/wp-camoo-sms/includes/gateways/class-wpsms-pro-gateway-' . $gateway_name . '.php');
         } else {
             return new $class_name();
         }
@@ -204,7 +204,7 @@ class Gateway
     {
         $gateways = array(
             ''               => array(
-                'default' => __('Please select your gateway', 'wp-sms'),
+                'default' => __('Please select your gateway', 'wp-camoo-sms'),
             ),
             'camoo' => array(
                 'camoo'     => 'camoo.cm',
@@ -222,7 +222,7 @@ class Gateway
         global $sms;
 
         //Check that, Are we in the Gateway WP_SMS tab setting page or not?
-        if (is_admin() and isset($_REQUEST['page']) and isset($_REQUEST['tab']) and $_REQUEST['page'] == 'wp-sms-settings' and $_REQUEST['tab'] == 'gateway') {
+        if (is_admin() and isset($_REQUEST['page']) and isset($_REQUEST['tab']) and $_REQUEST['page'] == 'wp-camoo-sms-settings' and $_REQUEST['tab'] == 'gateway') {
             // Get credit
             $result = $sms->getCredit();
 
@@ -234,7 +234,7 @@ class Gateway
                 update_option('wpsms_gateway_credit', 0);
 
                 // Return html
-                return '<div class="wpsms-no-credit"><span class="dashicons dashicons-no"></span> ' . __('Deactive!', 'wp-sms') . '</div>';
+                return '<div class="wpsms-no-credit"><span class="dashicons dashicons-no"></span> ' . __('Deactive!', 'wp-camoo-sms') . '</div>';
             }
             // Update credit
             if (! is_object($result)) {
@@ -243,7 +243,7 @@ class Gateway
             self::$get_response = var_export($result, true);
 
             // Return html
-            return '<div class="wpsms-has-credit"><span class="dashicons dashicons-yes"></span> ' . __('Active!', 'wp-sms') . '</div>';
+            return '<div class="wpsms-has-credit"><span class="dashicons dashicons-yes"></span> ' . __('Active!', 'wp-camoo-sms') . '</div>';
         }
     }
 
@@ -287,10 +287,10 @@ class Gateway
         // Get bulk status
         if ($sms->bulk_send == true) {
             // Return html
-            return '<div class="wpsms-has-credit"><span class="dashicons dashicons-yes"></span> ' . __('Supported', 'wp-sms') . '</div>';
+            return '<div class="wpsms-has-credit"><span class="dashicons dashicons-yes"></span> ' . __('Supported', 'wp-camoo-sms') . '</div>';
         } else {
             // Return html
-            return '<div class="wpsms-no-credit"><span class="dashicons dashicons-no"></span> ' . __('Does not support!', 'wp-sms') . '</div>';
+            return '<div class="wpsms-no-credit"><span class="dashicons dashicons-no"></span> ' . __('Does not support!', 'wp-camoo-sms') . '</div>';
         }
     }
 

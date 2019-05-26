@@ -67,18 +67,18 @@ class RestApi
         global $sms;
 
         if (empty($name) or empty($mobile)) {
-            return new \WP_Error('subscribe', __('The name and mobile number must be valued!', 'wp-sms'));
+            return new \WP_Error('subscribe', __('The name and mobile number must be valued!', 'wp-camoo-sms'));
         }
 
         $check_group = Newsletter::getGroup($group);
 
         if (! isset($check_group) and empty($check_group)) {
-            return new \WP_Error('subscribe', __('The group number is not valid!', 'wp-sms'));
+            return new \WP_Error('subscribe', __('The group number is not valid!', 'wp-camoo-sms'));
         }
 
         if (preg_match(WP_SMS_MOBILE_REGEX, $mobile) == false) {
             // Return response
-            return new \WP_Error('subscribe', __('Please enter a valid mobile number', 'wp-sms'));
+            return new \WP_Error('subscribe', __('Please enter a valid mobile number', 'wp-camoo-sms'));
         }
 
         $max_number = Option::getOption('mobile_terms_maximum');
@@ -86,14 +86,14 @@ class RestApi
         if ($max_number) {
             if (strlen($mobile) > $max_number) {
                 // Return response
-                return new \WP_Error('subscribe', sprintf(__('Your mobile number should be less than %s digits', 'wp-sms'), $max_number));
+                return new \WP_Error('subscribe', sprintf(__('Your mobile number should be less than %s digits', 'wp-camoo-sms'), $max_number));
             }
         }
         $min_number = Option::getOption('mobile_terms_minimum');
         if ($min_number) {
             if (strlen($mobile) < $min_number) {
                 // Return response
-                return new \WP_Error('subscribe', sprintf(__('Your mobile number should be greater than %s digits', 'wp-sms'), $min_number));
+                return new \WP_Error('subscribe', sprintf(__('Your mobile number should be greater than %s digits', 'wp-camoo-sms'), $min_number));
             }
         }
 
@@ -103,7 +103,7 @@ class RestApi
             // Check gateway setting
             if (! $gateway_name) {
                 // Return response
-                return new \WP_Error('subscribe', __('Service provider is not available for send activate key to your mobile. Please contact with site.', 'wp-sms'));
+                return new \WP_Error('subscribe', __('Service provider is not available for send activate key to your mobile. Please contact with site.', 'wp-camoo-sms'));
             }
 
             $key = rand(1000, 9999);
@@ -116,12 +116,12 @@ class RestApi
                 return new \WP_Error('subscribe', $result['message']);
             } else {
                 $sms->to  = array( $mobile );
-                $sms->msg = __('Your activation code', 'wp-sms') . ': ' . $key;
+                $sms->msg = __('Your activation code', 'wp-camoo-sms') . ': ' . $key;
                 $sms->sendSMS();
             }
 
             // Return response
-            return __('You will join the newsletter, Activation code sent to your mobile.', 'wp-sms');
+            return __('You will join the newsletter, Activation code sent to your mobile.', 'wp-camoo-sms');
         } else {
             // Add subscribe to database
             $result = Newsletter::addSubscriber($name, $mobile, $group, '1');
@@ -131,7 +131,7 @@ class RestApi
                 return new \WP_Error('subscribe', $result['message']);
             }
 
-            return __('Your number has been successfully subscribed.', 'wp-sms');
+            return __('Your number has been successfully subscribed.', 'wp-camoo-sms');
         }
     }
 
@@ -148,18 +148,18 @@ class RestApi
     {
 
         if (empty($name) or empty($mobile)) {
-            return new \WP_Error('unsubscribe', __('The name and mobile number must be valued!', 'wp-sms'));
+            return new \WP_Error('unsubscribe', __('The name and mobile number must be valued!', 'wp-camoo-sms'));
         }
 
         $check_group = Newsletter::getGroup($group);
 
         if (! isset($check_group) and empty($check_group)) {
-            return new \WP_Error('unsubscribe', __('The group number is not valid!', 'wp-sms'));
+            return new \WP_Error('unsubscribe', __('The group number is not valid!', 'wp-camoo-sms'));
         }
 
         if (preg_match(WP_SMS_MOBILE_REGEX, $mobile) == false) {
             // Return response
-            return new \WP_Error('unsubscribe', __('Please enter a valid mobile number', 'wp-sms'));
+            return new \WP_Error('unsubscribe', __('Please enter a valid mobile number', 'wp-camoo-sms'));
         }
 
         $max_number = Option::getOption('mobile_terms_maximum');
@@ -167,7 +167,7 @@ class RestApi
         if ($max_number) {
             if (strlen($mobile) > $max_number) {
                 // Return response
-                return new \WP_Error('unsubscribe', sprintf(__('Your mobile number should be less than %s digits', 'wp-sms'), $max_number));
+                return new \WP_Error('unsubscribe', sprintf(__('Your mobile number should be less than %s digits', 'wp-camoo-sms'), $max_number));
             }
         }
 
@@ -176,7 +176,7 @@ class RestApi
         if ($max_number) {
             if (strlen($mobile) < $max_number) {
                 // Return response
-                return new \WP_Error('unsubscribe', sprintf(__('Your mobile number should be greater than %s digits', 'wp-sms'), $max_number));
+                return new \WP_Error('unsubscribe', sprintf(__('Your mobile number should be greater than %s digits', 'wp-camoo-sms'), $max_number));
             }
         }
         // Delete subscriber
@@ -188,7 +188,7 @@ class RestApi
             return new \WP_Error('unsubscribe', $result['message']);
         }
 
-        return __('Your subscription was canceled.', 'wp-sms');
+        return __('Your subscription was canceled.', 'wp-camoo-sms');
     }
 
     /**
@@ -205,7 +205,7 @@ class RestApi
         global $sms, $wpdb;
 
         if (empty($name) or empty($mobile) or empty($activation)) {
-            return new \WP_Error('unsubscribe', __('The required parameters must be valued!', 'wp-sms'));
+            return new \WP_Error('unsubscribe', __('The required parameters must be valued!', 'wp-camoo-sms'));
         }
 
         // Check the mobile number is string or integer
@@ -220,7 +220,7 @@ class RestApi
         if (isset($check_mobile)) {
             if ($activation != $check_mobile->activate_key) {
                 // Return response
-                return new \WP_Error('verify_subscriber', __('Activation code is wrong!', 'wp-sms'));
+                return new \WP_Error('verify_subscriber', __('Activation code is wrong!', 'wp-camoo-sms'));
             }
 
             // Check the mobile number is string or integer
@@ -246,11 +246,11 @@ class RestApi
                 }
 
                 // Return response
-                return __('Your subscription was successful!', 'wp-sms');
+                return __('Your subscription was successful!', 'wp-camoo-sms');
             }
         }
 
-        return new \WP_Error('verify_subscriber', __('Not found the number!', 'wp-sms'));
+        return new \WP_Error('verify_subscriber', __('Not found the number!', 'wp-camoo-sms'));
     }
 
     /**
@@ -310,7 +310,7 @@ class RestApi
     {
         // Check if valued required parameters or not
         if (empty($to) or empty($msg)) {
-            return new \WP_Error('send_sms', __('The required parameters must be valued!', 'wp-sms'));
+            return new \WP_Error('send_sms', __('The required parameters must be valued!', 'wp-camoo-sms'));
         }
 
         // Get the result

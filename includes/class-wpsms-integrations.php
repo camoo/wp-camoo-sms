@@ -44,7 +44,7 @@ class Integrations
     {
         $new_page = array(
             'wpsms' => array(
-                'title'    => __('SMS Notification', 'wp-sms'),
+                'title'    => __('SMS Notification', 'wp-camoo-sms'),
                 'callback' => array( $this, 'cf7_setup_form' )
             )
         );

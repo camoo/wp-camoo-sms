@@ -40,29 +40,29 @@ class Outbox_List_Table extends \WP_List_Table
     {
         switch ($column_name) {
             case 'date':
-                return sprintf(__('%s <span class="wpsms-time">Time: %s</span>', 'wp-sms'), date_i18n('Y-m-d', strtotime($item[ $column_name ])), date_i18n('H:i:s', strtotime($item[ $column_name ])));
+                return sprintf(__('%s <span class="wpsms-time">Time: %s</span>', 'wp-camoo-sms'), date_i18n('Y-m-d', strtotime($item[ $column_name ])), date_i18n('H:i:s', strtotime($item[ $column_name ])));
 
             case 'message':
                 return $item[ $column_name ];
             case 'recipient':
                 $html = '<details>
-						  <summary>' . __('Click to View more...', 'wp-sms') . '</summary>
+						  <summary>' . __('Click to View more...', 'wp-camoo-sms') . '</summary>
 						  <p>' . $item[ $column_name ] . '</p>
 						</details>';
 
                 return $html;
             case 'response':
                 $html = '<details>
-						  <summary>' . __('Click to View more...', 'wp-sms') . '</summary>
+						  <summary>' . __('Click to View more...', 'wp-camoo-sms') . '</summary>
 						  <p>' . $item[ $column_name ] . '</p>
 						</details>';
 
                 return $html;
             case 'status':
                 if ($item[ $column_name ] == 'success') {
-                    return '<span class="wp_sms_status_success">' . __('Success', 'wp-sms') . '</span>';
+                    return '<span class="wp_sms_status_success">' . __('Success', 'wp-camoo-sms') . '</span>';
                 } else {
-                    return '<span class="wp_sms_status_fail">' . __('Fail', 'wp-sms') . '</span>';
+                    return '<span class="wp_sms_status_fail">' . __('Fail', 'wp-camoo-sms') . '</span>';
                 }
             default:
                 return print_r($item, true); //Show the whole array for troubleshooting purposes
@@ -74,8 +74,8 @@ class Outbox_List_Table extends \WP_List_Table
 
         //Build row actions
         $actions = array(
-            'resend' => sprintf('<a href="?page=%s&action=%s&ID=%s">' . __('Resend', 'wp-sms') . '</a>', $_REQUEST['page'], 'resend', $item['ID']),
-            'delete' => sprintf('<a href="?page=%s&action=%s&ID=%s">' . __('Delete', 'wp-sms') . '</a>', $_REQUEST['page'], 'delete', $item['ID']),
+            'resend' => sprintf('<a href="?page=%s&action=%s&ID=%s">' . __('Resend', 'wp-camoo-sms') . '</a>', $_REQUEST['page'], 'resend', $item['ID']),
+            'delete' => sprintf('<a href="?page=%s&action=%s&ID=%s">' . __('Delete', 'wp-camoo-sms') . '</a>', $_REQUEST['page'], 'delete', $item['ID']),
         );
 
         //Return the title contents
@@ -105,12 +105,12 @@ class Outbox_List_Table extends \WP_List_Table
     {
         $columns = array(
             'cb'        => '<input type="checkbox" />', //Render a checkbox instead of text
-            'sender'    => __('Sender', 'wp-sms'),
-            'date'      => __('Date', 'wp-sms'),
-            'message'   => __('Message', 'wp-sms'),
-            'recipient' => __('Recipient', 'wp-sms'),
-            'response'  => __('Response', 'wp-sms'),
-            'status'    => __('Status', 'wp-sms'),
+            'sender'    => __('Sender', 'wp-camoo-sms'),
+            'date'      => __('Date', 'wp-camoo-sms'),
+            'message'   => __('Message', 'wp-camoo-sms'),
+            'recipient' => __('Recipient', 'wp-camoo-sms'),
+            'response'  => __('Response', 'wp-camoo-sms'),
+            'status'    => __('Status', 'wp-camoo-sms'),
         );
 
         return $columns;
@@ -134,7 +134,7 @@ class Outbox_List_Table extends \WP_List_Table
     function get_bulk_actions()
     {
         $actions = array(
-            'bulk_delete' => __('Delete', 'wp-sms')
+            'bulk_delete' => __('Delete', 'wp-camoo-sms')
         );
 
         return $actions;
@@ -158,7 +158,7 @@ class Outbox_List_Table extends \WP_List_Table
             }
             $this->data  = $this->get_data();
             $this->count = $this->get_total();
-            echo '<div class="notice notice-success is-dismissible"><p>' . __('Items removed.', 'wp-sms') . '</p></div>';
+            echo '<div class="notice notice-success is-dismissible"><p>' . __('Items removed.', 'wp-camoo-sms') . '</p></div>';
         }
 
         // Single delete action
@@ -166,7 +166,7 @@ class Outbox_List_Table extends \WP_List_Table
             $this->db->delete($this->tb_prefix . "sms_send", array( 'ID' => $_GET['ID'] ));
             $this->data  = $this->get_data();
             $this->count = $this->get_total();
-            echo '<div class="notice notice-success is-dismissible"><p>' . __('Item removed.', 'wp-sms') . '</p></div>';
+            echo '<div class="notice notice-success is-dismissible"><p>' . __('Item removed.', 'wp-camoo-sms') . '</p></div>';
         }
 
         // Resend sms
@@ -180,7 +180,7 @@ class Outbox_List_Table extends \WP_List_Table
             if (is_wp_error($error)) {
                 echo '<div class="notice notice-error  is-dismissible"><p>' . $error->get_error_message() . '</p></div>';
             } else {
-                echo '<div class="notice notice-success is-dismissible"><p>' . __('The SMS sent successfully.', 'wp-sms') . '</p></div>';
+                echo '<div class="notice notice-success is-dismissible"><p>' . __('The SMS sent successfully.', 'wp-camoo-sms') . '</p></div>';
             }
             $this->data  = $this->get_data();
             $this->count = $this->get_total();

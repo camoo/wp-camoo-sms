@@ -2,7 +2,7 @@
 require('../../../../../wp-load.php');
 
 if (! is_super_admin()) {
-    wp_die(__('Access denied!', 'wp-sms'));
+    wp_die(__('Access denied!', 'wp-camoo-sms'));
 }
 
 $type = $_POST['export-file-type'];
@@ -47,5 +47,5 @@ if ($type) {
 
     $exporter->finalize();
 } else {
-    wp_die(__('Please select the desired items.', 'wp-sms'), false, array( 'back_link' => true ));
+    wp_die(__('Please select the desired items.', 'wp-camoo-sms'), false, array( 'back_link' => true ));
 }

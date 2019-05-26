@@ -1,20 +1,20 @@
-<div class="wrap wps-wrap wp-sms-settings">
-    <h2 class="wps_title"><?php _e('System Info', 'wp-sms'); ?></h2>
+<div class="wrap wps-wrap wp-camoo-sms-settings">
+    <h2 class="wps_title"><?php _e('System Info', 'wp-camoo-sms'); ?></h2>
     <div id="poststuff">
         <div id="post-body" class="metabox-holder columns-2">
             <div class="wp-list-table widefat widefat">
-                <div class="wp-sms-container">
+                <div class="wp-camoo-sms-container">
                     <ul class="tabs">
-                        <li class="tab-link current" data-tab="resources"><?php _e('Information', 'wp-sms'); ?></li>
+                        <li class="tab-link current" data-tab="resources"><?php _e('Information', 'wp-camoo-sms'); ?></li>
                     </ul>
                     <div id="resources" class="tab-content current">
                         <div class="wrap wps-wrap">
                             <table class="form-table">
                                 <tr valign="top">
                                     <th scope="row" colspan="2">
-                                        <h3><?php _e('Download information', 'wp-sms'); ?></h3>
+                                        <h3><?php _e('Download information', 'wp-camoo-sms'); ?></h3>
                                         <form method="POST">
-                                            <input type="submit" class="button action" name="wpsms_download_info" value="<?php _e('Download', 'wp-sms'); ?>"/>
+                                            <input type="submit" class="button action" name="wpsms_download_info" value="<?php _e('Download', 'wp-camoo-sms'); ?>"/>
                                         </form>
                                         <?php ?>
                                     </th>

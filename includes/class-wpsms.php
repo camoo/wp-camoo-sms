@@ -19,7 +19,7 @@ class WP_SMS
          */
         require_once WP_SMS_DIR . 'includes/class-wpsms-install.php';
 
-        register_activation_hook(WP_SMS_DIR . 'wp-sms.php', array( '\WP_SMS\Install', 'install' ));
+        register_activation_hook(WP_SMS_DIR . 'wp-camoo-sms.php', array( '\WP_SMS\Install', 'install' ));
     }
 
     /**
@@ -42,7 +42,7 @@ class WP_SMS
      */
     public function load_textdomain()
     {
-        load_plugin_textdomain('wp-sms', false, dirname(plugin_basename(__FILE__)) . '/languages');
+        load_plugin_textdomain('wp-camoo-sms', false, dirname(plugin_basename(__FILE__)) . '/languages');
     }
 
     /**

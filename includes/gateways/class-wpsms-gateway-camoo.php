@@ -87,7 +87,7 @@ class Camoo extends \WP_SMS\Gateway
     {
         // Check username and password
         if (! $this->username or ! $this->password) {
-            return new \WP_Error('account-credit', __('Username/Password does not set for this gateway', 'wp-sms-pro'));
+            return new \WP_Error('account-credit', __('Username/Password does not set for this gateway', 'wp-camoo-sms-pro'));
         }
         if (property_exists($this,'clearObject')) {
             call_user_func($this->clearObject);

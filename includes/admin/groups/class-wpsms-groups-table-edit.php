@@ -34,7 +34,7 @@ class Subscribers_Groups_Table_Edit
 					        <tr>
 					            <td style="padding-top: 10px;">
 					                <label for="wp_group_name"
-					                       class="wp_sms_subscribers_label">' . __('Name', 'wp-sms') . '</label>
+					                       class="wp_sms_subscribers_label">' . __('Name', 'wp-camoo-sms') . '</label>
 					                <input type="text" id="wp_group_name" name="wp_group_name" value="' . $group_name . '"
 					                       class="wp_sms_subscribers_input_text"/>
 					                <input type="hidden" id="wp_group_name" name="group_id" value="' . $group_id . '"
@@ -45,7 +45,7 @@ class Subscribers_Groups_Table_Edit
 							<tr>
 							    <td colspan="2" style="padding-top: 20px;">
 							        <input type="submit" class="button-primary" name="wp_update_group"
-							               value="' . __('Edit', 'wp-sms') . '"/>
+							               value="' . __('Edit', 'wp-camoo-sms') . '"/>
 							    </td>
 							</tr>
 							</table>

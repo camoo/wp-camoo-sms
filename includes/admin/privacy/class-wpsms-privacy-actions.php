@@ -63,20 +63,20 @@ class Privacy_Actions
         /*
          * privacy Page
          */
-        if ($pagenow == "admin.php" and isset($_GET['page']) and $_GET['page'] == "wp-sms-subscribers-privacy") {
+        if ($pagenow == "admin.php" and isset($_GET['page']) and $_GET['page'] == "wp-camoo-sms-subscribers-privacy") {
             if (isset($_GET['error'])) {
                 /*
                  *  Empty Mobile Number
                  */
                 if ($_GET['error'] == "empty_number") {
-                    Helper::notice(__('Please enter the mobile number', 'wp-sms'), "error");
+                    Helper::notice(__('Please enter the mobile number', 'wp-camoo-sms'), "error");
                 }
 
                 /*
                 *  Not found User
                  */
                 if ($_GET['error'] == "not_found") {
-                    Helper::notice(__('User with this mobile number was not found', 'wp-sms'), "error");
+                    Helper::notice(__('User with this mobile number was not found', 'wp-camoo-sms'), "error");
                 }
             }
 
@@ -84,7 +84,7 @@ class Privacy_Actions
              * Success Mobile Number
              */
             if (isset($_GET['delete_mobile'])) {
-                Helper::notice(sprintf(__('User with %s mobile number is removed completely', 'wp-sms'), trim($_GET['delete_mobile'])), "success");
+                Helper::notice(sprintf(__('User with %s mobile number is removed completely', 'wp-camoo-sms'), trim($_GET['delete_mobile'])), "success");
             }
         }
     }
@@ -109,14 +109,14 @@ class Privacy_Actions
                  * Export Area
                  */
                 if ($_POST['submit'] == __('Export')) {
-                    $this->create_csv($user_data, "wp-sms-report-" . $mobile);
+                    $this->create_csv($user_data, "wp-camoo-sms-report-" . $mobile);
                 }
 
                 /*
                  * Delete Area
                  */
                 if ($_POST['submit'] == __('Delete')) {
-                    wp_redirect(admin_url(add_query_arg(array( 'page' => 'wp-sms-subscribers-privacy', 'delete_mobile' => $mobile ), 'admin.php')));
+                    wp_redirect(admin_url(add_query_arg(array( 'page' => 'wp-camoo-sms-subscribers-privacy', 'delete_mobile' => $mobile ), 'admin.php')));
                     exit;
                 }
             }
@@ -132,7 +132,7 @@ class Privacy_Actions
     public function check_empty_mobile($mobile)
     {
         if (empty($mobile)) {
-            wp_redirect(admin_url(add_query_arg(array( 'page' => 'wp-sms-subscribers-privacy', 'error' => 'empty_number' ), 'admin.php')));
+            wp_redirect(admin_url(add_query_arg(array( 'page' => 'wp-camoo-sms-subscribers-privacy', 'error' => 'empty_number' ), 'admin.php')));
             exit;
         }
     }
@@ -179,7 +179,7 @@ class Privacy_Actions
         }
 
         if (empty($result)) {
-            wp_redirect(admin_url(add_query_arg(array( 'page' => 'wp-sms-subscribers-privacy', 'error' => 'not_found' ), 'admin.php')));
+            wp_redirect(admin_url(add_query_arg(array( 'page' => 'wp-camoo-sms-subscribers-privacy', 'error' => 'not_found' ), 'admin.php')));
             exit;
         }
 

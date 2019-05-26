@@ -53,7 +53,7 @@ class Newsletter
         global $wpdb;
 
         if (self::isDuplicate($mobile, $group_id)) {
-            return array( 'result' => 'error', 'message' => __('The mobile numbers has been already duplicate.', 'wp-sms') );
+            return array( 'result' => 'error', 'message' => __('The mobile numbers has been already duplicate.', 'wp-camoo-sms') );
         }
 
         $result = $wpdb->insert(
@@ -80,9 +80,9 @@ class Newsletter
              */
             do_action('wp_sms_add_subscriber', $name, $mobile);
 
-            return array( 'result' => 'success', 'message' => __('Subscriber successfully added.', 'wp-sms') );
+            return array( 'result' => 'success', 'message' => __('Subscriber successfully added.', 'wp-camoo-sms') );
         } else {
-            return array( 'result' => 'error', 'message' => __('Having problem with add subscriber, please try again later.', 'wp-sms') );
+            return array( 'result' => 'error', 'message' => __('Having problem with add subscriber, please try again later.', 'wp-camoo-sms') );
         }
     }
 
@@ -124,7 +124,7 @@ class Newsletter
         );
 
         if (! $result) {
-            return array( 'result' => 'error', 'message' => __('The subscribe does not exist.', 'wp-sms') );
+            return array( 'result' => 'error', 'message' => __('The subscribe does not exist.', 'wp-camoo-sms') );
         }
 
         /**
@@ -137,7 +137,7 @@ class Newsletter
          */
         do_action('wp_sms_delete_subscriber', $result);
 
-        return array( 'result' => 'success', 'message' => __('Subscribe successfully removed.', 'wp-sms') );
+        return array( 'result' => 'success', 'message' => __('Subscribe successfully removed.', 'wp-camoo-sms') );
     }
 
 
@@ -157,11 +157,11 @@ class Newsletter
         global $wpdb;
 
         if (empty($id) or empty($name) or empty($mobile)) {
-            return array( 'result' => 'error', 'message' => __('The fields must be valued.', 'wp-sms') );
+            return array( 'result' => 'error', 'message' => __('The fields must be valued.', 'wp-camoo-sms') );
         }
 
         if (self::isDuplicate($mobile, $group_id, $id)) {
-            return array( 'result' => 'error', 'message' => __('The mobile numbers has been already duplicate.', 'wp-sms') );
+            return array( 'result' => 'error', 'message' => __('The mobile numbers has been already duplicate.', 'wp-camoo-sms') );
         }
 
         $result = $wpdb->update(
@@ -189,9 +189,9 @@ class Newsletter
              */
             do_action('wp_sms_update_subscriber', $result);
 
-            return array( 'result' => 'success', 'message' => __('Subscriber successfully updated.', 'wp-sms') );
+            return array( 'result' => 'success', 'message' => __('Subscriber successfully updated.', 'wp-camoo-sms') );
         } else {
-            return array( 'result' => 'error', 'message' => __('Having problem with update subscriber, Duplicate entries or subscriber not found! please try again.', 'wp-sms') );
+            return array( 'result' => 'error', 'message' => __('Having problem with update subscriber, Duplicate entries or subscriber not found! please try again.', 'wp-camoo-sms') );
         }
     }
 
@@ -280,7 +280,7 @@ class Newsletter
     {
         global $wpdb;
         if (empty($name)) {
-            return array( 'result' => 'error', 'message' => __('Name is empty!', 'wp-sms') );
+            return array( 'result' => 'error', 'message' => __('Name is empty!', 'wp-camoo-sms') );
         }
 
         $table   = $wpdb->prefix . 'sms_subscribes_group';
@@ -289,7 +289,7 @@ class Newsletter
         if ($count) {
             return array(
                 'result'  => 'error',
-                'message' => sprintf(__('Group Name "%s" exists!', 'wp-sms'), $name)
+                'message' => sprintf(__('Group Name "%s" exists!', 'wp-camoo-sms'), $name)
             );
         } else {
             $result = $wpdb->insert(
@@ -311,7 +311,7 @@ class Newsletter
                  */
                 do_action('wp_sms_add_group', $result);
 
-                return array( 'result' => 'success', 'message' => __('Group successfully added.', 'wp-sms') );
+                return array( 'result' => 'success', 'message' => __('Group successfully added.', 'wp-camoo-sms') );
             }
         }
     }
@@ -340,7 +340,7 @@ class Newsletter
         if ($count) {
             return array(
                 'result'  => 'error',
-                'message' => sprintf(__('Group Name "%s" exists!', 'wp-sms'), $name)
+                'message' => sprintf(__('Group Name "%s" exists!', 'wp-camoo-sms'), $name)
             );
         } else {
             $result = $wpdb->update(
@@ -365,11 +365,11 @@ class Newsletter
                  */
                 do_action('wp_sms_update_group', $result);
 
-                return array( 'result' => 'success', 'message' => __('Group successfully updated.', 'wp-sms') );
+                return array( 'result' => 'success', 'message' => __('Group successfully updated.', 'wp-camoo-sms') );
             } else {
                 return array(
                     'result'  => 'error',
-                    'message' => sprintf(__('Group Name "%s" exists!', 'wp-sms'), $name)
+                    'message' => sprintf(__('Group Name "%s" exists!', 'wp-camoo-sms'), $name)
                 );
             }
         }

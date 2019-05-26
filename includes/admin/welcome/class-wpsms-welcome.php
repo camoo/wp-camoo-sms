@@ -18,14 +18,14 @@ class Welcome
      */
     public function init()
     {
-        if (get_option('wpsms_show_welcome_page') and ( strpos($_SERVER['REQUEST_URI'], '/wp-admin/index.php') !== false or strpos($_SERVER['REQUEST_URI'], 'wp-sms') !== false )) {
+        if (get_option('wpsms_show_welcome_page') and ( strpos($_SERVER['REQUEST_URI'], '/wp-admin/index.php') !== false or strpos($_SERVER['REQUEST_URI'], 'wp-camoo-sms') !== false )) {
             // Disable show welcome page
 
             update_option('wpsms_first_show_welcome_page', true);
             update_option('wpsms_show_welcome_page', false);
 
             // Redirect to welcome page
-            wp_redirect('admin.php?page=wp-sms-welcome');
+            wp_redirect('admin.php?page=wp-camoo-sms-welcome');
         }
 
         if (! get_option('wpsms_first_show_welcome_page')) {
@@ -38,7 +38,7 @@ class Welcome
      */
     public function menu()
     {
-        add_submenu_page(__('WP-SMS Welcome', 'wp-sms'), __('WP-SMS Welcome', 'wp-sms'), __('WP-SMS Welcome', 'wp-sms'), 'administrator', 'wp-sms-welcome', array( $this, 'page_callback' ));
+        add_submenu_page(__('WP-SMS Welcome', 'wp-camoo-sms'), __('WP-SMS Welcome', 'wp-camoo-sms'), __('WP-SMS Welcome', 'wp-camoo-sms'), 'administrator', 'wp-camoo-sms-welcome', array( $this, 'page_callback' ));
     }
 
     /**
@@ -55,7 +55,7 @@ class Welcome
      */
     public function do_welcome($upgrader_object, $options)
     {
-        $current_plugin_path_name = 'wp-sms/wp-sms.php';
+        $current_plugin_path_name = 'wp-camoo-sms/wp-camoo-sms.php';
 
         if (isset($options['action']) and $options['action'] == 'update' and isset($options['type']) and $options['type'] == 'plugin' and isset($options['plugins'])) {
             foreach ($options['plugins'] as $each_plugin) {
@@ -72,7 +72,7 @@ class Welcome
      */
     public static function show_change_log()
     {
-        $response = wp_remote_get('https://api.github.com/repos/camoo/wp-sms/releases/latest');
+        $response = wp_remote_get('https://api.github.com/repos/camoo/wp-camoo-sms/releases/latest');
 
         // Check response
         if (is_wp_error($response)) {

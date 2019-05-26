@@ -49,16 +49,16 @@ if (isset($_POST['wps_import'])) {
 
         if ($result) {
             if (isset($_POST['ignore_duplicate']) and $_POST['ignore_duplicate'] == 'ignore') {
-                echo " <div class='updated'><p > " . sprintf(__('<strong>%s</strong> items was successfully added and There was <strong>%s</strong> duplicated numbers.', 'wp-sms'), count($total_submit), count($count_duplicate)) . "</div ></p > ";
+                echo " <div class='updated'><p > " . sprintf(__('<strong>%s</strong> items was successfully added and There was <strong>%s</strong> duplicated numbers.', 'wp-camoo-sms'), count($total_submit), count($count_duplicate)) . "</div ></p > ";
             } else {
-                echo " <div class='updated' ><p >" . sprintf(__('<strong>%s</strong> items was successfully added.', 'wp-sms'), count($total_submit)) . "</div ></p>";
+                echo " <div class='updated' ><p >" . sprintf(__('<strong>%s</strong> items was successfully added.', 'wp-camoo-sms'), count($total_submit)) . "</div ></p>";
             }
         }
 
         if ($duplicate) {
-            echo "<div class='error'><p>" . sprintf(__('<strong>%s</strong> Mobile numbers Was repeated.', 'wp-sms'), count($duplicate)) . "</div ></p>";
+            echo "<div class='error'><p>" . sprintf(__('<strong>%s</strong> Mobile numbers Was repeated.', 'wp-camoo-sms'), count($duplicate)) . "</div ></p>";
         }
     } else {
-        echo "<div class='error'><p> " . __('Please complete all fields', 'wp-sms') . "</div ></p>";
+        echo "<div class='error'><p> " . __('Please complete all fields', 'wp-camoo-sms') . "</div ></p>";
     }
 }

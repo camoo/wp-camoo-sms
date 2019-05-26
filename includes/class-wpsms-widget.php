@@ -16,13 +16,13 @@ class Widget extends \WP_Widget
     {
         $widget_options = array(
             'classname'   => 'wpsms_widget',
-            'description' => __('SMS newsletter form', 'wp-sms'),
+            'description' => __('SMS newsletter form', 'wp-camoo-sms'),
         );
 
         // Add Actions
         add_action('widgets_init', array( $this, 'register_widget' ));
 
-        parent::__construct('wpsms_widget', __('SMS Newsletter', 'wp-sms'), $widget_options);
+        parent::__construct('wpsms_widget', __('SMS Newsletter', 'wp-camoo-sms'), $widget_options);
     }
 
     /**
@@ -59,7 +59,7 @@ class Widget extends \WP_Widget
     public function form($instance)
     {
 
-        $title       = ! empty($instance['title']) ? $instance['title'] : __('Subscribe SMS', 'wp-sms');
+        $title       = ! empty($instance['title']) ? $instance['title'] : __('Subscribe SMS', 'wp-camoo-sms');
         $description = ! empty($instance['description']) ? $instance['description'] : '';
 
         // Load template

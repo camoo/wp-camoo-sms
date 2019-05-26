@@ -12,8 +12,8 @@ class Shortcode
     public function __construct()
     {
 
-        // Add the shortcode [wp-sms-subscriber-form]
-        add_shortcode('wp-sms-subscriber-form', array( $this, 'register_shortcode' ));
+        // Add the shortcode [wp-camoo-sms-subscriber-form]
+        add_shortcode('wp-camoo-sms-subscriber-form', array( $this, 'register_shortcode' ));
     }
 
     /**

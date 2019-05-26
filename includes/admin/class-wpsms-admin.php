@@ -38,7 +38,7 @@ class Admin
         wp_register_style('wpsms-admin-bar', WP_SMS_URL . 'assets/css/admin-bar.css', true, WP_SMS_VERSION);
         wp_enqueue_style('wpsms-admin-bar');
 
-        if (stristr(get_current_screen()->id, "wp-sms")) {
+        if (stristr(get_current_screen()->id, "wp-camoo-sms")) {
             wp_register_style('wpsms-admin', WP_SMS_URL . 'assets/css/admin.css', true, WP_SMS_VERSION);
             wp_enqueue_style('wpsms-admin');
             if (is_rtl()) {
@@ -64,7 +64,7 @@ class Admin
                 $wp_admin_bar->add_menu(array(
                     'id'    => 'wp-credit-sms',
                     'title' => '<span class="ab-icon"></span>' . $credit,
-                    'href'  => WP_SMS_ADMIN_URL . '/admin.php?page=wp-sms-settings'
+                    'href'  => WP_SMS_ADMIN_URL . '/admin.php?page=wp-camoo-sms-settings'
                 ));
             }
         }
@@ -72,8 +72,8 @@ class Admin
         $wp_admin_bar->add_menu(array(
             'id'     => 'wp-send-sms',
             'parent' => 'new-content',
-            'title'  => __('SMS', 'wp-sms'),
-            'href'   => WP_SMS_ADMIN_URL . '/admin.php?page=wp-sms'
+            'title'  => __('SMS', 'wp-camoo-sms'),
+            'href'   => WP_SMS_ADMIN_URL . '/admin.php?page=wp-camoo-sms'
         ));
     }
 
@@ -85,9 +85,9 @@ class Admin
         $subscribe = $this->db->get_var("SELECT COUNT(*) FROM {$this->tb_prefix}sms_subscribes");
         $credit    = get_option('wpsms_gateway_credit');
 
-        echo "<li class='wpsms-subscribe-count'><a href='" . WP_SMS_ADMIN_URL . "admin.php?page=wp-sms-subscribers'>" . sprintf(__('%s Subscriber', 'wp-sms'), $subscribe) . "</a></li>";
+        echo "<li class='wpsms-subscribe-count'><a href='" . WP_SMS_ADMIN_URL . "admin.php?page=wp-camoo-sms-subscribers'>" . sprintf(__('%s Subscriber', 'wp-camoo-sms'), $subscribe) . "</a></li>";
         if (! is_object($credit)) {
-            echo "<li class='wpsms-credit-count'><a href='" . WP_SMS_ADMIN_URL . "admin.php?page=wp-sms-settings&tab=web-service'>" . sprintf(__('%s SMS Credit', 'wp-sms'), $credit) . "</a></li>";
+            echo "<li class='wpsms-credit-count'><a href='" . WP_SMS_ADMIN_URL . "admin.php?page=wp-camoo-sms-settings&tab=web-service'>" . sprintf(__('%s SMS Credit', 'wp-camoo-sms'), $credit) . "</a></li>";
         }
     }
 
@@ -97,19 +97,19 @@ class Admin
     public function admin_menu()
     {
         $hook_suffix = array();
-        add_menu_page(__('SMS', 'wp-sms'), __('SMS', 'wp-sms'), 'wpsms_sendsms', 'wp-sms', array( $this, 'send_sms_callback' ), 'dashicons-email-alt');
-        add_submenu_page('wp-sms', __('Send SMS', 'wp-sms'), __('Send SMS', 'wp-sms'), 'wpsms_sendsms', 'wp-sms', array( $this, 'send_sms_callback' ));
-        add_submenu_page('wp-sms', __('Outbox', 'wp-sms'), __('Outbox', 'wp-sms'), 'wpsms_outbox', 'wp-sms-outbox', array( $this, 'outbox_callback' ));
+        add_menu_page(__('SMS', 'wp-camoo-sms'), __('SMS', 'wp-camoo-sms'), 'wpsms_sendsms', 'wp-camoo-sms', array( $this, 'send_sms_callback' ), 'dashicons-email-alt');
+        add_submenu_page('wp-camoo-sms', __('Send SMS', 'wp-camoo-sms'), __('Send SMS', 'wp-camoo-sms'), 'wpsms_sendsms', 'wp-camoo-sms', array( $this, 'send_sms_callback' ));
+        add_submenu_page('wp-camoo-sms', __('Outbox', 'wp-camoo-sms'), __('Outbox', 'wp-camoo-sms'), 'wpsms_outbox', 'wp-camoo-sms-outbox', array( $this, 'outbox_callback' ));
 
-        $hook_suffix['subscribers'] = add_submenu_page('wp-sms', __('Subscribers', 'wp-sms'), __('Subscribers', 'wp-sms'), 'wpsms_subscribers', 'wp-sms-subscribers', array( $this, 'subscribers_callback' ));
-        $hook_suffix['groups']      = add_submenu_page('wp-sms', __('Groups', 'wp-sms'), __('Groups', 'wp-sms'), 'wpsms_subscribers', 'wp-sms-subscribers-group', array( $this, 'groups_callback' ));
+        $hook_suffix['subscribers'] = add_submenu_page('wp-camoo-sms', __('Subscribers', 'wp-camoo-sms'), __('Subscribers', 'wp-camoo-sms'), 'wpsms_subscribers', 'wp-camoo-sms-subscribers', array( $this, 'subscribers_callback' ));
+        $hook_suffix['groups']      = add_submenu_page('wp-camoo-sms', __('Groups', 'wp-camoo-sms'), __('Groups', 'wp-camoo-sms'), 'wpsms_subscribers', 'wp-camoo-sms-subscribers-group', array( $this, 'groups_callback' ));
 
         // Check GDPR compliance for Privacy menu
         if (isset($this->options['gdpr_compliance']) and $this->options['gdpr_compliance'] == 1) {
-            $hook_suffix['privacy'] = add_submenu_page('wp-sms', __('Privacy', 'wp-sms'), __('Privacy', 'wp-sms'), 'manage_options', 'wp-sms-subscribers-privacy', array( $this, 'privacy_callback' ));
+            $hook_suffix['privacy'] = add_submenu_page('wp-camoo-sms', __('Privacy', 'wp-camoo-sms'), __('Privacy', 'wp-camoo-sms'), 'manage_options', 'wp-camoo-sms-subscribers-privacy', array( $this, 'privacy_callback' ));
         }
 
-        $hook_suffix['system_info'] = add_submenu_page('wp-sms', __('System Info', 'wp-sms'), __('System Info', 'wp-sms'), 'manage_options', 'wp-sms-system-info', array( $this, 'system_info_callback' ));
+        $hook_suffix['system_info'] = add_submenu_page('wp-camoo-sms', __('System Info', 'wp-camoo-sms'), __('System Info', 'wp-camoo-sms'), 'manage_options', 'wp-camoo-sms-system-info', array( $this, 'system_info_callback' ));
 
         // Add styles to menu pages
         foreach ($hook_suffix as $menu => $hook) {
@@ -187,8 +187,8 @@ class Admin
      */
     public function subscribers_assets()
     {
-        wp_register_script('wp-sms-edit-subscriber', WP_SMS_URL . 'assets/js/edit-subscriber.js', array( 'jquery' ), null, true);
-        wp_enqueue_script('wp-sms-edit-subscriber');
+        wp_register_script('wp-camoo-sms-edit-subscriber', WP_SMS_URL . 'assets/js/edit-subscriber.js', array( 'jquery' ), null, true);
+        wp_enqueue_script('wp-camoo-sms-edit-subscriber');
 
         $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
 
@@ -201,9 +201,9 @@ class Admin
 
         $ajax_vars = array(
             'tb_show_url' => $tb_show_url,
-            'tb_show_tag' => __('Edit Subscriber', 'wp-sms')
+            'tb_show_tag' => __('Edit Subscriber', 'wp-camoo-sms')
         );
-        wp_localize_script('wp-sms-edit-subscriber', 'wp_sms_edit_subscribe_ajax_vars', $ajax_vars);
+        wp_localize_script('wp-camoo-sms-edit-subscriber', 'wp_sms_edit_subscribe_ajax_vars', $ajax_vars);
     }
 
     /**
@@ -211,8 +211,8 @@ class Admin
      */
     public function groups_assets()
     {
-        wp_register_script('wp-sms-edit-group', WP_SMS_URL . 'assets/js/edit-group.js', array( 'jquery' ), null, true);
-        wp_enqueue_script('wp-sms-edit-group');
+        wp_register_script('wp-camoo-sms-edit-group', WP_SMS_URL . 'assets/js/edit-group.js', array( 'jquery' ), null, true);
+        wp_enqueue_script('wp-camoo-sms-edit-group');
 
         $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
 
@@ -225,9 +225,9 @@ class Admin
 
         $ajax_vars = array(
             'tb_show_url' => $tb_show_url,
-            'tb_show_tag' => __('Edit Group', 'wp-sms')
+            'tb_show_tag' => __('Edit Group', 'wp-camoo-sms')
         );
-        wp_localize_script('wp-sms-edit-group', 'wp_sms_edit_group_ajax_vars', $ajax_vars);
+        wp_localize_script('wp-camoo-sms-edit-group', 'wp_sms_edit_group_ajax_vars', $ajax_vars);
     }
 
     /**
@@ -242,8 +242,8 @@ class Admin
         wp_enqueue_script('postbox');
 
         add_meta_box('privacy-meta-1', esc_html(get_admin_page_title()), array( Privacy::class, 'privacy_meta_html_gdpr' ), $pagehook, 'side', 'core');
-        add_meta_box('privacy-meta-2', __('Export User’s Data related to WP-SMS', 'wp-sms'), array( Privacy::class, 'privacy_meta_html_export' ), $pagehook, 'normal', 'core');
-        add_meta_box('privacy-meta-3', __('Erase User’s Data related to WP-SMS', 'wp-sms'), array( Privacy::class, 'privacy_meta_html_delete' ), $pagehook, 'normal', 'core');
+        add_meta_box('privacy-meta-2', __('Export User’s Data related to WP-SMS', 'wp-camoo-sms'), array( Privacy::class, 'privacy_meta_html_export' ), $pagehook, 'normal', 'core');
+        add_meta_box('privacy-meta-3', __('Erase User’s Data related to WP-SMS', 'wp-camoo-sms'), array( Privacy::class, 'privacy_meta_html_delete' ), $pagehook, 'normal', 'core');
     }
 
     /**
@@ -264,7 +264,7 @@ class Admin
      */
     public function meta_links($links, $file)
     {
-        if ($file == 'wp-sms/wp-sms.php') {
+        if ($file == 'wp-camoo-sms/wp-camoo-sms.php') {
         }
 
         return $links;

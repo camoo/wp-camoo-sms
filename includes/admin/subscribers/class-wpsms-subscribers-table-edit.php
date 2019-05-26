@@ -38,7 +38,7 @@ class Subscribers_Subscribers_Table_Edit
 					        <tr>
 					            <td style="padding-top: 10px;">
 					                <label for="wp_subscribe_name"
-					                       class="wp_sms_subscribers_label">' . __('Name', 'wp-sms') . '</label>
+					                       class="wp_sms_subscribers_label">' . __('Name', 'wp-camoo-sms') . '</label>
 					                       <input type="text" id="wp_subscribe_name" name="wp_subscribe_name"
                            value="' . $subscriber->name . '" class="wp_sms_subscribers_input_text" />
 							</td>
@@ -46,7 +46,7 @@ class Subscribers_Subscribers_Table_Edit
 					        <tr>
 					            <td style="padding-top: 10px;">
 					                <label for="wp_subscribe_mobile"
-					                       class="wp_sms_subscribers_label">' . __('Mobile', 'wp-sms') . '</label>
+					                       class="wp_sms_subscribers_label">' . __('Mobile', 'wp-camoo-sms') . '</label>
                            <input type="text" name="wp_subscribe_mobile" id="wp_subscribe_mobile"
                            value="' . $subscriber->mobile . '" class="wp_sms_subscribers_input_text code" />
 							</td>
@@ -55,7 +55,7 @@ class Subscribers_Subscribers_Table_Edit
             $html .= '<tr>
 					  <td style="padding-top: 10px;">
                       <label for="wpsms_group_name"
-					                       class="wp_sms_subscribers_label">' . __('Group', 'wp-sms') . '</label>
+					                       class="wp_sms_subscribers_label">' . __('Group', 'wp-camoo-sms') . '</label>
                    <select name="wpsms_group_name" id="wpsms_group_name" class="wp_sms_subscribers_input_text code">';
             foreach ($groups as $items) {
                 if ($subscriber->group_ID == $items->ID) {
@@ -71,8 +71,8 @@ class Subscribers_Subscribers_Table_Edit
             $html .= '<tr>
                       <td style="padding-top: 10px;">
                       <label for="wpsms_group_name"
-					                       class="wp_sms_subscribers_label">' . __('Group', 'wp-sms') . '</label>
-                      ' . sprintf(__('There is no group! <a href = "%s" > Add</a > ', 'wp-sms'), 'admin.php?page=wp-sms-subscribers-group') . '
+					                       class="wp_sms_subscribers_label">' . __('Group', 'wp-camoo-sms') . '</label>
+                      ' . sprintf(__('There is no group! <a href = "%s" > Add</a > ', 'wp-camoo-sms'), 'admin.php?page=wp-camoo-sms-subscribers-group') . '
                       </td>
                       </tr>';
         }
@@ -80,14 +80,14 @@ class Subscribers_Subscribers_Table_Edit
         $html .= '<tr>
                 <td>
                 <label for="wpsms_subscribe_status"
-					                       class="wp_sms_subscribers_label">' . __('Status', 'wp-sms') . '</label>
+					                       class="wp_sms_subscribers_label">' . __('Status', 'wp-camoo-sms') . '</label>
                     <select name="wpsms_subscribe_status" id="wpsms_subscribe_status" class="wp_sms_subscribers_input_text code" >';
         if ($subscriber->status == 0) {
-            $html .= '<option value="1">' . __('Active', 'wp-sms') . '</option>';
-            $html .= '<option value="0" selected="selected">' . __('Deactive', 'wp-sms') . '</option>';
+            $html .= '<option value="1">' . __('Active', 'wp-camoo-sms') . '</option>';
+            $html .= '<option value="0" selected="selected">' . __('Deactive', 'wp-camoo-sms') . '</option>';
         } else {
-            $html .= '<option value="1" selected="selected">' . __('Active', 'wp-sms') . '</option>';
-            $html .= '<option value="0">' . __('Deactive', 'wp-sms') . '</option>';
+            $html .= '<option value="1" selected="selected">' . __('Active', 'wp-camoo-sms') . '</option>';
+            $html .= '<option value="0">' . __('Deactive', 'wp-camoo-sms') . '</option>';
         }
         $html .= '</select>
                 </td>
@@ -96,7 +96,7 @@ class Subscribers_Subscribers_Table_Edit
         $html .= '<tr>
 				    <td colspan="2" style="padding-top: 20px;" >
 				        <input type="submit" class="button-primary" name="wp_update_subscribe"
-				               value="' . __('Update', 'wp-sms') . '" />
+				               value="' . __('Update', 'wp-camoo-sms') . '" />
 				    </td>
 				</tr>
 				</table>

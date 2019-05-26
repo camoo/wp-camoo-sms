@@ -24,7 +24,7 @@ class Settings
 
         add_action('admin_menu', array( $this, 'add_settings_menu' ), 11);
 
-        if (isset($_GET['page']) and $_GET['page'] == 'wp-sms-settings' or isset($_POST['option_page']) and $_POST['option_page'] == 'wpsms_settings') {
+        if (isset($_GET['page']) and $_GET['page'] == 'wp-camoo-sms-settings' or isset($_POST['option_page']) and $_POST['option_page'] == 'wpsms_settings') {
             add_action('admin_init', array( $this, 'register_settings' ));
         }
     }
@@ -34,7 +34,7 @@ class Settings
      * */
     public function add_settings_menu()
     {
-        add_submenu_page('wp-sms', __('Settings', 'wp-sms'), __('Settings', 'wp-sms'), 'wpsms_setting', 'wp-sms-settings', array(
+        add_submenu_page('wp-camoo-sms', __('Settings', 'wp-camoo-sms'), __('Settings', 'wp-camoo-sms'), 'wpsms_setting', 'wp-camoo-sms-settings', array(
             $this,
             'render_settings'
         ));
@@ -116,12 +116,12 @@ class Settings
     public function get_tabs()
     {
         $tabs = array(
-            'general'       => __('General', 'wp-sms'),
-            'gateway'       => __('Gateway', 'wp-sms'),
-            'newsletter'    => __('SMS Newsletter', 'wp-sms'),
-            'feature'       => __('Features', 'wp-sms'),
-            'notifications' => __('Notifications', 'wp-sms'),
-            'integration'   => __('Integration', 'wp-sms'),
+            'general'       => __('General', 'wp-camoo-sms'),
+            'gateway'       => __('Gateway', 'wp-camoo-sms'),
+            'newsletter'    => __('SMS Newsletter', 'wp-camoo-sms'),
+            'feature'       => __('Features', 'wp-camoo-sms'),
+            'notifications' => __('Notifications', 'wp-camoo-sms'),
+            'integration'   => __('Integration', 'wp-camoo-sms'),
         );
 
         return $tabs;
@@ -182,7 +182,7 @@ class Settings
         // Merge our new settings with the existing
         $output = array_merge($this->options, $input);
 
-        add_settings_error('wpsms-notices', '', __('Settings updated', 'wp-sms'), 'updated');
+        add_settings_error('wpsms-notices', '', __('Settings updated', 'wp-camoo-sms'), 'updated');
 
         return $output;
     }
@@ -197,8 +197,8 @@ class Settings
     {
 
         $options = array(
-            'enable'  => __('Enable', 'wp-sms'),
-            'disable' => __('Disable', 'wp-sms')
+            'enable'  => __('Enable', 'wp-camoo-sms'),
+            'disable' => __('Disable', 'wp-camoo-sms')
         );
 
         $settings = apply_filters('wp_sms_registered_settings', array(
@@ -206,32 +206,32 @@ class Settings
             'general'       => apply_filters('wp_sms_general_settings', array(
                 'admin_title'         => array(
                     'id'   => 'admin_title',
-                    'name' => __('Mobile', 'wp-sms'),
+                    'name' => __('Mobile', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'admin_mobile_number' => array(
                     'id'   => 'admin_mobile_number',
-                    'name' => __('Admin mobile number', 'wp-sms'),
+                    'name' => __('Admin mobile number', 'wp-camoo-sms'),
                     'type' => 'text',
-                    'desc' => __('Admin mobile number for get any sms notifications', 'wp-sms')
+                    'desc' => __('Admin mobile number for get any sms notifications', 'wp-camoo-sms')
                 ),
                 'mobile_county_code'  => array(
                     'id'   => 'mobile_county_code',
-                    'name' => __('Mobile country code', 'wp-sms'),
+                    'name' => __('Mobile country code', 'wp-camoo-sms'),
                     'type' => 'text',
-                    'desc' => __('Enter your mobile country code for prefix numbers. For example if you enter +1 The final number will be +19999999999', 'wp-sms')
+                    'desc' => __('Enter your mobile country code for prefix numbers. For example if you enter +1 The final number will be +19999999999', 'wp-camoo-sms')
                 ),
                 'admin_title_privacy' => array(
                     'id'   => 'admin_title_privacy',
-                    'name' => __('Privacy', 'wp-sms'),
+                    'name' => __('Privacy', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'gdpr_compliance'     => array(
                     'id'      => 'gdpr_compliance',
-                    'name'    => __('GDPR Enhancements', 'wp-sms'),
+                    'name'    => __('GDPR Enhancements', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Enable GDPR related features in this page. Read our GDPR documentation to learn more.', 'wp-sms'),
+                    'desc'    => __('Enable GDPR related features in this page. Read our GDPR documentation to learn more.', 'wp-camoo-sms'),
                 ),
             )),
 
@@ -240,104 +240,104 @@ class Settings
                 // Gateway
                 'gayeway_title'             => array(
                     'id'   => 'gayeway_title',
-                    'name' => __('Gateway information', 'wp-sms'),
+                    'name' => __('Gateway information', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'gateway_name'              => array(
                     'id'      => 'gateway_name',
-                    'name'    => __('Gateway name', 'wp-sms'),
+                    'name'    => __('Gateway name', 'wp-camoo-sms'),
                     'type'    => 'advancedselect',
                     'options' => Gateway::gateway(),
-                    'desc'    => __('Please select your gateway.', 'wp-sms')
+                    'desc'    => __('Please select your gateway.', 'wp-camoo-sms')
                 ),
                 'gateway_help'              => array(
                     'id'      => 'gateway_help',
-                    'name'    => __('Gateway description', 'wp-sms'),
+                    'name'    => __('Gateway description', 'wp-camoo-sms'),
                     'type'    => 'html',
                     'options' => Gateway::help(),
                 ),
                 'gateway_username'          => array(
                     'id'   => 'gateway_username',
-                    'name' => __('API Key', 'wp-sms'),
+                    'name' => __('API Key', 'wp-camoo-sms'),
                     'type' => 'text',
-                    'desc' => __('Enter API KEY for camoo gateway', 'wp-sms')
+                    'desc' => __('Enter API KEY for camoo gateway', 'wp-camoo-sms')
                 ),
                 'gateway_password'          => array(
                     'id'   => 'gateway_password',
-                    'name' => __('API Secret', 'wp-sms'),
+                    'name' => __('API Secret', 'wp-camoo-sms'),
                     'type' => 'text',
-                    'desc' => __('Enter API Secret key for camoo gateway', 'wp-sms')
+                    'desc' => __('Enter API Secret key for camoo gateway', 'wp-camoo-sms')
                 ),
                 'gateway_sender_id'         => array(
                     'id'   => 'gateway_sender_id',
-                    'name' => __('Sender number', 'wp-sms'),
+                    'name' => __('Sender number', 'wp-camoo-sms'),
                     'type' => 'text',
                     'std'  => Gateway::from(),
-                    'desc' => __('Sender number or sender ID', 'wp-sms')
+                    'desc' => __('Sender number or sender ID', 'wp-camoo-sms')
                 ),
                 'encrypt_sms'               => array(
                     'id'   => 'encrypt_sms',
-                    'name'    => __('Encrypt SMS', 'wp-sms'),
+                    'name'    => __('Encrypt SMS', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc' => __('Encrypt  SMS to ensure an end to end encryption between your server and the Camoo\'s server', 'wp-sms')
+                    'desc' => __('Encrypt  SMS to ensure an end to end encryption between your server and the Camoo\'s server', 'wp-camoo-sms')
                 ),
                 // Gateway status
                 'gateway_status_title'      => array(
                     'id'   => 'gateway_status_title',
-                    'name' => __('Gateway status', 'wp-sms'),
+                    'name' => __('Gateway status', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'account_credit'            => array(
                     'id'      => 'account_credit',
-                    'name'    => __('Status', 'wp-sms'),
+                    'name'    => __('Status', 'wp-camoo-sms'),
                     'type'    => 'html',
                     'options' => Gateway::status(),
                 ),
                 'account_response'          => array(
                     'id'      => 'account_response',
-                    'name'    => __('Result request', 'wp-sms'),
+                    'name'    => __('Result request', 'wp-camoo-sms'),
                     'type'    => 'html',
                     'options' => Gateway::response(),
                 ),
                 'bulk_send'                 => array(
                     'id'      => 'bulk_send',
-                    'name'    => __('Bulk send', 'wp-sms'),
+                    'name'    => __('Bulk send', 'wp-camoo-sms'),
                     'type'    => 'html',
                     'options' => Gateway::bulk_status(),
                 ),
                 // Account credit
                 'account_credit_title'      => array(
                     'id'   => 'account_credit_title',
-                    'name' => __('Account balance', 'wp-sms'),
+                    'name' => __('Account balance', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'account_credit_in_menu'    => array(
                     'id'      => 'account_credit_in_menu',
-                    'name'    => __('Show in admin menu', 'wp-sms'),
+                    'name'    => __('Show in admin menu', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Show your account credit in admin menu.', 'wp-sms')
+                    'desc'    => __('Show your account credit in admin menu.', 'wp-camoo-sms')
                 ),
                 'account_credit_in_sendsms' => array(
                     'id'      => 'account_credit_in_sendsms',
-                    'name'    => __('Show in send SMS page', 'wp-sms'),
+                    'name'    => __('Show in send SMS page', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Show your account credit in send SMS page.', 'wp-sms')
+                    'desc'    => __('Show your account credit in send SMS page.', 'wp-camoo-sms')
                 ),
                 // Message header
                 'message_title'             => array(
                     'id'   => 'message_title',
-                    'name' => __('Message options', 'wp-sms'),
+                    'name' => __('Message options', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'send_unicode'              => array(
                     'id'      => 'send_unicode',
-                    'name'    => __('Send as Unicode', 'wp-sms'),
+                    'name'    => __('Send as Unicode', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('You can send SMS messages using Unicode for non-English characters (such as Persian, Arabic, Chinese or Cyrillic characters).', 'wp-sms')
+                    'desc'    => __('You can send SMS messages using Unicode for non-English characters (such as Persian, Arabic, Chinese or Cyrillic characters).', 'wp-camoo-sms')
                 ),
             )),
 
@@ -346,143 +346,143 @@ class Settings
                 // SMS Newsletter
                 'newsletter_title'                => array(
                     'id'   => 'newsletter_title',
-                    'name' => __('SMS Newsletter', 'wp-sms'),
+                    'name' => __('SMS Newsletter', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'newsletter_form_groups'          => array(
                     'id'   => 'newsletter_form_groups',
-                    'name' => __('Show Groups', 'wp-sms'),
+                    'name' => __('Show Groups', 'wp-camoo-sms'),
                     'type' => 'checkbox',
-                    'desc' => __('Enable showing Groups on Form.', 'wp-sms')
+                    'desc' => __('Enable showing Groups on Form.', 'wp-camoo-sms')
                 ),
                 'newsletter_form_verify'          => array(
                     'id'   => 'newsletter_form_verify',
-                    'name' => __('Verify Subscriber', 'wp-sms'),
+                    'name' => __('Verify Subscriber', 'wp-camoo-sms'),
                     'type' => 'checkbox',
-                    'desc' => __('Verified subscribe with the activation code', 'wp-sms')
+                    'desc' => __('Verified subscribe with the activation code', 'wp-camoo-sms')
                 ),
                 'welcome'                         => array(
                     'id'   => 'welcome',
-                    'name' => __('Welcome SMS', 'wp-sms'),
+                    'name' => __('Welcome SMS', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'newsletter_form_welcome'         => array(
                     'id'   => 'newsletter_form_welcome',
-                    'name' => __('Status', 'wp-sms'),
+                    'name' => __('Status', 'wp-camoo-sms'),
                     'type' => 'checkbox',
-                    'desc' => __('Enable or Disable welcome SMS.', 'wp-sms')
+                    'desc' => __('Enable or Disable welcome SMS.', 'wp-camoo-sms')
                 ),
                 'newsletter_form_welcome_text'    => array(
                     'id'   => 'newsletter_form_welcome_text',
-                    'name' => __('SMS text', 'wp-sms'),
+                    'name' => __('SMS text', 'wp-camoo-sms'),
                     'type' => 'textarea',
-                    'desc' => sprintf(__('Subscribe name: %s, Subscribe mobile: %s', 'wp-sms'), '<code>%subscribe_name%</code>', '<code>%subscribe_mobile%</code>')
+                    'desc' => sprintf(__('Subscribe name: %s, Subscribe mobile: %s', 'wp-camoo-sms'), '<code>%subscribe_name%</code>', '<code>%subscribe_mobile%</code>')
                 ),
                 'mobile_terms'                    => array(
                     'id'   => 'mobile_terms',
-                    'name' => __('Mobile Number Terms', 'wp-sms'),
+                    'name' => __('Mobile Number Terms', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'mobile_terms_field_place_holder' => array(
                     'id'   => 'mobile_terms_field_place_holder',
-                    'name' => __('Field Placeholder', 'wp-sms'),
+                    'name' => __('Field Placeholder', 'wp-camoo-sms'),
                     'type' => 'text'
                 ),
                 'mobile_terms_minimum'            => array(
                     'id'   => 'mobile_terms_minimum',
-                    'name' => __('Minimum number', 'wp-sms'),
+                    'name' => __('Minimum number', 'wp-camoo-sms'),
                     'type' => 'number'
                 ),
                 'mobile_terms_maximum'            => array(
                     'id'   => 'mobile_terms_maximum',
-                    'name' => __('Maximum number', 'wp-sms'),
+                    'name' => __('Maximum number', 'wp-camoo-sms'),
                     'type' => 'number'
                 ),
                 //Style Setting
                 'style'                           => array(
                     'id'   => 'style',
-                    'name' => __('Style', 'wp-sms'),
+                    'name' => __('Style', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'disable_style_in_front'          => array(
                     'id'   => 'disable_style_in_front',
-                    'name' => __('Disable Frontend Style', 'wp-sms'),
+                    'name' => __('Disable Frontend Style', 'wp-camoo-sms'),
                     'type' => 'checkbox',
-                    'desc' => __('Disable loading Style from Frontend.', 'wp-sms')
+                    'desc' => __('Disable loading Style from Frontend.', 'wp-camoo-sms')
                 ),
             )),
             // Feature tab
             'feature'       => apply_filters('wp_sms_feature_settings', array(
                 'mobile_field'                     => array(
                     'id'   => 'mobile_field',
-                    'name' => __('Mobile field', 'wp-sms'),
+                    'name' => __('Mobile field', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'add_mobile_field'                 => array(
                     'id'      => 'add_mobile_field',
-                    'name'    => __('Add Mobile number field', 'wp-sms'),
+                    'name'    => __('Add Mobile number field', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Add Mobile number to user profile and register form.', 'wp-sms')
+                    'desc'    => __('Add Mobile number to user profile and register form.', 'wp-camoo-sms')
                 ),
                 'international_mobile_title'       => array(
                     'id'   => 'international_mobile_title',
-                    'name' => __('International Telephone Input', 'wp-sms'),
+                    'name' => __('International Telephone Input', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'international_mobile'             => array(
                     'id'      => 'international_mobile',
-                    'name'    => __('Enable for mobile fields', 'wp-sms'),
+                    'name'    => __('Enable for mobile fields', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Make mobile input fields in whole plugin to intel tel input.', 'wp-sms')
+                    'desc'    => __('Make mobile input fields in whole plugin to intel tel input.', 'wp-camoo-sms')
                 ),
                 'international_mobile_only_countries'      => array(
                     'id'      => 'international_mobile_only_countries',
-                    'name'    => __('Only Countries', 'wp-sms'),
+                    'name'    => __('Only Countries', 'wp-camoo-sms'),
                     'type'    => 'countryselect',
                     'options' => $this->get_countries_list(),
-                    'desc'    => __('In the dropdown, display only the countries you specify.', 'wp-sms')
+                    'desc'    => __('In the dropdown, display only the countries you specify.', 'wp-camoo-sms')
                 ),
                 'international_mobile_preferred_countries' => array(
                     'id'      => 'international_mobile_preferred_countries',
-                    'name'    => __('Preferred Countries', 'wp-sms'),
+                    'name'    => __('Preferred Countries', 'wp-camoo-sms'),
                     'type'    => 'countryselect',
                     'options' => $this->get_countries_list(),
-                    'desc'    => __('Specify the countries to appear at the top of the list.', 'wp-sms')
+                    'desc'    => __('Specify the countries to appear at the top of the list.', 'wp-camoo-sms')
                 ),
                 'international_mobile_auto_hide'           => array(
                     'id'      => 'international_mobile_auto_hide',
-                    'name'    => __('Auto hide dial code', 'wp-sms'),
+                    'name'    => __('Auto hide dial code', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('If there is just a dial code in the input: remove it on blur or submit, and re-add it on focus.<br>Requires National mode to be deactivate', 'wp-sms')
+                    'desc'    => __('If there is just a dial code in the input: remove it on blur or submit, and re-add it on focus.<br>Requires National mode to be deactivate', 'wp-camoo-sms')
                 ),
                 'international_mobile_national_mode'       => array(
                     'id'      => 'international_mobile_national_mode',
-                    'name'    => __('National mode', 'wp-sms'),
+                    'name'    => __('National mode', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Allow users to enter national numbers (and not have to think about international dial codes).', 'wp-sms')
+                    'desc'    => __('Allow users to enter national numbers (and not have to think about international dial codes).', 'wp-camoo-sms')
                 ),
                 'international_mobile_separate_dial_code'  => array(
                     'id'      => 'international_mobile_separate_dial_code',
-                    'name'    => __('Separate dial code', 'wp-sms'),
+                    'name'    => __('Separate dial code', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Display the country dial code next to the selected flag so it\'s not part of the typed number.<br>Note: this will disable National mode because technically we are dealing with international numbers, but with the dial code separated.', 'wp-sms')
+                    'desc'    => __('Display the country dial code next to the selected flag so it\'s not part of the typed number.<br>Note: this will disable National mode because technically we are dealing with international numbers, but with the dial code separated.', 'wp-camoo-sms')
                 ),
                 'rest_api'                         => array(
                     'id'   => 'rest_api',
-                    'name' => __('REST API', 'wp-sms'),
+                    'name' => __('REST API', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'rest_api_status'                  => array(
                     'id'      => 'rest_api_status',
-                    'name'    => __('REST API status', 'wp-sms'),
+                    'name'    => __('REST API status', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Add WP-SMS endpoints to the WP Rest API', 'wp-sms')
+                    'desc'    => __('Add WP-SMS endpoints to the WP Rest API', 'wp-camoo-sms')
                 ),
             )),
             // Notifications tab
@@ -490,23 +490,23 @@ class Settings
                 // Publish new post
                 'notif_publish_new_post_title'            => array(
                     'id'   => 'notif_publish_new_post_title',
-                    'name' => __('Published new posts', 'wp-sms'),
+                    'name' => __('Published new posts', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'notif_publish_new_post'                  => array(
                     'id'      => 'notif_publish_new_post',
-                    'name'    => __('Status', 'wp-sms'),
+                    'name'    => __('Status', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Send an SMS to subscribers When published new posts.', 'wp-sms')
+                    'desc'    => __('Send an SMS to subscribers When published new posts.', 'wp-camoo-sms')
                 ),
                 'notif_publish_new_post_template'         => array(
                     'id'   => 'notif_publish_new_post_template',
-                    'name' => __('Message body', 'wp-sms'),
+                    'name' => __('Message body', 'wp-camoo-sms'),
                     'type' => 'textarea',
-                    'desc' => __('Enter the contents of the sms message.', 'wp-sms') . '<br>' .
+                    'desc' => __('Enter the contents of the sms message.', 'wp-camoo-sms') . '<br>' .
                               sprintf(
-                                  __('Post title: %s, Post content: %s, Post url: %s, Post date: %s', 'wp-sms'),
+                                  __('Post title: %s, Post content: %s, Post url: %s, Post date: %s', 'wp-camoo-sms'),
                                   '<code>%post_title%</code>',
                                   '<code>%post_content%</code>',
                                   '<code>%post_url%</code>',
@@ -516,30 +516,30 @@ class Settings
                 // Publish new post
                 'notif_publish_new_post_author_title'     => array(
                     'id'   => 'notif_publish_new_post_author_title',
-                    'name' => __('Author of the post', 'wp-sms'),
+                    'name' => __('Author of the post', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'notif_publish_new_post_author'           => array(
                     'id'      => 'notif_publish_new_post_author',
-                    'name'    => __('Status', 'wp-sms'),
+                    'name'    => __('Status', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Send an SMS to the author of the post when that post publish.<br>Make sure "Add Mobile number field" enabled in "Features" settings.', 'wp-sms')
+                    'desc'    => __('Send an SMS to the author of the post when that post publish.<br>Make sure "Add Mobile number field" enabled in "Features" settings.', 'wp-camoo-sms')
                 ),
                 'notif_publish_new_post_author_post_type' => array(
                     'id'      => 'notif_publish_new_post_author_post_type',
-                    'name'    => __('Post Types', 'wp-sms'),
+                    'name'    => __('Post Types', 'wp-camoo-sms'),
                     'type'    => 'multiselect',
                     'options' => $this->get_list_post_type(array( 'show_ui' => 1 )),
-                    'desc'    => __('Select post types that you want to use this option.', 'wp-sms')
+                    'desc'    => __('Select post types that you want to use this option.', 'wp-camoo-sms')
                 ),
                 'notif_publish_new_post_author_template'  => array(
                     'id'   => 'notif_publish_new_post_author_template',
-                    'name' => __('Message body', 'wp-sms'),
+                    'name' => __('Message body', 'wp-camoo-sms'),
                     'type' => 'textarea',
-                    'desc' => __('Enter the contents of the sms message.', 'wp-sms') . '<br>' .
+                    'desc' => __('Enter the contents of the sms message.', 'wp-camoo-sms') . '<br>' .
                               sprintf(
-                                  __('Post title: %s, Post content: %s, Post url: %s, Post date: %s', 'wp-sms'),
+                                  __('Post title: %s, Post content: %s, Post url: %s, Post date: %s', 'wp-camoo-sms'),
                                   '<code>%post_title%</code>',
                                   '<code>%post_content%</code>',
                                   '<code>%post_url%</code>',
@@ -549,36 +549,36 @@ class Settings
                 // Publish new wp version
                 'notif_publish_new_wpversion_title'       => array(
                     'id'   => 'notif_publish_new_wpversion_title',
-                    'name' => __('The new release of WordPress', 'wp-sms'),
+                    'name' => __('The new release of WordPress', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'notif_publish_new_wpversion'             => array(
                     'id'      => 'notif_publish_new_wpversion',
-                    'name'    => __('Status', 'wp-sms'),
+                    'name'    => __('Status', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Send an SMS to you When the new release of WordPress.', 'wp-sms')
+                    'desc'    => __('Send an SMS to you When the new release of WordPress.', 'wp-camoo-sms')
                 ),
                 // Register new user
                 'notif_register_new_user_title'           => array(
                     'id'   => 'notif_register_new_user_title',
-                    'name' => __('Register a new user', 'wp-sms'),
+                    'name' => __('Register a new user', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'notif_register_new_user'                 => array(
                     'id'      => 'notif_register_new_user',
-                    'name'    => __('Status', 'wp-sms'),
+                    'name'    => __('Status', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Send an SMS to you and user when register on wordpress.', 'wp-sms')
+                    'desc'    => __('Send an SMS to you and user when register on wordpress.', 'wp-camoo-sms')
                 ),
                 'notif_register_new_user_admin_template'  => array(
                     'id'   => 'notif_register_new_user_admin_template',
-                    'name' => __('Message body for admin', 'wp-sms'),
+                    'name' => __('Message body for admin', 'wp-camoo-sms'),
                     'type' => 'textarea',
-                    'desc' => __('Enter the contents of the sms message.', 'wp-sms') . '<br>' .
+                    'desc' => __('Enter the contents of the sms message.', 'wp-camoo-sms') . '<br>' .
                               sprintf(
-                                  __('User login: %s, User email: %s, Register date: %s', 'wp-sms'),
+                                  __('User login: %s, User email: %s, Register date: %s', 'wp-camoo-sms'),
                                   '<code>%user_login%</code>',
                                   '<code>%user_email%</code>',
                                   '<code>%date_register%</code>'
@@ -586,11 +586,11 @@ class Settings
                 ),
                 'notif_register_new_user_template'        => array(
                     'id'   => 'notif_register_new_user_template',
-                    'name' => __('Message body for user', 'wp-sms'),
+                    'name' => __('Message body for user', 'wp-camoo-sms'),
                     'type' => 'textarea',
-                    'desc' => __('Enter the contents of the sms message.', 'wp-sms') . '<br>' .
+                    'desc' => __('Enter the contents of the sms message.', 'wp-camoo-sms') . '<br>' .
                               sprintf(
-                                  __('User login: %s, User email: %s, Register date: %s', 'wp-sms'),
+                                  __('User login: %s, User email: %s, Register date: %s', 'wp-camoo-sms'),
                                   '<code>%user_login%</code>',
                                   '<code>%user_email%</code>',
                                   '<code>%date_register%</code>'
@@ -599,23 +599,23 @@ class Settings
                 // New comment
                 'notif_new_comment_title'                 => array(
                     'id'   => 'notif_new_comment_title',
-                    'name' => __('New comment', 'wp-sms'),
+                    'name' => __('New comment', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'notif_new_comment'                       => array(
                     'id'      => 'notif_new_comment',
-                    'name'    => __('Status', 'wp-sms'),
+                    'name'    => __('Status', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Send an SMS to you When get a new comment.', 'wp-sms')
+                    'desc'    => __('Send an SMS to you When get a new comment.', 'wp-camoo-sms')
                 ),
                 'notif_new_comment_template'              => array(
                     'id'   => 'notif_new_comment_template',
-                    'name' => __('Message body', 'wp-sms'),
+                    'name' => __('Message body', 'wp-camoo-sms'),
                     'type' => 'textarea',
-                    'desc' => __('Enter the contents of the sms message.', 'wp-sms') . '<br>' .
+                    'desc' => __('Enter the contents of the sms message.', 'wp-camoo-sms') . '<br>' .
                               sprintf(
-                                  __('Comment author: %s, Author email: %s, Author url: %s, Author IP: %s, Comment date: %s, Comment content: %s', 'wp-sms'),
+                                  __('Comment author: %s, Author email: %s, Author url: %s, Author IP: %s, Comment date: %s, Comment content: %s', 'wp-camoo-sms'),
                                   '<code>%comment_author%</code>',
                                   '<code>%comment_author_email%</code>',
                                   '<code>%comment_author_url%</code>',
@@ -627,23 +627,23 @@ class Settings
                 // User login
                 'notif_user_login_title'                  => array(
                     'id'   => 'notif_user_login_title',
-                    'name' => __('User login', 'wp-sms'),
+                    'name' => __('User login', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'notif_user_login'                        => array(
                     'id'      => 'notif_user_login',
-                    'name'    => __('Status', 'wp-sms'),
+                    'name'    => __('Status', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Send an SMS to you When user is login.', 'wp-sms')
+                    'desc'    => __('Send an SMS to you When user is login.', 'wp-camoo-sms')
                 ),
                 'notif_user_login_template'               => array(
                     'id'   => 'notif_user_login_template',
-                    'name' => __('Message body', 'wp-sms'),
+                    'name' => __('Message body', 'wp-camoo-sms'),
                     'type' => 'textarea',
-                    'desc' => __('Enter the contents of the sms message.', 'wp-sms') . '<br>' .
+                    'desc' => __('Enter the contents of the sms message.', 'wp-camoo-sms') . '<br>' .
                               sprintf(
-                                  __('Username: %s, Nickname: %s', 'wp-sms'),
+                                  __('Username: %s, Nickname: %s', 'wp-camoo-sms'),
                                   '<code>%username_login%</code>',
                                   '<code>%display_name%</code>'
                               )
@@ -654,36 +654,36 @@ class Settings
                 // Contact form 7
                 'cf7_title'                    => array(
                     'id'   => 'cf7_title',
-                    'name' => __('Contact Form 7', 'wp-sms'),
+                    'name' => __('Contact Form 7', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'cf7_metabox'                  => array(
                     'id'      => 'cf7_metabox',
-                    'name'    => __('SMS meta box', 'wp-sms'),
+                    'name'    => __('SMS meta box', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Added Wordpress SMS meta box to Contact form 7 plugin when enable this option.', 'wp-sms')
+                    'desc'    => __('Added Wordpress SMS meta box to Contact form 7 plugin when enable this option.', 'wp-camoo-sms')
                 ),
                 // Woocommerce
                 'wc_title'                     => array(
                     'id'   => 'wc_title',
-                    'name' => __('WooCommerce', 'wp-sms'),
+                    'name' => __('WooCommerce', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'wc_notif_new_order'           => array(
                     'id'      => 'wc_notif_new_order',
-                    'name'    => __('New order', 'wp-sms'),
+                    'name'    => __('New order', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Send an SMS to you When get new order.', 'wp-sms')
+                    'desc'    => __('Send an SMS to you When get new order.', 'wp-camoo-sms')
                 ),
                 'wc_notif_new_order_template'  => array(
                     'id'   => 'wc_notif_new_order_template',
-                    'name' => __('Message body', 'wp-sms'),
+                    'name' => __('Message body', 'wp-camoo-sms'),
                     'type' => 'textarea',
-                    'desc' => __('Enter the contents of the sms message.', 'wp-sms') . '<br>' .
+                    'desc' => __('Enter the contents of the sms message.', 'wp-camoo-sms') . '<br>' .
                               sprintf(
-                                  __('Order ID: %s, Order status: %s', 'wp-sms'),
+                                  __('Order ID: %s, Order status: %s', 'wp-camoo-sms'),
                                   '<code>%order_id%</code>',
                                   '<code>%status%</code>'
                               )
@@ -691,19 +691,19 @@ class Settings
                 // EDD
                 'edd_title'                    => array(
                     'id'   => 'edd_title',
-                    'name' => __('Easy Digital Downloads', 'wp-sms'),
+                    'name' => __('Easy Digital Downloads', 'wp-camoo-sms'),
                     'type' => 'header'
                 ),
                 'edd_notif_new_order'          => array(
                     'id'      => 'edd_notif_new_order',
-                    'name'    => __('New order', 'wp-sms'),
+                    'name'    => __('New order', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Send an SMS to you When get new order.', 'wp-sms')
+                    'desc'    => __('Send an SMS to you When get new order.', 'wp-camoo-sms')
                 ),
                 'edd_notif_new_order_template' => array(
                     'id'   => 'edd_notif_new_order_template',
-                    'name' => __('Message body', 'wp-sms'),
+                    'name' => __('Message body', 'wp-camoo-sms'),
                     'type' => 'textarea',
                     'desc' => __('Enter the contents of the message.', 'wp-telegram-notifications') . '<br>' .
                               sprintf(
@@ -720,29 +720,29 @@ class Settings
         if (Option::getOption('gdpr_compliance')) {
             $settings['newsletter']['newsletter_gdpr'] = array(
                 'id'   => 'newsletter_gdpr',
-                'name' => __('GDPR Compliance', 'wp-sms'),
+                'name' => __('GDPR Compliance', 'wp-camoo-sms'),
                 'type' => 'header'
             );
 
             $settings['newsletter']['newsletter_form_gdpr_text'] = array(
                 'id'   => 'newsletter_form_gdpr_text',
-                'name' => __('Confirmation text', 'wp-sms'),
+                'name' => __('Confirmation text', 'wp-camoo-sms'),
                 'type' => 'textarea'
             );
 
             $settings['newsletter']['newsletter_form_gdpr_confirm_checkbox'] = array(
                 'id'      => 'newsletter_form_gdpr_confirm_checkbox',
-                'name'    => __('Confirmation Checkbox status', 'wp-sms'),
+                'name'    => __('Confirmation Checkbox status', 'wp-camoo-sms'),
                 'type'    => 'select',
                 'options' => array( 'checked' => 'Checked', 'unchecked' => 'Unchecked' ),
-                'desc'    => __('Checked or Unchecked GDPR checkbox as default form load.', 'wp-sms')
+                'desc'    => __('Checked or Unchecked GDPR checkbox as default form load.', 'wp-camoo-sms')
             );
         } else {
             $settings['newsletter']['newsletter_gdpr'] = array(
                 'id'   => 'gdpr_notify',
-                'name' => __('GDPR Compliance', 'wp-sms'),
+                'name' => __('GDPR Compliance', 'wp-camoo-sms'),
                 'type' => 'notice',
-                'desc' => __('To get more option for GDPR, you should enable that in the general tab.', 'wp-sms'),
+                'desc' => __('To get more option for GDPR, you should enable that in the general tab.', 'wp-camoo-sms'),
             );
         }
 
@@ -768,7 +768,7 @@ class Settings
     {
         $checked = isset($this->options[ $args['id'] ]) ? checked(1, $this->options[ $args['id'] ], false) : '';
         $html    = '<input type="checkbox" id="wpsms_settings[' . $args['id'] . ']" name="wpsms_settings[' . $args['id'] . ']" value="1" ' . $checked . '/>';
-        $html    .= '<label for="wpsms_settings[' . $args['id'] . ']"> ' . __('Active', 'wp-sms') . '</label>';
+        $html    .= '<label for="wpsms_settings[' . $args['id'] . ']"> ' . __('Active', 'wp-camoo-sms') . '</label>';
         $html    .= '<p class="description"> ' . $args['desc'] . '</p>';
 
         echo $html;
@@ -1076,12 +1076,12 @@ class Settings
         ?>
         <div class="wrap wpsms-settings-wrap">
             <?php do_action('wp_sms_settings_page'); ?>
-            <h2><?php _e('Settings', 'wp-sms') ?></h2>
+            <h2><?php _e('Settings', 'wp-camoo-sms') ?></h2>
             <div class="wpsms-tab-group">
                 <ul class="wpsms-tab">
                     <li id="wpsms-logo">
                         <img src="<?php echo WP_SMS_URL; ?>assets/images/logo.svg"/>
-                        <p><?php echo sprintf(__('WP-SMS v%s', 'wp-sms'), WP_SMS_VERSION); ?></p>
+                        <p><?php echo sprintf(__('WP-SMS v%s', 'wp-camoo-sms'), WP_SMS_VERSION); ?></p>
                         <?php do_action('wp_sms_after_setting_logo'); ?>
                     </li>
                     <?php

@@ -24,7 +24,7 @@ class Privacy
     {
         echo '<p style="text-align: center;"><img src="' . WP_SMS_URL . '/assets/images/gdpr.png" alt="GDPR"></p>';
         echo '<p class="text-lead">';
-        echo sprintf(__('According to Article 17 GDPR, the user (data subject) shall have the right to obtain his/her data or have them erased and forgotten. In WP-SMS plugin you can export the user\'s data or erase his/her data in the case she/he asks. For more information, read %1$sArticle 17 GDPR%2$s.%3$s Note: In this page you can export or delete only the user data related to WP-SMS plugin. For doing the same for your whole WordPress, see the "Export Personal Data" or "Erase Personal Data" pages.', 'wp-sms'), '<a href="' . esc_url('https://gdpr-info.eu/art-17-gdpr/') . '" target="_blank" style="text-decoration: none; color:#ff0000;">', '</a>', '<br />') . "\n";
+        echo sprintf(__('According to Article 17 GDPR, the user (data subject) shall have the right to obtain his/her data or have them erased and forgotten. In WP-SMS plugin you can export the user\'s data or erase his/her data in the case she/he asks. For more information, read %1$sArticle 17 GDPR%2$s.%3$s Note: In this page you can export or delete only the user data related to WP-SMS plugin. For doing the same for your whole WordPress, see the "Export Personal Data" or "Erase Personal Data" pages.', 'wp-camoo-sms'), '<a href="' . esc_url('https://gdpr-info.eu/art-17-gdpr/') . '" target="_blank" style="text-decoration: none; color:#ff0000;">', '</a>', '<br />') . "\n";
         echo '</p>';
     }
 
@@ -38,7 +38,7 @@ class Privacy
             <div id="universal-message-container">
                 <div class="options">
                     <p>
-                        <label><?php _e('User’s Mobile Number', 'wp-sms'); ?></label>
+                        <label><?php _e('User’s Mobile Number', 'wp-camoo-sms'); ?></label>
                         <br/>
                         <input type="tel" name="mobile-number-export" value=""/>
                     </p>
@@ -62,11 +62,11 @@ class Privacy
             <div id="universal-message-container">
                 <div class="options">
                     <p>
-                        <label><?php _e('Enter User’s Mobile Number', 'wp-sms'); ?></label>
+                        <label><?php _e('Enter User’s Mobile Number', 'wp-camoo-sms'); ?></label>
                         <br/>
                         <input type="tel" name="mobile-number-delete" value=""/>
                         <br/>
-                        <span class="description"><?php _e('Note: You cannot undo these actions.', 'wp-sms'); ?></span>
+                        <span class="description"><?php _e('Note: You cannot undo these actions.', 'wp-camoo-sms'); ?></span>
                     </p>
                 </div><!-- #universal-message-container -->
                 <?php submit_button(__('Delete'), 'primary', 'submit', false); ?>

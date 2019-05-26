@@ -60,11 +60,11 @@ class SMS_Send
         $credit       = get_option('wpsms_gateway_credit');
 
         if ($gateway_name && ! $credit) {
-            echo '<br><div class="update-nag">' . __('You should have sufficient funds for sending sms in the account', 'wp-sms') . '</div>';
+            echo '<br><div class="update-nag">' . __('You should have sufficient funds for sending sms in the account', 'wp-camoo-sms') . '</div>';
 
             return;
         } else if (! $gateway_name) {
-            echo '<br><div class="update-nag">' . __('You should choose and configuration your gateway in the Setting page', 'wp-sms') . '</div>';
+            echo '<br><div class="update-nag">' . __('You should choose and configuration your gateway in the Setting page', 'wp-camoo-sms') . '</div>';
 
             return;
         }
@@ -117,13 +117,13 @@ class SMS_Send
                         $response = $response->get_error_message();
                     }
 
-                    echo "<div class='error'><p>" . sprintf(__('<strong>SMS was not delivered! results received:</strong> %s', 'wp-sms'), $response) . "</p></div>";
+                    echo "<div class='error'><p>" . sprintf(__('<strong>SMS was not delivered! results received:</strong> %s', 'wp-camoo-sms'), $response) . "</p></div>";
                 } else {
-                    echo "<div class='updated'><p>" . __('The SMS sent successfully', 'wp-sms') . "</p></div>";
+                    echo "<div class='updated'><p>" . __('The SMS sent successfully', 'wp-camoo-sms') . "</p></div>";
                     $credit = Gateway::credit();
                 }
             } else {
-                echo "<div class='error'><p>" . __('Please enter your SMS message.', 'wp-sms') . "</p></div>";
+                echo "<div class='error'><p>" . __('Please enter your SMS message.', 'wp-camoo-sms') . "</p></div>";
             }
         }
 

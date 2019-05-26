@@ -54,7 +54,7 @@ class Notifications
                 if ($update[1]->current > $wp_version and $this->sms->getCredit()) {
                     if (get_option('wp_last_send_notification') == false) {
                         $this->sms->to  = array( $this->options['admin_mobile_number'] );
-                        $this->sms->msg = sprintf(__('WordPress %s is available! Please update now', 'wp-sms'), $update[1]->current);
+                        $this->sms->msg = sprintf(__('WordPress %s is available! Please update now', 'wp-camoo-sms'), $update[1]->current);
                         $this->sms->sendSMS();
 
                         update_option('wp_last_send_notification', true);
@@ -89,7 +89,7 @@ class Notifications
      */
     public function notification_meta_box()
     {
-        add_meta_box('subscribe-meta-box', __('SMS', 'wp-sms'), array(
+        add_meta_box('subscribe-meta-box', __('SMS', 'wp-camoo-sms'), array(
             $this,
             'notification_meta_box_handler'
         ), 'post', 'normal', 'high');

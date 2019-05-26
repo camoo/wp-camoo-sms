@@ -112,7 +112,7 @@ class Newsletter extends \WP_SMS\RestApi
             return self::response($result->get_error_message(), 400);
         }
 
-        return self::response(__('Your number has been successfully unsubscribed.', 'wp-sms'));
+        return self::response(__('Your number has been successfully unsubscribed.', 'wp-camoo-sms'));
     }
 
     /**
@@ -132,7 +132,7 @@ class Newsletter extends \WP_SMS\RestApi
             return self::response($result->get_error_message(), 400);
         }
 
-        return self::response(__('Your number has been successfully subscribed.', 'wp-sms'));
+        return self::response(__('Your number has been successfully subscribed.', 'wp-camoo-sms'));
     }
 }
 
