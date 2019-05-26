@@ -1333,10 +1333,10 @@ class Settings_Pro
                             do_settings_fields('wps_pp_settings_' . $active_tab, 'wps_pp_settings_' . $active_tab);
                             ?>
                         </table>
-                        <?php 
-                            if ($active_tab !== 'general' ) {
-                                submit_button(); 
-                            }
+                        <?php
+                        if ($active_tab !== 'general') {
+                            submit_button();
+                        }
                         ?>
                     </form>
                 </div>

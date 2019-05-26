@@ -21,7 +21,6 @@ class Gateway
     public $from;
     public $to;
     public $msg;
-    public $encrypt_sms = false;
     protected $db;
     protected $tb_prefix;
     public $options;
@@ -116,6 +115,9 @@ class Gateway
         // SET encryption setting
         $sms->encrypt_sms = Option::getOption('encrypt_sms') == 1;
 
+        // SET datacoding
+        $sms->isUnicode = Option::getOption('send_unicode') == 1;
+
         // Unset gateway key field if not available in the current gateway class.
         add_filter('wp_sms_gateway_settings', function ($filter) {
             global $sms;
@@ -202,12 +204,19 @@ class Gateway
      */
     public static function gateway()
     {
+        $sCamoo = ' (' .__('Recommended', 'wp-camoo-sms'). ')';
+        $sCamooLegacy = '';
+        if (static::getPhpVersion() < CAMOO_SMS_MIN_PHP_VERSION) {
+            $sCamoo = '';
+            $sCamooLegacy = ' (' .__('Recommended', 'wp-camoo-sms'). ')';
+        }
         $gateways = array(
             ''               => array(
                 'default' => __('Please select your gateway', 'wp-camoo-sms'),
             ),
             'camoo' => array(
-                'camoo'     => 'camoo.cm',
+                'camoo'       => 'camoo.cm' .$sCamoo,
+                'camoolegacy' => 'camoo.cm Legacy version' .$sCamooLegacy,
             ),
         );
 
@@ -330,5 +339,15 @@ class Gateway
         }
 
         return $to;
+    }
+
+    public static function getPhpVersion()
+    {
+        if (!defined('PHP_VERSION_ID')) {
+            $version = explode('.', PHP_VERSION);
+            define('PHP_VERSION_ID', $version[0] * 10000 + $version[1] * 100 + $version[2]);
+        }
+
+        return PHP_VERSION_ID;
     }
 }

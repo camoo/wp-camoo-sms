@@ -2,7 +2,7 @@
 
 namespace WP_SMS\Gateway;
 
-class Camoo extends \WP_SMS\Gateway
+class Camoolegacy extends \WP_SMS\Gateway
 {
     private $wsdl_link = '';
     private $client = null;
@@ -11,9 +11,9 @@ class Camoo extends \WP_SMS\Gateway
     public $unitrial = false;
     public $unit;
     public $flash = "enable";
-    public $isflash = false;
     public $encrypt_sms = false;
     public $isUnicode = false;
+    public $isflash = false;
     public $clearObject = [\Camoo\Sms\Base::class, 'clear'];
     public $oBalance = [\Camoo\Sms\Balance::class, 'create'];
     public $oMessage = [\Camoo\Sms\Message::class, 'create'];
@@ -21,7 +21,7 @@ class Camoo extends \WP_SMS\Gateway
     public function __construct()
     {
         parent::__construct();
-        include_once('libraries/camoo/vendor/autoload.php');
+        include_once('libraries/camoo-legacy/vendor/autoload.php');
 
         $this->validateNumber = "+2376XXXXYYY";
         $this->help           = 'WordPress SMS API Sending SMS via the CAMOO SMS gateway';
@@ -68,10 +68,6 @@ class Camoo extends \WP_SMS\Gateway
             if ($this->isUnicode !== true) {
                 $oMessage->datacoding = 'plain';
             }
-            if ($this->encrypt_sms === true) {
-                $oMessage->encrypt = true;
-            }
-
             $oResult = $oMessage->send();
             // Log the result
             $this->log($this->from, $this->msg, $this->to, $oResult);

@@ -24,3 +24,4 @@ define('WP_SMS_ADMIN_URL', get_admin_url());
 define('WP_SMS_SITE', 'https://wp-camoo-sms-pro.com');
 define('WP_SMS_MOBILE_REGEX', '/^[\+|\(|\)|\d|\- ]*$/');
 define('WP_SMS_CURRENT_DATE', date('Y-m-d H:i:s', current_time('timestamp')));
+define('CAMOO_SMS_MIN_PHP_VERSION', 70100);
