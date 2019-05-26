@@ -51,7 +51,7 @@ class Notifications
             $update = $update->updates;
 
             if (isset($update[1])) {
-                if ($update[1]->current > $wp_version and $this->sms->GetCredit()) {
+                if ($update[1]->current > $wp_version and $this->sms->getCredit()) {
                     if (get_option('wp_last_send_notification') == false) {
                         $this->sms->to  = array( $this->options['admin_mobile_number'] );
                         $this->sms->msg = sprintf(__('WordPress %s is available! Please update now', 'wp-sms'), $update[1]->current);

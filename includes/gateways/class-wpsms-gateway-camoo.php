@@ -83,7 +83,7 @@ class Camoo extends \WP_SMS\Gateway
         }
     }
 
-    public function GetCredit()
+    public function getCredit()
     {
         // Check username and password
         if (! $this->username or ! $this->password) {

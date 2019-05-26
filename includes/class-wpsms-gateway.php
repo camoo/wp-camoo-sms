@@ -224,7 +224,7 @@ class Gateway
         //Check that, Are we in the Gateway WP_SMS tab setting page or not?
         if (is_admin() and isset($_REQUEST['page']) and isset($_REQUEST['tab']) and $_REQUEST['page'] == 'wp-sms-settings' and $_REQUEST['tab'] == 'gateway') {
             // Get credit
-            $result = $sms->GetCredit();
+            $result = $sms->getCredit();
 
             if (is_wp_error($result)) {
                 // Set error message
@@ -300,7 +300,7 @@ class Gateway
     public static function credit()
     {
         global $sms;
-        $result = $sms->GetCredit();
+        $result = $sms->getCredit();
 
         if (is_wp_error($result)) {
             update_option('wpsms_gateway_credit', 0);

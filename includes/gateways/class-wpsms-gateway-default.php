@@ -22,14 +22,14 @@ class Default_Gateway extends Gateway
     public function sendSMS()
     {
         // Check gateway credit
-        if (is_wp_error($this->GetCredit())) {
+        if (is_wp_error($this->getCredit())) {
             return new \WP_Error('account-credit', __('Your account does not credit for sending sms.', 'wp-sms'));
         }
 
         return new \WP_Error('send-sms', __('Does not set any gateway', 'wp-sms'));
     }
 
-    public function GetCredit()
+    public function getCredit()
     {
         // Check username and password
         if (! $this->username && ! $this->password) {
