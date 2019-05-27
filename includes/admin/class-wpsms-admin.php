@@ -194,7 +194,7 @@ class Admin
 
         $tb_show_url = add_query_arg(
             array(
-                'action' => 'wp_sms_edit_subscriber'
+                'action' => 'wp_camoo_sms_edit_subscriber'
             ),
             admin_url('admin-ajax.php', $protocol)
         );
@@ -203,7 +203,7 @@ class Admin
             'tb_show_url' => $tb_show_url,
             'tb_show_tag' => __('Edit Subscriber', 'wp-camoo-sms')
         );
-        wp_localize_script('wp-camoo-sms-edit-subscriber', 'wp_sms_edit_subscribe_ajax_vars', $ajax_vars);
+        wp_localize_script('wp-camoo-sms-edit-subscriber', 'wp_camoo_sms_edit_subscribe_ajax_vars', $ajax_vars);
     }
 
     /**
@@ -218,7 +218,7 @@ class Admin
 
         $tb_show_url = add_query_arg(
             array(
-                'action' => 'wp_sms_edit_group'
+                'action' => 'wp_camoo_sms_edit_group'
             ),
             admin_url('admin-ajax.php', $protocol)
         );
@@ -227,7 +227,7 @@ class Admin
             'tb_show_url' => $tb_show_url,
             'tb_show_tag' => __('Edit Group', 'wp-camoo-sms')
         );
-        wp_localize_script('wp-camoo-sms-edit-group', 'wp_sms_edit_group_ajax_vars', $ajax_vars);
+        wp_localize_script('wp-camoo-sms-edit-group', 'wp_camoo_sms_edit_group_ajax_vars', $ajax_vars);
     }
 
     /**
@@ -296,7 +296,7 @@ class Admin
         }
 
         if (! get_option('wpsms_hide_newsletter')) {
-            add_action('wp_sms_settings_page', array( $this, 'admin_newsletter' ));
+            add_action('wp_camoo_sms_settings_page', array( $this, 'admin_newsletter' ));
         }
 
         // Check exists require function

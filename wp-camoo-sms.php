@@ -34,7 +34,7 @@ $wpsms_option = get_option( 'wp_camoo_sms_settings' );
  */
 require_once WP_SMS_DIR . 'includes/class-wpsms-gateway.php';
 
-$sms = wp_sms_initial_gateway();
+$sms = wp_camoo_sms_initial_gateway();
 
 /**
  * Load Plugin

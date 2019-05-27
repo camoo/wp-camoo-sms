@@ -38,7 +38,7 @@ class Camoo extends \WP_SMS\Gateway
          *
          * @param string $this ->from sender number.
          */
-        $this->from = apply_filters('wp_sms_from', $this->from);
+        $this->from = apply_filters('wp_camoo_sms_from', $this->from);
 
         /**
          * Modify Receiver number
@@ -47,7 +47,7 @@ class Camoo extends \WP_SMS\Gateway
          *
          * @param array $this ->to receiver number
          */
-        $this->to = apply_filters('wp_sms_to', $this->to);
+        $this->to = apply_filters('wp_camoo_sms_to', $this->to);
 
         /**
          * Modify text message
@@ -56,7 +56,7 @@ class Camoo extends \WP_SMS\Gateway
          *
          * @param string $this ->msg text message.
          */
-        $this->msg = apply_filters('wp_sms_msg', $this->msg);
+        $this->msg = apply_filters('wp_camoo_sms_msg', $this->msg);
         $oMessage = call_user_func_array($this->oMessage, [$this->username, $this->password]);
         try {
             $oMessage->from = $this->from;
@@ -83,7 +83,7 @@ class Camoo extends \WP_SMS\Gateway
              *
              * @param string $result result output.
              */
-            do_action('wp_sms_send', $oResult);
+            do_action('wp_camoo_sms_send', $oResult);
 
             return $oResult;
         } catch (\Camoo\Sms\Exception\CamooSmsException $e) {

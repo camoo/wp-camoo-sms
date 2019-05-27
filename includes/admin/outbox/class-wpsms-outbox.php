@@ -60,9 +60,9 @@ class Outbox_List_Table extends \WP_List_Table
                 return $html;
             case 'status':
                 if ($item[ $column_name ] == 'success') {
-                    return '<span class="wp_sms_status_success">' . __('Success', 'wp-camoo-sms') . '</span>';
+                    return '<span class="wp_camoo_sms_status_success">' . __('Success', 'wp-camoo-sms') . '</span>';
                 } else {
-                    return '<span class="wp_sms_status_fail">' . __('Fail', 'wp-camoo-sms') . '</span>';
+                    return '<span class="wp_camoo_sms_status_fail">' . __('Fail', 'wp-camoo-sms') . '</span>';
                 }
             default:
                 return print_r($item, true); //Show the whole array for troubleshooting purposes

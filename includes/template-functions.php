@@ -10,22 +10,22 @@ if (! defined('ABSPATH')) {
 /**
  * Show SMS newsletter form.
  *
- * @deprecated 4.0 Use wp_sms_subscribes()
- * @see wp_sms_subscribes()
+ * @deprecated 4.0 Use wp_camoo_sms_subscribes()
+ * @see wp_camoo_sms_subscribes()
  *
  */
 function wp_subscribes()
 {
-    _deprecated_function(__FUNCTION__, '4.0', 'wp_sms_subscribes()');
+    _deprecated_function(__FUNCTION__, '4.0', 'wp_camoo_sms_subscribes()');
 
-    wp_sms_subscribes();
+    wp_camoo_sms_subscribes();
 }
 
 /**
  * Show SMS newsletter form.
  *
  */
-function wp_sms_subscribes()
+function wp_camoo_sms_subscribes()
 {
     Newsletter::loadNewsLetter();
 }
@@ -39,7 +39,7 @@ function wp_sms_subscribes()
  *
  * @return string
  */
-function wp_sms_get_option($option_name, $pro = false, $setting_name = '')
+function wp_camoo_sms_get_option($option_name, $pro = false, $setting_name = '')
 {
     return Option::getOption($option_name, $pro, $setting_name);
 }
@@ -53,7 +53,7 @@ function wp_sms_get_option($option_name, $pro = false, $setting_name = '')
  *
  * @return string | WP_Error
  */
-function wp_sms_send($to, $msg, $is_flash = false)
+function wp_camoo_sms_send($to, $msg, $is_flash = false)
 {
     global $sms;
 

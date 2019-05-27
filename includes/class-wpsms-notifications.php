@@ -166,7 +166,7 @@ class Notifications
         }
 
         // Modify request value.
-        $request = apply_filters('wp_sms_from_notify_user_register', $_REQUEST);
+        $request = apply_filters('wp_camoo_sms_from_notify_user_register', $_REQUEST);
 
         // Send SMS to user register.
         if (isset($user->mobile) or $request and ! is_array($request)) {

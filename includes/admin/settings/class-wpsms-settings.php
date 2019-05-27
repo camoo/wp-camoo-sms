@@ -201,9 +201,9 @@ class Settings
             'disable' => __('Disable', 'wp-camoo-sms')
         );
 
-        $settings = apply_filters('wp_sms_registered_settings', array(
+        $settings = apply_filters('wp_camoo_sms_registered_settings', array(
             // General tab
-            'general'       => apply_filters('wp_sms_general_settings', array(
+            'general'       => apply_filters('wp_camoo_sms_general_settings', array(
                 'admin_title'         => array(
                     'id'   => 'admin_title',
                     'name' => __('Mobile', 'wp-camoo-sms'),
@@ -236,7 +236,7 @@ class Settings
             )),
 
             // Gateway tab
-            'gateway'       => apply_filters('wp_sms_gateway_settings', array(
+            'gateway'       => apply_filters('wp_camoo_sms_gateway_settings', array(
                 // Gateway
                 'gayeway_title'             => array(
                     'id'   => 'gayeway_title',
@@ -342,7 +342,7 @@ class Settings
             )),
 
             // SMS Newsletter tab
-            'newsletter'    => apply_filters('wp_sms_gateway_settings', array(
+            'newsletter'    => apply_filters('wp_camoo_sms_gateway_settings', array(
                 // SMS Newsletter
                 'newsletter_title'                => array(
                     'id'   => 'newsletter_title',
@@ -412,7 +412,7 @@ class Settings
                 ),
             )),
             // Feature tab
-            'feature'       => apply_filters('wp_sms_feature_settings', array(
+            'feature'       => apply_filters('wp_camoo_sms_feature_settings', array(
                 'mobile_field'                     => array(
                     'id'   => 'mobile_field',
                     'name' => __('Mobile field', 'wp-camoo-sms'),
@@ -486,7 +486,7 @@ class Settings
                 ),
             )),
             // Notifications tab
-            'notifications' => apply_filters('wp_sms_notifications_settings', array(
+            'notifications' => apply_filters('wp_camoo_sms_notifications_settings', array(
                 // Publish new post
                 'notif_publish_new_post_title'            => array(
                     'id'   => 'notif_publish_new_post_title',
@@ -650,7 +650,7 @@ class Settings
                 ),
             )),
             // Integration  tab
-            'integration'   => apply_filters('wp_sms_integration_settings', array(
+            'integration'   => apply_filters('wp_camoo_sms_integration_settings', array(
                 // Contact form 7
                 'cf7_title'                    => array(
                     'id'   => 'cf7_title',
@@ -1079,14 +1079,14 @@ class Settings
         ob_start();
         ?>
         <div class="wrap wpsms-settings-wrap">
-            <?php do_action('wp_sms_settings_page'); ?>
+            <?php do_action('wp_camoo_sms_settings_page'); ?>
             <h2><?php _e('Settings', 'wp-camoo-sms') ?></h2>
             <div class="wpsms-tab-group">
                 <ul class="wpsms-tab">
                     <li id="wpsms-logo">
                         <img src="<?php echo WP_SMS_URL; ?>assets/images/logo.svg"/>
                         <p><?php echo sprintf(__('WP-SMS v%s', 'wp-camoo-sms'), WP_SMS_VERSION); ?></p>
-                        <?php do_action('wp_sms_after_setting_logo'); ?>
+                        <?php do_action('wp_camoo_sms_after_setting_logo'); ?>
                     </li>
                     <?php
                     foreach ($this->get_tabs() as $tab_id => $tab_name) {

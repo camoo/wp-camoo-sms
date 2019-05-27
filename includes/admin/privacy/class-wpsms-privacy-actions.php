@@ -95,8 +95,8 @@ class Privacy_Actions
      */
     public function process_form()
     {
-        if (isset($_POST['wp_sms_nonce_privacy']) and isset($_POST['submit']) and ( isset($_POST['mobile-number-delete']) || isset($_POST['mobile-number-export']) )) {
-            if (wp_verify_nonce($_POST['wp_sms_nonce_privacy'], 'wp_sms_nonce_privacy')) {
+        if (isset($_POST['wp_camoo_sms_nonce_privacy']) and isset($_POST['submit']) and ( isset($_POST['mobile-number-delete']) || isset($_POST['mobile-number-export']) )) {
+            if (wp_verify_nonce($_POST['wp_camoo_sms_nonce_privacy'], 'wp_camoo_sms_nonce_privacy')) {
                 $mobile = ( $_POST['submit'] == __('Export') ? sanitize_text_field($_POST['mobile-number-export']) : sanitize_text_field($_POST['mobile-number-delete']) );
 
                 //Is Empty Mobile Number

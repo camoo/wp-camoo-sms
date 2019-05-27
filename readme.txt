@@ -132,64 +132,64 @@ Yes! WP SMS is compatible with PHP 7 and 7.1
     $to = array('Mobile Number');
     $msg = "Your Message";
     $is_flash = true; // Only if wants to send flash SMS, else you can remove this parameter from function.
-    wp_sms_send( $to, $msg, $is_flash );
+    wp_camoo_sms_send( $to, $msg, $is_flash );
 
 = How using Actions? =
 Run the following action when sending SMS with this plugin:
-`wp_sms_send`
+`wp_camoo_sms_send`
 
 Example: Send emails when sending SMS
 
 	function send_mail_when_send_sms($message_info) {
 		wp_mail('you@mail.com', 'Send SMS', $message_info);
 	}
-	add_action('wp_sms_send', 'send_mail_when_send_sms');
+	add_action('wp_camoo_sms_send', 'send_mail_when_send_sms');
 
 Run the following action when subscribing a new user.
-`wp_sms_add_subscriber`
+`wp_camoo_sms_add_subscriber`
 
 Example: Send Welcome SMS to users when they are registered.
 
 	function send_sms_when_subscribe_new_user($name, $mobile) {
 		$to = array($mobile);
         $msg = "Hi {$name}, Thanks for subscribe.";
-        wp_sms_send( $to, $msg )
+        wp_camoo_sms_send( $to, $msg )
 	}
-	add_action('wp_sms_add_subscriber', 'send_sms_when_subscribe_new_user', 10, 2);
+	add_action('wp_camoo_sms_add_subscriber', 'send_sms_when_subscribe_new_user', 10, 2);
 
 = How using Hooks? =
 You can use the following filter to modify numbers.
-`wp_sms_from`
+`wp_camoo_sms_from`
 
 Example: Add 0 to the end of the sender number
 
-	function wp_sms_modify_from($from) {
+	function wp_camoo_sms_modify_from($from) {
 		$from = $from . ' 0';
 		return $val;
 	}
-	add_filter('wp_sms_from', 'wp_sms_modify_from');
+	add_filter('wp_camoo_sms_from', 'wp_camoo_sms_modify_from');
 
 You can use the following filter to modify the receivers’ numbers.
-`wp_sms_to`
+`wp_camoo_sms_to`
 
 Example: Add new numbers to your numbers
 
-	function wp_sms_modify_receiver($numbers) {
+	function wp_camoo_sms_modify_receiver($numbers) {
 		$numbers[] = '09xxxxxxxx';
 		return $numbers;
 	}
-	add_filter('wp_sms_to', 'wp_sms_modify_receiver');
+	add_filter('wp_camoo_sms_to', 'wp_camoo_sms_modify_receiver');
 
 You can use the following filter to modify text messages
-`wp_sms_msg`
+`wp_camoo_sms_msg`
 
 Example: Add signatures to messages that are sent
 
-	function wp_sms_modify_message($message) {
+	function wp_camoo_sms_modify_message($message) {
 		$message = $message . ' /n Powerby: WP-SMS';
 		return $message;
 	}
-	add_filter('wp_sms_msg', 'wp_sms_modify_message');
+	add_filter('wp_camoo_sms_msg', 'wp_camoo_sms_modify_message');
 
 = Is REST API supported? =
 Yes. Up to now, we’ve just registered one endpoint in the plugin.
@@ -258,7 +258,7 @@ In this version, we have made a lot of changes. We tried using the free version 
 
 = 5.1 =
 * Added: Collapse for toggle the visibility of response column on Outbox table.
-* Added: A new template function for sending SMS `wp_sms_send( $to, $msg, $is_flash = false )`.
+* Added: A new template function for sending SMS `wp_camoo_sms_send( $to, $msg, $is_flash = false )`.
 * Improved: Primotexto.com gateway.
 * Fixed: Issue in Textplode.com gateway.
 * Fixed: Issue in WooCommerce class for sending SMS.
@@ -459,7 +459,7 @@ In this version, we have made a lot of changes. We tried using the free version 
 
 = 3.2 =
 * Added: New capabilities: `wpsms_sendsms`, `wpsms_outbox`, `wpsms_subscribers`, `wpsms_subscribe_groups` and `wpsms_setting` to user roles for manage page access.
-* Added: New filters `wp_sms_from`, `wp_sms_to`, `wp_sms_msg` in the plugin.
+* Added: New filters `wp_camoo_sms_from`, `wp_camoo_sms_to`, `wp_camoo_sms_msg` in the plugin.
 * Added: New gateway (bulutfon.com).
 * Added: New gateway (iransms.co).
 * Added: New gateway (arkapayamak.ir).
@@ -469,13 +469,13 @@ In this version, we have made a lot of changes. We tried using the free version 
 * Fixed: Issue in outbox, subscribe and group page after bulk edit.
 * Updated: `http` to `https` link in gateway.sa gateway.
 * Updated: Language file and any string in the plugin.
-* Renamed `wp_after_sms_gateway` action to `wp_sms_after_gateway`.
-* Renamed `wps_add_subscriber` action to `wp_sms_add_subscriber`.
-* Renamed `wps_delete_subscriber` action to `wp_sms_delete_subscriber`.
-* Renamed `wps_update_subscriber` action to `wp_sms_update_subscriber`.
-* Renamed `wps_add_group` action to `wp_sms_add_group`.
-* Renamed `wps_delete_group` action to `wp_sms_delete_group`.
-* Renamed `wps_update_group` action to `wp_sms_update_group`.
+* Renamed `wp_after_sms_gateway` action to `wp_camoo_sms_after_gateway`.
+* Renamed `wps_add_subscriber` action to `wp_camoo_sms_add_subscriber`.
+* Renamed `wps_delete_subscriber` action to `wp_camoo_sms_delete_subscriber`.
+* Renamed `wps_update_subscriber` action to `wp_camoo_sms_update_subscriber`.
+* Renamed `wps_add_group` action to `wp_camoo_sms_add_group`.
+* Renamed `wps_delete_group` action to `wp_camoo_sms_delete_group`.
+* Renamed `wps_update_group` action to `wp_camoo_sms_update_group`.
 * Removed: select access option in settig page.
 * Removed: `Hook` method from `WP_SMS` class and used `do_action` for gateways class.
 * Removed: gateway message in `wp-admin`.
@@ -713,8 +713,8 @@ In this version, we have made a lot of changes. We tried using the free version 
 
 = 2.4 =
 * Added: `WP_SMS` Class and placing a parent class.
-* Added: `wp_sms_send` Action when Send sms from the plugin.
-* Added: `wp_sms_subscribe` Action when register a new subscriber.
+* Added: `wp_camoo_sms_send` Action when Send sms from the plugin.
+* Added: `wp_camoo_sms_subscribe` Action when register a new subscriber.
 * Added: Notification SMS when registering a new subscribe.
 * Added: Ponisha SMS Webservice.
 * Added: SMS Credit and total subscriber in At a Glance.

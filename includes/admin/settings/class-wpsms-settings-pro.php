@@ -432,9 +432,9 @@ class Settings_Pro
             );
         }
 
-        $settings = apply_filters('wp_sms_pro_registered_settings', array(
+        $settings = apply_filters('wp_camoo_sms_pro_registered_settings', array(
             // Options for general tab
-            'general' => apply_filters('wp_sms_pro_general_settings', array(
+            'general' => apply_filters('wp_camoo_sms_pro_general_settings', array(
                 'license'     => array(
                     'id'   => 'sms_plus',
                     'name'        => __('Camoo SMS Plus'),
@@ -442,7 +442,7 @@ class Settings_Pro
                 ),
             )),
             // Options for wordpress tab
-            'wp'      => apply_filters('wp_sms_pro_wp_settings', array(
+            'wp'      => apply_filters('wp_camoo_sms_pro_wp_settings', array(
                 'login_title'       => array(
                     'id'   => 'login_title',
                     'name' => __('Login', 'wp-camoo-sms'),
@@ -478,7 +478,7 @@ class Settings_Pro
                 ),
             )),
             // Options for BuddyPress tab
-            'bp'      => apply_filters('wp_sms_pro_bp_settings', array(
+            'bp'      => apply_filters('wp_camoo_sms_pro_bp_settings', array(
                 'bp_fields'                    => array(
                     'id'   => 'bp_fields',
                     'name' => __('Fields', 'wp-camoo-sms'),
@@ -567,7 +567,7 @@ class Settings_Pro
                 )
             )),
             // Options for Woocommerce tab
-            'wc'      => apply_filters('wp_sms_pro_wc_settings', array(
+            'wc'      => apply_filters('wp_camoo_sms_pro_wc_settings', array(
                 'wc_fields'                  => array(
                     'id'   => 'wc_fields',
                     'name' => __('General', 'wp-camoo-sms'),
@@ -785,11 +785,11 @@ class Settings_Pro
                 ),
             )),
             // Options for Gravityforms tab
-            'gf'      => apply_filters('wp_sms_pro_gf_settings', $gf_forms),
+            'gf'      => apply_filters('wp_camoo_sms_pro_gf_settings', $gf_forms),
             // Options for Quform tab
-            'qf'      => apply_filters('wp_sms_pro_qf_settings', $qf_forms),
+            'qf'      => apply_filters('wp_camoo_sms_pro_qf_settings', $qf_forms),
             // Options for Easy Digital Downloads tab
-            'edd'     => apply_filters('wp_sms_pro_edd_settings', array(
+            'edd'     => apply_filters('wp_camoo_sms_pro_edd_settings', array(
                 'edd_fields'                  => array(
                     'id'   => 'edd_fields',
                     'name' => __('Fields', 'wp-camoo-sms'),
@@ -858,7 +858,7 @@ class Settings_Pro
                 ),
             )),
             // Options for WP Job Manager tab
-            'job'     => apply_filters('wp_sms_job_settings', array(
+            'job'     => apply_filters('wp_camoo_sms_job_settings', array(
                 'job_fields'                  => array(
                     'id'   => 'job_fields',
                     'name' => __('Mobile field', 'wp-camoo-sms'),
@@ -944,7 +944,7 @@ class Settings_Pro
                 ),
             )),
             // Options for Awesome Support
-            'as'      => apply_filters('wp_sms_as_settings', array(
+            'as'      => apply_filters('wp_camoo_sms_as_settings', array(
                 'as_notify_new_ticket'                 => array(
                     'id'   => 'as_notify_new_ticket',
                     'name' => __('Notify for new ticket', 'wp-camoo-sms'),
@@ -1018,7 +1018,7 @@ class Settings_Pro
                               )
                 ),
             )),
-            'um'      => apply_filters('wp_sms_pro_um_settings', $um_options),
+            'um'      => apply_filters('wp_camoo_sms_pro_um_settings', $um_options),
         ));
 
         return $settings;
@@ -1301,13 +1301,13 @@ class Settings_Pro
         ob_start();
         ?>
         <div class="wrap wpsms-pro-settings-wrap">
-            <?php do_action('wp_sms_pro_settings_page'); ?>
+            <?php do_action('wp_camoo_sms_pro_settings_page'); ?>
             <h2><?php _e('Settings', 'wp-camoo-sms') ?></h2>
             <div class="wpsms-tab-group">
                 <ul class="wpsms-tab">
                     <li id="wpsms-logo">
                         <img src="<?php echo WP_SMS_URL; ?>assets/images/logo.svg"/>
-                        <?php do_action('wp_sms_pro_after_setting_logo'); ?>
+                        <?php do_action('wp_camoo_sms_pro_after_setting_logo'); ?>
                     </li>
                     <?php
                     foreach ($this->get_tabs() as $tab_id => $tab_name) {

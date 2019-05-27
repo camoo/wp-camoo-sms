@@ -16,14 +16,14 @@
             <table>
                 <tr>
                     <td style="padding-top: 10px;">
-                        <label for="wp_subscribe_name" class="wp_sms_subscribers_label"><?php _e('Name', 'wp-camoo-sms'); ?></label>
-                        <input type="text" id="wp_subscribe_name" name="wp_subscribe_name" class="wp_sms_subscribers_input_text" required/>
+                        <label for="wp_subscribe_name" class="wp_camoo_sms_subscribers_label"><?php _e('Name', 'wp-camoo-sms'); ?></label>
+                        <input type="text" id="wp_subscribe_name" name="wp_subscribe_name" class="wp_camoo_sms_subscribers_input_text" required/>
                     </td>
                 </tr>
                 <tr>
                     <td style="padding-top: 10px;">
-                        <label for="wp_subscribe_mobile" class="wp_sms_subscribers_label"><?php _e('Mobile', 'wp-camoo-sms'); ?></label>
-                        <input type="text" id="wp_subscribe_mobile" name="wp_subscribe_mobile" class="wp_sms_subscribers_input_text" required/>
+                        <label for="wp_subscribe_mobile" class="wp_camoo_sms_subscribers_label"><?php _e('Mobile', 'wp-camoo-sms'); ?></label>
+                        <input type="text" id="wp_subscribe_mobile" name="wp_subscribe_mobile" class="wp_camoo_sms_subscribers_input_text" required/>
                     </td>
                 </tr>
                 <?php
@@ -31,9 +31,9 @@
                 if ($groups) : ?>
                     <tr>
                         <td style="padding-top: 10px;">
-                            <label class="wp_sms_subscribers_label" for="wpsms_group_name"><?php _e('Group', 'wp-camoo-sms'); ?>
+                            <label class="wp_camoo_sms_subscribers_label" for="wpsms_group_name"><?php _e('Group', 'wp-camoo-sms'); ?>
                                 :</label>
-                            <select name="wpsms_group_name" id="wpsms_group_name" class="wp_sms_subscribers_input_text">
+                            <select name="wpsms_group_name" id="wpsms_group_name" class="wp_camoo_sms_subscribers_input_text">
                                 <?php foreach ($groups as $items) : ?>
                                     <option value="<?php echo $items->ID; ?>"><?php echo $items->name; ?></option>
                                 <?php endforeach; ?>
@@ -43,7 +43,7 @@
                 <?php else : ?>
                     <tr>
                         <td>
-                            <span class="wp_sms_subscribers_label" for="wpsms_group_name"><?php _e('Group', 'wp-camoo-sms'); ?>:</span>
+                            <span class="wp_camoo_sms_subscribers_label" for="wpsms_group_name"><?php _e('Group', 'wp-camoo-sms'); ?>:</span>
                             <?php echo sprintf(__('There is no group! <a href="%s">Add</a>', 'wp-camoo-sms'), 'admin.php?page=wp-camoo-sms-subscribers-group'); ?>
                         </td>
                     </tr>
@@ -69,9 +69,9 @@
                 </tr>
                 <tr>
                     <td>
-                        <label for="wpsms_group_name" class="wp_sms_subscribers_label"><?php _e('Group', 'wp-camoo-sms'); ?></label>
+                        <label for="wpsms_group_name" class="wp_camoo_sms_subscribers_label"><?php _e('Group', 'wp-camoo-sms'); ?></label>
                         <?php if ($groups) : ?>
-                        <select name="wpsms_group_name" id="wpsms_group_name" class="wp_sms_subscribers_input_text">
+                        <select name="wpsms_group_name" id="wpsms_group_name" class="wp_camoo_sms_subscribers_input_text">
                             <?php
                             foreach ($groups as $items) :
                                 ?>
@@ -103,8 +103,8 @@
             <table>
                 <tr>
                     <td style="padding-top: 10px;">
-                        <label for="export-file-type" class="wp_sms_subscribers_label"><?php _e('Export To', 'wp-camoo-sms'); ?></label>
-                        <select id="export-file-type" name="export-file-type" class="wp_sms_subscribers_input_text">
+                        <label for="export-file-type" class="wp_camoo_sms_subscribers_label"><?php _e('Export To', 'wp-camoo-sms'); ?></label>
+                        <select id="export-file-type" name="export-file-type" class="wp_camoo_sms_subscribers_input_text">
                             <option value="0"><?php _e('Please select.', 'wp-camoo-sms'); ?></option>
                             <option value="excel">Excel</option>
                             <option value="xml">XML</option>

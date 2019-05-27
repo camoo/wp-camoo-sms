@@ -78,7 +78,7 @@ class Newsletter
              * @since 3.0
              *
              */
-            do_action('wp_sms_add_subscriber', $name, $mobile);
+            do_action('wp_camoo_sms_add_subscriber', $name, $mobile);
 
             return array( 'result' => 'success', 'message' => __('Subscriber successfully added.', 'wp-camoo-sms') );
         } else {
@@ -135,7 +135,7 @@ class Newsletter
          * @since 3.0
          *
          */
-        do_action('wp_sms_delete_subscriber', $result);
+        do_action('wp_camoo_sms_delete_subscriber', $result);
 
         return array( 'result' => 'success', 'message' => __('Subscribe successfully removed.', 'wp-camoo-sms') );
     }
@@ -187,7 +187,7 @@ class Newsletter
              * @since 3.0
              *
              */
-            do_action('wp_sms_update_subscriber', $result);
+            do_action('wp_camoo_sms_update_subscriber', $result);
 
             return array( 'result' => 'success', 'message' => __('Subscriber successfully updated.', 'wp-camoo-sms') );
         } else {
@@ -263,7 +263,7 @@ class Newsletter
              * @since 3.0
              *
              */
-            do_action('wp_sms_delete_group', $result);
+            do_action('wp_camoo_sms_delete_group', $result);
 
             return $result;
         }
@@ -309,7 +309,7 @@ class Newsletter
                  * @since 3.0
                  *
                  */
-                do_action('wp_sms_add_group', $result);
+                do_action('wp_camoo_sms_add_group', $result);
 
                 return array( 'result' => 'success', 'message' => __('Group successfully added.', 'wp-camoo-sms') );
             }
@@ -363,7 +363,7 @@ class Newsletter
                  * @since 3.0
                  *
                  */
-                do_action('wp_sms_update_group', $result);
+                do_action('wp_camoo_sms_update_group', $result);
 
                 return array( 'result' => 'success', 'message' => __('Group successfully updated.', 'wp-camoo-sms') );
             } else {

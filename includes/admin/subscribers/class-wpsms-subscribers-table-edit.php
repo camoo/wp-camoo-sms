@@ -20,10 +20,10 @@ class Subscribers_Subscribers_Table_Edit
         $this->db        = $wpdb;
         $this->tb_prefix = $wpdb->prefix;
 
-        add_action('wp_ajax_wp_sms_edit_subscriber', array( $this, 'wp_sms_edit_subscriber' ));
+        add_action('wp_ajax_wp_camoo_sms_edit_subscriber', array( $this, 'wp_camoo_sms_edit_subscriber' ));
     }
 
-    function wp_sms_edit_subscriber()
+    function wp_camoo_sms_edit_subscriber()
     {
         //set Actiom Values
         $subscriber_id = isset($_GET['subscriber_id']) ? $_GET['subscriber_id'] : null;
@@ -38,25 +38,25 @@ class Subscribers_Subscribers_Table_Edit
 					        <tr>
 					            <td style="padding-top: 10px;">
 					                <label for="wp_subscribe_name"
-					                       class="wp_sms_subscribers_label">' . __('Name', 'wp-camoo-sms') . '</label>
+					                       class="wp_camoo_sms_subscribers_label">' . __('Name', 'wp-camoo-sms') . '</label>
 					                       <input type="text" id="wp_subscribe_name" name="wp_subscribe_name"
-                           value="' . $subscriber->name . '" class="wp_sms_subscribers_input_text" />
+                           value="' . $subscriber->name . '" class="wp_camoo_sms_subscribers_input_text" />
 							</td>
 							</tr>
 					        <tr>
 					            <td style="padding-top: 10px;">
 					                <label for="wp_subscribe_mobile"
-					                       class="wp_sms_subscribers_label">' . __('Mobile', 'wp-camoo-sms') . '</label>
+					                       class="wp_camoo_sms_subscribers_label">' . __('Mobile', 'wp-camoo-sms') . '</label>
                            <input type="text" name="wp_subscribe_mobile" id="wp_subscribe_mobile"
-                           value="' . $subscriber->mobile . '" class="wp_sms_subscribers_input_text code" />
+                           value="' . $subscriber->mobile . '" class="wp_camoo_sms_subscribers_input_text code" />
 							</td>
 							</tr>';
         if ($groups) {
             $html .= '<tr>
 					  <td style="padding-top: 10px;">
                       <label for="wpsms_group_name"
-					                       class="wp_sms_subscribers_label">' . __('Group', 'wp-camoo-sms') . '</label>
-                   <select name="wpsms_group_name" id="wpsms_group_name" class="wp_sms_subscribers_input_text code">';
+					                       class="wp_camoo_sms_subscribers_label">' . __('Group', 'wp-camoo-sms') . '</label>
+                   <select name="wpsms_group_name" id="wpsms_group_name" class="wp_camoo_sms_subscribers_input_text code">';
             foreach ($groups as $items) {
                 if ($subscriber->group_ID == $items->ID) {
                     $html .= '<option value="' . $items->ID . '" selected="selected">' . $items->name . '</option>';
@@ -71,7 +71,7 @@ class Subscribers_Subscribers_Table_Edit
             $html .= '<tr>
                       <td style="padding-top: 10px;">
                       <label for="wpsms_group_name"
-					                       class="wp_sms_subscribers_label">' . __('Group', 'wp-camoo-sms') . '</label>
+					                       class="wp_camoo_sms_subscribers_label">' . __('Group', 'wp-camoo-sms') . '</label>
                       ' . sprintf(__('There is no group! <a href = "%s" > Add</a > ', 'wp-camoo-sms'), 'admin.php?page=wp-camoo-sms-subscribers-group') . '
                       </td>
                       </tr>';
@@ -80,8 +80,8 @@ class Subscribers_Subscribers_Table_Edit
         $html .= '<tr>
                 <td>
                 <label for="wpsms_subscribe_status"
-					                       class="wp_sms_subscribers_label">' . __('Status', 'wp-camoo-sms') . '</label>
-                    <select name="wpsms_subscribe_status" id="wpsms_subscribe_status" class="wp_sms_subscribers_input_text code" >';
+					                       class="wp_camoo_sms_subscribers_label">' . __('Status', 'wp-camoo-sms') . '</label>
+                    <select name="wpsms_subscribe_status" id="wpsms_subscribe_status" class="wp_camoo_sms_subscribers_input_text code" >';
         if ($subscriber->status == 0) {
             $html .= '<option value="1">' . __('Active', 'wp-camoo-sms') . '</option>';
             $html .= '<option value="0" selected="selected">' . __('Deactive', 'wp-camoo-sms') . '</option>';

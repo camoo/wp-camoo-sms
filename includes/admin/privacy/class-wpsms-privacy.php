@@ -45,7 +45,7 @@ class Privacy
                 </div>
                 <?php submit_button(__('Export'), 'primary', 'submit', false); ?>
             </div>
-            <input type="hidden" name="wp_sms_nonce_privacy" value="<?php echo wp_create_nonce('wp_sms_nonce_privacy'); ?>">
+            <input type="hidden" name="wp_camoo_sms_nonce_privacy" value="<?php echo wp_create_nonce('wp_camoo_sms_nonce_privacy'); ?>">
         </form>
         <div class="clear"></div>
         <?php
@@ -71,7 +71,7 @@ class Privacy
                 </div><!-- #universal-message-container -->
                 <?php submit_button(__('Delete'), 'primary', 'submit', false); ?>
             </div>
-            <input type="hidden" name="wp_sms_nonce_privacy" value="<?php echo wp_create_nonce('wp_sms_nonce_privacy'); ?>">
+            <input type="hidden" name="wp_camoo_sms_nonce_privacy" value="<?php echo wp_create_nonce('wp_camoo_sms_nonce_privacy'); ?>">
         </form>
         <div class="clear"></div>
         <?php

@@ -14,7 +14,7 @@ Very easy Send SMS by PHP code:
 ```php
 $to = array('01000000000');
 $msg = "Hello kmer World! Déjà vu!";
-wp_sms_send( $to, $msg );
+wp_camoo_sms_send( $to, $msg );
 ```
 
 
@@ -40,19 +40,19 @@ wp_sms_send( $to, $msg );
 # Installation
 1. Upload `wp-camoo-sms` to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. To display Subscribe goto Themes -> Widgets, and adding `SMS newsletter form` into your sidebar Or using this functions: `<?php wp_sms_subscribes(); ?>` into theme.
+3. To display Subscribe goto Themes -> Widgets, and adding `SMS newsletter form` into your sidebar Or using this functions: `<?php wp_camoo_sms_subscribes(); ?>` into theme.
 or using this Shortcode `[wp-sms-subscriber-form]` in Posts pages or Widget.
 4. Using this functions for send manual SMS:
 
 * First:`$to = array('Mobile Number');`
 * `$msg = "Your Message";`
 * `$isflash = true; // Only if wants to send flash SMS, else you can remove this parameter from function.`
-* Send SMS: `wp_sms_send( $to, $msg, $isflash )`
+* Send SMS: `wp_camoo_sms_send( $to, $msg, $isflash )`
 
 # Actions
 Run the following action when sending SMS with this plugin.
 ```php
-wp_sms_send
+wp_camoo_sms_send
 ```
 
 Example: Send mail when send sms.
@@ -60,12 +60,12 @@ Example: Send mail when send sms.
 function send_mail_when_send_sms($message_info) {
 	wp_mail('you@mail.com', 'Send SMS', $message_info);
 }
-add_action('wp_sms_send', 'send_mail_when_send_sms');
+add_action('wp_camoo_sms_send', 'send_mail_when_send_sms');
 ```
 
 Run the following action when subscribing a new user.
 ```php
-wp_sms_add_subscriber
+wp_camoo_sms_add_subscriber
 ```
 
 Example: Send sms to user when register a new subscriber.
@@ -73,55 +73,55 @@ Example: Send sms to user when register a new subscriber.
 function send_sms_when_subscribe_new_user($name, $mobile) {
     $to = array($mobile);
     $msg = "Hi {$name}, Thanks for subscribe.";
-    wp_sms_send( $to, $msg )
+    wp_camoo_sms_send( $to, $msg )
 }
-add_action('wp_sms_add_subscriber', 'send_sms_when_subscribe_new_user', 10, 2);
+add_action('wp_camoo_sms_add_subscriber', 'send_sms_when_subscribe_new_user', 10, 2);
 ```
 
 # Filters
 You can use the following filter for modifying from the number.
 ```php
-wp_sms_from
+wp_camoo_sms_from
 ```
 
 Example: Add 0 to the end sender number.
 ```php
-function wp_sms_modify_from($from) {
+function wp_camoo_sms_modify_from($from) {
 	$from = $from . ' 0';
 	
 	return $val;
 }
-add_filter('wp_sms_from', 'wp_sms_modify_from');
+add_filter('wp_camoo_sms_from', 'wp_camoo_sms_modify_from');
 ```
 
 You can use the following filter for modifying receivers number.
 ```php
-wp_sms_to
+wp_camoo_sms_to
 ```
 
 Example: Add new number to get message.
 ```php
-function wp_sms_modify_receiver($numbers) {
+function wp_camoo_sms_modify_receiver($numbers) {
 	$numbers[] = '67xxxxxxxx';
 	
 	return $numbers;
 }
-add_filter('wp_sms_to', 'wp_sms_modify_receiver');
+add_filter('wp_camoo_sms_to', 'wp_camoo_sms_modify_receiver');
 ```
 
 You can use the following filter for modifying text message.
 ```php
-wp_sms_msg
+wp_camoo_sms_msg
 ```
 
 Example: Add signature to messages that are sent.
 ```php
-function wp_sms_modify_message($message) {
+function wp_camoo_sms_modify_message($message) {
 	$message = $message . ' /n Powerby: WP-CAMOO-SMS';
 	
 	return $message;
 }
-add_filter('wp_sms_msg', 'wp_sms_modify_message');
+add_filter('wp_camoo_sms_msg', 'wp_camoo_sms_modify_message');
 ```
 
 # Rest API Endpoints

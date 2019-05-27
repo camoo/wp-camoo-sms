@@ -202,7 +202,7 @@ class Features
 
         $tel_intel_vars['util_js'] = WP_SMS_URL . 'assets/js/intel/utils.js';
 
-        wp_localize_script('wpsms-intel-script', 'wp_sms_intel_tel_input', $tel_intel_vars);
+        wp_localize_script('wpsms-intel-script', 'wp_camoo_sms_intel_tel_input', $tel_intel_vars);
     }
 }
 

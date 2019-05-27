@@ -20,10 +20,10 @@ class Subscribers_Groups_Table_Edit
         $this->db        = $wpdb;
         $this->tb_prefix = $wpdb->prefix;
 
-        add_action('wp_ajax_wp_sms_edit_group', array( $this, 'wp_sms_edit_group' ));
+        add_action('wp_ajax_wp_camoo_sms_edit_group', array( $this, 'wp_camoo_sms_edit_group' ));
     }
 
-    function wp_sms_edit_group()
+    function wp_camoo_sms_edit_group()
     {
         file_put_contents('log', print_r($_GET['group_name'], 1), FILE_APPEND);
         //set Actiom Values
@@ -34,11 +34,11 @@ class Subscribers_Groups_Table_Edit
 					        <tr>
 					            <td style="padding-top: 10px;">
 					                <label for="wp_group_name"
-					                       class="wp_sms_subscribers_label">' . __('Name', 'wp-camoo-sms') . '</label>
+					                       class="wp_camoo_sms_subscribers_label">' . __('Name', 'wp-camoo-sms') . '</label>
 					                <input type="text" id="wp_group_name" name="wp_group_name" value="' . $group_name . '"
-					                       class="wp_sms_subscribers_input_text"/>
+					                       class="wp_camoo_sms_subscribers_input_text"/>
 					                <input type="hidden" id="wp_group_name" name="group_id" value="' . $group_id . '"
-							class="wp_sms_subscribers_input_text"/>
+							class="wp_camoo_sms_subscribers_input_text"/>
 							</td>
 							</tr>
 							

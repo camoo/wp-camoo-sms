@@ -21,7 +21,7 @@ class Version
     {
         // Check pro pack is enabled
         if ($this->pro_is_active()) {
-            add_action('wp_sms_pro_after_setting_logo', array( $this, 'pro_setting_title' ));
+            add_action('wp_camoo_sms_pro_after_setting_logo', array( $this, 'pro_setting_title' ));
 
             // Check license key.
             if (Option::getOption('license_key_status', true) == 'no') {
@@ -30,8 +30,8 @@ class Version
         } else {
             add_filter('plugin_row_meta', array( $this, 'pro_meta_links' ), 10, 2);
             add_action('admin_enqueue_scripts', array( $this, 'pro_admin_script' ));
-            add_action('wp_sms_pro_after_setting_logo', array( $this, 'pro_setting_title_pro_not_activated' ));
-            add_action('wp_sms_after_setting_logo', array( $this, 'setting_title_pro_not_activated' ));
+            add_action('wp_camoo_sms_pro_after_setting_logo', array( $this, 'pro_setting_title_pro_not_activated' ));
+            add_action('wp_camoo_sms_after_setting_logo', array( $this, 'setting_title_pro_not_activated' ));
             add_filter('wpsms_gateway_list', array( $this, 'pro_gateways' ));
         }
     }

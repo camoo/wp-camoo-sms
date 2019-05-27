@@ -50,7 +50,7 @@
         </th>
         <td>
             <textarea cols="80" rows="5" id="wpsms-text-template" name="wpsms_text_template"><?php
-                echo wp_sms_get_option('notif_publish_new_post_template'); ?></textarea>
+                echo wp_camoo_sms_get_option('notif_publish_new_post_template'); ?></textarea>
             <p class="description data">
                 <?php _e('Input data:', 'wp-camoo-sms'); ?>
                 <br/><?php _e('Post title', 'wp-camoo-sms'); ?>: <code>%post_title%</code>

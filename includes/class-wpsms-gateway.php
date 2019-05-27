@@ -35,15 +35,15 @@ class Gateway
 
         // Check option for add country code to prefix numbers
         if (isset($this->options['mobile_county_code']) and $this->options['mobile_county_code']) {
-            add_filter('wp_sms_to', array( $this, 'applyCountryCode' ));
+            add_filter('wp_camoo_sms_to', array( $this, 'applyCountryCode' ));
         }
 
         if (isset($this->options['send_unicode']) and $this->options['send_unicode']) {
-            //add_filter( 'wp_sms_msg', array( $this, 'applyUnicode' ) );
+            //add_filter( 'wp_camoo_sms_msg', array( $this, 'applyUnicode' ) );
         }
 
         // Add Filters
-        add_filter('wp_sms_to', array( $this, 'modify_bulk_send' ));
+        add_filter('wp_camoo_sms_to', array( $this, 'modify_bulk_send' ));
     }
 
     /**
@@ -95,7 +95,7 @@ class Gateway
 
         // Show gateway help configuration in gateway page
         if ($sms->help) {
-            add_action('wp_sms_after_gateway', function () {
+            add_action('wp_camoo_sms_after_gateway', function () {
                 echo ' < p class="description" > ' . $sms->help . '</p > ';
             });
         }
@@ -119,7 +119,7 @@ class Gateway
         $sms->isUnicode = Option::getOption('send_unicode') == 1;
 
         // Unset gateway key field if not available in the current gateway class.
-        add_filter('wp_sms_gateway_settings', function ($filter) {
+        add_filter('wp_camoo_sms_gateway_settings', function ($filter) {
             global $sms;
 
             if (! $sms->has_key) {

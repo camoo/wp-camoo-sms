@@ -157,21 +157,21 @@
     text-align: justify;
 }
 
-.wp_sms_status_success {
+.wp_camoo_sms_status_success {
     background: #04ca15;
     color: #ffffff;
     padding: 3px 5px;
     border-radius: 3px;
 }
 
-.wp_sms_status_fail {
+.wp_camoo_sms_status_fail {
     background: #ca0404;
     color: #ffffff;
     padding: 3px 5px;
     border-radius: 3px;
 }
 
-.wp_sms_subscribers_label {
+.wp_camoo_sms_subscribers_label {
     line-height: 19px;
     left: 0px;
     top: 6px;
@@ -180,7 +180,7 @@
     display: inline-block;
 }
 
-.wp_sms_subscribers_input_text {
+.wp_camoo_sms_subscribers_input_text {
     left: 81px;
     top: 0px;
     width: 379px;
