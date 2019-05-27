@@ -35,20 +35,20 @@ class Admin
     public function admin_assets()
     {
         // Register admin-bar.css for whole admin area
-        wp_register_style('wpsms-admin-bar', WP_SMS_URL . 'assets/css/admin-bar.css', true, WP_SMS_VERSION);
+        wp_register_style('wpsms-admin-bar', WP_CAMOO_SMS_URL . 'assets/css/admin-bar.css', true, WP_CAMOO_SMS_VERSION);
         wp_enqueue_style('wpsms-admin-bar');
 
         if (stristr(get_current_screen()->id, "wp-camoo-sms")) {
-            wp_register_style('wpsms-admin', WP_SMS_URL . 'assets/css/admin.css', true, WP_SMS_VERSION);
+            wp_register_style('wpsms-admin', WP_CAMOO_SMS_URL . 'assets/css/admin.css', true, WP_CAMOO_SMS_VERSION);
             wp_enqueue_style('wpsms-admin');
             if (is_rtl()) {
-                wp_enqueue_style('wpsms-rtl', WP_SMS_URL . 'assets/css/rtl.css', true, WP_SMS_VERSION);
+                wp_enqueue_style('wpsms-rtl', WP_CAMOO_SMS_URL . 'assets/css/rtl.css', true, WP_CAMOO_SMS_VERSION);
             }
 
-            wp_enqueue_style('wpsms-chosen', WP_SMS_URL . 'assets/css/chosen.min.css', true, WP_SMS_VERSION);
-            wp_enqueue_script('wpsms-chosen', WP_SMS_URL . 'assets/js/chosen.jquery.min.js', true, WP_SMS_VERSION);
-            wp_enqueue_script('wpsms-word-and-character-counter', WP_SMS_URL . 'assets/js/jquery.word-and-character-counter.min.js', true, WP_SMS_VERSION);
-            wp_enqueue_script('wpsms-admin', WP_SMS_URL . 'assets/js/admin.js', true, WP_SMS_VERSION);
+            wp_enqueue_style('wpsms-chosen', WP_CAMOO_SMS_URL . 'assets/css/chosen.min.css', true, WP_CAMOO_SMS_VERSION);
+            wp_enqueue_script('wpsms-chosen', WP_CAMOO_SMS_URL . 'assets/js/chosen.jquery.min.js', true, WP_CAMOO_SMS_VERSION);
+            wp_enqueue_script('wpsms-word-and-character-counter', WP_CAMOO_SMS_URL . 'assets/js/jquery.word-and-character-counter.min.js', true, WP_CAMOO_SMS_VERSION);
+            wp_enqueue_script('wpsms-admin', WP_CAMOO_SMS_URL . 'assets/js/admin.js', true, WP_CAMOO_SMS_VERSION);
         }
     }
 
@@ -64,7 +64,7 @@ class Admin
                 $wp_admin_bar->add_menu(array(
                     'id'    => 'wp-credit-sms',
                     'title' => '<span class="ab-icon"></span>' . $credit,
-                    'href'  => WP_SMS_ADMIN_URL . '/admin.php?page=wp-camoo-sms-settings'
+                    'href'  => WP_CAMOO_SMS_ADMIN_URL . '/admin.php?page=wp-camoo-sms-settings'
                 ));
             }
         }
@@ -73,7 +73,7 @@ class Admin
             'id'     => 'wp-send-sms',
             'parent' => 'new-content',
             'title'  => __('Camoo SMS', 'wp-camoo-sms'),
-            'href'   => WP_SMS_ADMIN_URL . '/admin.php?page=wp-camoo-sms'
+            'href'   => WP_CAMOO_SMS_ADMIN_URL . '/admin.php?page=wp-camoo-sms'
         ));
     }
 
@@ -85,9 +85,9 @@ class Admin
         $subscribe = $this->db->get_var("SELECT COUNT(*) FROM {$this->tb_prefix}camoo_sms_subscribes");
         $credit    = get_option('wp_camoo_sms_gateway_credit');
 
-        echo "<li class='wpsms-subscribe-count'><a href='" . WP_SMS_ADMIN_URL . "admin.php?page=wp-camoo-sms-subscribers'>" . sprintf(__('%s Subscriber', 'wp-camoo-sms'), $subscribe) . "</a></li>";
+        echo "<li class='wpsms-subscribe-count'><a href='" . WP_CAMOO_SMS_ADMIN_URL . "admin.php?page=wp-camoo-sms-subscribers'>" . sprintf(__('%s Subscriber', 'wp-camoo-sms'), $subscribe) . "</a></li>";
         if (! is_object($credit)) {
-            echo "<li class='wpsms-credit-count'><a href='" . WP_SMS_ADMIN_URL . "admin.php?page=wp-camoo-sms-settings&tab=web-service'>" . sprintf(__('%s SMS Credit', 'wp-camoo-sms'), $credit) . "</a></li>";
+            echo "<li class='wpsms-credit-count'><a href='" . WP_CAMOO_SMS_ADMIN_URL . "admin.php?page=wp-camoo-sms-settings&tab=web-service'>" . sprintf(__('%s SMS Credit', 'wp-camoo-sms'), $credit) . "</a></li>";
         }
     }
 
@@ -142,7 +142,7 @@ class Admin
     {
 
         // Subscribers class.
-        require_once WP_SMS_DIR . 'includes/admin/subscribers/class-wpsms-subscribers.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/admin/subscribers/class-wpsms-subscribers.php';
 
         $page = new Subscribers();
         $page->render_page();
@@ -154,7 +154,7 @@ class Admin
     public function groups_callback()
     {
         // Groups class.
-        require_once WP_SMS_DIR . 'includes/admin/groups/class-wpsms-groups.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/admin/groups/class-wpsms-groups.php';
 
         $page = new Groups();
         $page->render_page();
@@ -166,7 +166,7 @@ class Admin
     public function privacy_callback()
     {
         // Privacy class.
-        require_once WP_SMS_DIR . 'includes/admin/privacy/class-wpsms-privacy.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/admin/privacy/class-wpsms-privacy.php';
 
         $page           = new Privacy();
         $page->pagehook = get_current_screen()->id;
@@ -187,7 +187,7 @@ class Admin
      */
     public function subscribers_assets()
     {
-        wp_register_script('wp-camoo-sms-edit-subscriber', WP_SMS_URL . 'assets/js/edit-subscriber.js', array( 'jquery' ), null, true);
+        wp_register_script('wp-camoo-sms-edit-subscriber', WP_CAMOO_SMS_URL . 'assets/js/edit-subscriber.js', array( 'jquery' ), null, true);
         wp_enqueue_script('wp-camoo-sms-edit-subscriber');
 
         $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
@@ -211,7 +211,7 @@ class Admin
      */
     public function groups_assets()
     {
-        wp_register_script('wp-camoo-sms-edit-group', WP_SMS_URL . 'assets/js/edit-group.js', array( 'jquery' ), null, true);
+        wp_register_script('wp-camoo-sms-edit-group', WP_CAMOO_SMS_URL . 'assets/js/edit-group.js', array( 'jquery' ), null, true);
         wp_enqueue_script('wp-camoo-sms-edit-group');
 
         $protocol = isset($_SERVER["HTTPS"]) ? 'https://' : 'http://';
@@ -251,7 +251,7 @@ class Admin
      */
     public function system_info_assets()
     {
-        wp_enqueue_style('wpsms-system-info', WP_SMS_URL . 'assets/css/system-info.css', true, WP_SMS_VERSION);
+        wp_enqueue_style('wpsms-system-info', WP_CAMOO_SMS_URL . 'assets/css/system-info.css', true, WP_CAMOO_SMS_VERSION);
     }
 
     /**
@@ -315,7 +315,7 @@ class Admin
      */
     public function admin_newsletter()
     {
-        #include_once WP_SMS_DIR . 'includes/templates/admin-newsletter.php';
+        #include_once WP_CAMOO_SMS_DIR . 'includes/templates/admin-newsletter.php';
     }
 }
 

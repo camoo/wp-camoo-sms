@@ -72,7 +72,7 @@ class Integrations
             $cf7_options_field['message'] = '';
         }
 
-        include_once WP_SMS_DIR . "includes/templates/wpcf7-form.php";
+        include_once WP_CAMOO_SMS_DIR . "includes/templates/wpcf7-form.php";
     }
 
     public function wpcf7_save_form($form)

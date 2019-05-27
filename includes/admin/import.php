@@ -4,7 +4,7 @@ if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-include_once WP_SMS_DIR . "includes/libraries/excel-reader.class.php";
+include_once WP_CAMOO_SMS_DIR . "includes/libraries/excel-reader.class.php";
 
 global $wpdb;
 

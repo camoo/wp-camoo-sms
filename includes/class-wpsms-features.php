@@ -101,7 +101,7 @@ class Features
 
     public function add_mobile_field_to_newuser_form()
     {
-        include_once WP_SMS_DIR . "includes/templates/mobile-field.php";
+        include_once WP_CAMOO_SMS_DIR . "includes/templates/mobile-field.php";
     }
 
     /**
@@ -119,7 +119,7 @@ class Features
     public function add_mobile_field_to_register_form()
     {
         $mobile = ( isset($_POST['mobile']) ) ? $_POST['mobile'] : '';
-        include_once WP_SMS_DIR . "includes/templates/mobile-field-register.php";
+        include_once WP_CAMOO_SMS_DIR . "includes/templates/mobile-field-register.php";
     }
 
     /**
@@ -161,9 +161,9 @@ class Features
     {
 
         //Register IntelTelInput Assets
-        wp_enqueue_style('wpsms-intel-tel-input', WP_SMS_URL . 'assets/css/intlTelInput.min.css', true, WP_SMS_VERSION);
-        wp_enqueue_script('wpsms-intel-tel-input', WP_SMS_URL . 'assets/js/intel/intlTelInput.min.js', array( 'jquery' ), WP_SMS_VERSION, true);
-        wp_enqueue_script('wpsms-intel-script', WP_SMS_URL . 'assets/js/intel/intel-script.js', true, WP_SMS_VERSION, true);
+        wp_enqueue_style('wpsms-intel-tel-input', WP_CAMOO_SMS_URL . 'assets/css/intlTelInput.min.css', true, WP_CAMOO_SMS_VERSION);
+        wp_enqueue_script('wpsms-intel-tel-input', WP_CAMOO_SMS_URL . 'assets/js/intel/intlTelInput.min.js', array( 'jquery' ), WP_CAMOO_SMS_VERSION, true);
+        wp_enqueue_script('wpsms-intel-script', WP_CAMOO_SMS_URL . 'assets/js/intel/intel-script.js', true, WP_CAMOO_SMS_VERSION, true);
 
         // Localize the IntelTelInput
         $tel_intel_vars             = array();
@@ -200,7 +200,7 @@ class Features
             $tel_intel_vars['separate_dial'] = false;
         }
 
-        $tel_intel_vars['util_js'] = WP_SMS_URL . 'assets/js/intel/utils.js';
+        $tel_intel_vars['util_js'] = WP_CAMOO_SMS_URL . 'assets/js/intel/utils.js';
 
         wp_localize_script('wpsms-intel-script', 'wp_camoo_sms_intel_tel_input', $tel_intel_vars);
     }

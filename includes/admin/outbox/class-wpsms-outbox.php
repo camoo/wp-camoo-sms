@@ -317,7 +317,7 @@ class Outbox
      */
     public function render_page()
     {
-        include_once WP_SMS_DIR . 'includes/admin/outbox/class-wpsms-outbox.php';
+        include_once WP_CAMOO_SMS_DIR . 'includes/admin/outbox/class-wpsms-outbox.php';
 
         //Create an instance of our package class...
         $list_table = new Outbox_List_Table;
@@ -325,6 +325,6 @@ class Outbox
         //Fetch, prepare, sort, and filter our data...
         $list_table->prepare_items();
 
-        include_once WP_SMS_DIR . "includes/admin/outbox/outbox.php";
+        include_once WP_CAMOO_SMS_DIR . "includes/admin/outbox/outbox.php";
     }
 }

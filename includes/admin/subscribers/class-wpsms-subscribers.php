@@ -38,10 +38,10 @@ class Subscribers
 
         // Import subscriber page
         if (isset($_POST['wps_import'])) {
-            include_once WP_SMS_DIR . "includes/admin/import.php";
+            include_once WP_CAMOO_SMS_DIR . "includes/admin/import.php";
         }
 
-        include_once WP_SMS_DIR . 'includes/admin/subscribers/class-wpsms-subscribers-table.php';
+        include_once WP_CAMOO_SMS_DIR . 'includes/admin/subscribers/class-wpsms-subscribers-table.php';
 
         //Create an instance of our package class...
         $list_table = new Subscribers_List_Table();
@@ -49,6 +49,6 @@ class Subscribers
         //Fetch, prepare, sort, and filter our data...
         $list_table->prepare_items();
 
-        include_once WP_SMS_DIR . "includes/admin/subscribers/subscribers.php";
+        include_once WP_CAMOO_SMS_DIR . "includes/admin/subscribers/subscribers.php";
     }
 }

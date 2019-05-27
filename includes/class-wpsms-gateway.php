@@ -56,8 +56,8 @@ class Gateway
         // Set the default_gateway class
         $class_name = '\\CAMOO_SMS\\Gateway\\Default_Gateway';
         // Include default gateway
-        include_once WP_SMS_DIR . 'includes/class-wpsms-gateway.php';
-        include_once WP_SMS_DIR . 'includes/gateways/class-wpsms-gateway-default.php';
+        include_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-gateway.php';
+        include_once WP_CAMOO_SMS_DIR . 'includes/gateways/class-wpsms-gateway-default.php';
 
         $gateway_name = Option::getOption('gateway_name');
         // Using default gateway if does not set gateway in the setting
@@ -65,8 +65,8 @@ class Gateway
             return new $class_name();
         }
 
-        if (is_file(WP_SMS_DIR . 'includes/gateways/class-wpsms-gateway-' . $gateway_name . '.php')) {
-            include_once WP_SMS_DIR . 'includes/gateways/class-wpsms-gateway-' . $gateway_name . '.php';
+        if (is_file(WP_CAMOO_SMS_DIR . 'includes/gateways/class-wpsms-gateway-' . $gateway_name . '.php')) {
+            include_once WP_CAMOO_SMS_DIR . 'includes/gateways/class-wpsms-gateway-' . $gateway_name . '.php';
         } else if (is_file(WP_PLUGIN_DIR . '/wp-camoo-sms/includes/gateways/class-wpsms-pro-gateway-' . $gateway_name . '.php')) {
             include_once(WP_PLUGIN_DIR . '/wp-camoo-sms/includes/gateways/class-wpsms-pro-gateway-' . $gateway_name . '.php');
         } else {

@@ -30,7 +30,7 @@ class Groups
             echo Helper::notice($result['message'], $result['result']);
         }
 
-        include_once WP_SMS_DIR . '/includes/admin/groups/class-wpsms-groups-table.php';
+        include_once WP_CAMOO_SMS_DIR . '/includes/admin/groups/class-wpsms-groups-table.php';
 
         //Create an instance of our package class...
         $list_table = new Subscribers_Groups_List_Table();
@@ -38,6 +38,6 @@ class Groups
         //Fetch, prepare, sort, and filter our data...
         $list_table->prepare_items();
 
-        include_once WP_SMS_DIR . "includes/admin/groups/groups.php";
+        include_once WP_CAMOO_SMS_DIR . "includes/admin/groups/groups.php";
     }
 }

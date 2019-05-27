@@ -1,6 +1,6 @@
 <div class="wrap wps-wrap about-wrap full-width-layout">
     <div class="wp-camoo-sms-welcome">
-        <h1><?php printf(__('Welcome to WP-SMS&nbsp;%s', 'wp-camoo-sms'), WP_SMS_VERSION); ?></h1>
+        <h1><?php printf(__('Welcome to WP-SMS&nbsp;%s', 'wp-camoo-sms'), WP_CAMOO_SMS_VERSION); ?></h1>
 
         <p class="about-text">
             <?php printf(__('Thank you for updating to the latest version! We encourage you to submit a %srating and review%s over at WordPress.org. Your feedback is greatly appreciated!', 'wp-camoo-sms'), '<a href="https://wordpress.org/support/plugin/wp-camoo-sms/reviews/?rate=5#new-post" target="_blank">', '</a>'); ?>
@@ -8,7 +8,7 @@
             <a href="https://wordpress.org/support/plugin/wp-camoo-sms/reviews/?rate=5#new-post" target="_blank"><img src="<?php echo plugins_url('wp-camoo-sms/assets/images/welcome/stars.png'); ?>"/></a>
         </p>
 
-        <div class="wp-badge"><?php printf(__('Version %s', 'wp-camoo-sms'), WP_SMS_VERSION); ?></div>
+        <div class="wp-badge"><?php printf(__('Version %s', 'wp-camoo-sms'), WP_CAMOO_SMS_VERSION); ?></div>
 
         <h2 class="nav-tab-wrapper wp-clearfix">
             <a href="#" class="nav-tab nav-tab-active" data-tab="whats-news"><?php _e('What&#8217;s New', 'wp-camoo-sms'); ?></a>

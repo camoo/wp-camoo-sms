@@ -106,7 +106,7 @@ class Notifications
 
         $get_group_result = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}camoo_sms_subscribes_group`");
         $username_active  = $wpdb->query("SELECT * FROM {$wpdb->prefix}camoo_sms_subscribes WHERE status = '1'");
-        include_once WP_SMS_DIR . "includes/templates/meta-box.php";
+        include_once WP_CAMOO_SMS_DIR . "includes/templates/meta-box.php";
     }
 
     /**

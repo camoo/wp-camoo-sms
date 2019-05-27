@@ -29,7 +29,7 @@ class Newsletter
     public function load_script()
     {
         // jQuery will be included automatically
-        wp_enqueue_script('ajax-script', WP_SMS_URL . 'assets/js/script.js', array( 'jquery' ), WP_SMS_VERSION);
+        wp_enqueue_script('ajax-script', WP_CAMOO_SMS_URL . 'assets/js/script.js', array( 'jquery' ), WP_CAMOO_SMS_VERSION);
 
         // Ajax params
         wp_localize_script('ajax-script', 'ajax_object', array(
@@ -486,7 +486,7 @@ class Newsletter
         global $wpdb;
         $get_group_result = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}camoo_sms_subscribes_group`");
 
-        include_once WP_SMS_DIR . "includes/templates/subscribe-form.php";
+        include_once WP_CAMOO_SMS_DIR . "includes/templates/subscribe-form.php";
     }
 }
 

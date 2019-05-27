@@ -28,12 +28,12 @@ class Front
     {
 
         //Register admin-bar.css for whole admin area
-        wp_register_style('wpsms-admin-bar', WP_SMS_URL . 'assets/css/admin-bar.css', true, WP_SMS_VERSION);
+        wp_register_style('wpsms-admin-bar', WP_CAMOO_SMS_URL . 'assets/css/admin-bar.css', true, WP_CAMOO_SMS_VERSION);
         wp_enqueue_style('wpsms-admin-bar');
 
         // Check if "Disable Style" in frontend is active or not
         if (empty($this->options['disable_style_in_front']) or ( isset($this->options['disable_style_in_front']) and ! $this->options['disable_style_in_front'] )) {
-            wp_register_style('wpsms-subscribe', WP_SMS_URL . 'assets/css/subscribe.css', true, WP_SMS_VERSION);
+            wp_register_style('wpsms-subscribe', WP_CAMOO_SMS_URL . 'assets/css/subscribe.css', true, WP_CAMOO_SMS_VERSION);
             wp_enqueue_style('wpsms-subscribe');
         }
     }
@@ -50,7 +50,7 @@ class Front
                 $wp_admin_bar->add_menu(array(
                     'id'    => 'wp-credit-sms',
                     'title' => '<span class="ab-icon"></span>' . $credit,
-                    'href'  => WP_SMS_ADMIN_URL . '/admin.php?page=wp-camoo-sms-settings'
+                    'href'  => WP_CAMOO_SMS_ADMIN_URL . '/admin.php?page=wp-camoo-sms-settings'
                 ));
             }
         }
@@ -59,7 +59,7 @@ class Front
             'id'     => 'wp-send-sms',
             'parent' => 'new-content',
             'title'  => __('SMS', 'wp-camoo-sms'),
-            'href'   => WP_SMS_ADMIN_URL . '/admin.php?page=wp-camoo-sms'
+            'href'   => WP_CAMOO_SMS_ADMIN_URL . '/admin.php?page=wp-camoo-sms'
         ));
     }
 }

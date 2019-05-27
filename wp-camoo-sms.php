@@ -22,7 +22,7 @@ require_once 'includes/defines.php';
 /**
  * Load plugin Special Functions
  */
-require_once WP_SMS_DIR . 'includes/functions.php';
+require_once WP_CAMOO_SMS_DIR . 'includes/functions.php';
 
 /**
  * Get plugin options
@@ -32,13 +32,13 @@ $wpsms_option = get_option( 'wp_camoo_sms_settings' );
 /**
  * Initial gateway
  */
-require_once WP_SMS_DIR . 'includes/class-wpsms-gateway.php';
+require_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-gateway.php';
 
 $sms = wp_camoo_sms_initial_gateway();
 
 /**
  * Load Plugin
  */
-require WP_SMS_DIR . 'includes/class-wpsms.php';
+require WP_CAMOO_SMS_DIR . 'includes/class-wpsms.php';
 
 new CAMOO_SMS();

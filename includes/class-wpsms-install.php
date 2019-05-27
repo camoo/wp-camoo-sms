@@ -100,7 +100,7 @@ class Install
 
         self::create_table($network_wide);
 
-        add_option('wp_camoo_sms_db_version', WP_SMS_VERSION);
+        add_option('wp_camoo_sms_db_version', WP_CAMOO_SMS_VERSION);
 
         // Delete notification new wp_version option
         delete_option('wp_notification_new_wp_version');
@@ -117,7 +117,7 @@ class Install
     {
         $installer_wpsms_ver = get_option('wp_camoo_sms_db_version');
 
-        if ($installer_wpsms_ver < WP_SMS_VERSION) {
+        if ($installer_wpsms_ver < WP_CAMOO_SMS_VERSION) {
             global $wpdb;
 
             // Add response and status for outbox
@@ -137,7 +137,7 @@ class Install
             $table_name = $wpdb->prefix . 'camoo_sms_subscribes';
             $wpdb->query("ALTER TABLE {$table_name} MODIFY name VARCHAR(250)");
 
-            update_option('wp_camoo_sms_db_version', WP_SMS_VERSION);
+            update_option('wp_camoo_sms_db_version', WP_CAMOO_SMS_VERSION);
 
             // Delete old last credit option
             delete_option('wp_last_credit');

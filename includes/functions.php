@@ -11,7 +11,7 @@ if (! defined('ABSPATH')) {
  */
 function wp_camoo_sms_initial_gateway()
 {
-    require_once WP_SMS_DIR . 'includes/class-wpsms-option.php';
+    require_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-option.php';
 
     return Gateway::initial();
 }

@@ -17,9 +17,9 @@ class CAMOO_SMS
         /**
          * Install And Upgrade plugin
          */
-        require_once WP_SMS_DIR . 'includes/class-wpsms-install.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-install.php';
 
-        register_activation_hook(WP_SMS_DIR . 'wp-camoo-sms.php', array( '\CAMOO_SMS\Install', 'install' ));
+        register_activation_hook(WP_CAMOO_SMS_DIR . 'wp-camoo-sms.php', array( '\CAMOO_SMS\Install', 'install' ));
     }
 
     /**
@@ -54,58 +54,58 @@ class CAMOO_SMS
     {
 
         // Utility classes.
-        require_once WP_SMS_DIR . 'includes/class-wpsms-features.php';
-        require_once WP_SMS_DIR . 'includes/class-wpsms-notifications.php';
-        require_once WP_SMS_DIR . 'includes/class-wpsms-integrations.php';
-        require_once WP_SMS_DIR . 'includes/class-wpsms-gravityforms.php';
-        require_once WP_SMS_DIR . 'includes/class-wpsms-quform.php';
-        require_once WP_SMS_DIR . 'includes/class-wpsms-newsletter.php';
-        require_once WP_SMS_DIR . 'includes/class-wpsms-widget.php';
-        require_once WP_SMS_DIR . 'includes/class-wpsms-rest-api.php';
-        require_once WP_SMS_DIR . 'includes/class-wpsms-shortcode.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-features.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-notifications.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-integrations.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-gravityforms.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-quform.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-newsletter.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-widget.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-rest-api.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-shortcode.php';
 
         if (is_admin()) {
             // Admin classes.
-            require_once WP_SMS_DIR . 'includes/admin/class-wpsms-admin.php';
-            require_once WP_SMS_DIR . 'includes/admin/class-wpsms-version.php';
-            require_once WP_SMS_DIR . 'includes/admin/class-wpsms-admin-helper.php';
-            require_once WP_SMS_DIR . 'includes/admin/welcome/class-wpsms-welcome.php';
+            require_once WP_CAMOO_SMS_DIR . 'includes/admin/class-wpsms-admin.php';
+            require_once WP_CAMOO_SMS_DIR . 'includes/admin/class-wpsms-version.php';
+            require_once WP_CAMOO_SMS_DIR . 'includes/admin/class-wpsms-admin-helper.php';
+            require_once WP_CAMOO_SMS_DIR . 'includes/admin/welcome/class-wpsms-welcome.php';
 
             // Groups class.
-            require_once WP_SMS_DIR . 'includes/admin/groups/class-wpsms-groups-table-edit.php';
+            require_once WP_CAMOO_SMS_DIR . 'includes/admin/groups/class-wpsms-groups-table-edit.php';
 
             // Outbox class.
-            require_once WP_SMS_DIR . 'includes/admin/outbox/class-wpsms-outbox.php';
+            require_once WP_CAMOO_SMS_DIR . 'includes/admin/outbox/class-wpsms-outbox.php';
 
             // Privacy class.
-            require_once WP_SMS_DIR . 'includes/admin/privacy/class-wpsms-privacy-actions.php';
+            require_once WP_CAMOO_SMS_DIR . 'includes/admin/privacy/class-wpsms-privacy-actions.php';
 
             // Send class.
-            require_once WP_SMS_DIR . 'includes/admin/send/class-wpsms-send.php';
+            require_once WP_CAMOO_SMS_DIR . 'includes/admin/send/class-wpsms-send.php';
 
             // Settings classes.
-            require_once WP_SMS_DIR . 'includes/admin/settings/class-wpsms-settings.php';
-            require_once WP_SMS_DIR . 'includes/admin/settings/class-wpsms-settings-pro.php';
+            require_once WP_CAMOO_SMS_DIR . 'includes/admin/settings/class-wpsms-settings.php';
+            require_once WP_CAMOO_SMS_DIR . 'includes/admin/settings/class-wpsms-settings-pro.php';
 
             // Subscribers class.
-            require_once WP_SMS_DIR . 'includes/admin/subscribers/class-wpsms-subscribers-table-edit.php';
+            require_once WP_CAMOO_SMS_DIR . 'includes/admin/subscribers/class-wpsms-subscribers-table-edit.php';
 
             // System info class.
-            require_once WP_SMS_DIR . 'includes/admin/system-info/class-wpsms-system-info.php';
+            require_once WP_CAMOO_SMS_DIR . 'includes/admin/system-info/class-wpsms-system-info.php';
         }
 
         if (! is_admin()) {
             // Front Class.
-            require_once WP_SMS_DIR . 'includes/class-front.php';
+            require_once WP_CAMOO_SMS_DIR . 'includes/class-front.php';
         }
 
         // API class.
-        require_once WP_SMS_DIR . 'includes/api/v1/class-wpsms-api-newsletter.php';
-        require_once WP_SMS_DIR . 'includes/api/v1/class-wpsms-api-subscribers.php';
-        require_once WP_SMS_DIR . 'includes/api/v1/class-wpsms-api-send.php';
-        require_once WP_SMS_DIR . 'includes/api/v1/class-wpsms-api-credit.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/api/v1/class-wpsms-api-newsletter.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/api/v1/class-wpsms-api-subscribers.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/api/v1/class-wpsms-api-send.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/api/v1/class-wpsms-api-credit.php';
 
         // Template functions.
-        require_once WP_SMS_DIR . 'includes/template-functions.php';
+        require_once WP_CAMOO_SMS_DIR . 'includes/template-functions.php';
     }
 }

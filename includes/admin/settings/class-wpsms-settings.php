@@ -1084,8 +1084,8 @@ class Settings
             <div class="wpsms-tab-group">
                 <ul class="wpsms-tab">
                     <li id="wpsms-logo">
-                        <img src="<?php echo WP_SMS_URL; ?>assets/images/logo.svg"/>
-                        <p><?php echo sprintf(__('WP-SMS v%s', 'wp-camoo-sms'), WP_SMS_VERSION); ?></p>
+                        <img src="<?php echo WP_CAMOO_SMS_URL; ?>assets/images/logo.svg"/>
+                        <p><?php echo sprintf(__('WP-SMS v%s', 'wp-camoo-sms'), WP_CAMOO_SMS_VERSION); ?></p>
                         <?php do_action('wp_camoo_sms_after_setting_logo'); ?>
                     </li>
                     <?php
@@ -1166,7 +1166,7 @@ class Settings
     public function get_countries_list()
     {
         // Load countries list file
-        $file   = WP_SMS_DIR . 'assets/countries.json';
+        $file   = WP_CAMOO_SMS_DIR . 'assets/countries.json';
         $file   = file_get_contents($file);
         $result = json_decode($file, true);
 

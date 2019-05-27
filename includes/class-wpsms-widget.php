@@ -63,7 +63,7 @@ class Widget extends \WP_Widget
         $description = ! empty($instance['description']) ? $instance['description'] : '';
 
         // Load template
-        include WP_SMS_DIR . "includes/templates/widget.php";
+        include WP_CAMOO_SMS_DIR . "includes/templates/widget.php";
     }
 
     /**

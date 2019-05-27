@@ -1306,7 +1306,7 @@ class Settings_Pro
             <div class="wpsms-tab-group">
                 <ul class="wpsms-tab">
                     <li id="wpsms-logo">
-                        <img src="<?php echo WP_SMS_URL; ?>assets/images/logo.svg"/>
+                        <img src="<?php echo WP_CAMOO_SMS_URL; ?>assets/images/logo.svg"/>
                         <?php do_action('wp_camoo_sms_pro_after_setting_logo'); ?>
                     </li>
                     <?php

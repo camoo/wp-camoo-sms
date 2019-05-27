@@ -64,7 +64,7 @@ class Version
     public function pro_meta_links($links, $file)
     {
         if ($file == 'wp-camoo-sms/wp-camoo-sms.php') {
-            $links[] = sprintf(__('<b><a href="%s" target="_blank" class="wpsms-plugin-meta-link wp-camoo-sms-pro" title="Get professional package!">Get professional package!</a></b>', 'wp-camoo-sms'), WP_SMS_SITE . '/purchase');
+            $links[] = sprintf(__('<b><a href="%s" target="_blank" class="wpsms-plugin-meta-link wp-camoo-sms-pro" title="Get professional package!">Get professional package!</a></b>', 'wp-camoo-sms'), WP_CAMOO_SMS_SITE . '/purchase');
         }
 
         return $links;
@@ -109,7 +109,7 @@ class Version
      */
     public function pro_admin_script()
     {
-        wp_enqueue_script('wpsms-pro-admin', WP_SMS_URL . 'assets/js/pro-pack.js', true, WP_SMS_VERSION);
+        wp_enqueue_script('wpsms-pro-admin', WP_CAMOO_SMS_URL . 'assets/js/pro-pack.js', true, WP_CAMOO_SMS_VERSION);
     }
 
     /**
@@ -130,7 +130,7 @@ class Version
      */
     public function version_notice()
     {
-        Helper::notice(sprintf(__('The <a href="%s" target="_blank">WP-SMS-Pro</a> is out of date and not compatible with new version of WP-SMS, Please update the plugin to the <a href="%s" target="_blank">latest version</a>.', 'wp-camoo-sms'), WP_SMS_SITE, 'https://wp-camoo-sms-pro.com/checkout/purchase-history/'), 'error');
+        Helper::notice(sprintf(__('The <a href="%s" target="_blank">WP-SMS-Pro</a> is out of date and not compatible with new version of WP-SMS, Please update the plugin to the <a href="%s" target="_blank">latest version</a>.', 'wp-camoo-sms'), WP_CAMOO_SMS_SITE, 'https://wp-camoo-sms-pro.com/checkout/purchase-history/'), 'error');
     }
 
     /**

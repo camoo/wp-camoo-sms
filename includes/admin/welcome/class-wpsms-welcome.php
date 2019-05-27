@@ -46,7 +46,7 @@ class Welcome
      */
     public static function page_callback()
     {
-        include(WP_SMS_DIR . "includes/admin/welcome/welcome.php");
+        include(WP_CAMOO_SMS_DIR . "includes/admin/welcome/welcome.php");
     }
 
     /**
@@ -85,7 +85,7 @@ class Welcome
             $data = json_decode($response['body']);
 
             if (! class_exists('\Parsedown')) {
-                include_once WP_SMS_DIR . 'includes/libraries/parsedown.class.php';
+                include_once WP_CAMOO_SMS_DIR . 'includes/libraries/parsedown.class.php';
             }
 
             $Parsedown = new \Parsedown();
