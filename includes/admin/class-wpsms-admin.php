@@ -59,7 +59,7 @@ class Admin
     {
         global $wp_admin_bar;
         if (is_super_admin() && is_admin_bar_showing()) {
-            $credit = get_option('wpsms_gateway_credit');
+            $credit = get_option('wp_camoo_sms_gateway_credit');
             if ($credit and isset($this->options['account_credit_in_menu']) and ! is_object($credit)) {
                 $wp_admin_bar->add_menu(array(
                     'id'    => 'wp-credit-sms',
@@ -72,7 +72,7 @@ class Admin
         $wp_admin_bar->add_menu(array(
             'id'     => 'wp-send-sms',
             'parent' => 'new-content',
-            'title'  => __('SMS', 'wp-camoo-sms'),
+            'title'  => __('Camoo SMS', 'wp-camoo-sms'),
             'href'   => WP_SMS_ADMIN_URL . '/admin.php?page=wp-camoo-sms'
         ));
     }
@@ -82,8 +82,8 @@ class Admin
      */
     public function dashboard_glance()
     {
-        $subscribe = $this->db->get_var("SELECT COUNT(*) FROM {$this->tb_prefix}sms_subscribes");
-        $credit    = get_option('wpsms_gateway_credit');
+        $subscribe = $this->db->get_var("SELECT COUNT(*) FROM {$this->tb_prefix}camoo_sms_subscribes");
+        $credit    = get_option('wp_camoo_sms_gateway_credit');
 
         echo "<li class='wpsms-subscribe-count'><a href='" . WP_SMS_ADMIN_URL . "admin.php?page=wp-camoo-sms-subscribers'>" . sprintf(__('%s Subscriber', 'wp-camoo-sms'), $subscribe) . "</a></li>";
         if (! is_object($credit)) {
@@ -97,7 +97,7 @@ class Admin
     public function admin_menu()
     {
         $hook_suffix = array();
-        add_menu_page(__('SMS', 'wp-camoo-sms'), __('SMS', 'wp-camoo-sms'), 'wpsms_sendsms', 'wp-camoo-sms', array( $this, 'send_sms_callback' ), 'dashicons-email-alt');
+        add_menu_page(__('Camoo SMS', 'wp-camoo-sms'), __('Camoo SMS', 'wp-camoo-sms'), 'wpsms_sendsms', 'wp-camoo-sms', array( $this, 'send_sms_callback' ), 'dashicons-email-alt');
         add_submenu_page('wp-camoo-sms', __('Send SMS', 'wp-camoo-sms'), __('Send SMS', 'wp-camoo-sms'), 'wpsms_sendsms', 'wp-camoo-sms', array( $this, 'send_sms_callback' ));
         add_submenu_page('wp-camoo-sms', __('Outbox', 'wp-camoo-sms'), __('Outbox', 'wp-camoo-sms'), 'wpsms_outbox', 'wp-camoo-sms-outbox', array( $this, 'outbox_callback' ));
 

@@ -34,7 +34,7 @@ class SMS_Send
      */
     public function render_page()
     {
-        $get_group_result = $this->db->get_results("SELECT * FROM `{$this->db->prefix}sms_subscribes_group`");
+        $get_group_result = $this->db->get_results("SELECT * FROM `{$this->db->prefix}camoo_sms_subscribes_group`");
         $get_users_mobile = $this->db->get_col("SELECT `meta_value` FROM `{$this->db->prefix}usermeta` WHERE `meta_key` = 'mobile'");
 
         $mobile_field = Option::getOption('add_mobile_field');
@@ -57,7 +57,7 @@ class SMS_Send
         }
 
         $gateway_name = Option::getOption('gateway_name');
-        $credit       = get_option('wpsms_gateway_credit');
+        $credit       = get_option('wp_camoo_sms_gateway_credit');
 
         if ($gateway_name && ! $credit) {
             echo '<br><div class="update-nag">' . __('You should have sufficient funds for sending sms in the account', 'wp-camoo-sms') . '</div>';
@@ -73,9 +73,9 @@ class SMS_Send
             if ($_POST['wp_get_message']) {
                 if ($_POST['wp_send_to'] == "wp_subscribe_username") {
                     if ($_POST['wpsms_group_name'] == 'all') {
-                        $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->db->prefix}sms_subscribes WHERE `status` = '1'");
+                        $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->db->prefix}camoo_sms_subscribes WHERE `status` = '1'");
                     } else {
-                        $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->db->prefix}sms_subscribes WHERE `status` = '1' AND `group_ID` = '" . $_POST['wpsms_group_name'] . "'");
+                        $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->db->prefix}camoo_sms_subscribes WHERE `status` = '1' AND `group_ID` = '" . $_POST['wpsms_group_name'] . "'");
                     }
                 } else if ($_POST['wp_send_to'] == "wp_users") {
                     $this->sms->to = $get_users_mobile;

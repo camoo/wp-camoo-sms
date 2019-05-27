@@ -104,8 +104,8 @@ class Notifications
     {
         global $wpdb;
 
-        $get_group_result = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}sms_subscribes_group`");
-        $username_active  = $wpdb->query("SELECT * FROM {$wpdb->prefix}sms_subscribes WHERE status = '1'");
+        $get_group_result = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}camoo_sms_subscribes_group`");
+        $username_active  = $wpdb->query("SELECT * FROM {$wpdb->prefix}camoo_sms_subscribes WHERE status = '1'");
         include_once WP_SMS_DIR . "includes/templates/meta-box.php";
     }
 
@@ -122,9 +122,9 @@ class Notifications
     {
         if ($_REQUEST['wps_send_subscribe'] == 'yes') {
             if ($_REQUEST['wps_subscribe_group'] == 'all') {
-                $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->tb_prefix}sms_subscribes");
+                $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->tb_prefix}camoo_sms_subscribes");
             } else {
-                $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->tb_prefix}sms_subscribes WHERE group_ID = '{$_REQUEST['wps_subscribe_group']}'");
+                $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->tb_prefix}camoo_sms_subscribes WHERE group_ID = '{$_REQUEST['wps_subscribe_group']}'");
             }
 
             $template_vars = array(

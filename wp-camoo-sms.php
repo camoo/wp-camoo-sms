@@ -27,7 +27,7 @@ require_once WP_SMS_DIR . 'includes/functions.php';
 /**
  * Get plugin options
  */
-$wpsms_option = get_option( 'wpsms_settings' );
+$wpsms_option = get_option( 'wp_camoo_sms_settings' );
 
 /**
  * Initial gateway

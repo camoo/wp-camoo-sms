@@ -165,7 +165,7 @@ class Privacy_Actions
         /*
          * Check in Subscribes Table
          */
-        $get_user = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}sms_subscribes` WHERE `mobile` = '$mobile'", ARRAY_A);
+        $get_user = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}camoo_sms_subscribes` WHERE `mobile` = '$mobile'", ARRAY_A);
         if (count($get_user) > 0) {
             foreach ($get_user as $user) {
                 //Get User Data
@@ -173,7 +173,7 @@ class Privacy_Actions
 
                 //Remove User data if Delete Request
                 if ($_POST['submit'] == __('Delete')) {
-                    $wpdb->delete($wpdb->prefix . 'sms_subscribes', array( 'ID' => $user['ID'] ), array( '%d' ));
+                    $wpdb->delete($wpdb->prefix . 'camoo_sms_subscribes', array( 'ID' => $user['ID'] ), array( '%d' ));
                 }
             }
         }

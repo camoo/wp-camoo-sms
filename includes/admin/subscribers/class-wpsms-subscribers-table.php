@@ -143,7 +143,7 @@ class Subscribers_List_Table extends \WP_List_Table
         //Detect when a bulk action is being triggered...
         // Search action
         if (isset($_GET['s'])) {
-            $prepare     = $this->db->prepare("SELECT * from `{$this->tb_prefix}sms_subscribes` WHERE name LIKE %s OR mobile LIKE %s", '%' . $this->db->esc_like($_GET['s']) . '%', '%' . $this->db->esc_like($_GET['s']) . '%');
+            $prepare     = $this->db->prepare("SELECT * from `{$this->tb_prefix}camoo_sms_subscribes` WHERE name LIKE %s OR mobile LIKE %s", '%' . $this->db->esc_like($_GET['s']) . '%', '%' . $this->db->esc_like($_GET['s']) . '%');
             $this->data  = $this->get_data($prepare);
             $this->count = $this->get_total($prepare);
         }
@@ -151,7 +151,7 @@ class Subscribers_List_Table extends \WP_List_Table
         // Bulk delete action
         if ('bulk_delete' == $this->current_action()) {
             foreach ($_GET['id'] as $id) {
-                $this->db->delete($this->tb_prefix . "sms_subscribes", array( 'ID' => $id ));
+                $this->db->delete($this->tb_prefix . "camoo_sms_subscribes", array( 'ID' => $id ));
             }
             $this->data  = $this->get_data();
             $this->count = $this->get_total();
@@ -160,7 +160,7 @@ class Subscribers_List_Table extends \WP_List_Table
 
         // Single delete action
         if ('delete' == $this->current_action()) {
-            $this->db->delete($this->tb_prefix . "sms_subscribes", array( 'ID' => $_GET['ID'] ));
+            $this->db->delete($this->tb_prefix . "camoo_sms_subscribes", array( 'ID' => $_GET['ID'] ));
             $this->data  = $this->get_data();
             $this->count = $this->get_total();
             echo '<div class="notice notice-success is-dismissible"><p>' . __('Item removed.', 'wp-camoo-sms') . '</p></div>';
@@ -267,7 +267,7 @@ class Subscribers_List_Table extends \WP_List_Table
     {
         $page_number = ( $this->get_pagenum() - 1 ) * $this->limit;
         if (! $query) {
-            $query = 'SELECT * FROM `' . $this->tb_prefix . 'sms_subscribes` LIMIT ' . $this->limit . ' OFFSET ' . $page_number;
+            $query = 'SELECT * FROM `' . $this->tb_prefix . 'camoo_sms_subscribes` LIMIT ' . $this->limit . ' OFFSET ' . $page_number;
         } else {
             $query .= ' LIMIT ' . $this->limit . ' OFFSET ' . $page_number;
         }
@@ -280,7 +280,7 @@ class Subscribers_List_Table extends \WP_List_Table
     function get_total($query = '')
     {
         if (! $query) {
-            $query = 'SELECT * FROM `' . $this->tb_prefix . 'sms_subscribes`';
+            $query = 'SELECT * FROM `' . $this->tb_prefix . 'camoo_sms_subscribes`';
         }
         $result = $this->db->get_results($query, ARRAY_A);
         $result = count($result);

@@ -57,7 +57,7 @@ class Newsletter
         }
 
         $result = $wpdb->insert(
-            $wpdb->prefix . "sms_subscribes",
+            $wpdb->prefix . "camoo_sms_subscribes",
             array(
                 'date'         => WP_SMS_CURRENT_DATE,
                 'name'         => $name,
@@ -97,7 +97,7 @@ class Newsletter
     public static function getSubscriber($id)
     {
         global $wpdb;
-        $result = $wpdb->get_row("SELECT * FROM `{$wpdb->prefix}sms_subscribes` WHERE ID = '" . $id . "'");
+        $result = $wpdb->get_row("SELECT * FROM `{$wpdb->prefix}camoo_sms_subscribes` WHERE ID = '" . $id . "'");
 
         if ($result) {
             return $result;
@@ -116,7 +116,7 @@ class Newsletter
     {
         global $wpdb;
         $result = $wpdb->delete(
-            $wpdb->prefix . "sms_subscribes",
+            $wpdb->prefix . "camoo_sms_subscribes",
             array(
                 'mobile'   => $mobile,
                 'group_id' => $group_id,
@@ -165,7 +165,7 @@ class Newsletter
         }
 
         $result = $wpdb->update(
-            $wpdb->prefix . "sms_subscribes",
+            $wpdb->prefix . "camoo_sms_subscribes",
             array(
                 'name'     => $name,
                 'mobile'   => $mobile,
@@ -206,7 +206,7 @@ class Newsletter
     {
         global $wpdb;
 
-        $db_prepare = $wpdb->prepare("SELECT * FROM `{$wpdb->prefix}sms_subscribes_group` WHERE `ID` = %d", $group_id);
+        $db_prepare = $wpdb->prepare("SELECT * FROM `{$wpdb->prefix}camoo_sms_subscribes_group` WHERE `ID` = %d", $group_id);
         $result     = $wpdb->get_row($db_prepare);
 
         if ($result) {
@@ -224,7 +224,7 @@ class Newsletter
     public static function getGroups()
     {
         global $wpdb;
-        $result = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}sms_subscribes_group`");
+        $result = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}camoo_sms_subscribes_group`");
 
         if ($result) {
             return $result;
@@ -247,7 +247,7 @@ class Newsletter
         }
 
         $result = $wpdb->delete(
-            $wpdb->prefix . "sms_subscribes_group",
+            $wpdb->prefix . "camoo_sms_subscribes_group",
             array(
                 'ID' => $id,
             )
@@ -283,7 +283,7 @@ class Newsletter
             return array( 'result' => 'error', 'message' => __('Name is empty!', 'wp-camoo-sms') );
         }
 
-        $table   = $wpdb->prefix . 'sms_subscribes_group';
+        $table   = $wpdb->prefix . 'camoo_sms_subscribes_group';
         $prepare = $wpdb->prepare("SELECT COUNT(ID) FROM {$table} WHERE `name` = %s", $name);
         $count   = $wpdb->get_var($prepare);
         if ($count) {
@@ -293,7 +293,7 @@ class Newsletter
             );
         } else {
             $result = $wpdb->insert(
-                $wpdb->prefix . "sms_subscribes_group",
+                $wpdb->prefix . "camoo_sms_subscribes_group",
                 array(
                     'name' => $name,
                 )
@@ -333,7 +333,7 @@ class Newsletter
             return;
         }
 
-        $table   = $wpdb->prefix . 'sms_subscribes_group';
+        $table   = $wpdb->prefix . 'camoo_sms_subscribes_group';
         $prepare = $wpdb->prepare("SELECT COUNT(ID) FROM {$table} WHERE `name` = %s", $name);
         $count   = $wpdb->get_var($prepare);
 
@@ -344,7 +344,7 @@ class Newsletter
             );
         } else {
             $result = $wpdb->update(
-                $wpdb->prefix . "sms_subscribes_group",
+                $wpdb->prefix . "camoo_sms_subscribes_group",
                 array(
                     'name' => $name,
                 ),
@@ -387,7 +387,7 @@ class Newsletter
     public static function isDuplicate($mobile_number, $group_id = null, $id = null)
     {
         global $wpdb;
-        $sql = "SELECT * FROM `{$wpdb->prefix}sms_subscribes` WHERE mobile = '" . $mobile_number . "'";
+        $sql = "SELECT * FROM `{$wpdb->prefix}camoo_sms_subscribes` WHERE mobile = '" . $mobile_number . "'";
 
         if ($group_id) {
             $sql .= " AND group_id = '" . $group_id . "'";
@@ -418,7 +418,7 @@ class Newsletter
             $where = $wpdb->prepare(' WHERE group_ID = %d', $group_id);
         }
 
-        $result = $wpdb->get_col("SELECT `mobile` FROM {$wpdb->prefix}sms_subscribes" . $where);
+        $result = $wpdb->get_col("SELECT `mobile` FROM {$wpdb->prefix}camoo_sms_subscribes" . $where);
 
         return $result;
     }
@@ -438,7 +438,7 @@ class Newsletter
         global $wpdb;
 
         $result = $wpdb->insert(
-            "{$wpdb->prefix}sms_subscribes",
+            "{$wpdb->prefix}camoo_sms_subscribes",
             array(
                 'date'     => $date,
                 'name'     => $name,
@@ -463,9 +463,9 @@ class Newsletter
         global $wpdb;
 
         if ($group_id) {
-            $result = $wpdb->query($wpdb->prepare("SELECT name FROM {$wpdb->prefix}sms_subscribes WHERE group_ID = %d", $group_id));
+            $result = $wpdb->query($wpdb->prepare("SELECT name FROM {$wpdb->prefix}camoo_sms_subscribes WHERE group_ID = %d", $group_id));
         } else {
-            $result = $wpdb->query("SELECT name FROM {$wpdb->prefix}sms_subscribes");
+            $result = $wpdb->query("SELECT name FROM {$wpdb->prefix}camoo_sms_subscribes");
         }
 
         if ($result) {
@@ -484,7 +484,7 @@ class Newsletter
     public static function loadNewsLetter($widget_id = null, $instance = null)
     {
         global $wpdb;
-        $get_group_result = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}sms_subscribes_group`");
+        $get_group_result = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}camoo_sms_subscribes_group`");
 
         include_once WP_SMS_DIR . "includes/templates/subscribe-form.php";
     }

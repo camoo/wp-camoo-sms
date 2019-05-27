@@ -85,7 +85,7 @@ class Option
         if ($pro) {
             $setting_name = 'wps_pp_settings';
         } else {
-            $setting_name = 'wpsms_settings';
+            $setting_name = 'wp_camoo_sms_settings';
         }
 
         $options         = self::getOptions($pro);

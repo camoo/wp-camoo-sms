@@ -88,7 +88,7 @@
                                         <option value="all">
                                             <?php
                                             global $wpdb;
-                                            $username_active = $wpdb->query("SELECT * FROM {$wpdb->prefix}sms_subscribes WHERE status = '1'");
+                                            $username_active = $wpdb->query("SELECT * FROM {$wpdb->prefix}camoo_sms_subscribes WHERE status = '1'");
                                             echo sprintf(__('All (%s subscribers active)', 'wp-camoo-sms'), $username_active);
                                             ?>
                                         </option>

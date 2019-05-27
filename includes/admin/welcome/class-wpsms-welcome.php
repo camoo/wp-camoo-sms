@@ -18,18 +18,18 @@ class Welcome
      */
     public function init()
     {
-        if (get_option('wpsms_show_welcome_page') and ( strpos($_SERVER['REQUEST_URI'], '/wp-admin/index.php') !== false or strpos($_SERVER['REQUEST_URI'], 'wp-camoo-sms') !== false )) {
+        if (get_option('wp_camoo_sms_show_welcome_page') and ( strpos($_SERVER['REQUEST_URI'], '/wp-admin/index.php') !== false or strpos($_SERVER['REQUEST_URI'], 'wp-camoo-sms') !== false )) {
             // Disable show welcome page
 
-            update_option('wpsms_first_show_welcome_page', true);
-            update_option('wpsms_show_welcome_page', false);
+            update_option('wp_camoo_sms_first_show_welcome_page', true);
+            update_option('wp_camoo_sms_show_welcome_page', false);
 
             // Redirect to welcome page
             wp_redirect('admin.php?page=wp-camoo-sms-welcome');
         }
 
-        if (! get_option('wpsms_first_show_welcome_page')) {
-            update_option('wpsms_show_welcome_page', true);
+        if (! get_option('wp_camoo_sms_first_show_welcome_page')) {
+            update_option('wp_camoo_sms_show_welcome_page', true);
         }
     }
 
@@ -61,7 +61,7 @@ class Welcome
             foreach ($options['plugins'] as $each_plugin) {
                 if ($each_plugin == $current_plugin_path_name) {
                     // Enable welcome page in database
-                    update_option('wpsms_show_welcome_page', true);
+                    update_option('wp_camoo_sms_show_welcome_page', true);
                 }
             }
         }

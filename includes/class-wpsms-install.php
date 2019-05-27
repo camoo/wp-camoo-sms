@@ -48,7 +48,7 @@ class Install
         global $wpdb;
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
-        $table_name = $wpdb->prefix . 'sms_subscribes';
+        $table_name = $wpdb->prefix . 'camoo_sms_subscribes';
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
             $create_sms_subscribes = ( "CREATE TABLE IF NOT EXISTS {$table_name}(
             ID int(10) NOT NULL auto_increment,
@@ -63,7 +63,7 @@ class Install
             dbDelta($create_sms_subscribes);
         }
 
-        $table_name = $wpdb->prefix . 'sms_subscribes_group';
+        $table_name = $wpdb->prefix . 'camoo_sms_subscribes_group';
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
             $create_sms_subscribes_group = ( "CREATE TABLE IF NOT EXISTS {$table_name}(
             ID int(10) NOT NULL auto_increment,
@@ -73,7 +73,7 @@ class Install
             dbDelta($create_sms_subscribes_group);
         }
 
-        $table_name = $wpdb->prefix . 'sms_send';
+        $table_name = $wpdb->prefix . 'camoo_sms_send';
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
             $create_sms_send = ( "CREATE TABLE IF NOT EXISTS {$table_name}(
             ID int(10) NOT NULL auto_increment,
@@ -96,11 +96,11 @@ class Install
      */
     static function install($network_wide)
     {
-        global $wp_sms_db_version;
+        global $wp_camoo_sms_db_version;
 
         self::create_table($network_wide);
 
-        add_option('wp_sms_db_version', WP_SMS_VERSION);
+        add_option('wp_camoo_sms_db_version', WP_SMS_VERSION);
 
         // Delete notification new wp_version option
         delete_option('wp_notification_new_wp_version');
@@ -115,13 +115,13 @@ class Install
      */
     static function upgrade()
     {
-        $installer_wpsms_ver = get_option('wp_sms_db_version');
+        $installer_wpsms_ver = get_option('wp_camoo_sms_db_version');
 
         if ($installer_wpsms_ver < WP_SMS_VERSION) {
             global $wpdb;
 
             // Add response and status for outbox
-            $table_name = $wpdb->prefix . 'sms_send';
+            $table_name = $wpdb->prefix . 'camoo_sms_send';
             $column     = $wpdb->get_results($wpdb->prepare(
                 "SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = %s AND TABLE_NAME = %s AND COLUMN_NAME = %s ",
                 DB_NAME,
@@ -134,10 +134,10 @@ class Install
             }
 
             // Fix columns length issue
-            $table_name = $wpdb->prefix . 'sms_subscribes';
+            $table_name = $wpdb->prefix . 'camoo_sms_subscribes';
             $wpdb->query("ALTER TABLE {$table_name} MODIFY name VARCHAR(250)");
 
-            update_option('wp_sms_db_version', WP_SMS_VERSION);
+            update_option('wp_camoo_sms_db_version', WP_SMS_VERSION);
 
             // Delete old last credit option
             delete_option('wp_last_credit');
@@ -170,7 +170,7 @@ class Install
     public function remove_table_on_delete_blog($tables)
     {
 
-        foreach (array( 'sms_subscribes', 'sms_subscribes_group', 'sms_send' ) as $tbl) {
+        foreach (array( 'camoo_sms_subscribes', 'camoo_sms_subscribes_group', 'camoo_sms_send' ) as $tbl) {
             $tables[] = $this->tb_prefix . $tbl;
         }
 

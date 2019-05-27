@@ -210,9 +210,9 @@ class RestApi
 
         // Check the mobile number is string or integer
         if (strpos($mobile, '+') !== false) {
-            $db_prepare = $wpdb->prepare("SELECT * FROM `{$wpdb->prefix}sms_subscribes` WHERE `mobile` = %s AND `status` = %d AND group_ID = %d", $mobile, 0, $group);
+            $db_prepare = $wpdb->prepare("SELECT * FROM `{$wpdb->prefix}camoo_sms_subscribes` WHERE `mobile` = %s AND `status` = %d AND group_ID = %d", $mobile, 0, $group);
         } else {
-            $db_prepare = $wpdb->prepare("SELECT * FROM `{$wpdb->prefix}sms_subscribes` WHERE `mobile` = %d AND `status` = %d AND group_ID = %d", $mobile, 0, $group);
+            $db_prepare = $wpdb->prepare("SELECT * FROM `{$wpdb->prefix}camoo_sms_subscribes` WHERE `mobile` = %d AND `status` = %d AND group_ID = %d", $mobile, 0, $group);
         }
 
         $check_mobile = $wpdb->get_row($db_prepare);
@@ -225,9 +225,9 @@ class RestApi
 
             // Check the mobile number is string or integer
             if (strpos($mobile, '+') !== false) {
-                $result = $wpdb->update("{$wpdb->prefix}sms_subscribes", array( 'status' => '1' ), array( 'mobile' => $mobile, 'group_ID' => $group ), array( '%d', '%d' ), array( '%s' ));
+                $result = $wpdb->update("{$wpdb->prefix}camoo_sms_subscribes", array( 'status' => '1' ), array( 'mobile' => $mobile, 'group_ID' => $group ), array( '%d', '%d' ), array( '%s' ));
             } else {
-                $result = $wpdb->update("{$wpdb->prefix}sms_subscribes", array( 'status' => '1' ), array( 'mobile' => $mobile, 'group_ID' => $group ), array( '%d', '%d' ), array( '%d' ));
+                $result = $wpdb->update("{$wpdb->prefix}camoo_sms_subscribes", array( 'status' => '1' ), array( 'mobile' => $mobile, 'group_ID' => $group ), array( '%d', '%d' ), array( '%d' ));
             }
 
             if ($result) {
@@ -292,7 +292,7 @@ class RestApi
             $where = $wpdb->prepare('WHERE name LIKE "%s"', '%' . $wpdb->esc_like($search) . '%');
         }
 
-        $result = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}sms_subscribes {$where}{$limit}");
+        $result = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}camoo_sms_subscribes {$where}{$limit}");
 
         return $result;
     }

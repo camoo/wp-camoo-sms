@@ -145,7 +145,7 @@ class Gateway
     public function log($sender, $message, $to, $response, $status = 'success')
     {
         return $this->db->insert(
-            $this->tb_prefix . "sms_send",
+            $this->tb_prefix . "camoo_sms_send",
             array(
                 'date'      => WP_SMS_CURRENT_DATE,
                 'sender'    => $sender,
@@ -240,14 +240,14 @@ class Gateway
                 self::$get_response = var_export($result->get_error_message(), true);
 
                 // Update credit
-                update_option('wpsms_gateway_credit', 0);
+                update_option('wp_camoo_sms_gateway_credit', 0);
 
                 // Return html
                 return '<div class="wpsms-no-credit"><span class="dashicons dashicons-no"></span> ' . __('Deactive!', 'wp-camoo-sms') . '</div>';
             }
             // Update credit
             if (! is_object($result)) {
-                update_option('wpsms_gateway_credit', $result);
+                update_option('wp_camoo_sms_gateway_credit', $result);
             }
             self::$get_response = var_export($result, true);
 
@@ -312,13 +312,13 @@ class Gateway
         $result = $sms->getCredit();
 
         if (is_wp_error($result)) {
-            update_option('wpsms_gateway_credit', 0);
+            update_option('wp_camoo_sms_gateway_credit', 0);
 
             return 0;
         }
 
         if (! is_object($result)) {
-            update_option('wpsms_gateway_credit', $result);
+            update_option('wp_camoo_sms_gateway_credit', $result);
         }
 
         return $result;
