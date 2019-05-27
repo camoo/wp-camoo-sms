@@ -1,6 +1,6 @@
 <?php
 
-namespace WP_SMS;
+namespace CAMOO_SMS;
 
 class SystemInfo
 {

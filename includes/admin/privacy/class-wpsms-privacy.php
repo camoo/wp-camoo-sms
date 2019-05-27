@@ -1,8 +1,8 @@
 <?php
 
-namespace WP_SMS;
+namespace CAMOO_SMS;
 
-use WP_SMS\Admin\Helper;
+use CAMOO_SMS\Admin\Helper;
 
 if (! defined('ABSPATH')) {
     exit;

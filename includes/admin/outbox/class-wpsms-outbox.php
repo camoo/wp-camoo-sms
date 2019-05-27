@@ -1,6 +1,6 @@
 <?php
 
-namespace WP_SMS;
+namespace CAMOO_SMS;
 
 if (! defined('ABSPATH')) {
     exit;
@@ -239,7 +239,7 @@ class Outbox_List_Table extends \WP_List_Table
          * sorting technique would be unnecessary.
          */
 
-        usort($data, '\WP_SMS\Outbox_List_Table::usort_reorder');
+        usort($data, '\CAMOO_SMS\Outbox_List_Table::usort_reorder');
 
         /**
          * REQUIRED for pagination. Let's check how many items are in our data array.

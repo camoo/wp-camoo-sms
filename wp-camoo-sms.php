@@ -41,4 +41,4 @@ $sms = wp_camoo_sms_initial_gateway();
  */
 require WP_SMS_DIR . 'includes/class-wpsms.php';
 
-new WP_SMS();
+new CAMOO_SMS();

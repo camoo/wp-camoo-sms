@@ -4,7 +4,7 @@ if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
-class WP_SMS
+class CAMOO_SMS
 {
 
     public function __construct()
@@ -19,7 +19,7 @@ class WP_SMS
          */
         require_once WP_SMS_DIR . 'includes/class-wpsms-install.php';
 
-        register_activation_hook(WP_SMS_DIR . 'wp-camoo-sms.php', array( '\WP_SMS\Install', 'install' ));
+        register_activation_hook(WP_SMS_DIR . 'wp-camoo-sms.php', array( '\CAMOO_SMS\Install', 'install' ));
     }
 
     /**

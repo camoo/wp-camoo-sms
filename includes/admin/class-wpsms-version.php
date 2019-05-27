@@ -1,8 +1,8 @@
 <?php
 
-namespace WP_SMS;
+namespace CAMOO_SMS;
 
-use WP_SMS\Admin\Helper;
+use CAMOO_SMS\Admin\Helper;
 
 if (! defined('ABSPATH')) {
     exit;
@@ -12,7 +12,7 @@ if (! defined('ABSPATH')) {
  * WP SMS version class
  *
  * @category   class
- * @package    WP_SMS
+ * @package    CAMOO_SMS
  */
 class Version
 {

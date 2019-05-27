@@ -1,6 +1,6 @@
 <?php
 
-namespace WP_SMS\Api\V1;
+namespace CAMOO_SMS\Api\V1;
 
 if (! defined('ABSPATH')) {
     exit;
@@ -11,7 +11,7 @@ if (! defined('ABSPATH')) {
  * @package    WP_SMS_Api
  * @version    1.0
  */
-class Credit extends \WP_SMS\RestApi
+class Credit extends \CAMOO_SMS\RestApi
 {
 
     public function __construct()

@@ -1,8 +1,8 @@
 <?php
 
-namespace WP_SMS\Gateway;
+namespace CAMOO_SMS\Gateway;
 
-use WP_SMS\Gateway;
+use CAMOO_SMS\Gateway;
 
 class Default_Gateway extends Gateway
 {

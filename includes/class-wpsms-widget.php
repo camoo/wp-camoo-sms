@@ -1,6 +1,6 @@
 <?php
 
-namespace WP_SMS;
+namespace CAMOO_SMS;
 
 if (! defined('ABSPATH')) {
     exit;
@@ -97,7 +97,7 @@ class Widget extends \WP_Widget
      */
     public function register_widget()
     {
-        register_widget('\WP_SMS\Widget');
+        register_widget('\CAMOO_SMS\Widget');
     }
 }
 

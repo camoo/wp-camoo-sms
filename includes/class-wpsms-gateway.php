@@ -1,13 +1,13 @@
 <?php
 
-namespace WP_SMS;
+namespace CAMOO_SMS;
 
 if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
 /**
- * WP_SMS gateway class
+ * CAMOO_SMS gateway class
  */
 class Gateway
 {
@@ -54,7 +54,7 @@ class Gateway
     public static function initial()
     {
         // Set the default_gateway class
-        $class_name = '\\WP_SMS\\Gateway\\Default_Gateway';
+        $class_name = '\\CAMOO_SMS\\Gateway\\Default_Gateway';
         // Include default gateway
         include_once WP_SMS_DIR . 'includes/class-wpsms-gateway.php';
         include_once WP_SMS_DIR . 'includes/gateways/class-wpsms-gateway-default.php';
@@ -77,7 +77,7 @@ class Gateway
         if ($gateway_name == 'default') {
             $sms = new $class_name();
         } else {
-            $class_name = '\\WP_SMS\\Gateway\\' . ucfirst($gateway_name);
+            $class_name = '\\CAMOO_SMS\\Gateway\\' . ucfirst($gateway_name);
             $sms        = new $class_name();
         }
 
@@ -230,7 +230,7 @@ class Gateway
     {
         global $sms;
 
-        //Check that, Are we in the Gateway WP_SMS tab setting page or not?
+        //Check that, Are we in the Gateway CAMOO_SMS tab setting page or not?
         if (is_admin() and isset($_REQUEST['page']) and isset($_REQUEST['tab']) and $_REQUEST['page'] == 'wp-camoo-sms-settings' and $_REQUEST['tab'] == 'gateway') {
             // Get credit
             $result = $sms->getCredit();

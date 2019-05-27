@@ -1,8 +1,8 @@
 <?php
 
-namespace WP_SMS\Gateway;
+namespace CAMOO_SMS\Gateway;
 
-class Camoolegacy extends \WP_SMS\Gateway
+class Camoolegacy extends \CAMOO_SMS\Gateway
 {
     private $wsdl_link = '';
     private $client = null;

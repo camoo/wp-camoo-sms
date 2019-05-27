@@ -27,7 +27,7 @@
                     </td>
                 </tr>
                 <?php
-                $groups = \WP_SMS\Newsletter::getGroups();
+                $groups = \CAMOO_SMS\Newsletter::getGroups();
                 if ($groups) : ?>
                     <tr>
                         <td style="padding-top: 10px;">

@@ -243,7 +243,7 @@
         </div>
 
         <div data-content="changelog" class="tab-content">
-            <?php \WP_SMS\Welcome::show_change_log(); ?>
+            <?php \CAMOO_SMS\Welcome::show_change_log(); ?>
         </div>
         <hr style="clear: both;">
         <div class="wps-return-to-dashboard">

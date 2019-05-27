@@ -23,7 +23,7 @@
                                     <th scope="row" colspan="2"><h3>WordPress</h3>
                                     </th>
                                 </tr>
-                                <?php foreach (\WP_SMS\SystemInfo::getWordpressInfo() as $var => $info) : ?>
+                                <?php foreach (\CAMOO_SMS\SystemInfo::getWordpressInfo() as $var => $info) : ?>
                                     <tr valign="top">
                                         <th scope="row">
                                             <?php echo $var . ':'; ?>
@@ -43,7 +43,7 @@
                                     <th scope="row" colspan="2"><h3>PHP</h3>
                                     </th>
                                 </tr>
-                                <?php foreach (\WP_SMS\SystemInfo::getPHPInfo() as $var => $info) : ?>
+                                <?php foreach (\CAMOO_SMS\SystemInfo::getPHPInfo() as $var => $info) : ?>
                                     <tr valign="top">
                                         <th scope="row">
                                             <?php echo $var . ':'; ?>

@@ -127,5 +127,5 @@ add_filter('wp_camoo_sms_msg', 'wp_camoo_sms_modify_message');
 # Rest API Endpoints
 Add new subscribe to SMS newsletter
 ```sh
-POST /wpsms/v1/subscriber/add
+POST /camoosms/v1/subscriber/add
 ```

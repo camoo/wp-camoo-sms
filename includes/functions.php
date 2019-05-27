@@ -1,6 +1,6 @@
 <?php
 
-use WP_SMS\Gateway;
+use CAMOO_SMS\Gateway;
 
 if (! defined('ABSPATH')) {
     exit;

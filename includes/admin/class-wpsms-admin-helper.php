@@ -1,6 +1,6 @@
 <?php
 
-namespace WP_SMS\Admin;
+namespace CAMOO_SMS\Admin;
 
 class Helper
 {

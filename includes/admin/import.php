@@ -12,10 +12,10 @@ $get_mobile      = array();
 $get_mobile_dups = array();
 
 if (isset($_POST['ignore_duplicate']) and $_POST['ignore_duplicate'] == 'ignore') {
-    $get_mobile      = \WP_SMS\Newsletter::getSubscribers($_POST['wpsms_group_name']);
-    $get_mobile_dups = \WP_SMS\Newsletter::getSubscribers();
+    $get_mobile      = \CAMOO_SMS\Newsletter::getSubscribers($_POST['wpsms_group_name']);
+    $get_mobile_dups = \CAMOO_SMS\Newsletter::getSubscribers();
 } else {
-    $get_mobile = \WP_SMS\Newsletter::getSubscribers();
+    $get_mobile = \CAMOO_SMS\Newsletter::getSubscribers();
 }
 
 $result          = [];
@@ -44,7 +44,7 @@ if (isset($_POST['wps_import'])) {
             // Count submitted items.
             $total_submit[] = $data->sheets[0]['cells'];
 
-            $result = \WP_SMS\Newsletter::insertSubscriber(WP_SMS_CURRENT_DATE, $items[1], $items[2], 1, $_POST['wpsms_group_name']);
+            $result = \CAMOO_SMS\Newsletter::insertSubscriber(WP_SMS_CURRENT_DATE, $items[1], $items[2], 1, $_POST['wpsms_group_name']);
         }
 
         if ($result) {
