@@ -10,20 +10,6 @@ if (! defined('ABSPATH')) {
 /**
  * Show SMS newsletter form.
  *
- * @deprecated 4.0 Use wp_camoo_sms_subscribes()
- * @see wp_camoo_sms_subscribes()
- *
- */
-function wp_subscribes()
-{
-    _deprecated_function(__FUNCTION__, '4.0', 'wp_camoo_sms_subscribes()');
-
-    wp_camoo_sms_subscribes();
-}
-
-/**
- * Show SMS newsletter form.
- *
  */
 function wp_camoo_sms_subscribes()
 {

@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "6bda941a84132b6e4be33e9a97650860",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/camoo/sms.git",
-                "reference": "910df43c0d27bcf4e5f6e12d0534d6b5b1192ec1"
+                "reference": "cff8da4d29bda89ec19375358d6e2ddd24de6905"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/camoo/sms/zipball/910df43c0d27bcf4e5f6e12d0534d6b5b1192ec1",
-                "reference": "910df43c0d27bcf4e5f6e12d0534d6b5b1192ec1",
+                "url": "https://api.github.com/repos/camoo/sms/zipball/cff8da4d29bda89ec19375358d6e2ddd24de6905",
+                "reference": "cff8da4d29bda89ec19375358d6e2ddd24de6905",
                 "shasum": ""
             },
             "require": {
@@ -51,7 +51,7 @@
                 "sms",
                 "sms gateway"
             ],
-            "time": "2019-05-26T12:00:30+00:00"
+            "time": "2019-05-26T12:38:09+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
