@@ -10,8 +10,8 @@
  * Domain Path: /languages
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+if (! defined('ABSPATH')) {
+    exit;
 } // Exit if accessed directly
 
 /**
@@ -27,7 +27,7 @@ require_once WP_CAMOO_SMS_DIR . 'includes/functions.php';
 /**
  * Get plugin options
  */
-$wpsms_option = get_option( 'wp_camoo_sms_settings' );
+$wpsms_option = get_option('wp_camoo_sms_settings');
 
 /**
  * Initial gateway

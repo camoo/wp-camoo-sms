@@ -31,3 +31,4 @@ nbproject
 
 vendor
 *.swp
+.php_cs.cache

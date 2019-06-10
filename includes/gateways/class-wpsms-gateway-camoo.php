@@ -68,11 +68,16 @@ class Camoo extends \CAMOO_SMS\Gateway
             if ($this->isUnicode !== true) {
                 $oMessage->datacoding = 'plain';
             }
+
             if ($this->encrypt_sms === true) {
                 $oMessage->encrypt = true;
             }
 
-            $oResult = $oMessage->send();
+            if (!empty($this->to) && is_array($this->to) && count($this->to) > \Camoo\Sms\Constants::SMS_MAX_RECIPIENTS) {
+                $oResult = $oMessage->sendBulk();
+            } else {
+                $oResult = $oMessage->send();
+            }
             // Log the result
             $this->log($this->from, $this->msg, $this->to, $oResult);
 
@@ -87,9 +92,7 @@ class Camoo extends \CAMOO_SMS\Gateway
 
             return $oResult;
         } catch (\Camoo\Sms\Exception\CamooSmsException $e) {
-            // Log the result
             $this->log($this->from, $this->msg, $this->to, $e->getMessage(), 'error');
-
             return new \WP_Error('send-sms', $e->getMessage());
         }
     }
