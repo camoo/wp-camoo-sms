@@ -11,7 +11,6 @@ if (! defined('ABSPATH')) {
  */
 class Gateway
 {
-
     public $username;
     public $password;
     public $has_key = false;
@@ -67,7 +66,7 @@ class Gateway
 
         if (is_file(WP_CAMOO_SMS_DIR . 'includes/gateways/class-wpsms-gateway-' . $gateway_name . '.php')) {
             include_once WP_CAMOO_SMS_DIR . 'includes/gateways/class-wpsms-gateway-' . $gateway_name . '.php';
-        } else if (is_file(WP_PLUGIN_DIR . '/wp-camoo-sms/includes/gateways/class-wpsms-pro-gateway-' . $gateway_name . '.php')) {
+        } elseif (is_file(WP_PLUGIN_DIR . '/wp-camoo-sms/includes/gateways/class-wpsms-pro-gateway-' . $gateway_name . '.php')) {
             include_once(WP_PLUGIN_DIR . '/wp-camoo-sms/includes/gateways/class-wpsms-pro-gateway-' . $gateway_name . '.php');
         } else {
             return new $class_name();
@@ -84,7 +83,6 @@ class Gateway
         // Set username and password
         $sms->username = Option::getOption('gateway_username');
         $sms->password = Option::getOption('gateway_password');
-
 
         $gateway_key = Option::getOption('gateway_key');
 
@@ -142,19 +140,24 @@ class Gateway
      *
      * @return false|int
      */
-    public function log($sender, $message, $to, $response, $status = 'success')
+    public function log($options, $status = 'sent')
     {
-        return $this->db->insert(
-            $this->tb_prefix . "camoo_sms_send",
-            array(
+        $hData = [
                 'date'      => WP_SMS_CURRENT_DATE,
-                'sender'    => $sender,
-                'message'   => $message,
-                'recipient' => implode(',', $to),
-                'response'  => var_export($response, true),
+                'sender'    => $options['sender'],
+                'message'   => $options['message'],
+                'recipient' => implode(',', $options['to']),
+                'response'  => var_export($options['response'], true),
                 'status'    => $status,
-            )
-        );
+            ];
+        if (array_key_exists('message_id', $options)) {
+            $hData['message_id'] = $options['message_id'];
+        }
+        if (array_key_exists('reference', $options)) {
+            $hData['reference'] = $options['reference'];
+        }
+
+        return $this->db->insert($this->tb_prefix . "camoo_sms_send", $hData);
     }
 
     /**
@@ -197,7 +200,7 @@ class Gateway
     /**
      * @var
      */
-    static $get_response;
+    public static $get_response;
 
     /**
      * @return mixed|void

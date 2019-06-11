@@ -8,7 +8,6 @@ if (! defined('ABSPATH')) {
 
 class Install
 {
-
     public function __construct()
     {
         add_action('wpmu_new_blog', array( $this, 'add_table_on_create_blog' ), 10, 1);
@@ -50,7 +49,7 @@ class Install
 
         $table_name = $wpdb->prefix . 'camoo_sms_subscribes';
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
-            $create_sms_subscribes = ( "CREATE TABLE IF NOT EXISTS {$table_name}(
+            $create_sms_subscribes = ("CREATE TABLE IF NOT EXISTS {$table_name}(
             ID int(10) NOT NULL auto_increment,
             date DATETIME,
             name VARCHAR(250),
@@ -58,32 +57,34 @@ class Install
             status tinyint(1),
             activate_key INT(11),
             group_ID int(5),
-            PRIMARY KEY(ID)) CHARSET=utf8" );
+            PRIMARY KEY(ID)) CHARSET=utf8");
 
             dbDelta($create_sms_subscribes);
         }
 
         $table_name = $wpdb->prefix . 'camoo_sms_subscribes_group';
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
-            $create_sms_subscribes_group = ( "CREATE TABLE IF NOT EXISTS {$table_name}(
+            $create_sms_subscribes_group = ("CREATE TABLE IF NOT EXISTS {$table_name}(
             ID int(10) NOT NULL auto_increment,
             name VARCHAR(250),
-            PRIMARY KEY(ID)) CHARSET=utf8" );
+            PRIMARY KEY(ID)) CHARSET=utf8");
 
             dbDelta($create_sms_subscribes_group);
         }
 
         $table_name = $wpdb->prefix . 'camoo_sms_send';
         if ($wpdb->get_var("show tables like '{$table_name}'") != $table_name) {
-            $create_sms_send = ( "CREATE TABLE IF NOT EXISTS {$table_name}(
+            $create_sms_send = ("CREATE TABLE IF NOT EXISTS {$table_name}(
             ID int(10) NOT NULL auto_increment,
+			message_id varchar(100) NOT NULL DEFAULT '',
             date DATETIME,
             sender VARCHAR(20) NOT NULL,
             message TEXT NOT NULL,
             recipient TEXT NOT NULL,
   			response TEXT NOT NULL,
-  			status varchar(10) NOT NULL,
-            PRIMARY KEY(ID)) CHARSET=utf8" );
+			status varchar(10) NOT NULL DEFAULT '',
+			reference varchar(75) NOT NULL DEFAULT '',
+            PRIMARY KEY(ID)) CHARSET=utf8");
 
             dbDelta($create_sms_send);
         }
@@ -94,7 +95,7 @@ class Install
      *
      * @param $network_wide
      */
-    static function install($network_wide)
+    public static function install($network_wide)
     {
         global $wp_camoo_sms_db_version;
 
@@ -113,7 +114,7 @@ class Install
     /**
      * Upgrade plugin requirements if needed
      */
-    static function upgrade()
+    public static function upgrade()
     {
         $installer_wpsms_ver = get_option('wp_camoo_sms_db_version');
 
@@ -169,7 +170,6 @@ class Install
      */
     public function remove_table_on_delete_blog($tables)
     {
-
         foreach (array( 'camoo_sms_subscribes', 'camoo_sms_subscribes_group', 'camoo_sms_send' ) as $tbl) {
             $tables[] = $this->tb_prefix . $tbl;
         }

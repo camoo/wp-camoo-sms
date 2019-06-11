@@ -171,6 +171,13 @@
     border-radius: 3px;
 }
 
+.wp_camoo_sms_status_sent {
+    background: #ffa500;
+    color: #ffffff;
+    padding: 3px 5px;
+    border-radius: 3px;
+}
+
 .wp_camoo_sms_subscribers_label {
     line-height: 19px;
     left: 0px;

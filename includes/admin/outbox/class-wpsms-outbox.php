@@ -12,14 +12,13 @@ if (! class_exists('WP_List_Table')) {
 
 class Outbox_List_Table extends \WP_List_Table
 {
-
     protected $db;
     protected $tb_prefix;
     protected $limit;
     protected $count;
-    var $data;
+    public $data;
 
-    function __construct()
+    public function __construct()
     {
         global $wpdb;
 
@@ -36,7 +35,25 @@ class Outbox_List_Table extends \WP_List_Table
         $this->data      = $this->get_data();
     }
 
-    function column_default($item, $column_name)
+	public function statusMaps($xStatus)
+	{
+		$hStatus = [
+			'no_status'       => 'sent',
+			'delivered'       => 'success',
+			'success'         => 'success',
+			'scheduled'       => 'sent',
+			'buffered'        => 'sent',
+			'sent'            => 'sent',
+			'expired'         => 'Fail',
+			'delivery_failed' => 'Fail',
+		];
+		if (array_key_exists($xStatus, $hStatus)) {
+			return $hStatus[$xStatus];
+		}
+		return false;
+	}
+
+    public function column_default($item, $column_name)
     {
         switch ($column_name) {
             case 'date':
@@ -59,17 +76,18 @@ class Outbox_List_Table extends \WP_List_Table
 
                 return $html;
             case 'status':
-                if ($item[ $column_name ] == 'success') {
-                    return '<span class="wp_camoo_sms_status_success">' . __('Success', 'wp-camoo-sms') . '</span>';
+                if ( $status = $this->statusMaps($item[ $column_name ])) {
+                    return '<span class="wp_camoo_sms_status_'.$status.'">' . __($status, 'wp-camoo-sms') . '</span>';
                 } else {
                     return '<span class="wp_camoo_sms_status_fail">' . __('Fail', 'wp-camoo-sms') . '</span>';
                 }
+                // no break
             default:
                 return print_r($item, true); //Show the whole array for troubleshooting purposes
         }
     }
 
-    function column_sender($item)
+    public function column_sender($item)
     {
 
         //Build row actions
@@ -90,7 +108,7 @@ class Outbox_List_Table extends \WP_List_Table
         );
     }
 
-    function column_cb($item)
+    public function column_cb($item)
     {
         return sprintf(
             '<input type="checkbox" name="%1$s[]" value="%2$s" />',
@@ -101,7 +119,7 @@ class Outbox_List_Table extends \WP_List_Table
         );
     }
 
-    function get_columns()
+    public function get_columns()
     {
         $columns = array(
             'cb'        => '<input type="checkbox" />', //Render a checkbox instead of text
@@ -116,7 +134,7 @@ class Outbox_List_Table extends \WP_List_Table
         return $columns;
     }
 
-    function get_sortable_columns()
+    public function get_sortable_columns()
     {
         $sortable_columns = array(
             'ID'        => array( 'ID', true ),     //true means it's already sorted
@@ -131,7 +149,7 @@ class Outbox_List_Table extends \WP_List_Table
         return $sortable_columns;
     }
 
-    function get_bulk_actions()
+    public function get_bulk_actions()
     {
         $actions = array(
             'bulk_delete' => __('Delete', 'wp-camoo-sms')
@@ -140,7 +158,7 @@ class Outbox_List_Table extends \WP_List_Table
         return $actions;
     }
 
-    function process_bulk_action()
+    public function process_bulk_action()
     {
 
         //Detect when a bulk action is being triggered...
@@ -187,7 +205,7 @@ class Outbox_List_Table extends \WP_List_Table
         }
     }
 
-    function prepare_items()
+    public function prepare_items()
     {
         /**
          * First, lets decide how many records per page to show
@@ -273,19 +291,19 @@ class Outbox_List_Table extends \WP_List_Table
      *
      * @return array
      */
-    function usort_reorder($a, $b)
+    public function usort_reorder($a, $b)
     {
-        $orderby = ( ! empty($_REQUEST['orderby']) ) ? $_REQUEST['orderby'] : 'date'; //If no sort, default to sender
-        $order   = ( ! empty($_REQUEST['order']) ) ? $_REQUEST['order'] : 'desc'; //If no order, default to asc
+        $orderby = (! empty($_REQUEST['orderby'])) ? $_REQUEST['orderby'] : 'date'; //If no sort, default to sender
+        $order   = (! empty($_REQUEST['order'])) ? $_REQUEST['order'] : 'desc'; //If no order, default to asc
         $result  = strcmp($a[ $orderby ], $b[ $orderby ]); //Determine sort order
 
-        return ( $order === 'asc' ) ? $result : - $result; //Send final sort direction to usort
+        return ($order === 'asc') ? $result : - $result; //Send final sort direction to usort
     }
 
     //set $per_page item as int number
-    function get_data($query = '')
+    public function get_data($query = '')
     {
-        $page_number = ( $this->get_pagenum() - 1 ) * $this->limit;
+        $page_number = ($this->get_pagenum() - 1) * $this->limit;
         if (! $query) {
             $query = 'SELECT * FROM `' . $this->tb_prefix . 'camoo_sms_send` LIMIT ' . $this->limit . ' OFFSET ' . $page_number;
         } else {
@@ -297,7 +315,7 @@ class Outbox_List_Table extends \WP_List_Table
     }
 
     //get total items on different Queries
-    function get_total($query = '')
+    public function get_total($query = '')
     {
         if (! $query) {
             $query = 'SELECT * FROM `' . $this->tb_prefix . 'camoo_sms_send`';

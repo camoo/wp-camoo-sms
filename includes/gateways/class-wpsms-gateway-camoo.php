@@ -72,14 +72,21 @@ class Camoo extends \CAMOO_SMS\Gateway
             if ($this->encrypt_sms === true) {
                 $oMessage->encrypt = true;
             }
+            $hLog = [
+                'sender'  => $this->from,
+                'message' => $this->msg,
+                'to'      => $this->to,
+            ];
 
             if (!empty($this->to) && is_array($this->to) && count($this->to) > \Camoo\Sms\Constants::SMS_MAX_RECIPIENTS) {
                 $oResult = $oMessage->sendBulk();
             } else {
                 $oResult = $oMessage->send();
+                $hLog['message_id'] = \Camoo\Sms\Lib\Utils::getMessageKey($oResult, 'message_id');
             }
-            // Log the result
-            $this->log($this->from, $this->msg, $this->to, $oResult);
+
+            $hLog['response'] = $oResult;
+            $this->log($hLog);
 
             /**
              * Run hook after send sms.
@@ -92,7 +99,8 @@ class Camoo extends \CAMOO_SMS\Gateway
 
             return $oResult;
         } catch (\Camoo\Sms\Exception\CamooSmsException $e) {
-            $this->log($this->from, $this->msg, $this->to, $e->getMessage(), 'error');
+            $hLog['response'] = $e->getMessage();
+            $this->log($hLog, 'error');
             return new \WP_Error('send-sms', $e->getMessage());
         }
     }

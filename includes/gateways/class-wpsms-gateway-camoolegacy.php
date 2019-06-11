@@ -68,9 +68,15 @@ class Camoolegacy extends \CAMOO_SMS\Gateway
             if ($this->isUnicode !== true) {
                 $oMessage->datacoding = 'plain';
             }
+            $hLog = [
+                'sender'  => $this->from,
+                'message' => $this->msg,
+                'to'      => $this->to,
+            ];
             $oResult = $oMessage->send();
+            $hLog['response'] = $oResult;
             // Log the result
-            $this->log($this->from, $this->msg, $this->to, $oResult);
+            $this->log($hLog);
 
             /**
              * Run hook after send sms.
@@ -84,8 +90,8 @@ class Camoolegacy extends \CAMOO_SMS\Gateway
             return $oResult;
         } catch (\Camoo\Sms\Exception\CamooSmsException $e) {
             // Log the result
-            $this->log($this->from, $this->msg, $this->to, $e->getMessage(), 'error');
-
+            $hLog['response'] = $e->getMessage();
+            $this->log($hLog, 'error');
             return new \WP_Error('send-sms', $e->getMessage());
         }
     }
