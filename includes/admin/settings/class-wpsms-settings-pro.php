@@ -8,7 +8,6 @@ if (! defined('ABSPATH')) {
 
 class Settings_Pro
 {
-
     public $setting_name;
     public $options = array();
 
@@ -70,7 +69,7 @@ class Settings_Pro
      */
     public function register_settings()
     {
-        if (false == get_option($this->setting_name)) {
+        if (false === get_option($this->setting_name)) {
             add_option($this->setting_name);
         }
 
@@ -149,7 +148,6 @@ class Settings_Pro
      */
     public function settings_sanitize($input = array())
     {
-
         if (empty($_POST['_wp_http_referer'])) {
             return $input;
         }
@@ -263,20 +261,20 @@ class Settings_Pro
                     'name' => sprintf(__('Notify for %s form', 'wp-camoo-sms'), $form->title),
                     'type' => 'header'
                 );
-                $gf_forms[ 'gf_notify_enable_form_' . $form->id ]   = array(
+            $gf_forms[ 'gf_notify_enable_form_' . $form->id ]   = array(
                     'id'      => 'gf_notify_enable_form_' . $form->id,
                     'name'    => __('Send SMS', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
                     'desc'    => __('Send SMS when this form get new message', 'wp-camoo-sms')
                 );
-                $gf_forms[ 'gf_notify_receiver_form_' . $form->id ] = array(
+            $gf_forms[ 'gf_notify_receiver_form_' . $form->id ] = array(
                     'id'   => 'gf_notify_receiver_form_' . $form->id,
                     'name' => __('Send SMS', 'wp-camoo-sms'),
                     'type' => 'text',
                     'desc' => __('Please enter mobile number for get sms. You can separate the numbers with the Latin comma.', 'wp-camoo-sms')
                 );
-                $gf_forms[ 'gf_notify_message_form_' . $form->id ]  = array(
+            $gf_forms[ 'gf_notify_message_form_' . $form->id ]  = array(
                     'id'   => 'gf_notify_message_form_' . $form->id,
                     'name' => __('Message body', 'wp-camoo-sms'),
                     'type' => 'textarea',
@@ -291,22 +289,22 @@ class Settings_Pro
                               )
                 );
 
-                if (Gravityforms::get_field($form->id)) {
-                    $gf_forms[ 'gf_notify_enable_field_form_' . $form->id ]   = array(
+            if (Gravityforms::get_field($form->id)) {
+                $gf_forms[ 'gf_notify_enable_field_form_' . $form->id ]   = array(
                         'id'      => 'gf_notify_enable_field_form_' . $form->id,
                         'name'    => __('Send SMS to field', 'wp-camoo-sms'),
                         'type'    => 'checkbox',
                         'options' => $options,
                         'desc'    => __('Send SMS to field value when this form get new message', 'wp-camoo-sms')
                     );
-                    $gf_forms[ 'gf_notify_receiver_field_form_' . $form->id ] = array(
+                $gf_forms[ 'gf_notify_receiver_field_form_' . $form->id ] = array(
                         'id'      => 'gf_notify_receiver_field_form_' . $form->id,
                         'name'    => __('Field form', 'wp-camoo-sms'),
                         'type'    => 'select',
                         'options' => Gravityforms::get_field($form->id),
                         'desc'    => __('Please select the field of the form', 'wp-camoo-sms')
                     );
-                    $gf_forms[ 'gf_notify_message_field_form_' . $form->id ]  = array(
+                $gf_forms[ 'gf_notify_message_field_form_' . $form->id ]  = array(
                         'id'   => 'gf_notify_message_field_form_' . $form->id,
                         'name' => __('Message body', 'wp-camoo-sms'),
                         'type' => 'textarea',
@@ -320,7 +318,7 @@ class Settings_Pro
                                       '<code>%content%</code>'
                                   )
                     );
-                }
+            }
             endforeach;
         } else {
             $gf_forms['gf_notify_form'] = array(
@@ -360,20 +358,20 @@ class Settings_Pro
                         'name' => sprintf(__('Notify for %s form', 'wp-camoo-sms'), $form['name']),
                         'type' => 'header'
                     );
-                    $qf_forms[ 'qf_notify_enable_form_' . $form['id'] ]   = array(
+                $qf_forms[ 'qf_notify_enable_form_' . $form['id'] ]   = array(
                         'id'      => 'qf_notify_enable_form_' . $form['id'],
                         'name'    => __('Send SMS', 'wp-camoo-sms'),
                         'type'    => 'checkbox',
                         'options' => $options,
                         'desc'    => __('Send SMS when this form get new message', 'wp-camoo-sms')
                     );
-                    $qf_forms[ 'qf_notify_receiver_form_' . $form['id'] ] = array(
+                $qf_forms[ 'qf_notify_receiver_form_' . $form['id'] ] = array(
                         'id'   => 'qf_notify_receiver_form_' . $form['id'],
                         'name' => __('Send SMS', 'wp-camoo-sms'),
                         'type' => 'text',
                         'desc' => __('Please enter mobile number for get sms. You can separate the numbers with the Latin comma.', 'wp-camoo-sms')
                     );
-                    $qf_forms[ 'qf_notify_message_form_' . $form['id'] ]  = array(
+                $qf_forms[ 'qf_notify_message_form_' . $form['id'] ]  = array(
                         'id'   => 'qf_notify_message_form_' . $form['id'],
                         'name' => __('Message body', 'wp-camoo-sms'),
                         'type' => 'textarea',
@@ -386,22 +384,22 @@ class Settings_Pro
                                   )
                     );
 
-                    if ($form['elements']) {
-                        $qf_forms[ 'qf_notify_enable_field_form_' . $form['id'] ]   = array(
+                if ($form['elements']) {
+                    $qf_forms[ 'qf_notify_enable_field_form_' . $form['id'] ]   = array(
                             'id'      => 'qf_notify_enable_field_form_' . $form['id'],
                             'name'    => __('Send SMS to field', 'wp-camoo-sms'),
                             'type'    => 'checkbox',
                             'options' => $options,
                             'desc'    => __('Send SMS to field value when this form get new message', 'wp-camoo-sms')
                         );
-                        $qf_forms[ 'qf_notify_receiver_field_form_' . $form['id'] ] = array(
+                    $qf_forms[ 'qf_notify_receiver_field_form_' . $form['id'] ] = array(
                             'id'      => 'qf_notify_receiver_field_form_' . $form['id'],
                             'name'    => __('Field form', 'wp-camoo-sms'),
                             'type'    => 'select',
                             'options' => Quform::get_fields($form['id']),
                             'desc'    => __('Please select the field of the form', 'wp-camoo-sms')
                         );
-                        $qf_forms[ 'qf_notify_message_field_form_' . $form['id'] ]  = array(
+                    $qf_forms[ 'qf_notify_message_field_form_' . $form['id'] ]  = array(
                             'id'   => 'qf_notify_message_field_form_' . $form['id'],
                             'name' => __('Message body', 'wp-camoo-sms'),
                             'type' => 'textarea',
@@ -413,7 +411,7 @@ class Settings_Pro
                                           '<code>%referring_url%</code>'
                                       )
                         );
-                    }
+                }
                 endforeach;
             } else {
                 $qf_forms['qf_notify_form'] = array(
@@ -1066,18 +1064,17 @@ class Settings_Pro
 
     public function radio_callback($args)
     {
-
         foreach ($args['options'] as $key => $option) :
             $checked = false;
 
-            if (isset($this->options[ $args['id'] ]) && $this->options[ $args['id'] ] == $key) {
-                $checked = true;
-            } elseif (isset($args['std']) && $args['std'] == $key && ! isset($this->options[ $args['id'] ])) {
-                $checked = true;
-            }
+        if (isset($this->options[ $args['id'] ]) && $this->options[ $args['id'] ] == $key) {
+            $checked = true;
+        } elseif (isset($args['std']) && $args['std'] == $key && ! isset($this->options[ $args['id'] ])) {
+            $checked = true;
+        }
 
-            echo '<input name="wps_pp_settings[' . $args['id'] . ']"" id="wps_pp_settings[' . $args['id'] . '][' . $key . ']" type="radio" value="' . $key . '" ' . checked(true, $checked, false) . '/>';
-            echo '<label for="wps_pp_settings[' . $args['id'] . '][' . $key . ']">' . $option . '</label>&nbsp;&nbsp;';
+        echo '<input name="wps_pp_settings[' . $args['id'] . ']"" id="wps_pp_settings[' . $args['id'] . '][' . $key . ']" type="radio" value="' . $key . '" ' . checked(true, $checked, false) . '/>';
+        echo '<label for="wps_pp_settings[' . $args['id'] . '][' . $key . ']">' . $option . '</label>&nbsp;&nbsp;';
         endforeach;
 
         echo '<p class="description">' . $args['desc'] . '</p>';
@@ -1085,15 +1082,14 @@ class Settings_Pro
 
     public function text_callback($args)
     {
-
         if (isset($this->options[ $args['id'] ]) and $this->options[ $args['id'] ]) {
             $value = $this->options[ $args['id'] ];
         } else {
             $value = isset($args['std']) ? $args['std'] : '';
         }
 
-        $size        = ( isset($args['size']) && ! is_null($args['size']) ) ? $args['size'] : 'regular';
-        $after_input = ( isset($args['after_input']) && ! is_null($args['after_input']) ) ? $args['after_input'] : '';
+        $size        = (isset($args['size']) && ! is_null($args['size'])) ? $args['size'] : 'regular';
+        $after_input = (isset($args['after_input']) && ! is_null($args['after_input'])) ? $args['after_input'] : '';
         $html        = '<input type="text" class="' . $size . '-text" id="wps_pp_settings[' . $args['id'] . ']" name="wps_pp_settings[' . $args['id'] . ']" value="' . esc_attr(stripslashes($value)) . '"/>';
         $html        .= $after_input;
         $html        .= '<p class="description"> ' . $args['desc'] . '</p>';
@@ -1103,7 +1099,6 @@ class Settings_Pro
 
     public function number_callback($args)
     {
-
         if (isset($this->options[ $args['id'] ])) {
             $value = $this->options[ $args['id'] ];
         } else {
@@ -1114,7 +1109,7 @@ class Settings_Pro
         $min  = isset($args['min']) ? $args['min'] : 0;
         $step = isset($args['step']) ? $args['step'] : 1;
 
-        $size = ( isset($args['size']) && ! is_null($args['size']) ) ? $args['size'] : 'regular';
+        $size = (isset($args['size']) && ! is_null($args['size'])) ? $args['size'] : 'regular';
         $html = '<input type="number" step="' . esc_attr($step) . '" max="' . esc_attr($max) . '" min="' . esc_attr($min) . '" class="' . $size . '-text" id="wps_pp_settings[' . $args['id'] . ']" name="wps_pp_settings[' . $args['id'] . ']" value="' . esc_attr(stripslashes($value)) . '"/>';
         $html .= '<p class="description"> ' . $args['desc'] . '</p>';
 
@@ -1123,14 +1118,13 @@ class Settings_Pro
 
     public function textarea_callback($args)
     {
-
         if (isset($this->options[ $args['id'] ])) {
             $value = $this->options[ $args['id'] ];
         } else {
             $value = isset($args['std']) ? $args['std'] : '';
         }
 
-        $size = ( isset($args['size']) && ! is_null($args['size']) ) ? $args['size'] : 'regular';
+        $size = (isset($args['size']) && ! is_null($args['size'])) ? $args['size'] : 'regular';
         $html = '<textarea class="large-text" cols="50" rows="5" id="wps_pp_settings[' . $args['id'] . ']" name="wps_pp_settings[' . $args['id'] . ']">' . esc_textarea(stripslashes($value)) . '</textarea>';
         $html .= '<p class="description"> ' . $args['desc'] . '</p>';
 
@@ -1139,14 +1133,13 @@ class Settings_Pro
 
     public function password_callback($args)
     {
-
         if (isset($this->options[ $args['id'] ])) {
             $value = $this->options[ $args['id'] ];
         } else {
             $value = isset($args['std']) ? $args['std'] : '';
         }
 
-        $size = ( isset($args['size']) && ! is_null($args['size']) ) ? $args['size'] : 'regular';
+        $size = (isset($args['size']) && ! is_null($args['size'])) ? $args['size'] : 'regular';
         $html = '<input type="password" class="' . $size . '-text" id="wps_pp_settings[' . $args['id'] . ']" name="wps_pp_settings[' . $args['id'] . ']" value="' . esc_attr($value) . '"/>';
         $html .= '<p class="description"> ' . $args['desc'] . '</p>';
 
@@ -1162,7 +1155,6 @@ class Settings_Pro
 
     public function select_callback($args)
     {
-
         if (isset($this->options[ $args['id'] ])) {
             $value = $this->options[ $args['id'] ];
         } else {
@@ -1173,7 +1165,7 @@ class Settings_Pro
 
         foreach ($args['options'] as $option => $name) :
             $selected = selected($option, $value, false);
-            $html     .= '<option value="' . $option . '" ' . $selected . '>' . $name . '</option>';
+        $html     .= '<option value="' . $option . '" ' . $selected . '>' . $name . '</option>';
         endforeach;
 
         $html .= '</select>';
@@ -1184,7 +1176,6 @@ class Settings_Pro
 
     public function advancedselect_callback($args)
     {
-
         if (isset($this->options[ $args['id'] ])) {
             $value = $this->options[ $args['id'] ];
         } else {
@@ -1204,7 +1195,7 @@ class Settings_Pro
 
             foreach ($v as $option => $name) :
                 $selected = selected($option, $value, false);
-                $html     .= '<option value="' . $option . '" ' . $selected . '>' . ucfirst($name) . '</option>';
+            $html     .= '<option value="' . $option . '" ' . $selected . '>' . ucfirst($name) . '</option>';
             endforeach;
 
             $html .= '</optgroup>';
@@ -1218,7 +1209,6 @@ class Settings_Pro
 
     public function color_select_callback($args)
     {
-
         if (isset($this->options[ $args['id'] ])) {
             $value = $this->options[ $args['id'] ];
         } else {
@@ -1229,7 +1219,7 @@ class Settings_Pro
 
         foreach ($args['options'] as $option => $color) :
             $selected = selected($option, $value, false);
-            $html     .= '<option value="' . $option . '" ' . $selected . '>' . $color['label'] . '</option>';
+        $html     .= '<option value="' . $option . '" ' . $selected . '>' . $color['label'] . '</option>';
         endforeach;
 
         $html .= '</select>';
@@ -1261,14 +1251,13 @@ class Settings_Pro
 
     public function upload_callback($args)
     {
-
         if (isset($this->options[ $args['id'] ])) {
             $value = $this->options[ $args['id'] ];
         } else {
             $value = isset($args['std']) ? $args['std'] : '';
         }
 
-        $size = ( isset($args['size']) && ! is_null($args['size']) ) ? $args['size'] : 'regular';
+        $size = (isset($args['size']) && ! is_null($args['size'])) ? $args['size'] : 'regular';
         $html = '<input type="text" class="' . $size . '-text wpsms_upload_field" id="wps_pp_settings[' . $args['id'] . ']" name="wps_pp_settings[' . $args['id'] . ']" value="' . esc_attr(stripslashes($value)) . '"/>';
         $html .= '<span>&nbsp;<input type="button" class="wps_pp_settings_upload_button button-secondary" value="' . __('Upload File', 'wpsms') . '"/></span>';
         $html .= '<p class="description"> ' . $args['desc'] . '</p>';
@@ -1278,7 +1267,6 @@ class Settings_Pro
 
     public function color_callback($args)
     {
-
         if (isset($this->options[ $args['id'] ])) {
             $value = $this->options[ $args['id'] ];
         } else {
@@ -1287,7 +1275,7 @@ class Settings_Pro
 
         $default = isset($args['std']) ? $args['std'] : '';
 
-        $size = ( isset($args['size']) && ! is_null($args['size']) ) ? $args['size'] : 'regular';
+        $size = (isset($args['size']) && ! is_null($args['size'])) ? $args['size'] : 'regular';
         $html = '<input type="text" class="wpsms-color-picker" id="wps_pp_settings[' . $args['id'] . ']" name="wps_pp_settings[' . $args['id'] . ']" value="' . esc_attr($value) . '" data-default-color="' . esc_attr($default) . '" />';
         $html .= '<p class="description"> ' . $args['desc'] . '</p>';
 
@@ -1298,8 +1286,7 @@ class Settings_Pro
     {
         $active_tab = isset($_GET['tab']) && array_key_exists($_GET['tab'], $this->get_tabs()) ? $_GET['tab'] : 'general';
 
-        ob_start();
-        ?>
+        ob_start(); ?>
         <div class="wrap wpsms-pro-settings-wrap">
             <?php do_action('wp_camoo_sms_pro_settings_page'); ?>
             <h2><?php _e('Settings', 'wp-camoo-sms') ?></h2>
@@ -1321,8 +1308,7 @@ class Settings_Pro
                         echo '<li><a href="' . esc_url($tab_url) . '" title="' . esc_attr($tab_name) . '" class="' . $active . '">';
                         echo $tab_name;
                         echo '</a></li>';
-                    }
-                    ?>
+                    } ?>
                 </ul>
                 <?php echo settings_errors('wpsms-notices'); ?>
                 <div class="wpsms-tab-content">
@@ -1330,14 +1316,12 @@ class Settings_Pro
                         <table class="form-table">
                             <?php
                             settings_fields($this->setting_name);
-                            do_settings_fields('wps_pp_settings_' . $active_tab, 'wps_pp_settings_' . $active_tab);
-                            ?>
+        do_settings_fields('wps_pp_settings_' . $active_tab, 'wps_pp_settings_' . $active_tab); ?>
                         </table>
                         <?php
                         if ($active_tab !== 'general') {
                             submit_button();
-                        }
-                        ?>
+                        } ?>
                     </form>
                 </div>
             </div>
