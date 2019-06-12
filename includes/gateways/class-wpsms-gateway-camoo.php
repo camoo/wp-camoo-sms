@@ -77,10 +77,11 @@ class Camoo extends \CAMOO_SMS\Gateway
                 'message' => $this->msg,
                 'to'      => $this->to,
             ];
-
             if (!empty($this->to) && is_array($this->to) && count($this->to) > \Camoo\Sms\Constants::SMS_MAX_RECIPIENTS) {
                 $oResult = $oMessage->sendBulk();
             } else {
+                $sNotifyUrl = plugin_dir_url(dirname(dirname(__FILE__))) . 'wp-camoo-sms-status.php';
+                $oMessage->notify_url = esc_url($sNotifyUrl);
                 $oResult = $oMessage->send();
                 $hLog['message_id'] = \Camoo\Sms\Lib\Utils::getMessageKey($oResult, 'message_id');
             }

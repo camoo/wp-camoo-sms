@@ -35,10 +35,31 @@ wp_camoo_sms_send( $to, $msg );
 * Support WP REST API
 * Import/Export Subscribers.
 * Support GPG encyption to ensure an end  to end encryption between your server and ours.
+* Handle SMS status rapport
 
 
 # Installation
+
 1. Upload `wp-camoo-sms` to the `/wp-content/plugins/` directory
+
+Install Using Composer
+```sh
+cd wp-content/plugins
+
+composer require camoo/wp-camoo-sms
+
+cd wp-content/plugins/wp-camoo-sms/includes/gateways/libraries/camoo
+# or cd wp-content/plugins/wp-camoo-sms/includes/gateways/libraries/camoo-legacy
+
+composer require camoo/sms
+```
+
+Install Manually
+
+If you do not use Composer to manage plugins or other dependencies, you can install the plugin manually. Download the wp-camoo-sms-Full.zip file from the Releases page and extract the ZIP file to your plugins directory.
+
+You can also git clone this repository, and run composer install in the plugin folder to pull in it's dependencies.
+
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. To display Subscribe goto Themes -> Widgets, and adding `SMS newsletter form` into your sidebar Or using this functions: `<?php wp_camoo_sms_subscribes(); ?>` into theme.
 or using this Shortcode `[wp-sms-subscriber-form]` in Posts pages or Widget.
