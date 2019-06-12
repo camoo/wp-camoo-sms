@@ -48,10 +48,6 @@ cd wp-content/plugins
 
 composer require camoo/wp-camoo-sms
 
-cd wp-content/plugins/wp-camoo-sms/includes/gateways/libraries/camoo
-# or cd wp-content/plugins/wp-camoo-sms/includes/gateways/libraries/camoo-legacy
-
-composer require camoo/sms
 ```
 
 Install Manually
