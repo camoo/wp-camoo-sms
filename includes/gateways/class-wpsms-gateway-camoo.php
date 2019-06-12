@@ -93,10 +93,11 @@ class Camoo extends \CAMOO_SMS\Gateway
                         ]
                     ],
                     'variables' => [
-                    'message' => 'message',
-                    'recipient' => 'to',
-                    'message_id' => 'message_id',
-                    'sender'	=> 'from'
+                        'message'    => 'message',
+                        'recipient'  => 'to',
+                        'message_id' => 'message_id',
+                        'sender'	 => 'from',
+                        'response'	 => 'response',
                     ]
                 ];
 
@@ -106,10 +107,9 @@ class Camoo extends \CAMOO_SMS\Gateway
                 $oMessage->notify_url = esc_url($sNotifyUrl);
                 $oResult = $oMessage->send();
                 $hLog['message_id'] = \Camoo\Sms\Lib\Utils::getMessageKey($oResult, 'message_id');
+                $hLog['response'] = $oResult;
+                $this->log($hLog);
             }
-
-            $hLog['response'] = $oResult;
-            $this->log($hLog);
 
             /**
              * Run hook after send sms.
