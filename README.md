@@ -48,6 +48,8 @@ cd wp-content/plugins
 
 composer require camoo/wp-camoo-sms
 
+mv vendor/camoo/wp-camoo-sms .
+
 ```
 
 Install Manually
