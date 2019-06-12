@@ -17,7 +17,6 @@ $msg = "Hello kmer World! Déjà vu!";
 wp_camoo_sms_send( $to, $msg );
 ```
 
-
 # Features
 
 * Send SMS to number(s), subscribers and wordpress users.
@@ -42,7 +41,7 @@ wp_camoo_sms_send( $to, $msg );
 
 1. Upload `wp-camoo-sms` to the `/wp-content/plugins/` directory
 
-Install Using Composer
+	Install Using Composer
 ```sh
 cd wp-content/plugins
 
@@ -50,9 +49,11 @@ composer require camoo/wp-camoo-sms
 
 mv vendor/camoo/wp-camoo-sms .
 
+# install dependencies
+./wp-camoo-sms/bin/install_dependencies.sh
 ```
 
-Install Manually
+	Install Manually
 
 If you do not use Composer to manage plugins or other dependencies, you can install the plugin manually. Download the wp-camoo-sms-Full.zip file from the Releases page and extract the ZIP file to your plugins directory.
 
