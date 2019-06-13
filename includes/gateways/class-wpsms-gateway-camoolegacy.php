@@ -17,6 +17,7 @@ class Camoolegacy extends \CAMOO_SMS\Gateway
     public $clearObject = [\Camoo\Sms\Base::class, 'clear'];
     public $oBalance = [\Camoo\Sms\Balance::class, 'create'];
     public $oMessage = [\Camoo\Sms\Message::class, 'create'];
+    public $bulk_send = false;
 
     public function __construct()
     {

@@ -8,7 +8,6 @@ if (! defined('ABSPATH')) {
 
 class Integrations
 {
-
     public $sms;
     public $date;
     public $options;

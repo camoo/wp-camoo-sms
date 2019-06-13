@@ -7,19 +7,21 @@ You can add to WordPress, the ability to send SMS, member of SMS newsletter and 
 
 To every events in WordPress, you can send sms through this plugin.
 
-The usage of this plugin is completely free. You have to just have an account from service in the gateway lists that we support them.
+The usage of this plugin is completely free. You have to just have a CAMOO account:
+    - [Sign up](https://www.camoo.cm/join) for a free CAMOO SMS account
+    - Ask CAMOO Team for new access_key for developers
 
 Very easy Send SMS by PHP code:
 
 ```php
-$to = array('01000000000');
+$to = array('+23761732567');
 $msg = "Hello kmer World! Déjà vu!";
 wp_camoo_sms_send( $to, $msg );
 ```
 
 # Features
 
-* Send SMS to number(s), subscribers and wordpress users.
+* Send (Bulk) SMS to number(s), subscribers and wordpress users.
 * Subscribe newsletter SMS.
 * Send activation code to subscribe for complete subscription.
 * Notification SMS when published new post to subscribers.
@@ -36,7 +38,6 @@ wp_camoo_sms_send( $to, $msg );
 * Support GPG encyption to ensure an end  to end encryption between your server and ours.
 * Handle SMS status rapport
 
-
 # Installation
 
 1. Upload `wp-camoo-sms` to the `/wp-content/plugins/` directory
@@ -52,7 +53,6 @@ mv vendor/camoo/wp-camoo-sms .
 # install dependencies
 ./wp-camoo-sms/bin/install_dependencies.sh
 ```
-
 	Install Manually
 
 If you do not use Composer to manage plugins or other dependencies, you can install the plugin manually. Download the wp-camoo-sms-Full.zip file from the Releases page and extract the ZIP file to your plugins directory.

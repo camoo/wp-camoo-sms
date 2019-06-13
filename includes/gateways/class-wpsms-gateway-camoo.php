@@ -17,6 +17,8 @@ class Camoo extends \CAMOO_SMS\Gateway
     public $clearObject = [\Camoo\Sms\Base::class, 'clear'];
     public $oBalance = [\Camoo\Sms\Balance::class, 'create'];
     public $oMessage = [\Camoo\Sms\Message::class, 'create'];
+    public $bulk_threshold = 50;
+    public $bulk_chunk = 50;
 
     public function __construct()
     {
@@ -72,16 +74,21 @@ class Camoo extends \CAMOO_SMS\Gateway
             if ($this->encrypt_sms === true) {
                 $oMessage->encrypt = true;
             }
+			// Notify URL
+			$sNotifyUrl = plugin_dir_url(dirname(dirname(__FILE__))) . 'wp-camoo-sms-status.php';
+			$oMessage->notify_url = esc_url($sNotifyUrl);
+
             $hLog = [
                 'sender'  => $this->from,
                 'message' => $this->msg,
                 'to'      => $this->to,
             ];
-            if (!empty($this->to) && is_array($this->to) && count($this->to) > \Camoo\Sms\Constants::SMS_MAX_RECIPIENTS) {
-                $conf_path  = $this->get_conf_path();
-                require_once($conf_path);
+            if (!empty($this->to) && is_array($this->to) && count($this->to) > $this->bulk_threshold) {
+                //$conf_path  = $this->get_conf_path();
+                //require_once($conf_path);
                 $hCallback = [
-                    'driver' => [\Camoo\Sms\Database\MySQL::class, 'getInstance'],
+                    'driver' => [Database\MySQL::class, 'getInstance'],
+                    'bulk_chunk' => $this->bulk_chunk,
                     'db_config' => [
                         [
                             'db_name'      => DB_NAME,
@@ -89,7 +96,7 @@ class Camoo extends \CAMOO_SMS\Gateway
                             'db_password'  => DB_PASSWORD,
                             'db_host'      => DB_HOST,
                             'table_sms'    => 'camoo_sms_send',
-                            'table_prefix' => $table_prefix,
+                            'table_prefix' => $this->tb_prefix,
                         ]
                     ],
                     'variables' => [
@@ -103,8 +110,6 @@ class Camoo extends \CAMOO_SMS\Gateway
 
                 $oResult = $oMessage->sendBulk($hCallback);
             } else {
-                $sNotifyUrl = plugin_dir_url(dirname(dirname(__FILE__))) . 'wp-camoo-sms-status.php';
-                $oMessage->notify_url = esc_url($sNotifyUrl);
                 $oResult = $oMessage->send();
                 $hLog['message_id'] = \Camoo\Sms\Lib\Utils::getMessageKey($oResult, 'message_id');
                 $hLog['response'] = $oResult;
@@ -144,22 +149,6 @@ class Camoo extends \CAMOO_SMS\Gateway
             return $ohBalance->balance->balance;
         } catch (\Camoo\Sms\Exception\CamooSmsException $e) {
             return new \WP_Error('account-credit', $e->getMessage());
-        }
-    }
-
-    private function get_conf_path(string $file = 'wp-config.php')
-    {
-        $opath = $file;
-
-        for ($i = 0; $i < 10; $i++) {
-            $path = $i == 0 ? './' : str_repeat('../', $i);
-            $file = $path . $file;
-
-            if (is_readable($file)) {
-                return $file;
-            }
-
-            $file = $opath;
         }
     }
 }

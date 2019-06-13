@@ -23,7 +23,7 @@ class Status
         }
         list($this->dbh_connect, $this->dbh_query, $this->dbh_error, $this->dbh_escape) = $handlers;
 
-        $conf_path  = $this->get_conf_path();
+        $conf_path  = $this->getConfPath();
         $this->connection = $this->doDbConnection($conf_path);
         if (empty($this->connection)) {
             header('HTTP/1.1 400 Bad Request', true, 400);
@@ -45,12 +45,12 @@ class Status
 
     private function escape_string($string)
     {
-        return $this->is_mysqli()?  call_user_func($this->dbh_escape, $this->connection, trim($string)) : call_user_func($this->dbh_escape, trim($string));
+        return $this->isMYSQLi()?  call_user_func($this->dbh_escape, $this->connection, trim($string)) : call_user_func($this->dbh_escape, trim($string));
     }
 
     private function close_connection()
     {
-        return $this->is_mysqli()?  mysqli_close($this->connection) : mysql_close();
+        return $this->isMYSQLi()?  mysqli_close($this->connection) : mysql_close();
     }
 
     private function getMysqlHandlers()
@@ -64,11 +64,11 @@ class Status
         }
     }
 
-    private function get_conf_path(string $file = 'wp-config.php')
+    private function getConfPath(string $file = 'wp-config.php')
     {
         $opath = $file;
   
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $path = $i == 0 ? './' : str_repeat('../', $i);
             $file = $path . $file;
     
@@ -95,7 +95,7 @@ class Status
 
     private function db_connect($host, $user, $password, $name)
     {
-        if ($this->is_mysqli()) {
+        if ($this->isMYSQLi()) {
             $port           = null;
             $socket         = null;
             $port_or_socket = strstr($host, ':');
@@ -130,10 +130,10 @@ class Status
         return $connection;
     }
 
-    public function fetch_assoc($result)
+    private function fetch_assoc($result)
     {
-        $array = array();
-        if ($this->is_mysqli()) {
+        $array = [];
+        if ($this->isMYSQLi()) {
             while ($row = $result->fetch_assoc()) {
                 $array[] = $row;
             }
@@ -142,33 +142,32 @@ class Status
                 $array[] = $row;
             }
         }
-
         return $array;
     }
 
-    public function is_mysqli()
+    private function isMYSQLi()
     {
         return $this->dbh_connect === 'mysqli_connect';
     }
 
-    public function execute_query($query)
+    private function query($query)
     {
-        if ($this->is_mysqli()) {
+        if ($this->isMYSQLi()) {
             $result = call_user_func($this->dbh_query, $this->connection, $query);
         } else {
             $result = call_user_func($this->dbh_query, $query);
         }
 
         if (!$result) {
-            echo $this->get_error();
+            echo $this->getError();
         }
 
         return $result;
     }
 
-    public function get_error()
+    private function getError()
     {
-        if ($this->is_mysqli()) {
+        if ($this->isMYSQLi()) {
             return mysqli_error($this->connection);
         } else {
             return mysql_error();
@@ -177,7 +176,7 @@ class Status
 
     private function getByMessageId($id)
     {
-        $result = $this->execute_query("SELECT ID,message_id,status FROM " . $this->escape_string($this->table_prefix) . "camoo_sms_send WHERE message_id='$id'");
+        $result = $this->query("SELECT ID,message_id,status FROM " . $this->escape_string($this->table_prefix) . "camoo_sms_send WHERE message_id='$id'");
 
         $result = $this->fetch_assoc($result);
 
@@ -189,7 +188,7 @@ class Status
 
     private function updateById($id, $status)
     {
-        return $this->execute_query("UPDATE " . $this->escape_string($this->table_prefix) . "camoo_sms_send SET status='$status' WHERE ID='$id'");
+        return $this->query("UPDATE " . $this->escape_string($this->table_prefix) . "camoo_sms_send SET status='$status' WHERE ID='$id'");
     }
 }
 

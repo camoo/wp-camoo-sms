@@ -8,7 +8,6 @@ if (! defined('ABSPATH')) {
 
 class Settings
 {
-
     public $setting_name;
     public $options = array();
 
@@ -138,7 +137,6 @@ class Settings
      */
     public function settings_sanitize($input = array())
     {
-
         if (empty($_POST['_wp_http_referer'])) {
             return $input;
         }
@@ -163,6 +161,14 @@ class Settings
 
             // General filter
             $input[ $key ] = apply_filters('wp_camoo_sms_settings_sanitize', $value, $key);
+
+            if ($key === 'bulk_chunk') {
+                if (!Gateway::can_bulk_send()) {
+                    unset($input[$key]);
+                } elseif ((int) $value > 50 || empty($value)) {
+                    $input[ $key ] = apply_filters('wp_camoo_sms_settings_sanitize_number', 50, $key);
+                }
+            }
         }
 
         // Loop through the whitelist and unset any that are empty for the tab being saved
@@ -195,7 +201,6 @@ class Settings
      */
     public function get_registered_settings()
     {
-
         $options = array(
             'enable'  => __('Enable', 'wp-camoo-sms'),
             'disable' => __('Disable', 'wp-camoo-sms')
@@ -305,6 +310,14 @@ class Settings
                     'name'    => __('Bulk send', 'wp-camoo-sms'),
                     'type'    => 'html',
                     'options' => Gateway::bulk_status(),
+                ),
+                'bulk_chunk'          => array(
+                    'id'   => 'bulk_chunk',
+                    'name' => __('Bulk Chunk', 'wp-camoo-sms'),
+                    'type' => 'number',
+                    'std'  => 50,
+                    'options' =>  ['disabled'  => !Gateway::can_bulk_send()],
+                    'desc' => __('When sending bulk SMS in Background, how many SMS should be sent for each request? Max: 50', 'wp-camoo-sms')
                 ),
                 // Account credit
                 'account_credit_title'      => array(
@@ -798,14 +811,14 @@ class Settings
         foreach ($args['options'] as $key => $option) :
             $checked = false;
 
-            if (isset($this->options[ $args['id'] ]) && $this->options[ $args['id'] ] == $key) {
-                $checked = true;
-            } elseif (isset($args['std']) && $args['std'] == $key && ! isset($this->options[ $args['id'] ])) {
-                $checked = true;
-            }
+        if (isset($this->options[ $args['id'] ]) && $this->options[ $args['id'] ] == $key) {
+            $checked = true;
+        } elseif (isset($args['std']) && $args['std'] == $key && ! isset($this->options[ $args['id'] ])) {
+            $checked = true;
+        }
 
-            echo '<input name="wp_camoo_sms_settings[' . $args['id'] . ']"" id="wp_camoo_sms_settings[' . $args['id'] . '][' . $key . ']" type="radio" value="' . $key . '" ' . checked(true, $checked, false) . '/>';
-            echo '<label for="wp_camoo_sms_settings[' . $args['id'] . '][' . $key . ']">' . $option . '</label>&nbsp;&nbsp;';
+        echo '<input name="wp_camoo_sms_settings[' . $args['id'] . ']"" id="wp_camoo_sms_settings[' . $args['id'] . '][' . $key . ']" type="radio" value="' . $key . '" ' . checked(true, $checked, false) . '/>';
+        echo '<label for="wp_camoo_sms_settings[' . $args['id'] . '][' . $key . ']">' . $option . '</label>&nbsp;&nbsp;';
         endforeach;
 
         echo '<p class="description">' . $args['desc'] . '</p>';
@@ -819,8 +832,10 @@ class Settings
             $value = isset($args['std']) ? $args['std'] : '';
         }
 
-        $size = ( isset($args['size']) && ! is_null($args['size']) ) ? $args['size'] : 'regular';
-        $html = '<input type="text" class="' . $size . '-text" id="wp_camoo_sms_settings[' . $args['id'] . ']" name="wp_camoo_sms_settings[' . $args['id'] . ']" value="' . esc_attr(stripslashes($value)) . '"/>';
+        $disabled = is_array($args['options']) && array_key_exists('disabled', $args['options']) && $args['options']['disabled'] === true?  ' disabled' : '';
+
+        $size = (isset($args['size']) && ! is_null($args['size'])) ? $args['size'] : 'regular';
+        $html = '<input type="text" class="' . $size . '-text" id="wp_camoo_sms_settings[' . $args['id'] . ']" name="wp_camoo_sms_settings[' . $args['id'] . ']" value="' . esc_attr(stripslashes($value)) . '"'.$disabled.'/>';
         $html .= '<p class="description"> ' . $args['desc'] . '</p>';
 
         echo $html;
@@ -833,13 +848,14 @@ class Settings
         } else {
             $value = isset($args['std']) ? $args['std'] : '';
         }
+        $disabled = is_array($args['options']) && array_key_exists('disabled', $args['options']) && $args['options']['disabled'] === true?  ' disabled' : '';
 
         $max  = isset($args['max']) ? $args['max'] : 999999;
         $min  = isset($args['min']) ? $args['min'] : 0;
         $step = isset($args['step']) ? $args['step'] : 1;
 
-        $size = ( isset($args['size']) && ! is_null($args['size']) ) ? $args['size'] : 'regular';
-        $html = '<input type="number" step="' . esc_attr($step) . '" max="' . esc_attr($max) . '" min="' . esc_attr($min) . '" class="' . $size . '-text" id="wp_camoo_sms_settings[' . $args['id'] . ']" name="wp_camoo_sms_settings[' . $args['id'] . ']" value="' . esc_attr(stripslashes($value)) . '"/>';
+        $size = (isset($args['size']) && ! is_null($args['size'])) ? $args['size'] : 'regular';
+        $html = '<input type="number" step="' . esc_attr($step) . '" max="' . esc_attr($max) . '" min="' . esc_attr($min) . '" class="' . $size . '-text" id="wp_camoo_sms_settings[' . $args['id'] . ']" name="wp_camoo_sms_settings[' . $args['id'] . ']" value="' . esc_attr(stripslashes($value)) . '"'.$disabled.'/>';
         $html .= '<p class="description"> ' . $args['desc'] . '</p>';
 
         echo $html;
@@ -853,7 +869,7 @@ class Settings
             $value = isset($args['std']) ? $args['std'] : '';
         }
 
-        $size = ( isset($args['size']) && ! is_null($args['size']) ) ? $args['size'] : 'regular';
+        $size = (isset($args['size']) && ! is_null($args['size'])) ? $args['size'] : 'regular';
         $html = '<textarea class="large-text" cols="50" rows="5" id="wp_camoo_sms_settings[' . $args['id'] . ']" name="wp_camoo_sms_settings[' . $args['id'] . ']">' . esc_textarea(stripslashes($value)) . '</textarea>';
         $html .= '<p class="description"> ' . $args['desc'] . '</p>';
 
@@ -868,7 +884,7 @@ class Settings
             $value = isset($args['std']) ? $args['std'] : '';
         }
 
-        $size = ( isset($args['size']) && ! is_null($args['size']) ) ? $args['size'] : 'regular';
+        $size = (isset($args['size']) && ! is_null($args['size'])) ? $args['size'] : 'regular';
         $html = '<input type="password" class="' . $size . '-text" id="wp_camoo_sms_settings[' . $args['id'] . ']" name="wp_camoo_sms_settings[' . $args['id'] . ']" value="' . esc_attr($value) . '"/>';
         $html .= '<p class="description"> ' . $args['desc'] . '</p>';
 
@@ -895,7 +911,7 @@ class Settings
 
         foreach ($args['options'] as $option => $name) :
             $selected = selected($option, $value, false);
-            $html     .= '<option value="' . $option . '" ' . $selected . '>' . $name . '</option>';
+        $html     .= '<option value="' . $option . '" ' . $selected . '>' . $name . '</option>';
         endforeach;
 
         $html .= '</select>';
@@ -924,8 +940,8 @@ class Settings
                         $selected = '';
                     }
                 }
-                $html .= '<option value="' . $option . '" ' . $selected . '>' . $name . '</option>';
-            endforeach;
+        $html .= '<option value="' . $option . '" ' . $selected . '>' . $name . '</option>';
+        endforeach;
         endforeach;
 
         $html .= '</select>';
@@ -953,7 +969,7 @@ class Settings
                     $selected = '';
                 }
             }
-            $html .= '<option value="' . $country['code'] . '" ' . $selected . '>' . $country['name'] . '</option>';
+        $html .= '<option value="' . $country['code'] . '" ' . $selected . '>' . $country['name'] . '</option>';
         endforeach;
 
         $html .= '</select>';
@@ -983,9 +999,9 @@ class Settings
             $html .= '<optgroup label="' . ucfirst(str_replace('_', ' ', $key)) . '">';
 
             foreach ($v as $option => $name) :
-                $disabled = ( $key == 'pro_pack_gateways' ) ? $disabled = ' disabled' : '';
-                $selected = selected($option, $value, false);
-                $html     .= '<option value="' . $option . '" ' . $selected . ' ' . $disabled . '>' . ucfirst($name) . '</option>';
+                $disabled = ($key == 'pro_pack_gateways') ? $disabled = ' disabled' : '';
+            $selected = selected($option, $value, false);
+            $html     .= '<option value="' . $option . '" ' . $selected . ' ' . $disabled . '>' . ucfirst($name) . '</option>';
             endforeach;
 
             $html .= '</optgroup>';
@@ -1009,7 +1025,7 @@ class Settings
 
         foreach ($args['options'] as $option => $color) :
             $selected = selected($option, $value, false);
-            $html     .= '<option value="' . $option . '" ' . $selected . '>' . $color['label'] . '</option>';
+        $html     .= '<option value="' . $option . '" ' . $selected . '>' . $color['label'] . '</option>';
         endforeach;
 
         $html .= '</select>';
@@ -1047,7 +1063,7 @@ class Settings
             $value = isset($args['std']) ? $args['std'] : '';
         }
 
-        $size = ( isset($args['size']) && ! is_null($args['size']) ) ? $args['size'] : 'regular';
+        $size = (isset($args['size']) && ! is_null($args['size'])) ? $args['size'] : 'regular';
         $html = '<input type="text" class="' . $size . '-text wpsms_upload_field" id="wp_camoo_sms_settings[' . $args['id'] . ']" name="wp_camoo_sms_settings[' . $args['id'] . ']" value="' . esc_attr(stripslashes($value)) . '"/>';
         $html .= '<span>&nbsp;<input type="button" class="wp_camoo_sms_settings_upload_button button-secondary" value="' . __('Upload File', 'wpsms') . '"/></span>';
         $html .= '<p class="description"> ' . $args['desc'] . '</p>';
@@ -1065,7 +1081,7 @@ class Settings
 
         $default = isset($args['std']) ? $args['std'] : '';
 
-        $size = ( isset($args['size']) && ! is_null($args['size']) ) ? $args['size'] : 'regular';
+        $size = (isset($args['size']) && ! is_null($args['size'])) ? $args['size'] : 'regular';
         $html = '<input type="text" class="wpsms-color-picker" id="wp_camoo_sms_settings[' . $args['id'] . ']" name="wp_camoo_sms_settings[' . $args['id'] . ']" value="' . esc_attr($value) . '" data-default-color="' . esc_attr($default) . '" />';
         $html .= '<p class="description"> ' . $args['desc'] . '</p>';
 
@@ -1076,8 +1092,7 @@ class Settings
     {
         $active_tab = isset($_GET['tab']) && array_key_exists($_GET['tab'], $this->get_tabs()) ? $_GET['tab'] : 'general';
 
-        ob_start();
-        ?>
+        ob_start(); ?>
         <div class="wrap wpsms-settings-wrap">
             <?php do_action('wp_camoo_sms_settings_page'); ?>
             <h2><?php _e('Settings', 'wp-camoo-sms') ?></h2>
@@ -1100,8 +1115,7 @@ class Settings
                         echo '<li><a href="' . esc_url($tab_url) . '" title="' . esc_attr($tab_name) . '" class="' . $active . '">';
                         echo $tab_name;
                         echo '</a></li>';
-                    }
-                    ?>
+                    } ?>
                 </ul>
                 <?php echo settings_errors('wpsms-notices'); ?>
                 <div class="wpsms-tab-content">
@@ -1109,8 +1123,7 @@ class Settings
                         <table class="form-table">
                             <?php
                             settings_fields($this->setting_name);
-                            do_settings_fields('wp_camoo_sms_settings_' . $active_tab, 'wp_camoo_sms_settings_' . $active_tab);
-                            ?>
+        do_settings_fields('wp_camoo_sms_settings_' . $active_tab, 'wp_camoo_sms_settings_' . $active_tab); ?>
                         </table>
                         <?php submit_button(); ?>
                     </form>

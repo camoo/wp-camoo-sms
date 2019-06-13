@@ -116,6 +116,11 @@ class Gateway
         // SET datacoding
         $sms->isUnicode = Option::getOption('send_unicode') == 1;
 
+        if (! Option::getOption('bulk_chunk')) {
+            $sms->bulk_chunk = Option::getOption('bulk_chunk');
+        }
+
+
         // Unset gateway key field if not available in the current gateway class.
         add_filter('wp_camoo_sms_gateway_settings', function ($filter) {
             global $sms;
@@ -353,4 +358,11 @@ class Gateway
 
         return PHP_VERSION_ID;
     }
+
+    public function can_bulk_send()
+    {
+        global $sms;
+        return $sms->bulk_send;
+    }
+
 }
