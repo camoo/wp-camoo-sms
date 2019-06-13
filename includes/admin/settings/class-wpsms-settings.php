@@ -162,7 +162,7 @@ class Settings
             // General filter
             $input[ $key ] = apply_filters('wp_camoo_sms_settings_sanitize', $value, $key);
 
-            if ($key === 'bulk_chunk') {
+            if (in_array($key, ['bulk_chunk','bulk_threshold'])) {
                 if (!Gateway::can_bulk_send()) {
                     unset($input[$key]);
                 } elseif ((int) $value > 50 || empty($value)) {
@@ -317,8 +317,17 @@ class Settings
                     'type' => 'number',
                     'std'  => 50,
                     'options' =>  ['disabled'  => !Gateway::can_bulk_send()],
-                    'desc' => __('When sending bulk SMS in Background, how many SMS should be sent for each request? Max: 50', 'wp-camoo-sms')
+                    'desc' => __('When sending bulk SMS in the background, how many SMS chunk should be sent for each loop request? Max: 50', 'wp-camoo-sms')
                 ),
+                'bulk_threshold'          => array(
+                    'id'   => 'bulk_threshold',
+                    'name' => __('Bulk Threshold', 'wp-camoo-sms'),
+                    'type' => 'number',
+                    'std'  => 50,
+                    'options' =>  ['disabled'  => !Gateway::can_bulk_send()],
+                    'desc' => __('Bulk Threshold triggers sending bulk SMS in the background. Max: 50', 'wp-camoo-sms')
+                ),
+
                 // Account credit
                 'account_credit_title'      => array(
                     'id'   => 'account_credit_title',

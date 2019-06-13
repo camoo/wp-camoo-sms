@@ -74,9 +74,9 @@ class Camoo extends \CAMOO_SMS\Gateway
             if ($this->encrypt_sms === true) {
                 $oMessage->encrypt = true;
             }
-			// Notify URL
-			$sNotifyUrl = plugin_dir_url(dirname(dirname(__FILE__))) . 'wp-camoo-sms-status.php';
-			$oMessage->notify_url = esc_url($sNotifyUrl);
+            // Notify URL
+            $sNotifyUrl = plugin_dir_url(dirname(dirname(__FILE__))) . 'wp-camoo-sms-status.php';
+            $oMessage->notify_url = esc_url($sNotifyUrl);
 
             $hLog = [
                 'sender'  => $this->from,

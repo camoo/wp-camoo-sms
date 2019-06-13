@@ -120,6 +120,9 @@ class Gateway
             $sms->bulk_chunk = Option::getOption('bulk_chunk');
         }
 
+        if (! Option::getOption('bulk_threshold')) {
+            $sms->bulk_threshold = Option::getOption('bulk_threshold');
+        }
 
         // Unset gateway key field if not available in the current gateway class.
         add_filter('wp_camoo_sms_gateway_settings', function ($filter) {
@@ -364,5 +367,4 @@ class Gateway
         global $sms;
         return $sms->bulk_send;
     }
-
 }
