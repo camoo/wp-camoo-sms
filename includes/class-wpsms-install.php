@@ -77,13 +77,14 @@ class Install
             $create_sms_send = ("CREATE TABLE IF NOT EXISTS {$table_name}(
             ID int(10) NOT NULL auto_increment,
 			message_id varchar(100) NOT NULL DEFAULT '',
-            date DATETIME,
+            date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
             sender VARCHAR(20) NOT NULL,
             message TEXT NOT NULL,
             recipient TEXT NOT NULL,
   			response TEXT NOT NULL,
-			status varchar(10) NOT NULL DEFAULT '',
+			status varchar(10) NOT NULL DEFAULT 'sent',
 			reference varchar(75) NOT NULL DEFAULT '',
+			status_time datetime NOT NULL DEFAULT '2019-01-01 00:00:00',
             PRIMARY KEY(ID)) CHARSET=utf8");
 
             dbDelta($create_sms_send);

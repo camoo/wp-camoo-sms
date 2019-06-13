@@ -116,11 +116,11 @@ class Gateway
         // SET datacoding
         $sms->isUnicode = Option::getOption('send_unicode') == 1;
 
-        if (! Option::getOption('bulk_chunk')) {
+        if (Option::getOption('bulk_chunk')) {
             $sms->bulk_chunk = Option::getOption('bulk_chunk');
         }
 
-        if (! Option::getOption('bulk_threshold')) {
+        if (Option::getOption('bulk_threshold')) {
             $sms->bulk_threshold = Option::getOption('bulk_threshold');
         }
 
@@ -362,7 +362,7 @@ class Gateway
         return PHP_VERSION_ID;
     }
 
-    public function can_bulk_send()
+    public static function can_bulk_send()
     {
         global $sms;
         return $sms->bulk_send;

@@ -83,12 +83,10 @@ class Camoo extends \CAMOO_SMS\Gateway
                 'message' => $this->msg,
                 'to'      => $this->to,
             ];
-            if (!empty($this->to) && is_array($this->to) && count($this->to) > $this->bulk_threshold) {
-                //$conf_path  = $this->get_conf_path();
-                //require_once($conf_path);
+            if (!empty($this->to) && is_array($this->to) && count($this->to) > (int) $this->bulk_threshold) {
                 $hCallback = [
-                    'driver' => [Database\MySQL::class, 'getInstance'],
-                    'bulk_chunk' => $this->bulk_chunk,
+                    'driver' => [\Camoo\Sms\Database\MySQL::class, 'getInstance'],
+                    'bulk_chunk' => (int) $this->bulk_chunk,
                     'db_config' => [
                         [
                             'db_name'      => DB_NAME,
@@ -107,7 +105,6 @@ class Camoo extends \CAMOO_SMS\Gateway
                         'response'	 => 'response',
                     ]
                 ];
-
                 $oResult = $oMessage->sendBulk($hCallback);
             } else {
                 $oResult = $oMessage->send();
@@ -115,7 +112,6 @@ class Camoo extends \CAMOO_SMS\Gateway
                 $hLog['response'] = $oResult;
                 $this->log($hLog);
             }
-
             /**
              * Run hook after send sms.
              *
