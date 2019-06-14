@@ -151,10 +151,9 @@ class Gateway
     public function log($options, $status = 'sent')
     {
         $hData = [
-                'date'      => WP_SMS_CURRENT_DATE,
                 'sender'    => $options['sender'],
                 'message'   => $options['message'],
-                'recipient' => implode(',', $options['to']),
+                'recipient' => is_array($options['to'])? implode(",", $options['to']) : $options['to'],
                 'response'  => var_export($options['response'], true),
                 'status'    => $status,
             ];
