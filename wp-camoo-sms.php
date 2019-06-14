@@ -3,7 +3,7 @@
  * Plugin Name: Camoo SMS
  * Plugin URI: 'https://www.camoo.cm/bulk-sms'
  * Description: Camoo SMS plugin for WordPress
- * Version: 5.1.5
+ * Version: 1.0
  * Author: Camoo Sarl
  * Author URI: https://www.camoo.cm/
  * Text Domain: wp-sms-camoo

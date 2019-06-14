@@ -129,11 +129,6 @@ class Settings_Pro
             'as'      => __('Awesome Support', 'wp-camoo-sms'),
         );
 
-        // Check what version of WP-Pro using? if not new version, don't show tabs
-        if (defined('WP_SMS_PRO_VERSION') and version_compare(WP_SMS_PRO_VERSION, "2.4.2", "<=")) {
-            return array();
-        }
-
         return $tabs;
     }
 
