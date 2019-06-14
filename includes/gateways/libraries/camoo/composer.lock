@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "camoo/sms",
-            "version": "v3.1.1",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/camoo/sms.git",
-                "reference": "faf0294e3b961dccc8ebb371d1719df0a669f321"
+                "reference": "74cac24b3e74029f0d70258e771a7ba4f3a60e2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/camoo/sms/zipball/faf0294e3b961dccc8ebb371d1719df0a669f321",
-                "reference": "faf0294e3b961dccc8ebb371d1719df0a669f321",
+                "url": "https://api.github.com/repos/camoo/sms/zipball/74cac24b3e74029f0d70258e771a7ba4f3a60e2f",
+                "reference": "74cac24b3e74029f0d70258e771a7ba4f3a60e2f",
                 "shasum": ""
             },
             "require": {
@@ -51,10 +51,11 @@
                 "API-SMS",
                 "CAMOO",
                 "GPG SMS encrytion",
+                "bulk sms",
                 "sms",
                 "sms gateway"
             ],
-            "time": "2019-05-26T12:55:12+00:00"
+            "time": "2019-06-14T13:30:17+00:00"
         },
         {
             "name": "giggsey/libphonenumber-for-php",
@@ -410,16 +411,16 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.17",
+            "version": "2.0.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "3ca5b88d582c69178c8d01fd9d02b94e15042bb8"
+                "reference": "60519001db8d791215a822efd366d24cafee9e63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/3ca5b88d582c69178c8d01fd9d02b94e15042bb8",
-                "reference": "3ca5b88d582c69178c8d01fd9d02b94e15042bb8",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/60519001db8d791215a822efd366d24cafee9e63",
+                "reference": "60519001db8d791215a822efd366d24cafee9e63",
                 "shasum": ""
             },
             "require": {
@@ -498,7 +499,7 @@
                 "x.509",
                 "x509"
             ],
-            "time": "2019-05-26T20:38:34+00:00"
+            "time": "2019-06-13T06:15:54+00:00"
         },
         {
             "name": "psr/http-message",
