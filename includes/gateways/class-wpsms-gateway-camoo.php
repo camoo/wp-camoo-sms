@@ -19,6 +19,7 @@ class Camoo extends \CAMOO_SMS\Gateway
     public $oMessage = [\Camoo\Sms\Message::class, 'create'];
     public $bulk_threshold = 50;
     public $bulk_chunk = 50;
+    public $sms_route = 'premium';
 
     public function __construct()
     {
@@ -67,6 +68,10 @@ class Camoo extends \CAMOO_SMS\Gateway
             if ($this->isflash === true) {
                 $oMessage->type = 'flash';
             }
+            if ($this->sms_route === 'classic') {
+                $oMessage->route = 'classic';
+            }
+
             if ($this->isUnicode !== true) {
                 $oMessage->datacoding = 'plain';
             }

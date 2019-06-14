@@ -76,7 +76,7 @@
                                                 ?>
                                                 <option value="<?php echo $key_item; ?>"<?php if ($val_item['count'] < 1) {
                                                     echo " disabled";
-                                                               } ?>><?php _e($val_item['name'], 'wp-camoo-sms'); ?>
+                                                } ?>><?php _e($val_item['name'], 'wp-camoo-sms'); ?>
                                                     (<?php echo sprintf(__('<b>%s</b> Users have mobile number.', 'wp-camoo-sms'), $val_item['count']); ?>
                                                     )
                                                 </option>
@@ -140,6 +140,17 @@
                                     </td>
                                 </tr>
                             <?php } ?>
+                                <tr>
+                                    <td><?php _e('SMS route', 'wp-camoo-sms'); ?>:</td>
+                                    <td>
+                                        <input type="radio" id="route_premium" name="wp_route" value="premium" checked="checked"/>
+                                        <label for="flash_yes"><?php _e('Premium', 'wp-camoo-sms'); ?></label>
+                                        <input type="radio" id="route_classic" name="wp_route" value="classic"/>
+                                        <label for="flash_no"><?php _e('Classic', 'wp-camoo-sms'); ?></label>
+                                        <br/>
+                                        <p class="description"><?php _e('The SMS route that is used to send the message. <span style="color:#ff0000;">The classic route works only for cameroonian mobile phone numbers.</span> <a href="https://github.com/camoo/sms/wiki/Send-a-message#optional-parameters" target="_blank">Check Wiki for more explanation</a>', 'wp-camoo-sms'); ?></p>
+                                    </td>
+                                </tr>
                             <tr>
                                 <td>
                                     <p class="submit" style="padding: 0;">

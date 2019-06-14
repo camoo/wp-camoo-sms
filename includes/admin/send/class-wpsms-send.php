@@ -11,7 +11,6 @@ if (! defined('ABSPATH')) {
  */
 class SMS_Send
 {
-
     public $sms;
     protected $db;
     protected $tb_prefix;
@@ -63,7 +62,7 @@ class SMS_Send
             echo '<br><div class="update-nag">' . __('You should have sufficient funds for sending sms in the account', 'wp-camoo-sms') . '</div>';
 
             return;
-        } else if (! $gateway_name) {
+        } elseif (! $gateway_name) {
             echo '<br><div class="update-nag">' . __('You should choose and configuration your gateway in the Setting page', 'wp-camoo-sms') . '</div>';
 
             return;
@@ -77,11 +76,11 @@ class SMS_Send
                     } else {
                         $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->db->prefix}camoo_sms_subscribes WHERE `status` = '1' AND `group_ID` = '" . $_POST['wpsms_group_name'] . "'");
                     }
-                } else if ($_POST['wp_send_to'] == "wp_users") {
+                } elseif ($_POST['wp_send_to'] == "wp_users") {
                     $this->sms->to = $get_users_mobile;
-                } else if ($_POST['wp_send_to'] == "wp_tellephone") {
+                } elseif ($_POST['wp_send_to'] == "wp_tellephone") {
                     $this->sms->to = explode(",", $_POST['wp_get_number']);
-                } else if ($_POST['wp_send_to'] == "wp_role") {
+                } elseif ($_POST['wp_send_to'] == "wp_role") {
                     $to = array();
                     add_action('pre_user_query', array( SMS_Send::class, 'get_query_user_mobile' ));
                     $list = get_users(array(
@@ -102,6 +101,9 @@ class SMS_Send
                 $this->sms->msg  = $_POST['wp_get_message'];
 
                 $this->sms->isflash = isset($_POST['wp_flash']) && $_POST['wp_flash'] === 'true';
+                if (isset($_POST['wp_route']) && $_POST['wp_route'] === 'classic') {
+                    $this->sms->sms_route = 'classic';
+                }
 
                 // Send sms
                 $response = $this->sms->sendSMS();
