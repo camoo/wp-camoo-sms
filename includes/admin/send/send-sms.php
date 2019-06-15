@@ -148,7 +148,7 @@
                                         <input type="radio" id="route_classic" name="wp_route" value="classic"/>
                                         <label for="flash_no"><?php _e('Classic', 'wp-camoo-sms'); ?></label>
                                         <br/>
-                                        <p class="description"><?php _e('The SMS route that is used to send the message. <span style="color:#ff0000;">The classic route works only for cameroonian mobile phone numbers.</span> <a href="https://github.com/camoo/sms/wiki/Send-a-message#optional-parameters" target="_blank">Check Wiki for more explanation</a>', 'wp-camoo-sms'); ?></p>
+                                        <p class="description"><?php echo sprintf(__("The SMS route that is used to send the message. <span style='color:#ff0000;'>The classic route works only for cameroonian mobile phone numbers.</span> <a href='%s' target='_blank'>Check Wiki for more explanation</a>", 'wp-camoo-sms'), 'https://github.com/camoo/sms/wiki/Send-a-message#optional-parameters'); ?></p>
                                     </td>
                                 </tr>
                             <tr>
