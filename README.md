@@ -42,6 +42,16 @@ wp_camoo_sms_send( $to, $msg );
 
 1. Upload `wp-camoo-sms` to the `/wp-content/plugins/` directory
 
+	Install Using GIT
+```sh
+cd wp-content/plugins
+
+git clone https://github.com/camoo/wp-camoo-sms.git
+
+# install dependencies
+./wp-camoo-sms/bin/install_dependencies.sh
+```
+
 	Install Using Composer
 ```sh
 cd wp-content/plugins

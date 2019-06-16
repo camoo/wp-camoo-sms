@@ -72,7 +72,7 @@ class Subscribers_Subscribers_Table_Edit
                       <td style="padding-top: 10px;">
                       <label for="wpsms_group_name"
 					                       class="wp_camoo_sms_subscribers_label">' . __('Group', 'wp-camoo-sms') . '</label>
-                      ' . sprintf(__('There is no group! <a href = "%s" > Add</a > ', 'wp-camoo-sms'), 'admin.php?page=wp-camoo-sms-subscribers-group') . '
+                      ' . sprintf(__('There is no group! <a href="%s">Add</a>', 'wp-camoo-sms'), 'admin.php?page=wp-camoo-sms-subscribers-group') . '
                       </td>
                       </tr>';
         }

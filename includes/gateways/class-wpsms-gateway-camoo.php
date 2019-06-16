@@ -88,7 +88,7 @@ class Camoo extends \CAMOO_SMS\Gateway
                 'message' => $this->msg,
                 'to'      => $this->to,
             ];
-            if (!empty($this->to) && is_array($this->to) && count($this->to) > (int) $this->bulk_threshold) {
+            if (!empty($this->to) && is_array($this->to) && count($this->to) >= (int) $this->bulk_threshold) {
                 $hCallback = [
                     'driver' => [\Camoo\Sms\Database\MySQL::class, 'getInstance'],
                     'bulk_chunk' => (int) $this->bulk_chunk,
