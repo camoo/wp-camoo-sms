@@ -6,7 +6,6 @@ if (! defined('ABSPATH')) {
 
 class CAMOO_SMS
 {
-
     public function __construct()
     {
         /*
@@ -20,6 +19,7 @@ class CAMOO_SMS
         require_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-install.php';
 
         register_activation_hook(WP_CAMOO_SMS_DIR . 'wp-camoo-sms.php', array( '\CAMOO_SMS\Install', 'install' ));
+        register_deactivation_hook(WP_CAMOO_SMS_DIR . 'wp-camoo-sms.php', [$this, 'sms_status_plugin_deactivate']);
     }
 
     /**
@@ -31,8 +31,10 @@ class CAMOO_SMS
     {
         // Load text domain
         add_action('init', array( $this, 'load_textdomain' ));
-
         $this->includes();
+        add_action('init', [$this,'sms_status']);
+        add_filter('query_vars', [$this,'sms_status_query']);
+        add_filter('template_redirect', [$this,'sms_status_plugin_display']);
     }
 
     /**
@@ -43,6 +45,35 @@ class CAMOO_SMS
     public function load_textdomain()
     {
         load_plugin_textdomain('wp-camoo-sms', false, dirname(plugin_basename(__FILE__)) . '/languages');
+    }
+
+    public function sms_status()
+    {
+        add_rewrite_rule('camoo-sms-status/?([^/]*)', 'index.php?pagename=sms_status', 'top');
+        flush_rewrite_rules();
+    }
+
+    public function sms_status_query($vars)
+    {
+        $vars[] .= 'id';
+        $vars[] .= 'status';
+        $vars[] .= 'recipient';
+        $vars[] .= 'statusDatetime';
+        #$vars[] .= 'reference';
+        return $vars;
+    }
+
+    public function sms_status_plugin_display()
+    {
+        $sms_status_page = get_query_var('pagename');
+        if ('sms_status' === $sms_status_page) {
+            return call_user_func([new \CAMOO_SMS\Status\Status(), 'manage']);
+        }
+    }
+
+    public function sms_status_plugin_deactivate()
+    {
+        flush_rewrite_rules();
     }
 
     /**
@@ -107,5 +138,8 @@ class CAMOO_SMS
 
         // Template functions.
         require_once WP_CAMOO_SMS_DIR . 'includes/template-functions.php';
+
+        // SMS Status
+        require_once WP_CAMOO_SMS_DIR . 'includes/status/class-camoo-sms-status.php';
     }
 }

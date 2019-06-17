@@ -80,8 +80,7 @@ class Camoo extends \CAMOO_SMS\Gateway
                 $oMessage->encrypt = true;
             }
             // Notify URL
-            $sNotifyUrl = plugin_dir_url(dirname(dirname(__FILE__))) . 'wp-camoo-sms-status.php';
-            $oMessage->notify_url = esc_url($sNotifyUrl);
+            $oMessage->notify_url = esc_url($this->getNotifyUrl());
 
             $hLog = [
                 'sender'  => $this->from,
@@ -151,5 +150,11 @@ class Camoo extends \CAMOO_SMS\Gateway
         } catch (\Camoo\Sms\Exception\CamooSmsException $e) {
             return new \WP_Error('account-credit', $e->getMessage());
         }
+    }
+
+    private function getNotifyUrl()
+    {
+        $params = ['pagename' => 'sms_status'];
+        return add_query_arg($params, get_home_url());
     }
 }
