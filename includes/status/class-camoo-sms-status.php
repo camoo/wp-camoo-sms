@@ -33,20 +33,22 @@ class Status
         $this->tb_prefix = $wpdb->prefix;
     }
 
-    public function manage()
+    public function manage(\WP_REST_Request $request)
     {
-        $id = sanitize_key(get_query_var('id'));
-        $status = sanitize_key(get_query_var('status'));
-        $recipient = sanitize_text_field(get_query_var('recipient'));
-        $statusDatetime = sanitize_text_field(get_query_var('statusDatetime'));
+        $data = $request->get_params();
+        $id = sanitize_key($data['id']);
+        $status = sanitize_key($data['status']);
+        $recipient = sanitize_text_field($data['recipient']);
+        $statusDatetime = sanitize_text_field($data['statusDatetime']);
 
         if (!empty($id) && !empty($status) && !empty($recipient) && !empty($statusDatetime) && ($ohSMS = $this->getByMessageId($id))) {
             $options = ['status' => $status, 'status_time' => $statusDatetime];
             if (in_array($status, $this->hStatus) && $this->updateById($ohSMS->ID, $options)) {
-                header('HTTP/1.1 200 OK', true, 200);
+                return new \WP_REST_Response(['message' => 'OK', 'error' => []], 200);
                 exit;
             }
         }
+        return new \WP_Error('404', 'Page Not Found!', ['status' => 404]);
     }
 
     private function updateById($id, $options)

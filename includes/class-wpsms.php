@@ -32,9 +32,7 @@ class CAMOO_SMS
         // Load text domain
         add_action('init', array( $this, 'load_textdomain' ));
         $this->includes();
-        add_action('init', [$this,'sms_status']);
-        add_filter('query_vars', [$this,'sms_status_query']);
-        add_filter('template_redirect', [$this,'sms_status_plugin_display']);
+        add_action('rest_api_init', [$this,'sms_status']);
         add_filter('template_redirect', [$this,'camoo_export']);
     }
 
@@ -50,26 +48,43 @@ class CAMOO_SMS
 
     public function sms_status()
     {
-        add_rewrite_rule('camoo-sms-status/?([^/]*)', 'index.php?pagename=sms_status', 'top');
+        register_rest_route(
+            'camoo/v1',
+            '/status',
+            [
+                'methods' => 'GET',
+                'callback' => [new \CAMOO_SMS\Status\Status(),'manage'],
+                'args'                => array(
+                    'id'      => array(
+                        'required' => true,
+                        'validate_callback' => function ($param, $request, $key) {
+                            return is_string($param);
+                        }
+                    ),
+                    'status'     => array(
+                        'required' => true,
+                        'validate_callback' => function ($param, $request, $key) {
+                            return is_string($param);
+                        }
+                    ),
+                    'recipient' => array(
+                        'required' => true,
+                        'validate_callback' => function ($param, $request, $key) {
+                            return is_string($param);
+                        }
+                    ),
+                    'statusDatetime' => [
+                        'required' => true,
+                        'validate_callback' => function ($param, $request, $key) {
+                            return is_string($param);
+                        }
+
+                  ]
+                ),
+
+            ]
+        );
         flush_rewrite_rules();
-    }
-
-    public function sms_status_query($vars)
-    {
-        $vars[] .= 'id';
-        $vars[] .= 'status';
-        $vars[] .= 'recipient';
-        $vars[] .= 'statusDatetime';
-        #$vars[] .= 'reference';
-        return $vars;
-    }
-
-    public function sms_status_plugin_display()
-    {
-        $sms_status_page = get_query_var('pagename');
-        if ('sms_status' === $sms_status_page) {
-            return call_user_func([new \CAMOO_SMS\Status\Status(), 'manage']);
-        }
     }
 
     public function camoo_export()
