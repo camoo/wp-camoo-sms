@@ -35,10 +35,10 @@ class Status
 
     public function manage()
     {
-        $id = get_query_var('id');
-        $status = get_query_var('status');
-        $recipient = get_query_var('recipient');
-        $statusDatetime = get_query_var('statusDatetime');
+        $id = sanitize_key(get_query_var('id'));
+        $status = sanitize_key(get_query_var('status'));
+        $recipient = sanitize_key(get_query_var('recipient'));
+        $statusDatetime = sanitize_key(get_query_var('statusDatetime'));
 
         if (!empty($id) && !empty($status) && !empty($recipient) && !empty($statusDatetime) && ($ohSMS = $this->getByMessageId($id))) {
             $options = ['status' => $status, 'status_time' => $statusDatetime];

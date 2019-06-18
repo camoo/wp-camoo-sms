@@ -154,7 +154,6 @@ class Camoo extends \CAMOO_SMS\Gateway
 
     private function getNotifyUrl()
     {
-        $params = ['pagename' => 'sms_status'];
-        return add_query_arg($params, get_home_url());
+        return get_home_url().'/camoo-sms-status';
     }
 }

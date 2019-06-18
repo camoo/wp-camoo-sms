@@ -35,6 +35,7 @@ class CAMOO_SMS
         add_action('init', [$this,'sms_status']);
         add_filter('query_vars', [$this,'sms_status_query']);
         add_filter('template_redirect', [$this,'sms_status_plugin_display']);
+        add_filter('template_redirect', [$this,'camoo_export']);
     }
 
     /**
@@ -68,6 +69,14 @@ class CAMOO_SMS
         $sms_status_page = get_query_var('pagename');
         if ('sms_status' === $sms_status_page) {
             return call_user_func([new \CAMOO_SMS\Status\Status(), 'manage']);
+        }
+    }
+
+    public function camoo_export()
+    {
+        $page = get_query_var('pagename');
+        if ('camoo_export' === $page) {
+            return call_user_func([new \CAMOO_SMS\Export\Export(), 'download']);
         }
     }
 
@@ -141,5 +150,7 @@ class CAMOO_SMS
 
         // SMS Status
         require_once WP_CAMOO_SMS_DIR . 'includes/status/class-camoo-sms-status.php';
+        // Export Download class.
+        require_once WP_CAMOO_SMS_DIR . 'includes/export/class-camoo-sms-export.php';
     }
 }

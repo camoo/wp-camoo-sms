@@ -99,7 +99,7 @@
     </div>
 
     <div id="export-subscriber" style="display:none;">
-        <form action="<?php echo plugins_url('wp-camoo-sms/includes/admin/export.php'); ?>" method="post">
+		<form method="post" action="<?php echo add_query_arg(['pagename' => 'camoo_export'], get_home_url());?>">
             <table>
                 <tr>
                     <td style="padding-top: 10px;">
@@ -117,7 +117,7 @@
 
                 <tr>
                     <td colspan="2" style="padding-top: 10px;">
-                        <input type="submit" class="button-primary" name="wps_export_subscribe" value="<?php _e('Export', 'wp-camoo-sms'); ?>"/>
+                        <input type="submit" class="button-primary" name="camoo_export" value="<?php _e('Export', 'wp-camoo-sms'); ?>"/>
                     </td>
                 </tr>
             </table>

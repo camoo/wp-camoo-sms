@@ -28,7 +28,7 @@ abstract class ExportData
 
         switch ($this->exportTo) {
             case 'browser':
-                $this->sendHttpHeaders();
+                $this->stringData = '';
                 break;
             case 'string':
                 $this->stringData = '';
@@ -78,7 +78,7 @@ abstract class ExportData
     {
         switch ($this->exportTo) {
             case 'browser':
-                echo $data;
+                $this->stringData .= $data;
                 break;
             case 'string':
                 $this->stringData .= $data;
