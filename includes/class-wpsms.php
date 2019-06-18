@@ -52,7 +52,7 @@ class CAMOO_SMS
             'camoo/v1',
             '/status',
             [
-                'methods' => 'GET',
+                'methods' => \WP_REST_Server::READABLE,
                 'callback' => [new \CAMOO_SMS\Status\Status(),'manage'],
                 'args'                => array(
                     'id'      => array(
