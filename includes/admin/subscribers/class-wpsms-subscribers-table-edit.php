@@ -9,7 +9,6 @@ if (! defined('ABSPATH')) {
 
 class Subscribers_Subscribers_Table_Edit
 {
-
     public $db;
     protected $tb_prefix;
 
@@ -23,7 +22,7 @@ class Subscribers_Subscribers_Table_Edit
         add_action('wp_ajax_wp_camoo_sms_edit_subscriber', array( $this, 'wp_camoo_sms_edit_subscriber' ));
     }
 
-    function wp_camoo_sms_edit_subscriber()
+    public function wp_camoo_sms_edit_subscriber()
     {
         //set Actiom Values
         $subscriber_id = isset($_GET['subscriber_id']) ? $_GET['subscriber_id'] : null;
@@ -33,7 +32,7 @@ class Subscribers_Subscribers_Table_Edit
         $groups     = Newsletter::getGroups();
 
         $html = '<form action="" method="post">
-					<input type="hidden" name="ID" value="' . $subscriber_id . '" />
+					<input type="hidden" name="ID" value="' . $subscriber_id . '" /><input name="camoo_sms_n" type="hidden" value="' .wp_create_nonce('camoo_sms_n'). '" />
 					    <table>
 					        <tr>
 					            <td style="padding-top: 10px;">

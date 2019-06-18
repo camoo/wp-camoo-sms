@@ -9,7 +9,6 @@ if (! defined('ABSPATH')) {
 //Edit Groups Class
 class Subscribers_Groups_Table_Edit
 {
-
     public $db;
     protected $tb_prefix;
 
@@ -23,12 +22,13 @@ class Subscribers_Groups_Table_Edit
         add_action('wp_ajax_wp_camoo_sms_edit_group', array( $this, 'wp_camoo_sms_edit_group' ));
     }
 
-    function wp_camoo_sms_edit_group()
+    public function wp_camoo_sms_edit_group()
     {
         //set Actiom Values
-        $group_id   = isset($_GET['group_id']) ? $_GET['group_id'] : null;
-        $group_name = isset($_GET['group_name']) ? $_GET['group_name'] : null;
+        $group_id   = isset($_GET['group_id']) ? sanitize_key($_GET['group_id']) : null;
+        $group_name = isset($_GET['group_name']) ? sanitize_text_field($_GET['group_name']) : null;
         $html       = '<form action="" method="post">
+						<input name="camoo_sms_n" type="hidden" value="' .wp_create_nonce('camoo_sms_n'). '" />
 					    <table>
 					        <tr>
 					            <td style="padding-top: 10px;">

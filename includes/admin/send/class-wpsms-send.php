@@ -68,7 +68,7 @@ class SMS_Send
             return;
         }
 
-        if (isset($_POST['sendSMS'])) {
+        if (isset($_POST['sendSMS']) && isset($_POST['camoo_sms_send']) && wp_verify_nonce($_POST['camoo_sms_send'], 'camoo_sms_send')) {
             if ($_POST['wp_get_message']) {
                 if ($_POST['wp_send_to'] == "wp_subscribe_username") {
                     if ($_POST['wpsms_group_name'] == 'all') {
@@ -79,7 +79,7 @@ class SMS_Send
                 } elseif ($_POST['wp_send_to'] == "wp_users") {
                     $this->sms->to = $get_users_mobile;
                 } elseif ($_POST['wp_send_to'] == "wp_tellephone") {
-                    $this->sms->to = explode(",", $_POST['wp_get_number']);
+                    $this->sms->to = explode(",", sanitize_text_field($_POST['wp_get_number']));
                 } elseif ($_POST['wp_send_to'] == "wp_role") {
                     $to = array();
                     add_action('pre_user_query', array( SMS_Send::class, 'get_query_user_mobile' ));
@@ -87,7 +87,7 @@ class SMS_Send
                         'meta_key'     => 'mobile',
                         'meta_value'   => '',
                         'meta_compare' => '!=',
-                        'role'         => $_POST['wpsms_group_role'],
+                        'role'         => sanitize_text_field($_POST['wpsms_group_role']),
                         'fields'       => 'all'
                     ));
                     remove_action('pre_user_query', array( SMS_Send::class, 'get_query_user_mobile' ));
@@ -97,11 +97,11 @@ class SMS_Send
                     $this->sms->to = $to;
                 }
 
-                $this->sms->from = $_POST['wp_get_sender'];
-                $this->sms->msg  = $_POST['wp_get_message'];
+                $this->sms->from = sanitize_text_field($_POST['wp_get_sender']);
+                $this->sms->msg  = sanitize_textarea_field($_POST['wp_get_message']);
 
                 $this->sms->isflash = isset($_POST['wp_flash']) && $_POST['wp_flash'] === 'true';
-                if (isset($_POST['wp_route']) && $_POST['wp_route'] === 'classic') {
+                if (isset($_POST['wp_route']) && sanitize_key($_POST['wp_route']) === 'classic') {
                     $this->sms->sms_route = 'classic';
                 }
 

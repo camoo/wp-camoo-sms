@@ -37,8 +37,8 @@ class Status
     {
         $id = sanitize_key(get_query_var('id'));
         $status = sanitize_key(get_query_var('status'));
-        $recipient = sanitize_key(get_query_var('recipient'));
-        $statusDatetime = sanitize_key(get_query_var('statusDatetime'));
+        $recipient = sanitize_text_field(get_query_var('recipient'));
+        $statusDatetime = sanitize_text_field(get_query_var('statusDatetime'));
 
         if (!empty($id) && !empty($status) && !empty($recipient) && !empty($statusDatetime) && ($ohSMS = $this->getByMessageId($id))) {
             $options = ['status' => $status, 'status_time' => $statusDatetime];

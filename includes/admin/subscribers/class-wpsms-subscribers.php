@@ -18,7 +18,7 @@ class Subscribers
     {
 
         // Add subscriber
-        if (isset($_POST['wp_add_subscribe'])) {
+        if (isset($_POST['wp_add_subscribe']) && isset($_POST['camoo_sms_n']) && wp_verify_nonce($_POST['camoo_sms_n'], 'camoo_sms_n')) {
             $group = isset($_POST['wpsms_group_name']) ? $_POST['wpsms_group_name'] : '';
             if ($group) {
                 $result = Newsletter::addSubscriber($_POST['wp_subscribe_name'], $_POST['wp_subscribe_mobile'], $group);
@@ -30,14 +30,14 @@ class Subscribers
         }
 
         // Edit subscriber page
-        if (isset($_POST['wp_update_subscribe'])) {
+        if (isset($_POST['wp_update_subscribe']) && isset($_POST['camoo_sms_n']) && wp_verify_nonce($_POST['camoo_sms_n'], 'camoo_sms_n')) {
             $group  = isset($_POST['wpsms_group_name']) ? $_POST['wpsms_group_name'] : '';
             $result = Newsletter::updateSubscriber($_POST['ID'], $_POST['wp_subscribe_name'], $_POST['wp_subscribe_mobile'], $group, $_POST['wpsms_subscribe_status']);
             echo Helper::notice($result['message'], $result['result']);
         }
 
         // Import subscriber page
-        if (isset($_POST['wps_import'])) {
+        if (isset($_POST['wps_import']) && isset($_POST['camoo_sms_n']) && wp_verify_nonce($_POST['camoo_sms_n'], 'camoo_sms_n')) {
             include_once WP_CAMOO_SMS_DIR . "includes/admin/import.php";
         }
 

@@ -9,6 +9,7 @@
                     class="dashicons dashicons-groups"></span> <?php _e('Add Group', 'wp-camoo-sms'); ?></a>
         <div id="add-group" style="display:none;">
             <form action="" method="post">
+               <input type="hidden" name="camoo_sms_n" value="<?php echo wp_create_nonce('camoo_sms_n'); ?>"/>
                 <table>
                     <tr>
                         <td style="padding-top: 10px;">

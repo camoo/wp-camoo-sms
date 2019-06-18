@@ -13,6 +13,7 @@
     </div>
     <div id="add-subscriber" style="display:none;">
         <form action="" method="post">
+            <input type="hidden" name="camoo_sms_n" value="<?php echo wp_create_nonce('camoo_sms_n'); ?>"/>
             <table>
                 <tr>
                     <td style="padding-top: 10px;">
@@ -60,6 +61,7 @@
 
     <div id="import-subscriber" style="display:none;">
         <form action="" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="camoo_sms_n" value="<?php echo wp_create_nonce('camoo_sms_n'); ?>"/>
             <table>
                 <tr>
                     <td style="padding-top: 10px;">
@@ -100,6 +102,7 @@
 
     <div id="export-subscriber" style="display:none;">
 		<form method="post" action="<?php echo add_query_arg(['pagename' => 'camoo_export'], get_home_url());?>">
+        <input type="hidden" name="camoo_sms_export_nonce" value="<?php echo wp_create_nonce('camoo_sms_export_nonce'); ?>"/>
             <table>
                 <tr>
                     <td style="padding-top: 10px;">

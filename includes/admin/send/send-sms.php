@@ -44,7 +44,7 @@
 
                 <div class="inside">
                     <form method="post" action="">
-                        <?php wp_nonce_field('update-options'); ?>
+                        <?php wp_nonce_field('camoo_sms_send', 'camoo_sms_send'); ?>
                         <table class="form-table">
                             <tr valign="top">
                                 <th scope="row">

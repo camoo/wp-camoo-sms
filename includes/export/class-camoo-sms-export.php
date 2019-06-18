@@ -19,14 +19,13 @@ class Export
     public function __construct()
     {
         global $wpdb;
-
         $this->db        = $wpdb;
         $this->tb_prefix = $wpdb->prefix;
     }
 
     public function download()
     {
-        if (current_user_can('wpsms_setting')) {
+        if (current_user_can('wpsms_setting') && isset($_POST['camoo_sms_export_nonce']) && wp_verify_nonce($_POST['camoo_sms_export_nonce'], 'camoo_sms_export_nonce')) {
             $hData = $this->getData();
             header("Content-type: application/x-msdownload", true, 200);
             header("Content-Disposition: attachment; filename=" .basename($hData['filename']));
@@ -35,7 +34,7 @@ class Export
             header("Pragma: no-cache");
             header("Expires: 0");
             echo $hData['content'];
-			exit;
+            exit;
         }
     }
 
