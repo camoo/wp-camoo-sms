@@ -16,7 +16,7 @@ class Status
     protected $db;
     protected $tb_prefix;
 
-    protected $hStatus = [
+    private static $hStatus = [
             'delivered',
             'scheduled',
             'buffered',
@@ -33,6 +33,10 @@ class Status
         $this->tb_prefix = $wpdb->prefix;
     }
 
+	public static function allowedStatus()
+	{
+		return self::$hStatus;
+	}
     public function manage(\WP_REST_Request $request)
     {
         $data = $request->get_params();
@@ -43,7 +47,7 @@ class Status
 
         if (!empty($id) && !empty($status) && !empty($recipient) && !empty($statusDatetime) && ($ohSMS = $this->getByMessageId($id))) {
             $options = ['status' => $status, 'status_time' => $statusDatetime];
-            if (in_array($status, $this->hStatus) && $this->updateById($ohSMS->ID, $options)) {
+            if (in_array($status, static::allowedStatus()) && $this->updateById($ohSMS->ID, $options)) {
                 return new \WP_REST_Response(['message' => 'OK', 'error' => []], 200);
                 exit;
             }

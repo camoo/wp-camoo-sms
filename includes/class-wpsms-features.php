@@ -8,7 +8,6 @@ if (! defined('ABSPATH')) {
 
 class Features
 {
-
     public $sms;
     public $date;
     public $options;
@@ -118,7 +117,7 @@ class Features
 
     public function add_mobile_field_to_register_form()
     {
-        $mobile = ( isset($_POST['mobile']) ) ? $_POST['mobile'] : '';
+        $mobile = (isset($_POST['mobile'])) ? sanitize_text_field($_POST['mobile']) : '';
         include_once WP_CAMOO_SMS_DIR . "includes/templates/mobile-field-register.php";
     }
 
@@ -135,7 +134,7 @@ class Features
             $errors->add('first_name_error', __('<strong>ERROR</strong>: You must include a mobile number.', 'wp-camoo-sms'));
         }
 
-        if ($this->check_mobile_number($_POST['mobile'])) {
+        if ($this->check_mobile_number(sanitize_text_field($_POST['mobile']))) {
             $errors->add('duplicate_mobile_number', __('<strong>ERROR</strong>: This mobile is already registered, please choose another one.', 'wp-camoo-sms'));
         }
 
@@ -148,7 +147,7 @@ class Features
     public function save_register($user_id)
     {
         if (isset($_POST['mobile'])) {
-            update_user_meta($user_id, 'mobile', $_POST['mobile']);
+            update_user_meta($user_id, 'mobile', sanitize_text_field($_POST['mobile']));
         }
     }
 

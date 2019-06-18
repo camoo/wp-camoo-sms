@@ -64,7 +64,7 @@ class CAMOO_SMS
                     'status'     => array(
                         'required' => true,
                         'validate_callback' => function ($param, $request, $key) {
-                            return is_string($param);
+                            return in_array($param,\CAMOO_SMS\Status\Status::allowedStatus());
                         }
                     ),
                     'recipient' => array(
@@ -78,7 +78,6 @@ class CAMOO_SMS
                         'validate_callback' => function ($param, $request, $key) {
                             return is_string($param);
                         }
-
                   ]
                 ),
 
