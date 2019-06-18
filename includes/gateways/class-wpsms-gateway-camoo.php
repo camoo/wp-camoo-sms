@@ -154,6 +154,6 @@ class Camoo extends \CAMOO_SMS\Gateway
 
     private function getNotifyUrl()
     {
-        return get_home_url(). '/camoo/v1/status';
+        return get_home_url(). '/wp-json/camoo/v1/status';
     }
 }
