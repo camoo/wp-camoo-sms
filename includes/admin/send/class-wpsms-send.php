@@ -74,7 +74,7 @@ class SMS_Send
                     if ($_POST['wpsms_group_name'] == 'all') {
                         $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->db->prefix}camoo_sms_subscribes WHERE `status` = '1'");
                     } else {
-                        $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->db->prefix}camoo_sms_subscribes WHERE `status` = '1' AND `group_ID` = '" . $_POST['wpsms_group_name'] . "'");
+                        $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->db->prefix}camoo_sms_subscribes WHERE `status` = '1' AND `group_ID` = '" . sanitize_text_field($_POST['wpsms_group_name']) . "'");
                     }
                 } elseif ($_POST['wp_send_to'] == "wp_users") {
                     $this->sms->to = $get_users_mobile;

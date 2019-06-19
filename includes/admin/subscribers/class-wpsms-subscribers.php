@@ -19,11 +19,11 @@ class Subscribers
 
         // Add subscriber
         if (isset($_POST['wp_add_subscribe']) && isset($_POST['camoo_sms_n']) && wp_verify_nonce($_POST['camoo_sms_n'], 'camoo_sms_n')) {
-            $group = isset($_POST['wpsms_group_name']) ? $_POST['wpsms_group_name'] : '';
+            $group = isset($_POST['wpsms_group_name']) ? sanitize_text_field($_POST['wpsms_group_name']) : '';
             if ($group) {
-                $result = Newsletter::addSubscriber($_POST['wp_subscribe_name'], $_POST['wp_subscribe_mobile'], $group);
+                $result = Newsletter::addSubscriber(sanitize_text_field($_POST['wp_subscribe_name']), sanitize_text_field($_POST['wp_subscribe_mobile']), $group);
             } else {
-                $result = Newsletter::addSubscriber($_POST['wp_subscribe_name'], $_POST['wp_subscribe_mobile']);
+                $result = Newsletter::addSubscriber(sanitize_text_field($_POST['wp_subscribe_name']), sanitize_text_field($_POST['wp_subscribe_mobile']));
             }
 
             echo Helper::notice($result['message'], $result['result']);

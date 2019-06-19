@@ -20,13 +20,13 @@ class Groups
 
         //Add groups
         if (isset($_POST['wp_add_group']) && isset($_POST['camoo_sms_n']) && wp_verify_nonce($_POST['camoo_sms_n'], 'camoo_sms_n')) {
-            $result = Newsletter::addGroup($_POST['wp_group_name']);
+            $result = Newsletter::addGroup(sanitize_text_field($_POST['wp_group_name']));
             echo Helper::notice($result['message'], $result['result']);
         }
 
         // Manage groups
         if (isset($_POST['wp_update_group']) && isset($_POST['camoo_sms_n']) && wp_verify_nonce($_POST['camoo_sms_n'], 'camoo_sms_n')) {
-            $result = Newsletter::updateGroup($_POST['group_id'], $_POST['wp_group_name']);
+            $result = Newsletter::updateGroup(sanitize_key($_POST['group_id']), sanitize_text_field($_POST['wp_group_name']));
             echo Helper::notice($result['message'], $result['result']);
         }
 
