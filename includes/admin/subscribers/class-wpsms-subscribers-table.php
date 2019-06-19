@@ -59,7 +59,7 @@ class Subscribers_List_Table extends \WP_List_Table
                 return ($item[ $column_name ] == '1' ? '<span class="dashicons dashicons-yes wpsms-color-green"></span>' : '<span class="dashicons dashicons-no-alt wpsms-color-red"></span>');
 
             case 'activate_key':
-                return '<code>' . $item[ $column_name ] . '</code>';
+                return '<code>' . empty($item[ $column_name ])? '-' : $item[ $column_name ] . '</code>';
 
             default:
                 return print_r($item, true); //Show the whole array for troubleshooting purposes
