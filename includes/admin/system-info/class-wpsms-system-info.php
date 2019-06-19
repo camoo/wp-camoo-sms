@@ -12,7 +12,7 @@ class SystemInfo
     {
         include_once "system-info.php";
         // Export log file
-        if (isset($_POST['wpsms_download_info'])) {
+        if (isset($_POST['wpsms_download_info']) && isset($_POST['camoo_sms_dl']) && wp_verify_nonce($_POST['camoo_sms_dl'], 'camoo_sms_dl')) {
             $style = "
 				<style>
 				#adminmenumain {display: none;}
@@ -36,14 +36,10 @@ class SystemInfo
      */
     public static function getWordpressInfo()
     {
-        $information = array();
+        $information = [];
 
         // Check multisite
-        if (is_multisite()) {
-            $information['Multisite'][ [ 'status' ] ] = 'Enabled';
-        } else {
-            $information['Multisite']['status'] = 'Disabled';
-        }
+        $information['Multisite']['status'] = is_multisite()? __('Enabled', 'wp-camoo-sms') : __('Disabled', 'wp-camoo-sms');
         $information['Multisite']['desc'] = 'Check WP multisite.';
 
         // Get version
@@ -95,31 +91,13 @@ class SystemInfo
      */
     public static function getPHPInfo()
     {
-        $information = array();
+        $information = [];
 
         // Get PHP version
         $information['Version']['status'] = phpversion();
 
-        // Check cURL enabled or not
-        if (function_exists('curl_version')) {
-            $information['cURL']['status'] = 'Enabled';
-        } else {
-            $information['cURL']['status'] = 'Disabled';
-        }
-
-        // Check fsockopen enabled or not
-        if (function_exists('fsockopen')) {
-            $information['fsockopen']['status'] = 'Enabled';
-        } else {
-            $information['fsockopen']['status'] = 'Disabled';
-        }
-
-        // Check SOAP Client enabled or not
-        if (class_exists("SOAPClient")) {
-            $information['SOAP Client']['status'] = 'Enabled';
-        } else {
-            $information['SOAP Client']['status'] = 'Enabled';
-        }
+        // Check shell_exec enabled or not
+        $information['shell_exec']['status'] = function_exists('shell_exec')? __('Enabled', 'wp-camoo-sms') : __('Disabled', 'wp-camoo-sms');
 
         return $information;
     }

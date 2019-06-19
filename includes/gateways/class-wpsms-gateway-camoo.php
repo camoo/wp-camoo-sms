@@ -4,7 +4,6 @@ namespace CAMOO_SMS\Gateway;
 
 class Camoo extends \CAMOO_SMS\Gateway
 {
-    private $wsdl_link = '';
     private $client = null;
     private $http;
     public $tariff = "";

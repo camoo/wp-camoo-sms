@@ -35,23 +35,23 @@ class Outbox_List_Table extends \WP_List_Table
         $this->data      = $this->get_data();
     }
 
-	public function statusMaps($xStatus)
-	{
-		$hStatus = [
-			'no_status'       => 'sent',
-			'delivered'       => 'success',
-			'success'         => 'success',
-			'scheduled'       => 'sent',
-			'buffered'        => 'sent',
-			'sent'            => 'sent',
-			'expired'         => 'Fail',
-			'delivery_failed' => 'Fail',
-		];
-		if (array_key_exists($xStatus, $hStatus)) {
-			return $hStatus[$xStatus];
-		}
-		return false;
-	}
+    public function statusMaps($xStatus)
+    {
+        $hStatus = [
+            'no_status'       => 'sent',
+            'delivered'       => 'success',
+            'success'         => 'success',
+            'scheduled'       => 'sent',
+            'buffered'        => 'sent',
+            'sent'            => 'sent',
+            'expired'         => 'Fail',
+            'delivery_failed' => 'Fail',
+        ];
+        if (array_key_exists($xStatus, $hStatus)) {
+            return $hStatus[$xStatus];
+        }
+        return false;
+    }
 
     public function column_default($item, $column_name)
     {
@@ -76,7 +76,7 @@ class Outbox_List_Table extends \WP_List_Table
 
                 return $html;
             case 'status':
-                if ( $status = $this->statusMaps($item[ $column_name ])) {
+                if ($status = $this->statusMaps($item[ $column_name ])) {
                     return '<span class="wp_camoo_sms_status_'.$status.'">' . __($status, 'wp-camoo-sms') . '</span>';
                 } else {
                     return '<span class="wp_camoo_sms_status_fail">' . __('Fail', 'wp-camoo-sms') . '</span>';
@@ -170,7 +170,7 @@ class Outbox_List_Table extends \WP_List_Table
         }
 
         // Bulk delete action
-        if ('bulk_delete' == $this->current_action()) {
+        if ('bulk_delete' === $this->current_action()) {
             foreach ($_GET['id'] as $id) {
                 $this->db->delete($this->tb_prefix . "camoo_sms_send", array( 'ID' => $id ));
             }
@@ -180,7 +180,7 @@ class Outbox_List_Table extends \WP_List_Table
         }
 
         // Single delete action
-        if ('delete' == $this->current_action()) {
+        if ('delete' === $this->current_action()) {
             $this->db->delete($this->tb_prefix . "camoo_sms_send", array( 'ID' => $_GET['ID'] ));
             $this->data  = $this->get_data();
             $this->count = $this->get_total();
@@ -188,7 +188,7 @@ class Outbox_List_Table extends \WP_List_Table
         }
 
         // Resend sms
-        if ('resend' == $this->current_action()) {
+        if ('resend' === $this->current_action()) {
             global $sms;
             $error    = null;
             $result   = $this->db->get_row($this->db->prepare("SELECT * from `{$this->tb_prefix}camoo_sms_send` WHERE ID =%s;", $_GET['ID']));

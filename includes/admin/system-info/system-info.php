@@ -14,6 +14,7 @@
                                     <th scope="row" colspan="2">
                                         <h3><?php _e('Download information', 'wp-camoo-sms'); ?></h3>
                                         <form method="POST">
+                                            <?php wp_nonce_field('camoo_sms_dl', 'camoo_sms_dl'); ?>
                                             <input type="submit" class="button action" name="wpsms_download_info" value="<?php _e('Download', 'wp-camoo-sms'); ?>"/>
                                         </form>
                                         <?php ?>
