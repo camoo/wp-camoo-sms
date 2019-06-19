@@ -164,7 +164,7 @@ class Outbox_List_Table extends \WP_List_Table
         //Detect when a bulk action is being triggered...
         // Search action
         if (isset($_GET['s'])) {
-            $prepare     = $this->db->prepare("SELECT * from `{$this->tb_prefix}camoo_sms_send` WHERE message LIKE %s OR recipient LIKE %s", '%' . $this->db->esc_like($_GET['s']) . '%', '%' . $this->db->esc_like($_GET['s']) . '%');
+            $prepare     = $this->db->prepare("SELECT * from `{$this->tb_prefix}camoo_sms_send` WHERE message LIKE %s OR recipient LIKE %s", '%' . $this->db->esc_like(sanitize_text_field($_GET['s'])) . '%', '%' . $this->db->esc_like(sanitize_text_field($_GET['s'])) . '%');
             $this->data  = $this->get_data($prepare);
             $this->count = $this->get_total($prepare);
         }
@@ -172,7 +172,7 @@ class Outbox_List_Table extends \WP_List_Table
         // Bulk delete action
         if ('bulk_delete' === $this->current_action()) {
             foreach ($_GET['id'] as $id) {
-                $this->db->delete($this->tb_prefix . "camoo_sms_send", array( 'ID' => $id ));
+                $this->db->delete($this->tb_prefix . "camoo_sms_send", array( 'ID' => sanitize_key($id) ));
             }
             $this->data  = $this->get_data();
             $this->count = $this->get_total();
@@ -181,7 +181,7 @@ class Outbox_List_Table extends \WP_List_Table
 
         // Single delete action
         if ('delete' === $this->current_action()) {
-            $this->db->delete($this->tb_prefix . "camoo_sms_send", array( 'ID' => $_GET['ID'] ));
+            $this->db->delete($this->tb_prefix . "camoo_sms_send", array( 'ID' => sanitize_key($_GET['ID']) ));
             $this->data  = $this->get_data();
             $this->count = $this->get_total();
             echo '<div class="notice notice-success is-dismissible"><p>' . __('Item removed.', 'wp-camoo-sms') . '</p></div>';
@@ -191,7 +191,7 @@ class Outbox_List_Table extends \WP_List_Table
         if ('resend' === $this->current_action()) {
             global $sms;
             $error    = null;
-            $result   = $this->db->get_row($this->db->prepare("SELECT * from `{$this->tb_prefix}camoo_sms_send` WHERE ID =%s;", $_GET['ID']));
+            $result   = $this->db->get_row($this->db->prepare("SELECT * from `{$this->tb_prefix}camoo_sms_send` WHERE ID =%s;", sanitize_key($_GET['ID'])));
             $sms->to  = array( $result->recipient );
             $sms->msg = $result->message;
             $error    = $sms->sendSMS();

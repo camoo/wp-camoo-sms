@@ -4,7 +4,6 @@ namespace CAMOO_SMS;
 
 class Admin
 {
-
     public $sms;
     protected $db;
     protected $tb_prefix;
