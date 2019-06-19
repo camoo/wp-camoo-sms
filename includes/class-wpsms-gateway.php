@@ -241,7 +241,7 @@ class Gateway
         global $sms;
 
         //Check that, Are we in the Gateway CAMOO_SMS tab setting page or not?
-        if (is_admin() and isset($_REQUEST['page']) and isset($_REQUEST['tab']) and $_REQUEST['page'] == 'wp-camoo-sms-settings' and $_REQUEST['tab'] == 'gateway') {
+        if (is_admin() and isset($_REQUEST['page']) and isset($_REQUEST['tab']) and $_REQUEST['page'] == 'wp-camoo-sms-settings' and $_REQUEST['tab'] === 'gateway') {
             // Get credit
             $result = $sms->getCredit();
 

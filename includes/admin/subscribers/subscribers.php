@@ -128,7 +128,7 @@
     </div>
 
     <form id="subscribers-filter" method="get">
-        <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>"/>
+        <input type="hidden" name="page" value="<?php echo esc_html($_REQUEST['page']) ?>"/>
         <?php $list_table->search_box(__('Search', 'wp-camoo-sms'), 'search_id'); ?>
         <?php $list_table->display(); ?>
     </form>

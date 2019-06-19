@@ -13,7 +13,6 @@ if (! defined('ABSPATH')) {
  */
 class Privacy_Actions
 {
-
     public $options;
     public $metabox = 'privacy_metabox_general';
 
@@ -28,7 +27,7 @@ class Privacy_Actions
     /*
      * Set Screen layout columns
      */
-    function on_screen_layout_columns($columns, $screen)
+    public function on_screen_layout_columns($columns, $screen)
     {
         $pagehook = get_current_screen()->id;
         if ($screen == $pagehook) {
@@ -41,7 +40,7 @@ class Privacy_Actions
     /*
      * Save Change Meta Box
      */
-    function on_save_changes_metabox()
+    public function on_save_changes_metabox()
     {
         //user permission check
         if (! current_user_can('manage_options')) {
@@ -95,9 +94,9 @@ class Privacy_Actions
      */
     public function process_form()
     {
-        if (isset($_POST['wp_camoo_sms_nonce_privacy']) and isset($_POST['submit']) and ( isset($_POST['mobile-number-delete']) || isset($_POST['mobile-number-export']) )) {
+        if (isset($_POST['wp_camoo_sms_nonce_privacy']) and isset($_POST['submit']) and (isset($_POST['mobile-number-delete']) || isset($_POST['mobile-number-export']))) {
             if (wp_verify_nonce($_POST['wp_camoo_sms_nonce_privacy'], 'wp_camoo_sms_nonce_privacy')) {
-                $mobile = ( $_POST['submit'] == __('Export') ? sanitize_text_field($_POST['mobile-number-export']) : sanitize_text_field($_POST['mobile-number-delete']) );
+                $mobile = ($_POST['submit'] == __('Export') ? sanitize_text_field($_POST['mobile-number-export']) : sanitize_text_field($_POST['mobile-number-delete']));
 
                 //Is Empty Mobile Number
                 $this->check_empty_mobile($mobile);

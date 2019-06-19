@@ -92,8 +92,8 @@ class Outbox_List_Table extends \WP_List_Table
 
         //Build row actions
         $actions = array(
-            'resend' => sprintf('<a href="?page=%s&action=%s&ID=%s">' . __('Resend', 'wp-camoo-sms') . '</a>', $_REQUEST['page'], 'resend', $item['ID']),
-            'delete' => sprintf('<a href="?page=%s&action=%s&ID=%s">' . __('Delete', 'wp-camoo-sms') . '</a>', $_REQUEST['page'], 'delete', $item['ID']),
+            'resend' => sprintf('<a href="?page=%s&action=%s&ID=%s">' . __('Resend', 'wp-camoo-sms') . '</a>', esc_html($_REQUEST['page']), 'resend', $item['ID']),
+            'delete' => sprintf('<a href="?page=%s&action=%s&ID=%s">' . __('Delete', 'wp-camoo-sms') . '</a>', esc_html($_REQUEST['page']), 'delete', $item['ID']),
         );
 
         //Return the title contents
@@ -293,8 +293,8 @@ class Outbox_List_Table extends \WP_List_Table
      */
     public function usort_reorder($a, $b)
     {
-        $orderby = (! empty($_REQUEST['orderby'])) ? $_REQUEST['orderby'] : 'date'; //If no sort, default to sender
-        $order   = (! empty($_REQUEST['order'])) ? $_REQUEST['order'] : 'desc'; //If no order, default to asc
+        $orderby = (! empty($_REQUEST['orderby'])) ? sanitize_text_field($_REQUEST['orderby']) : 'date'; //If no sort, default to sender
+        $order   = (! empty($_REQUEST['order'])) ? sanitize_text_field($_REQUEST['order']) : 'desc'; //If no order, default to asc
         $result  = strcmp($a[ $orderby ], $b[ $orderby ]); //Determine sort order
 
         return ($order === 'asc') ? $result : - $result; //Send final sort direction to usort

@@ -62,7 +62,7 @@ class Subscribers_Groups_List_Table extends \WP_List_Table
         //Build row actions
         $actions = array(
             'edit'   => sprintf('<a href="#" onclick="wp_camoo_sms_edit_group(%d, \'%s\')" />' . __('Edit', 'wp-camoo-sms') . '</a>', $item['ID'], $item['name']),
-            'delete' => sprintf('<a href="?page=%s&action=%s&ID=%s">' . __('Delete', 'wp-camoo-sms') . '</a>', $_REQUEST['page'], 'delete', $item['ID']),
+            'delete' => sprintf('<a href="?page=%s&action=%s&ID=%s">' . __('Delete', 'wp-camoo-sms') . '</a>', esc_html($_REQUEST['page']), 'delete', $item['ID']),
         );
 
         //Return the title contents
@@ -237,8 +237,8 @@ class Subscribers_Groups_List_Table extends \WP_List_Table
      */
     public function usort_reorder($a, $b)
     {
-        $orderby = (! empty($_REQUEST['orderby'])) ? $_REQUEST['orderby'] : 'ID'; //If no sort, default to sender
-        $order   = (! empty($_REQUEST['order'])) ? $_REQUEST['order'] : 'desc'; //If no order, default to asc
+        $orderby = (! empty($_REQUEST['orderby'])) ? sanitize_text_field($_REQUEST['orderby']) : 'ID'; //If no sort, default to sender
+        $order   = (! empty($_REQUEST['order'])) ? sanitize_text_field($_REQUEST['order']) : 'desc'; //If no order, default to asc
         $result  = strcmp($a[ $orderby ], $b[ $orderby ]); //Determine sort order
 
         return ($order === 'asc') ? $result : - $result; //Send final sort direction to usort

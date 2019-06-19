@@ -8,7 +8,6 @@ if (! defined('ABSPATH')) {
 
 class Notifications
 {
-
     public $sms;
     public $date;
     public $options;
@@ -124,7 +123,7 @@ class Notifications
             if ($_REQUEST['wps_subscribe_group'] == 'all') {
                 $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->tb_prefix}camoo_sms_subscribes");
             } else {
-                $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->tb_prefix}camoo_sms_subscribes WHERE group_ID = '{$_REQUEST['wps_subscribe_group']}'");
+                $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->tb_prefix}camoo_sms_subscribes WHERE group_ID = '".sanitize_text_field($_REQUEST['wps_subscribe_group'])."'");
             }
 
             $template_vars = array(
@@ -134,7 +133,7 @@ class Notifications
                 '%post_date%'    => get_post_time('Y-m-d H:i:s', false, $ID, true),
             );
 
-            $message = str_replace(array_keys($template_vars), array_values($template_vars), $_REQUEST['wpsms_text_template']);
+            $message = str_replace(array_keys($template_vars), array_values($template_vars), sanitize_text_field($_REQUEST['wpsms_text_template']));
 
             $this->sms->msg = $message;
             $this->sms->sendSMS();
@@ -148,7 +147,6 @@ class Notifications
      */
     public function new_user($user_id)
     {
-
         $user = get_userdata($user_id);
 
         $template_vars = array(
@@ -172,7 +170,7 @@ class Notifications
         if (isset($user->mobile) or $request and ! is_array($request)) {
             if (isset($user->mobile)) {
                 $this->sms->to = array( $user->mobile );
-            } else if ($request) {
+            } elseif ($request) {
                 $this->sms->to = array( $request );
             }
             $message        = str_replace(array_keys($template_vars), array_values($template_vars), $this->options['notif_register_new_user_template']);
@@ -189,7 +187,6 @@ class Notifications
      */
     public function new_comment($comment_id, $comment_object)
     {
-
         if ($comment_object->comment_type == 'order_note') {
             return;
         }
@@ -220,7 +217,6 @@ class Notifications
      */
     public function login_user($username_login, $username)
     {
-
         if (Option::getOption('admin_mobile_number')) {
             $this->sms->to = array( $this->options['admin_mobile_number'] );
 
@@ -266,7 +262,7 @@ class Notifications
      * @param $old_status
      * @param $post
      */
-    function transition_publish($new_status, $old_status, $post)
+    public function transition_publish($new_status, $old_status, $post)
     {
         if ('publish' === $new_status && 'publish' !== $old_status) {
             $post_types_option = Option::getOption('notif_publish_new_post_author_post_type');
