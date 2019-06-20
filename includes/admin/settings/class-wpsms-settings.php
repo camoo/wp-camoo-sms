@@ -5,6 +5,7 @@ namespace CAMOO_SMS;
 if (! defined('ABSPATH')) {
     exit;
 } // No direct access allowed ;)
+use CAMOO_SMS\Admin\Helper;
 
 class Settings
 {
@@ -284,7 +285,7 @@ class Settings
                     'id'   => 'encrypt_sms',
                     'name'    => __('Encrypt SMS', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
-                    'options' => ['disabled' => Gateway::getPhpVersion() < CAMOO_SMS_MIN_PHP_VERSION || $this->options['gateway_name'] !== 'camoo'],
+                    'options' => ['disabled' => Helper::getPhpVersion() < CAMOO_SMS_MIN_PHP_VERSION || $this->options['gateway_name'] !== 'camoo'],
                     'desc' => __('Encrypt  SMS to ensure an end to end encryption between your server and the Camoo\'s server', 'wp-camoo-sms')
                 ),
                 // Gateway status

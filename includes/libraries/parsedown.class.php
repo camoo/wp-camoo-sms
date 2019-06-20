@@ -21,7 +21,7 @@ class Parsedown
 
     # ~
 
-    function text($text)
+    public function text($text)
     {
         # make sure no definitions are set
         $this->DefinitionData = array();
@@ -48,7 +48,7 @@ class Parsedown
     # Setters
     #
 
-    function setBreaksEnabled($breaksEnabled)
+    public function setBreaksEnabled($breaksEnabled)
     {
         $this->breaksEnabled = $breaksEnabled;
 
@@ -57,7 +57,7 @@ class Parsedown
 
     protected $breaksEnabled;
 
-    function setMarkupEscaped($markupEscaped)
+    public function setMarkupEscaped($markupEscaped)
     {
         $this->markupEscaped = $markupEscaped;
 
@@ -66,7 +66,7 @@ class Parsedown
 
     protected $markupEscaped;
 
-    function setUrlsLinked($urlsLinked)
+    public function setUrlsLinked($urlsLinked)
     {
         $this->urlsLinked = $urlsLinked;
 
@@ -1330,7 +1330,7 @@ class Parsedown
     # Deprecated Methods
     #
 
-    function parse($text)
+    public function parse($text)
     {
         $markup = $this->text($text);
 
@@ -1341,7 +1341,7 @@ class Parsedown
     # Static Methods
     #
 
-    static function instance($name = 'default')
+    public static function instance($name = 'default')
     {
         if (isset(self::$instances[$name])) {
             return self::$instances[$name];

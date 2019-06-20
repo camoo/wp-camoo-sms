@@ -17,7 +17,7 @@ class Newsletter
     {
         global $wpdb;
 
-        $this->date      = WP_SMS_CURRENT_DATE;
+        $this->date      = CAMOO_SMS_CURRENT_DATE;
         $this->db        = $wpdb;
         $this->tb_prefix = $wpdb->prefix;
         add_action('wp_enqueue_scripts', array( $this, 'load_script' ));
@@ -59,7 +59,7 @@ class Newsletter
         $result = $wpdb->insert(
             $wpdb->prefix . "camoo_sms_subscribes",
             array(
-                'date'         => WP_SMS_CURRENT_DATE,
+                'date'         => CAMOO_SMS_CURRENT_DATE,
                 'name'         => $name,
                 'mobile'       => $mobile,
                 'status'       => $status,

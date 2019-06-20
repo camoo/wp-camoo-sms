@@ -30,4 +30,19 @@ class Helper
             return $text;
         }
     }
+
+    public static function adminUrl($args, $adminFile='admin.php')
+    {
+        return add_query_arg($args, WP_CAMOO_SMS_ADMIN_URL . $adminFile);
+    }
+
+    public static function getPhpVersion()
+    {
+        if (!defined('CAMOO_SMS_PHP_VERSION_ID')) {
+            $version = explode('.', PHP_VERSION);
+            define('CAMOO_SMS_PHP_VERSION_ID', $version[0] * 10000 + $version[1] * 100 + $version[2]);
+        }
+
+        return CAMOO_SMS_PHP_VERSION_ID;
+    }
 }

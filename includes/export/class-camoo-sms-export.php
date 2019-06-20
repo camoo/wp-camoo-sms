@@ -49,26 +49,26 @@ class Export
             $sFilename = '';
 
             switch ($type) {
-        case 'excel':
-            $sFilename = "{$file_name}.xls";
-            $exporter = new \ExportDataExcel('browser', "{$file_name}.xls");
-            break;
+                case 'excel':
+                $sFilename = "{$file_name}.xls";
+                $exporter = new \ExportDataExcel('browser', "{$file_name}.xls");
+                break;
 
-        case 'xml':
-            $sFilename = "{$file_name}.xml";
-            $exporter = new \ExportDataExcel('browser', "{$file_name}.xml");
-            break;
+                case 'xml':
+                    $sFilename = "{$file_name}.xml";
+                    $exporter = new \ExportDataExcel('browser', "{$file_name}.xml");
+                    break;
 
-        case 'csv':
-            $sFilename = "{$file_name}.csv";
-            $exporter = new \ExportDataCSV('browser', "{$file_name}.csv");
-            break;
+                case 'csv':
+                    $sFilename = "{$file_name}.csv";
+                    $exporter = new \ExportDataCSV('browser', "{$file_name}.csv");
+                    break;
 
-        case 'tsv':
-            $sFilename = "{$file_name}.tsv";
-            $exporter = new \ExportDataTSV('browser', "{$file_name}.tsv");
-            break;
-    }
+                case 'tsv':
+                    $sFilename = "{$file_name}.tsv";
+                    $exporter = new \ExportDataTSV('browser', "{$file_name}.tsv");
+                    break;
+            }
 
             $exporter->initialize();
 

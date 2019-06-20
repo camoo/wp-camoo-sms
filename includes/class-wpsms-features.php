@@ -16,7 +16,7 @@ class Features
     protected $tb_prefix;
 
     /**
-     * WP_SMS_Features constructor.
+     * CAMOO_SMS_Features constructor.
      */
     public function __construct()
     {
@@ -25,7 +25,7 @@ class Features
         $this->sms       = $sms;
         $this->db        = $wpdb;
         $this->tb_prefix = $wpdb->prefix;
-        $this->date      = WP_SMS_CURRENT_DATE;
+        $this->date      = CAMOO_SMS_CURRENT_DATE;
         $this->options   = Option::getOptions();
 
         if (isset($this->options['add_mobile_field'])) {

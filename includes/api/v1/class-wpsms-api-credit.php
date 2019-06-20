@@ -8,7 +8,7 @@ if (! defined('ABSPATH')) {
 
 /**
  * @category   class
- * @package    WP_SMS_Api
+ * @package    CAMOO_SMS_Api
  * @version    1.0
  */
 class Credit extends \CAMOO_SMS\RestApi

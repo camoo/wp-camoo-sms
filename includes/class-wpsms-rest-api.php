@@ -76,7 +76,7 @@ class RestApi
             return new \WP_Error('subscribe', __('The group number is not valid!', 'wp-camoo-sms'));
         }
 
-        if (preg_match(WP_SMS_MOBILE_REGEX, $mobile) == false) {
+        if (preg_match(CAMOO_SMS_MOBILE_REGEX, $mobile) == false) {
             // Return response
             return new \WP_Error('subscribe', __('Please enter a valid mobile number', 'wp-camoo-sms'));
         }
@@ -157,7 +157,7 @@ class RestApi
             return new \WP_Error('unsubscribe', __('The group number is not valid!', 'wp-camoo-sms'));
         }
 
-        if (preg_match(WP_SMS_MOBILE_REGEX, $mobile) == false) {
+        if (preg_match(CAMOO_SMS_MOBILE_REGEX, $mobile) == false) {
             // Return response
             return new \WP_Error('unsubscribe', __('Please enter a valid mobile number', 'wp-camoo-sms'));
         }

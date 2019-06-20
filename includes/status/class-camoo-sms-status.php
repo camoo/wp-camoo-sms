@@ -6,6 +6,8 @@ if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+use DateTime;
+
 /**
  * @category   class
  * @package    CAMOO_SMS_Status
@@ -33,21 +35,28 @@ class Status
         $this->tb_prefix = $wpdb->prefix;
     }
 
-	public static function allowedStatus()
-	{
-		return self::$hStatus;
-	}
+    public static function allowedStatus()
+    {
+        return self::$hStatus;
+    }
+
+    public static function validateDate($sDate, $format = 'Y-m-d H:i:s')
+    {
+        $oDate = DateTime::createFromFormat($format, $sDate);
+        return $oDate && $oDate->format($format) == $sDate;
+    }
+
     public function manage(\WP_REST_Request $request)
     {
         $data = $request->get_params();
         $id = sanitize_key($data['id']);
         $status = sanitize_key($data['status']);
         $recipient = sanitize_text_field($data['recipient']);
-        $statusDatetime = sanitize_text_field($data['statusDatetime']);
+        $sDatetime = sanitize_text_field($data['statusDatetime']);
 
-        if (!empty($id) && !empty($status) && !empty($recipient) && !empty($statusDatetime) && ($ohSMS = $this->getByMessageId($id))) {
-            $options = ['status' => $status, 'status_time' => $statusDatetime];
-            if (in_array($status, static::allowedStatus()) && $this->updateById($ohSMS->ID, $options)) {
+        if (!empty($id) && !empty($status) && !empty($recipient) && !empty($sDatetime) && ($ohSMS = $this->getByMessageId($id))) {
+            $options = ['status' => $status, 'status_time' => $sDatetime];
+            if (in_array($status, static::allowedStatus()) && static::validateDate($sDatetime) && $this->updateById($ohSMS->ID, $options)) {
                 return new \WP_REST_Response(['message' => 'OK', 'error' => []], 200);
                 exit;
             }

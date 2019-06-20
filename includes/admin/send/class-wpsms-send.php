@@ -6,6 +6,7 @@ if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 
+use CAMOO_SMS\Admin\Helper;
 /**
  * Class Send SMS Page
  */
@@ -62,8 +63,9 @@ class SMS_Send
             echo '<br><div class="update-nag">' . __('You should have sufficient funds for sending sms in the account', 'wp-camoo-sms') . '</div>';
 
             return;
-        } elseif (! $gateway_name) {
-            echo '<br><div class="update-nag">' . __('You should choose and configuration your gateway in the Setting page', 'wp-camoo-sms') . '</div>';
+        } elseif ( !$gateway_name) {
+        $params = ['page' => 'wp-camoo-sms-settings', 'tab' => 'gateway'];
+            echo '<br><div class="update-nag">' . sprintf(__('You should choose and configuration your gateway in the Setting page.<br><a href="%s">Click here</a> to configure the camoo\'s gateway', 'wp-camoo-sms'), Helper::adminUrl($params)) . '</div>';
 
             return;
         }

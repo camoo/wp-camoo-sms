@@ -4,7 +4,6 @@ namespace CAMOO_SMS;
 
 class Welcome
 {
-
     public function __construct()
     {
         // Welcome Hooks
@@ -18,7 +17,7 @@ class Welcome
      */
     public function init()
     {
-        if (get_option('wp_camoo_sms_show_welcome_page') and ( strpos($_SERVER['REQUEST_URI'], '/wp-admin/index.php') !== false or strpos($_SERVER['REQUEST_URI'], 'wp-camoo-sms') !== false )) {
+        if (get_option('wp_camoo_sms_show_welcome_page') and (strpos($_SERVER['REQUEST_URI'], '/wp-admin/index.php') !== false or strpos($_SERVER['REQUEST_URI'], 'wp-camoo-sms') !== false)) {
             // Disable show welcome page
 
             update_option('wp_camoo_sms_first_show_welcome_page', true);

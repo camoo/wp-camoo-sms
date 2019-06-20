@@ -27,14 +27,14 @@ class Notifications
     protected $tb_prefix;
 
     /**
-     * WP_SMS_Notifications constructor.
+     * CAMOO_SMS_Notifications constructor.
      */
     public function __construct()
     {
         global $sms, $wp_version, $wpdb;
 
         $this->sms       = $sms;
-        $this->date      = WP_SMS_CURRENT_DATE;
+        $this->date      = CAMOO_SMS_CURRENT_DATE;
         $this->options   = Option::getOptions();
         $this->db        = $wpdb;
         $this->tb_prefix = $wpdb->prefix;

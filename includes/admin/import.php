@@ -44,7 +44,7 @@ if (isset($_POST['wps_import'])) {
             // Count submitted items.
             $total_submit[] = $data->sheets[0]['cells'];
 
-            $result = \CAMOO_SMS\Newsletter::insertSubscriber(WP_SMS_CURRENT_DATE, $items[1], $items[2], 1, sanitize_text_field($_POST['wpsms_group_name']));
+            $result = \CAMOO_SMS\Newsletter::insertSubscriber(CAMOO_SMS_CURRENT_DATE, $items[1], $items[2], 1, sanitize_text_field($_POST['wpsms_group_name']));
         }
 
         if ($result) {

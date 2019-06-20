@@ -18,7 +18,7 @@ class Integrations
         global $sms;
 
         $this->sms     = $sms;
-        $this->date    = WP_SMS_CURRENT_DATE;
+        $this->date    = CAMOO_SMS_CURRENT_DATE;
         $this->options = Option::getOptions();
 
         // Contact Form 7

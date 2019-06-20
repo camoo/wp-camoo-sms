@@ -58,25 +58,25 @@ class CAMOO_SMS
                     'id'      => array(
                         'required' => true,
                         'validate_callback' => function ($param, $request, $key) {
-                            return is_string($param);
+                            return (boolean) preg_match('/^[\p{Ll}\p{Lm}\p{Lo}\p{Lt}\p{Lu}\p{Nd}]+$/Du', $param);
                         }
                     ),
                     'status'     => array(
                         'required' => true,
                         'validate_callback' => function ($param, $request, $key) {
-                            return in_array($param,\CAMOO_SMS\Status\Status::allowedStatus());
+                            return in_array($param, \CAMOO_SMS\Status\Status::allowedStatus());
                         }
                     ),
                     'recipient' => array(
                         'required' => true,
                         'validate_callback' => function ($param, $request, $key) {
-                            return is_string($param);
+                            return is_scalar($param);
                         }
                     ),
                     'statusDatetime' => [
                         'required' => true,
                         'validate_callback' => function ($param, $request, $key) {
-                            return is_string($param);
+                            return \CAMOO_SMS\Status\Status::validateDate($param);
                         }
                   ]
                 ),

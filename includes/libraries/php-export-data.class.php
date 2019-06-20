@@ -25,7 +25,6 @@ abstract class ExportData
 
     public function initialize()
     {
-
         switch ($this->exportTo) {
             case 'browser':
                 $this->stringData = '';
@@ -49,7 +48,6 @@ abstract class ExportData
 
     public function finalize()
     {
-
         $this->write($this->generateFooter());
 
         switch ($this->exportTo) {
@@ -108,8 +106,7 @@ abstract class ExportData
  */
 class ExportDataTSV extends ExportData
 {
-
-    function generateRow($row)
+    public function generateRow($row)
     {
         foreach ($row as $key => $value) {
             // Escape inner quotes and wrap all contents in new quotes.
@@ -120,7 +117,7 @@ class ExportDataTSV extends ExportData
         return implode("\t", $row) . "\n";
     }
 
-    function sendHttpHeaders()
+    public function sendHttpHeaders()
     {
         header("Content-type: text/tab-separated-values");
         header("Content-Disposition: attachment; filename=" . basename($this->filename));
@@ -132,8 +129,7 @@ class ExportDataTSV extends ExportData
  */
 class ExportDataCSV extends ExportData
 {
-
-    function generateRow($row)
+    public function generateRow($row)
     {
         foreach ($row as $key => $value) {
             // Escape inner quotes and wrap all contents in new quotes.
@@ -144,7 +140,7 @@ class ExportDataCSV extends ExportData
         return implode(",", $row) . "\n";
     }
 
-    function sendHttpHeaders()
+    public function sendHttpHeaders()
     {
         header("Content-type: text/csv");
         header("Content-Disposition: attachment; filename=" . basename($this->filename));
@@ -168,7 +164,6 @@ class ExportDataCSV extends ExportData
  */
 class ExportDataExcel extends ExportData
 {
-
     const XmlHeader = "<?xml version=\"1.0\" encoding=\"%s\"?\>\n<Workbook xmlns=\"urn:schemas-microsoft-com:office:spreadsheet\" xmlns:x=\"urn:schemas-microsoft-com:office:excel\" xmlns:ss=\"urn:schemas-microsoft-com:office:spreadsheet\" xmlns:html=\"http://www.w3.org/TR/REC-html40\">";
     const XmlFooter = "</Workbook>";
 
@@ -177,7 +172,7 @@ class ExportDataExcel extends ExportData
 
     public $title = 'Sheet1'; // title for Worksheet
 
-    function generateHeader()
+    public function generateHeader()
     {
 
         // workbook header
@@ -194,7 +189,7 @@ class ExportDataExcel extends ExportData
         return $output;
     }
 
-    function generateFooter()
+    public function generateFooter()
     {
         $output = '';
 
@@ -207,7 +202,7 @@ class ExportDataExcel extends ExportData
         return $output;
     }
 
-    function generateRow($row)
+    public function generateRow($row)
     {
         $output = '';
         $output .= "        <Row>\n";
@@ -226,7 +221,7 @@ class ExportDataExcel extends ExportData
 
         // Tell Excel to treat as a number. Note that Excel only stores roughly 15 digits, so keep
         // as text if number is longer than that.
-        if (preg_match("/^-?\d+(?:[.,]\d+)?$/", $item) && ( strlen($item) < 15 )) {
+        if (preg_match("/^-?\d+(?:[.,]\d+)?$/", $item) && (strlen($item) < 15)) {
             $type = 'Number';
         }
         // Sniff for valid dates; should look something like 2010-07-14 or 7/14/2010 etc. Can
@@ -236,9 +231,9 @@ class ExportDataExcel extends ExportData
         // of really screwing up the data if we try to reformat a string that was not actually
         // intended to represent a date.
         elseif (preg_match("/^(\d{1,2}|\d{4})[\/\-]\d{1,2}[\/\-](\d{1,2}|\d{4})([^\d].+)?$/", $item) &&
-                 ( $timestamp = strtotime($item) ) &&
-                 ( $timestamp > 0 ) &&
-                 ( $timestamp < strtotime('+500 years') )
+                 ($timestamp = strtotime($item)) &&
+                 ($timestamp > 0) &&
+                 ($timestamp < strtotime('+500 years'))
         ) {
             $type  = 'DateTime';
             $item  = strftime("%Y-%m-%dT%H:%M:%S", $timestamp);
@@ -256,7 +251,7 @@ class ExportDataExcel extends ExportData
         return $output;
     }
 
-    function sendHttpHeaders()
+    public function sendHttpHeaders()
     {
         header("Content-Type: application/vnd.ms-excel; charset=" . $this->encoding);
         header("Content-Disposition: inline; filename=\"" . basename($this->filename) . "\"");

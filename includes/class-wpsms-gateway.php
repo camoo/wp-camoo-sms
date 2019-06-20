@@ -5,6 +5,7 @@ namespace CAMOO_SMS;
 if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
+use CAMOO_SMS\Admin\Helper;
 
 /**
  * CAMOO_SMS gateway class
@@ -216,7 +217,7 @@ class Gateway
     {
         $sCamoo = ' (' .__('Recommended', 'wp-camoo-sms'). ')';
         $sCamooLegacy = '';
-        if (static::getPhpVersion() < CAMOO_SMS_MIN_PHP_VERSION) {
+        if (Helper::getPhpVersion() < CAMOO_SMS_MIN_PHP_VERSION) {
             $sCamoo = '';
             $sCamooLegacy = ' (' .__('Recommended', 'wp-camoo-sms'). ')';
         }
@@ -349,16 +350,6 @@ class Gateway
         }
 
         return $to;
-    }
-
-    public static function getPhpVersion()
-    {
-        if (!defined('PHP_VERSION_ID')) {
-            $version = explode('.', PHP_VERSION);
-            define('PHP_VERSION_ID', $version[0] * 10000 + $version[1] * 100 + $version[2]);
-        }
-
-        return PHP_VERSION_ID;
     }
 
     public static function can_bulk_send()
