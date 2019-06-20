@@ -19,11 +19,11 @@ class SMS_Send
 
     public function __construct()
     {
-        global $wpdb, $sms;
+        global $wpdb, $oCamooSMS;
 
         $this->db        = $wpdb;
         $this->tb_prefix = $wpdb->prefix;
-        $this->sms       = $sms;
+        $this->sms       = $oCamooSMS;
         $this->options   = Option::getOptions();
     }
 

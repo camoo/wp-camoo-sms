@@ -17,9 +17,9 @@ class RestApi
 
     public function __construct()
     {
-        global $sms, $wpdb;
+        global $oCamooSMS, $wpdb;
 
-        $this->sms       = $sms;
+        $this->sms       = $oCamooSMS;
         $this->options   = Option::getOptions();
         $this->db        = $wpdb;
         $this->tb_prefix = $wpdb->prefix;
@@ -64,7 +64,7 @@ class RestApi
      */
     public static function subscribe($name, $mobile, $group)
     {
-        global $sms;
+        global $oCamooSMS;
 
         if (empty($name) or empty($mobile)) {
             return new \WP_Error('subscribe', __('The name and mobile number must be valued!', 'wp-camoo-sms'));
@@ -115,9 +115,9 @@ class RestApi
                 // Return response
                 return new \WP_Error('subscribe', $result['message']);
             } else {
-                $sms->to  = array( $mobile );
-                $sms->msg = __('Your activation code', 'wp-camoo-sms') . ': ' . $key;
-                $sms->sendSMS();
+                $oCamooSMS->to  = array( $mobile );
+                $oCamooSMS->msg = __('Your activation code', 'wp-camoo-sms') . ': ' . $key;
+                $oCamooSMS->sendSMS();
             }
 
             // Return response
@@ -202,7 +202,7 @@ class RestApi
      */
     public static function verifySubscriber($name, $mobile, $activation, $group)
     {
-        global $sms, $wpdb;
+        global $oCamooSMS, $wpdb;
 
         if (empty($name) or empty($mobile) or empty($activation)) {
             return new \WP_Error('unsubscribe', __('The required parameters must be valued!', 'wp-camoo-sms'));
@@ -240,9 +240,9 @@ class RestApi
                     $text          = Option::getOption('newsletter_form_welcome_text');
                     $message       = str_replace(array_keys($template_vars), array_values($template_vars), $text);
 
-                    $sms->to  = array( $mobile );
-                    $sms->msg = $message;
-                    $sms->sendSMS();
+                    $oCamooSMS->to  = array( $mobile );
+                    $oCamooSMS->msg = $message;
+                    $oCamooSMS->sendSMS();
                 }
 
                 // Return response
@@ -314,10 +314,10 @@ class RestApi
         }
 
         // Get the result
-        global $sms;
-        $sms->to  = array( $to );
-        $sms->msg = $msg;
-        $result   = $sms->sendSMS();
+        global $oCamooSMS;
+        $oCamooSMS->to  = array( $to );
+        $oCamooSMS->msg = $msg;
+        $result   = $oCamooSMS->sendSMS();
 
         return $result;
     }

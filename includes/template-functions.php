@@ -41,11 +41,11 @@ function wp_camoo_sms_get_option($option_name, $pro = false, $setting_name = '')
  */
 function wp_camoo_sms_send($to, $msg, $is_flash = false)
 {
-    global $sms;
+    global $oCamooSMS;
 
-    $sms->isflash = $is_flash;
-    $sms->to      = array( $to );
-    $sms->msg     = $msg;
+    $oCamooSMS->isflash = $is_flash;
+    $oCamooSMS->to      = array( $to );
+    $oCamooSMS->msg     = $msg;
 
-    return $sms->sendSMS();
+    return $oCamooSMS->sendSMS();
 }

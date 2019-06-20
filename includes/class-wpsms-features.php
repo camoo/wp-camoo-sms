@@ -20,9 +20,9 @@ class Features
      */
     public function __construct()
     {
-        global $sms, $wpdb;
+        global $oCamooSMS, $wpdb;
 
-        $this->sms       = $sms;
+        $this->sms       = $oCamooSMS;
         $this->db        = $wpdb;
         $this->tb_prefix = $wpdb->prefix;
         $this->date      = CAMOO_SMS_CURRENT_DATE;

@@ -18,6 +18,6 @@ if (! defined('ABSPATH')) {
  */
 require_once plugin_dir_path( __FILE__ ) . 'includes/config/bootstrap.php';
 
-$sms = (new \CAMOO_SMS\Config\Bootstrap())->initialze();
+$oCamooSMS = (new \CAMOO_SMS\Config\Bootstrap())->initialze();
 
 new \CAMOO_SMS();

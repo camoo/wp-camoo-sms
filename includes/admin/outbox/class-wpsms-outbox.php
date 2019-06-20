@@ -189,12 +189,12 @@ class Outbox_List_Table extends \WP_List_Table
 
         // Resend sms
         if ('resend' === $this->current_action()) {
-            global $sms;
+            global $oCamooSMS;
             $error    = null;
             $result   = $this->db->get_row($this->db->prepare("SELECT * from `{$this->tb_prefix}camoo_sms_send` WHERE ID =%s;", sanitize_key($_GET['ID'])));
-            $sms->to  = array( $result->recipient );
-            $sms->msg = $result->message;
-            $error    = $sms->sendSMS();
+            $oCamooSMS->to  = array( $result->recipient );
+            $oCamooSMS->msg = $result->message;
+            $error    = $oCamooSMS->sendSMS();
             if (is_wp_error($error)) {
                 echo '<div class="notice notice-error  is-dismissible"><p>' . $error->get_error_message() . '</p></div>';
             } else {

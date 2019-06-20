@@ -75,61 +75,61 @@ class Gateway
 
         // Create object from the gateway class
         if ($gateway_name == 'default') {
-            $sms = new $class_name();
+            $oCamooSMS = new $class_name();
         } else {
             $class_name = '\\CAMOO_SMS\\Gateway\\' . ucfirst($gateway_name);
-            $sms        = new $class_name();
+            $oCamooSMS        = new $class_name();
         }
 
         // Set username and password
-        $sms->username = Option::getOption('gateway_username');
-        $sms->password = Option::getOption('gateway_password');
+        $oCamooSMS->username = Option::getOption('gateway_username');
+        $oCamooSMS->password = Option::getOption('gateway_password');
 
         $gateway_key = Option::getOption('gateway_key');
 
         // Set api key
-        if ($sms->has_key && $gateway_key) {
-            $sms->has_key = $gateway_key;
+        if ($oCamooSMS->has_key && $gateway_key) {
+            $oCamooSMS->has_key = $gateway_key;
         }
 
         // Show gateway help configuration in gateway page
-        if ($sms->help) {
+        if ($oCamooSMS->help) {
             add_action('wp_camoo_sms_after_gateway', function () {
-                echo ' < p class="description" > ' . $sms->help . '</p > ';
+                echo ' < p class="description" > ' . $oCamooSMS->help . '</p > ';
             });
         }
 
         // Check unit credit gateway
-        if ($sms->unitrial == true) {
-            $sms->unit = __('Credit', 'wp - sms');
+        if ($oCamooSMS->unitrial == true) {
+            $oCamooSMS->unit = __('Credit', 'wp - sms');
         } else {
-            $sms->unit = __('SMS', 'wp - sms');
+            $oCamooSMS->unit = __('SMS', 'wp - sms');
         }
 
         // Set sender id
-        if (! $sms->from) {
-            $sms->from = Option::getOption('gateway_sender_id');
+        if (! $oCamooSMS->from) {
+            $oCamooSMS->from = Option::getOption('gateway_sender_id');
         }
 
         // SET encryption setting
-        $sms->encrypt_sms = Option::getOption('encrypt_sms') == 1;
+        $oCamooSMS->encrypt_sms = Option::getOption('encrypt_sms') == 1;
 
         // SET datacoding
-        $sms->isUnicode = Option::getOption('send_unicode') == 1;
+        $oCamooSMS->isUnicode = Option::getOption('send_unicode') == 1;
 
         if (Option::getOption('bulk_chunk')) {
-            $sms->bulk_chunk = Option::getOption('bulk_chunk');
+            $oCamooSMS->bulk_chunk = Option::getOption('bulk_chunk');
         }
 
         if (Option::getOption('bulk_threshold')) {
-            $sms->bulk_threshold = Option::getOption('bulk_threshold');
+            $oCamooSMS->bulk_threshold = Option::getOption('bulk_threshold');
         }
 
         // Unset gateway key field if not available in the current gateway class.
         add_filter('wp_camoo_sms_gateway_settings', function ($filter) {
-            global $sms;
+            global $oCamooSMS;
 
-            if (! $sms->has_key) {
+            if (! $oCamooSMS->has_key) {
                 unset($filter['gateway_key']);
             }
 
@@ -137,7 +137,7 @@ class Gateway
         });
 
         // Return gateway object
-        return $sms;
+        return $oCamooSMS;
     }
 
     /**
@@ -239,12 +239,12 @@ class Gateway
      */
     public static function status()
     {
-        global $sms;
+        global $oCamooSMS;
 
         //Check that, Are we in the Gateway CAMOO_SMS tab setting page or not?
         if (is_admin() and isset($_REQUEST['page']) and isset($_REQUEST['tab']) and $_REQUEST['page'] == 'wp-camoo-sms-settings' and $_REQUEST['tab'] === 'gateway') {
             // Get credit
-            $result = $sms->getCredit();
+            $result = $oCamooSMS->getCredit();
 
             if (is_wp_error($result)) {
                 // Set error message
@@ -280,10 +280,10 @@ class Gateway
      */
     public static function help()
     {
-        global $sms;
+        global $oCamooSMS;
 
         // Get gateway help
-        return $sms->help;
+        return $oCamooSMS->help;
     }
 
     /**
@@ -291,10 +291,10 @@ class Gateway
      */
     public static function from()
     {
-        global $sms;
+        global $oCamooSMS;
 
         // Get gateway from
-        return $sms->from;
+        return $oCamooSMS->from;
     }
 
     /**
@@ -302,10 +302,10 @@ class Gateway
      */
     public static function bulk_status()
     {
-        global $sms;
+        global $oCamooSMS;
 
         // Get bulk status
-        if ($sms->bulk_send == true) {
+        if ($oCamooSMS->bulk_send == true) {
             // Return html
             return '<div class="wpsms-has-credit"><span class="dashicons dashicons-yes"></span> ' . __('Supported', 'wp-camoo-sms') . '</div>';
         } else {
@@ -319,8 +319,8 @@ class Gateway
      */
     public static function credit()
     {
-        global $sms;
-        $result = $sms->getCredit();
+        global $oCamooSMS;
+        $result = $oCamooSMS->getCredit();
 
         if (is_wp_error($result)) {
             update_option('wp_camoo_sms_gateway_credit', 0);
@@ -344,8 +344,8 @@ class Gateway
      */
     public function modify_bulk_send($to)
     {
-        global $sms;
-        if (! $sms->bulk_send) {
+        global $oCamooSMS;
+        if (! $oCamooSMS->bulk_send) {
             return array( $to[0] );
         }
 
@@ -354,7 +354,7 @@ class Gateway
 
     public static function can_bulk_send()
     {
-        global $sms;
-        return $sms->bulk_send;
+        global $oCamooSMS;
+        return $oCamooSMS->bulk_send;
     }
 }

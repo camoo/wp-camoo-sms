@@ -31,9 +31,9 @@ class Notifications
      */
     public function __construct()
     {
-        global $sms, $wp_version, $wpdb;
+        global $oCamooSMS, $wp_version, $wpdb;
 
-        $this->sms       = $sms;
+        $this->sms       = $oCamooSMS;
         $this->date      = CAMOO_SMS_CURRENT_DATE;
         $this->options   = Option::getOptions();
         $this->db        = $wpdb;
