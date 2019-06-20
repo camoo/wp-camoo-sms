@@ -103,7 +103,7 @@ class Install
         self::create_table($network_wide);
 
         add_option('wp_camoo_sms_db_version', WP_CAMOO_SMS_VERSION);
-
+        self::createAppFile();
         // Delete notification new wp_version option
         delete_option('wp_notification_new_wp_version');
 
@@ -176,6 +176,19 @@ class Install
         }
 
         return $tables;
+    }
+
+    private static function createAppFile()
+    {
+        $sFile = plugin_dir_path(__FILE__) .'config/app.php';
+        if (!file_exists($sFile) && ($SALTs = file_get_contents('https://api.wordpress.org/secret-key/1.1/salt/'))) {
+            list($AUTH_KEY, $rest) = explode("\n", $SALTs, 2);
+            $sKey = str_replace('AUTH_KEY', 'CAMOO_SMS_SALT_SECRET_KEY', $AUTH_KEY) ."\n";
+            $content ="<?php\ndefined( 'ABSPATH' ) or die();\n\n" .$sKey;
+            if (!file_put_contents($sFile, $content, LOCK_EX)) {
+                die("Error: failed to write data to $sFile");
+            }
+        }
     }
 }
 

@@ -16,7 +16,7 @@ class Settings
     {
         $this->setting_name = 'wp_camoo_sms_settings';
         $this->get_settings();
-        $this->options = get_option($this->setting_name);
+        $this->options = Helper::onAfterGetSettings(get_option($this->setting_name));
 
         if (empty($this->options)) {
             update_option($this->setting_name, array());
@@ -48,13 +48,12 @@ class Settings
      */
     public function get_settings()
     {
-        $settings = get_option($this->setting_name);
+        $settings = Helper::onAfterGetSettings(get_option($this->setting_name));
         if (! $settings) {
             update_option($this->setting_name, array(
                 'rest_api_status' => 1,
             ));
         }
-
         return apply_filters('wpsms_get_settings', $settings);
     }
 
@@ -101,7 +100,6 @@ class Settings
                         'std'     => isset($option['std']) ? $option['std'] : ''
                     )
                 );
-
                 register_setting($this->setting_name, $this->setting_name, array( $this, 'settings_sanitize' ));
             }
         }
@@ -169,6 +167,11 @@ class Settings
                 } elseif ((int) $value > 50 || empty($value)) {
                     $input[ $key ] = apply_filters('wp_camoo_sms_settings_sanitize_number', 50, $key);
                 }
+            }
+
+            // encrypt api secret key
+            if (in_array($key, ['gateway_password', 'gateway_username'])) {
+                $input[ $key ] = apply_filters('wp_camoo_sms_settings_sanitize', Helper::encrypt($value), $key);
             }
         }
 
@@ -908,7 +911,6 @@ class Settings
         return false;
     }
 
-
     public function select_callback($args)
     {
         if (isset($this->options[ $args['id'] ])) {
@@ -987,7 +989,6 @@ class Settings
 
         echo $html;
     }
-
 
     public function advancedselect_callback($args)
     {

@@ -122,7 +122,6 @@ class CAMOO_SMS
             // Admin classes.
             require_once WP_CAMOO_SMS_DIR . 'includes/admin/class-wpsms-admin.php';
             require_once WP_CAMOO_SMS_DIR . 'includes/admin/class-wpsms-version.php';
-            require_once WP_CAMOO_SMS_DIR . 'includes/admin/class-wpsms-admin-helper.php';
             require_once WP_CAMOO_SMS_DIR . 'includes/admin/welcome/class-wpsms-welcome.php';
 
             // Groups class.

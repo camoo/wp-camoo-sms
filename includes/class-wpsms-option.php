@@ -5,7 +5,7 @@ namespace CAMOO_SMS;
 if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
-
+use CAMOO_SMS\Admin\Helper;
 class Option
 {
 
@@ -20,20 +20,13 @@ class Option
     public static function getOptions($pro = false, $setting_name = '')
     {
         if (! $setting_name) {
-            if ($pro) {
-                global $wpsms_pro_option;
-
-                return $wpsms_pro_option;
-            }
-
-            global $wpsms_option;
+            $wpsms_option = Helper::getSetting();
 
             return $wpsms_option;
         }
 
         return get_option($setting_name);
     }
-
 
     /**
      * Get the only Option that we want
@@ -47,13 +40,8 @@ class Option
     public static function getOption($option_name, $pro = false, $setting_name = '')
     {
         if (! $setting_name) {
-            if ($pro) {
-                global $wpsms_pro_option;
 
-                return isset($wpsms_pro_option[ $option_name ]) ? $wpsms_pro_option[ $option_name ] : '';
-            }
-
-            global $wpsms_option;
+            $wpsms_option = Helper::getSetting();
 
             return isset($wpsms_option[ $option_name ]) ? $wpsms_option[ $option_name ] : '';
         }

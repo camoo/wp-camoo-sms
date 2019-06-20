@@ -13,32 +13,11 @@
 if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
-
 /**
- * Load Plugin Defines
+ * Load plugin Special Options init
  */
-require_once 'includes/defines.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/config/bootstrap.php';
 
-/**
- * Load plugin Special Functions
- */
-require_once WP_CAMOO_SMS_DIR . 'includes/functions.php';
+$sms = (new \CAMOO_SMS\Config\Bootstrap())->initialze();
 
-/**
- * Get plugin options
- */
-$wpsms_option = get_option('wp_camoo_sms_settings');
-
-/**
- * Initial gateway
- */
-require_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-gateway.php';
-
-$sms = wp_camoo_sms_initial_gateway();
-
-/**
- * Load Plugin
- */
-require WP_CAMOO_SMS_DIR . 'includes/class-wpsms.php';
-
-new CAMOO_SMS();
+new \CAMOO_SMS();
