@@ -72,7 +72,7 @@ class SystemInfo
         $information['WP_DEBUG']['status'] = $wp_debug;
 
         // Get activated plugins
-        $active_plugins = get_option('active_plugins');
+        $active_plugins = Option::getOptions('active_plugins');
         $all_plugins    = get_plugins();
         $final          = array();
         foreach ($active_plugins as $p) {

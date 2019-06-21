@@ -1,7 +1,10 @@
 <?php
-
 namespace CAMOO_SMS;
+if (! defined('ABSPATH')) {
+    exit;
+} // Exit if accessed directly
 
+use CAMOO_SMS\Option;
 class Admin
 {
     public $oCamooSMS;
@@ -58,7 +61,7 @@ class Admin
     {
         global $wp_admin_bar;
         if (is_super_admin() && is_admin_bar_showing()) {
-            $credit = get_option('wp_camoo_sms_gateway_credit');
+            $credit = Option::getOptions('wp_camoo_sms_gateway_credit');
             if ($credit and isset($this->options['account_credit_in_menu']) and ! is_object($credit)) {
                 $wp_admin_bar->add_menu(array(
                     'id'    => 'wp-credit-sms',
@@ -82,7 +85,7 @@ class Admin
     public function dashboard_glance()
     {
         $subscribe = $this->db->get_var("SELECT COUNT(*) FROM {$this->tb_prefix}camoo_sms_subscribes");
-        $credit    = get_option('wp_camoo_sms_gateway_credit');
+        $credit    = Option::getOptions('wp_camoo_sms_gateway_credit');
 
         echo "<li class='wpsms-subscribe-count'><a href='" . WP_CAMOO_SMS_ADMIN_URL . "admin.php?page=wp-camoo-sms-subscribers'>" . sprintf(__('%s Subscriber', 'wp-camoo-sms'), $subscribe) . "</a></li>";
         if (! is_object($credit)) {
@@ -294,7 +297,7 @@ class Admin
             }
         }
 
-        if (! get_option('wpcamoosms_hide_newsletter')) {
+        if (! Option::getOptions('wpcamoosms_hide_newsletter')) {
             add_action('wp_camoo_sms_settings_page', array( $this, 'admin_newsletter' ));
         }
 

@@ -5,6 +5,7 @@ namespace CAMOO_SMS\Api\V1;
 if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
+use CAMOO_SMS\Option;
 
 /**
  * @category   class
@@ -46,7 +47,7 @@ class Credit extends \CAMOO_SMS\RestApi
     public function credit_callback(\WP_REST_Request $request)
     {
         $output = array(
-            'credit' => get_option('wp_camoo_sms_gateway_credit'),
+            'credit' => Option::getOptions('wp_camoo_sms_gateway_credit'),
         );
 
         return new \WP_REST_Response($output);

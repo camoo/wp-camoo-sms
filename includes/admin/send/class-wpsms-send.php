@@ -57,7 +57,7 @@ class SMS_Send
         }
 
         $gateway_name = Option::getOption('gateway_name');
-        $credit       = get_option('wp_camoo_sms_gateway_credit');
+        $credit       = Option::getOptions('wp_camoo_sms_gateway_credit');
 
         if ($gateway_name && ! $credit) {
             echo '<br><div class="update-nag">' . __('You should have sufficient funds for sending sms in the account', 'wp-camoo-sms') . '</div>';

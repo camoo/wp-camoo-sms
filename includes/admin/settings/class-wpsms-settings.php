@@ -6,6 +6,7 @@ if (! defined('ABSPATH')) {
     exit;
 } // No direct access allowed ;)
 use CAMOO_SMS\Admin\Helper;
+use CAMOO_SMS\Option;
 
 class Settings
 {
@@ -52,7 +53,7 @@ class Settings
      */
     public function get_settings()
     {
-        $settings =  get_option($this->setting_name);
+        $settings =  Option::getOptions($this->setting_name);
         if (! $settings) {
             update_option($this->setting_name, array(
                 'rest_api_status' => 1,
@@ -69,7 +70,7 @@ class Settings
      */
     public function register_settings()
     {
-        if (false == get_option($this->setting_name)) {
+        if (false == Option::getOptions($this->setting_name)) {
             add_option($this->setting_name);
         }
 

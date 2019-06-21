@@ -25,7 +25,7 @@ class Integrations
         if (isset($this->options['cf7_metabox'])) {
             add_filter('wpcf7_editor_panels', array( $this, 'cf7_editor_panels' ));
             add_action('wpcf7_after_save', array( $this, 'wpcf7_save_form' ));
-            add_action('wpcf7_before_send_mail', array( $this, 'wpcf7_sms_handler' ));
+            add_action('wpcf7_before_send_mail', array( $this, 'wpcf7_camoosms_handler' ));
         }
 
         // Woocommerce
@@ -55,8 +55,8 @@ class Integrations
 
     public function cf7_setup_form($form)
     {
-        $cf7_options       = get_option('wpcf7_sms_' . $form->id());
-        $cf7_options_field = get_option('wpcf7_sms_form' . $form->id());
+        $cf7_options       = Option::getOptions('wpcf7_camoosms_' . $form->id());
+        $cf7_options_field = Option::getOptions('wpcf7_camoosms_form' . $form->id());
 
         if (! isset($cf7_options['phone'])) {
             $cf7_options['phone'] = '';
@@ -76,14 +76,14 @@ class Integrations
 
     public function wpcf7_save_form($form)
     {
-        update_option('wpcf7_sms_' . $form->id(), sanitize_text_field($_POST['wpcf7-sms']));
-        update_option('wpcf7_sms_form' . $form->id(), sanitize_text_field($_POST['wpcf7-sms-form']));
+        update_option('wpcf7_camoosms_' . $form->id(), sanitize_text_field($_POST['wpcf7-sms']));
+        update_option('wpcf7_camoosms_form' . $form->id(), sanitize_text_field($_POST['wpcf7-sms-form']));
     }
 
-    public function wpcf7_sms_handler($form)
+    public function wpcf7_camoosms_handler($form)
     {
-        $cf7_options       = get_option('wpcf7_sms_' . $form->id());
-        $cf7_options_field = get_option('wpcf7_sms_form' . $form->id());
+        $cf7_options       = Option::getOptions('wpcf7_camoosms_' . $form->id());
+        $cf7_options_field = Option::getOptions('wpcf7_camoosms_form' . $form->id());
         $this->set_cf7_data();
 
         if ($cf7_options['message'] && $cf7_options['phone']) {

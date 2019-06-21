@@ -6,10 +6,10 @@ if (! defined('ABSPATH')) {
     exit;
 } // Exit if accessed directly
 use CAMOO_SMS\Admin\Helper;
+
 class Option
 {
-
-	public const MAIN_SETTING_KEY = 'wp_camoo_sms_settings';
+    public const MAIN_SETTING_KEY = 'wp_camoo_sms_settings';
 
     /**
      * Get the whole Plugin Options
@@ -20,9 +20,11 @@ class Option
      */
     public static function getOptions($setting_name=null)
     {
-		if (null === $setting_name) {
-			$setting_name = static::MAIN_SETTING_KEY;
-		}
+        if (null === $setting_name) {
+            $setting_name = static::MAIN_SETTING_KEY;
+        }
+        // hook afterfind option
+        add_filter('option_' .static::MAIN_SETTING_KEY, [\CAMOO_SMS\Option::class, 'afterFind']);
         return get_option($setting_name);
     }
 
@@ -37,7 +39,6 @@ class Option
     public static function getOption($option_name, $setting_name=null)
     {
         if (null === $setting_name) {
-
             $wpcamoosms_option = self::getOptions();
 
             return isset($wpcamoosms_option[ $option_name ]) ? $wpcamoosms_option[ $option_name ] : '';
@@ -94,6 +95,6 @@ class Option
         if (!empty($option['gateway_username'])) {
             $option['gateway_username'] = Helper::encrypt($option['gateway_username']);
         }
-		return $option;
+        return $option;
     }
 }

@@ -116,7 +116,7 @@ class Install
      */
     public static function upgrade()
     {
-        $installer_wpcamoosms_ver = get_option('wp_camoo_sms_db_version');
+        $installer_wpcamoosms_ver = Option::getOptions('wp_camoo_sms_db_version');
 
         if ($installer_wpcamoosms_ver < WP_CAMOO_SMS_VERSION) {
             global $wpdb;

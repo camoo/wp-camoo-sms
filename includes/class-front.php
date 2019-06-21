@@ -45,12 +45,12 @@ class Front
     {
         global $wp_admin_bar;
         if (is_super_admin() && is_admin_bar_showing()) {
-            $credit = get_option('wp_camoo_sms_gateway_credit');
+            $credit = Option::getOptions('wp_camoo_sms_gateway_credit');
             if ($credit and isset($this->options['account_credit_in_menu']) and ! is_object($credit)) {
                 $wp_admin_bar->add_menu(array(
                     'id'    => 'wp-credit-sms',
                     'title' => '<span class="ab-icon"></span>' . $credit,
-                    'href'  => WP_CAMOO_SMS_ADMIN_URL . '/admin.php?page=wp-camoo-sms-settings'
+                    'href'  => WP_CAMOO_SMS_ADMIN_URL . 'admin.php?page=wp-camoo-sms-settings'
                 ));
             }
         }
@@ -59,7 +59,7 @@ class Front
             'id'     => 'wp-send-sms',
             'parent' => 'new-content',
             'title'  => __('SMS', 'wp-camoo-sms'),
-            'href'   => WP_CAMOO_SMS_ADMIN_URL . '/admin.php?page=wp-camoo-sms'
+            'href'   => WP_CAMOO_SMS_ADMIN_URL . 'admin.php?page=wp-camoo-sms'
         ));
     }
 }

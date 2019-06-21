@@ -5,6 +5,7 @@ namespace CAMOO_SMS;
 if (! defined('ABSPATH')) {
     exit;
 } // No direct access allowed ;)
+use CAMOO_SMS\Option;
 
 class Settings_Pro
 {
@@ -15,7 +16,7 @@ class Settings_Pro
     {
         $this->setting_name = 'wp_camoo_sms_params';
 
-        $this->options = get_option($this->setting_name);
+        $this->options = Option::getOptions($this->setting_name);
 
         if (empty($this->options)) {
             update_option($this->setting_name, array());
@@ -56,7 +57,7 @@ class Settings_Pro
      */
     public function get_settings()
     {
-        $settings = get_option($this->setting_name);
+        $settings = Option::getOptions($this->setting_name);
         if (empty($settings)) {
             update_option($this->setting_name, array(//'admin_lang'    =>  'enable',
             ));
@@ -72,7 +73,7 @@ class Settings_Pro
      */
     public function register_settings()
     {
-        if (false === get_option($this->setting_name)) {
+        if (false === Option::getOptions($this->setting_name)) {
             add_option($this->setting_name);
         }
 
