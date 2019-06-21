@@ -1,19 +1,19 @@
-﻿=== WP CAMOO SMS ===
+﻿=== CAMOO SMS ===
 Forked from WP SMS
-Contributors: mostafa.s1990, ghasemi71ir, mehrshaddarzi
+Contributors: camoo
 Donate link: https://wp-sms-pro.com/donate
-Tags: sms, wordpress, send, subscribe, message, register, notification, webservice, sms panel, woocommerce, subscribes-sms, EDD, twilio, bulksms, clockworksms, nexmo
+Tags: sms, wordpress, send, subscribe, message, register, notification, webservice, sms panel, woocommerce, subscribes-sms, EDD, twilio, bulksms, nexmo, camoo sarl, bulk sms
 Requires at least: 3.0
-Tested up to: 5.2
+Tested up to: 5.2.2
 Requires PHP: 5.6
-Stable tag: 5.1.5
+Stable tag: 1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-A powerful texting plugin for WordPress
+CAMOO SMS A powerful texting plugin for WordPress
 
 == Description ==
-By WP SMS you can add the ability of SMS sending to your WordPress product. So you can send SMS to your newsletter subscribers or your users and get their attentions to your site and products.
+By CAMOO SMS you can add the ability of SMS sending to your WordPress product. So you can send SMS to your newsletter subscribers or your users and get their attentions to your site and products.
 
 Using WP SMS you can enjoy many features, You can
 
@@ -40,6 +40,7 @@ Using WP SMS you can enjoy many features, You can
 * Supporting WP REST API
 * Importing/Exporting Subscribers.
 * GPG SMS encryption
+* Handle status report
 == Changelog ==
-= 5.1.5 =
+= 1.0 =
 * Start plugin

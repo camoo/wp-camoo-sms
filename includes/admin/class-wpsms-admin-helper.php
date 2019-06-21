@@ -106,4 +106,18 @@ class Helper
         }
         return call_user_func($hMapTypes['text'], $value);
     }
+
+    public static function satanizeRequest($filter, $input=[])
+    {
+        if (has_filter($filter, [\CAMOO_SMS\Admin\Helper::class, 'sanitizer'])) {
+            foreach ($input as $key => $value) {
+                if (is_array($value)) {
+                    $input[$key] = self::satanizeRequest($filter, $value);
+                    continue;
+                }
+                $input[$key] = apply_filters($filter, $value);
+            }
+        }
+        return $input;
+    }
 }

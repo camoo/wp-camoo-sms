@@ -152,7 +152,7 @@ class Install
      */
     public function add_table_on_create_blog($blog_id)
     {
-        if (is_plugin_active_for_network('wp-camoo-sms/wp-camoo-sms.php')) {
+        if (is_plugin_active_for_network(\CAMOO_SMS\Config\Bootstrap::PLUGIN_MAIN_FILE)) {
             switch_to_blog($blog_id);
 
             self::table_sql();

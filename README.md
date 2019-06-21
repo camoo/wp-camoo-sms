@@ -1,15 +1,14 @@
 
-
 # WP-CAMOO-SMS Plugin
-A simple and powerful texting plugin for WordPress
+CAMOO SMS A simple and powerful texting plugin for WordPress
 
-You can add to WordPress, the ability to send SMS, member of SMS newsletter and send to the SMS.
+You can add to WordPress, the ability to send SMS to a group, to a user, to a number or just to members of SMS newsletter.
 
 To every events in WordPress, you can send sms through this plugin.
 
 The usage of this plugin is completely free. You have to just have a CAMOO account:
-    - [Sign up](https://www.camoo.cm/join) for a free CAMOO SMS account
-    - Ask CAMOO Team for new access_key for developers
+* [Sign up](https://www.camoo.cm/join) for a free CAMOO SMS account
+* Ask CAMOO Team for new access_key for developers
 
 Very easy Send SMS by PHP code:
 
@@ -36,7 +35,7 @@ wp_camoo_sms_send( $to, $msg );
 * Support WP REST API
 * Import/Export Subscribers.
 * Support GPG encyption to ensure an end  to end encryption between your server and ours.
-* Handle SMS status rapport
+* Handle SMS status report
 
 # Installation
 
@@ -152,6 +151,14 @@ function wp_camoo_sms_modify_message($message) {
 	return $message;
 }
 add_filter('wp_camoo_sms_msg', 'wp_camoo_sms_modify_message');
+```
+
+Example: Auto satanize all REQUEST Data
+```php
+if (isset($_POST['my_submit'])) {
+	add_filter('my_filter', [\CAMOO_SMS\Admin\Helper::class, 'sanitizer']);
+}
+$input = \CAMOO_SMS\Admin\Helper::satanizeRequest('my_filter', $input);
 ```
 
 # Rest API Endpoints

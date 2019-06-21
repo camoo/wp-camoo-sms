@@ -266,7 +266,7 @@ class Admin
      */
     public function meta_links($links, $file)
     {
-        if ($file == 'wp-camoo-sms/wp-camoo-sms.php') {
+        if ($file === \CAMOO_SMS\Config\Bootstrap::PLUGIN_MAIN_FILE) {
         }
 
         return $links;

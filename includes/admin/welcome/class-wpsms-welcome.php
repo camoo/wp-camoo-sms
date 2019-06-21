@@ -54,11 +54,9 @@ class Welcome
      */
     public function do_welcome($upgrader_object, $options)
     {
-        $current_plugin_path_name = 'wp-camoo-sms/wp-camoo-sms.php';
-
-        if (isset($options['action']) and $options['action'] == 'update' and isset($options['type']) and $options['type'] == 'plugin' and isset($options['plugins'])) {
+        if (isset($options['action']) && $options['action'] == 'update' && isset($options['type']) && $options['type'] == 'plugin' && isset($options['plugins'])) {
             foreach ($options['plugins'] as $each_plugin) {
-                if ($each_plugin == $current_plugin_path_name) {
+                if ($each_plugin === \CAMOO_SMS\Config\Bootstrap::PLUGIN_MAIN_FILE) {
                     // Enable welcome page in database
                     update_option('wp_camoo_sms_show_welcome_page', true);
                 }
