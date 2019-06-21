@@ -80,7 +80,7 @@ class Subscribers extends \CAMOO_SMS\RestApi
      */
     public function get_item_permissions_check($request)
     {
-        return current_user_can('wpsms_subscribers');
+        return current_user_can('wpcamoosms_subscribers');
     }
 }
 

@@ -25,7 +25,7 @@ class Export
 
     public function download()
     {
-        if (current_user_can('wpsms_setting') && isset($_POST['camoo_sms_export_nonce']) && wp_verify_nonce($_POST['camoo_sms_export_nonce'], 'camoo_sms_export_nonce')) {
+        if (current_user_can('wpcamoosms_setting') && isset($_POST['camoo_sms_export_nonce']) && wp_verify_nonce($_POST['camoo_sms_export_nonce'], 'camoo_sms_export_nonce')) {
             $hData = $this->getData();
             header("Content-type: application/x-msdownload", true, 200);
             header("Content-Disposition: attachment; filename=" .basename($hData['filename']));

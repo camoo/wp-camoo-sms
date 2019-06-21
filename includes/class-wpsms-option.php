@@ -9,22 +9,20 @@ use CAMOO_SMS\Admin\Helper;
 class Option
 {
 
+	public const MAIN_SETTING_KEY = 'wp_camoo_sms_settings';
+
     /**
      * Get the whole Plugin Options
      *
-     * @param string $setting_name
-     * @param bool $pro
+     * @param string $setting_name setting name
      *
      * @return mixed|void
      */
-    public static function getOptions($pro = false, $setting_name = '')
+    public static function getOptions($setting_name=null)
     {
-        if (! $setting_name) {
-            $wpsms_option = Helper::getSetting();
-
-            return $wpsms_option;
-        }
-
+		if (null === $setting_name) {
+			$setting_name = static::MAIN_SETTING_KEY;
+		}
         return get_option($setting_name);
     }
 
@@ -33,17 +31,16 @@ class Option
      *
      * @param $option_name
      * @param string $setting_name
-     * @param bool $pro
      *
      * @return string
      */
-    public static function getOption($option_name, $pro = false, $setting_name = '')
+    public static function getOption($option_name, $setting_name=null)
     {
-        if (! $setting_name) {
+        if (null === $setting_name) {
 
-            $wpsms_option = Helper::getSetting();
+            $wpcamoosms_option = self::getOptions();
 
-            return isset($wpsms_option[ $option_name ]) ? $wpsms_option[ $option_name ] : '';
+            return isset($wpcamoosms_option[ $option_name ]) ? $wpcamoosms_option[ $option_name ] : '';
         }
         $options = self::getOptions($setting_name);
 
@@ -66,19 +63,37 @@ class Option
      *
      * @param $key
      * @param $value
-     * @param bool $pro
      */
-    public static function updateOption($key, $value, $pro = false)
+    public static function updateOption($key, $value)
     {
-        if ($pro) {
-            $setting_name = 'wps_pp_settings';
-        } else {
-            $setting_name = 'wp_camoo_sms_settings';
-        }
-
-        $options         = self::getOptions($pro);
+        $options         = self::getOptions();
         $options[ $key ] = $value;
 
-        update_option($setting_name, $options);
+        update_option(static::MAIN_SETTING_KEY, $options);
+    }
+
+    public static function afterFind($xData)
+    {
+        if (is_array($xData)) {
+            if (!empty($xData['gateway_username'])) {
+                $xData['gateway_username'] = Helper::decrypt($xData['gateway_username']);
+            }
+            if (!empty($xData['gateway_password'])) {
+                $xData['gateway_password'] = Helper::decrypt($xData['gateway_password']);
+            }
+        }
+        return $xData;
+    }
+
+    public static function beforeSave($option=[])
+    {
+        // ENCRYPT API SECRET KEY
+        if (!empty($option['gateway_password'])) {
+            $option['gateway_password'] = Helper::encrypt($option['gateway_password']);
+        }
+        if (!empty($option['gateway_username'])) {
+            $option['gateway_username'] = Helper::encrypt($option['gateway_username']);
+        }
+		return $option;
     }
 }

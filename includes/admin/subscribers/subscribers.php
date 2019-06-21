@@ -32,9 +32,9 @@
                 if ($groups) : ?>
                     <tr>
                         <td style="padding-top: 10px;">
-                            <label class="wp_camoo_sms_subscribers_label" for="wpsms_group_name"><?php _e('Group', 'wp-camoo-sms'); ?>
+                            <label class="wp_camoo_sms_subscribers_label" for="wpcamoosms_group_name"><?php _e('Group', 'wp-camoo-sms'); ?>
                                 :</label>
-                            <select name="wpsms_group_name" id="wpsms_group_name" class="wp_camoo_sms_subscribers_input_text">
+                            <select name="wpcamoosms_group_name" id="wpcamoosms_group_name" class="wp_camoo_sms_subscribers_input_text">
                                 <?php foreach ($groups as $items) : ?>
                                     <option value="<?php echo $items->ID; ?>"><?php echo $items->name; ?></option>
                                 <?php endforeach; ?>
@@ -44,7 +44,7 @@
                 <?php else : ?>
                     <tr>
                         <td>
-                            <span class="wp_camoo_sms_subscribers_label" for="wpsms_group_name"><?php _e('Group', 'wp-camoo-sms'); ?>:</span>
+                            <span class="wp_camoo_sms_subscribers_label" for="wpcamoosms_group_name"><?php _e('Group', 'wp-camoo-sms'); ?>:</span>
                             <?php echo sprintf(__('There is no group! <a href="%s">Add</a>', 'wp-camoo-sms'), 'admin.php?page=wp-camoo-sms-subscribers-group'); ?>
                         </td>
                     </tr>
@@ -71,9 +71,9 @@
                 </tr>
                 <tr>
                     <td>
-                        <label for="wpsms_group_name" class="wp_camoo_sms_subscribers_label"><?php _e('Group', 'wp-camoo-sms'); ?></label>
+                        <label for="wpcamoosms_group_name" class="wp_camoo_sms_subscribers_label"><?php _e('Group', 'wp-camoo-sms'); ?></label>
                         <?php if ($groups) : ?>
-                        <select name="wpsms_group_name" id="wpsms_group_name" class="wp_camoo_sms_subscribers_input_text">
+                        <select name="wpcamoosms_group_name" id="wpcamoosms_group_name" class="wp_camoo_sms_subscribers_input_text">
                             <?php
                             foreach ($groups as $items) :
                                 ?>

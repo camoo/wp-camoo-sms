@@ -70,9 +70,9 @@
                                     </select>
 
                                     <?php if (! empty($mobile_field) or $mobile_field == 1) { ?>
-                                        <select name="wpsms_group_role" class="wpsms-value wprole-group">
+                                        <select name="wpcamoosms_group_role" class="wpsms-value wprole-group">
                                             <?php
-                                            foreach ($wpsms_list_of_role as $key_item => $val_item) :
+                                            foreach ($wpcamoosms_list_of_role as $key_item => $val_item) :
                                                 ?>
                                                 <option value="<?php echo $key_item; ?>"<?php if ($val_item['count'] < 1) {
                                                     echo " disabled";
@@ -84,7 +84,7 @@
                                         </select>
                                     <?php } ?>
 
-                                    <select name="wpsms_group_name" class="wpsms-value wpsms-group">
+                                    <select name="wpcamoosms_group_name" class="wpsms-value wpsms-group">
                                         <option value="all">
                                             <?php
                                             global $wpdb;

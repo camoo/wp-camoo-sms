@@ -133,7 +133,7 @@ class Notifications
                 '%post_date%'    => get_post_time('Y-m-d H:i:s', false, $ID, true),
             );
 
-            $message = str_replace(array_keys($template_vars), array_values($template_vars), sanitize_text_field($_REQUEST['wpsms_text_template']));
+            $message = str_replace(array_keys($template_vars), array_values($template_vars), sanitize_text_field($_REQUEST['wpcamoosms_text_template']));
 
             $this->sms->msg = $message;
             $this->sms->sendSMS();

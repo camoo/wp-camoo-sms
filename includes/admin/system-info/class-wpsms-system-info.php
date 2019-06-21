@@ -12,7 +12,7 @@ class SystemInfo
     {
         include_once "system-info.php";
         // Export log file
-        if (isset($_POST['wpsms_download_info']) && isset($_POST['camoo_sms_dl']) && wp_verify_nonce($_POST['camoo_sms_dl'], 'camoo_sms_dl')) {
+        if (isset($_POST['wpcamoosms_download_info']) && isset($_POST['camoo_sms_dl']) && wp_verify_nonce($_POST['camoo_sms_dl'], 'camoo_sms_dl')) {
             $style = "
 				<style>
 				#adminmenumain {display: none;}

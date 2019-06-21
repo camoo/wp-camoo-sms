@@ -41,9 +41,9 @@ class SMS_Send
 
         //Get User Mobile List by Role
         if (! empty($mobile_field) and $mobile_field == 1) {
-            $wpsms_list_of_role = array();
+            $wpcamoosms_list_of_role = array();
             foreach (wp_roles()->role_names as $key_item => $val_item) {
-                $wpsms_list_of_role[ $key_item ] = array(
+                $wpcamoosms_list_of_role[ $key_item ] = array(
                     "name"  => $val_item,
                     "count" => count(get_users(array(
                         'meta_key'     => 'mobile',
@@ -73,10 +73,10 @@ class SMS_Send
         if (isset($_POST['sendSMS']) && isset($_POST['camoo_sms_send']) && wp_verify_nonce($_POST['camoo_sms_send'], 'camoo_sms_send')) {
             if ($_POST['wp_get_message']) {
                 if ($_POST['wp_send_to'] == "wp_subscribe_username") {
-                    if ($_POST['wpsms_group_name'] == 'all') {
+                    if ($_POST['wpcamoosms_group_name'] == 'all') {
                         $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->db->prefix}camoo_sms_subscribes WHERE `status` = '1'");
                     } else {
-                        $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->db->prefix}camoo_sms_subscribes WHERE `status` = '1' AND `group_ID` = '" . sanitize_text_field($_POST['wpsms_group_name']) . "'");
+                        $this->sms->to = $this->db->get_col("SELECT mobile FROM {$this->db->prefix}camoo_sms_subscribes WHERE `status` = '1' AND `group_ID` = '" . sanitize_text_field($_POST['wpcamoosms_group_name']) . "'");
                     }
                 } elseif ($_POST['wp_send_to'] == "wp_users") {
                     $this->sms->to = $get_users_mobile;
@@ -89,7 +89,7 @@ class SMS_Send
                         'meta_key'     => 'mobile',
                         'meta_value'   => '',
                         'meta_compare' => '!=',
-                        'role'         => sanitize_text_field($_POST['wpsms_group_role']),
+                        'role'         => sanitize_text_field($_POST['wpcamoosms_group_role']),
                         'fields'       => 'all'
                     ));
                     remove_action('pre_user_query', array( SMS_Send::class, 'get_query_user_mobile' ));

@@ -49,7 +49,7 @@
             <label for="wpsms-text-template"><?php _e('Text template', 'wp-camoo-sms'); ?>:</label>
         </th>
         <td>
-            <textarea cols="80" rows="5" id="wpsms-text-template" name="wpsms_text_template"><?php
+            <textarea cols="80" rows="5" id="wpsms-text-template" name="wpcamoosms_text_template"><?php
                 echo wp_camoo_sms_get_option('notif_publish_new_post_template'); ?></textarea>
             <p class="description data">
                 <?php _e('Input data:', 'wp-camoo-sms'); ?>

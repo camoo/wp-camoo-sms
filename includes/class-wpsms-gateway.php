@@ -231,7 +231,7 @@ class Gateway
             ),
         );
 
-        return apply_filters('wpsms_gateway_list', $gateways);
+        return apply_filters('wpcamoosms_gateway_list', $gateways);
     }
 
     /**

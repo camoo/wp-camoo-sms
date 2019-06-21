@@ -15,14 +15,14 @@ class Widget extends \WP_Widget
     public function __construct()
     {
         $widget_options = array(
-            'classname'   => 'wpsms_widget',
+            'classname'   => 'wpcamoosms_widget',
             'description' => __('SMS newsletter form', 'wp-camoo-sms'),
         );
 
         // Add Actions
         add_action('widgets_init', array( $this, 'register_widget' ));
 
-        parent::__construct('wpsms_widget', __('SMS Newsletter', 'wp-camoo-sms'), $widget_options);
+        parent::__construct('wpcamoosms_widget', __('SMS Newsletter', 'wp-camoo-sms'), $widget_options);
     }
 
     /**

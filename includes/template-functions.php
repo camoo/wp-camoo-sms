@@ -20,21 +20,20 @@ function wp_camoo_sms_subscribes()
  * Get option value.
  *
  * @param $option_name
- * @param bool $pro
  * @param string $setting_name
  *
  * @return string
  */
-function wp_camoo_sms_get_option($option_name, $pro = false, $setting_name = '')
+function wp_camoo_sms_get_option($option_name, $setting_name=null)
 {
-    return Option::getOption($option_name, $pro, $setting_name);
+    return Option::getOption($option_name, $setting_name);
 }
 
 /**
  * Send SMS.
  *
  * @param $to
- * @param $msg $pro
+ * @param $msg
  * @param bool $is_flash
  *
  * @return string | WP_Error
@@ -44,7 +43,7 @@ function wp_camoo_sms_send($to, $msg, $is_flash = false)
     global $oCamooSMS;
 
     $oCamooSMS->isflash = $is_flash;
-    $oCamooSMS->to      = array( $to );
+    $oCamooSMS->to      = [$to];
     $oCamooSMS->msg     = $msg;
 
     return $oCamooSMS->sendSMS();

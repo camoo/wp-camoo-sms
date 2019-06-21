@@ -19,7 +19,7 @@ class Subscribers
 
         // Add subscriber
         if (isset($_POST['wp_add_subscribe']) && isset($_POST['camoo_sms_n']) && wp_verify_nonce($_POST['camoo_sms_n'], 'camoo_sms_n')) {
-            $group = isset($_POST['wpsms_group_name']) ? sanitize_text_field($_POST['wpsms_group_name']) : '';
+            $group = isset($_POST['wpcamoosms_group_name']) ? sanitize_text_field($_POST['wpcamoosms_group_name']) : '';
             if ($group) {
                 $result = Newsletter::addSubscriber(sanitize_text_field($_POST['wp_subscribe_name']), sanitize_text_field($_POST['wp_subscribe_mobile']), $group);
             } else {
@@ -31,8 +31,8 @@ class Subscribers
 
         // Edit subscriber page
         if (isset($_POST['wp_update_subscribe']) && isset($_POST['camoo_sms_n']) && wp_verify_nonce($_POST['camoo_sms_n'], 'camoo_sms_n')) {
-            $group  = isset($_POST['wpsms_group_name']) ? sanitize_text_field($_POST['wpsms_group_name']) : '';
-            $result = Newsletter::updateSubscriber(sanitize_key($_POST['ID']), sanitize_text_field($_POST['wp_subscribe_name']), sanitize_text_field($_POST['wp_subscribe_mobile']), $group, sanitize_text_field($_POST['wpsms_subscribe_status']));
+            $group  = isset($_POST['wpcamoosms_group_name']) ? sanitize_text_field($_POST['wpcamoosms_group_name']) : '';
+            $result = Newsletter::updateSubscriber(sanitize_key($_POST['ID']), sanitize_text_field($_POST['wp_subscribe_name']), sanitize_text_field($_POST['wp_subscribe_mobile']), $group, sanitize_text_field($_POST['wpcamoosms_subscribe_status']));
             echo Helper::notice($result['message'], $result['result']);
         }
 

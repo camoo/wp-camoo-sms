@@ -48,10 +48,13 @@ class Helper
 
     public static function encrypt($string, $sCipher='AES-256-CBC')
     {
-        if (!defined('CAMOO_SMS_SALT_SECRET_KEY')) {
+        if (empty($string)) {
+            return '';
+        }
+        if (!defined('NONCE_SALT')) {
             return $string;
         }
-        $key = hash('sha256', CAMOO_SMS_SALT_SECRET_KEY);
+        $key = hash('sha256', NONCE_SALT);
         $ivlen = openssl_cipher_iv_length($sCipher);
         $iv = openssl_random_pseudo_bytes($ivlen);
         $ciphertext_raw = openssl_encrypt($string, $sCipher, $key, OPENSSL_RAW_DATA, $iv);
@@ -61,11 +64,14 @@ class Helper
 
     public static function decrypt($string, $sCipher='AES-256-CBC')
     {
-        if (!defined('CAMOO_SMS_SALT_SECRET_KEY')) {
+        if (empty($string) || !self::isBase64Encoded($string)) {
+            return '';
+        }
+        if (!defined('NONCE_SALT')) {
             return self::isBase64Encoded($string) ? null : $string;
         }
         $enc = base64_decode($string);
-        $key = hash('sha256', CAMOO_SMS_SALT_SECRET_KEY);
+        $key = hash('sha256', NONCE_SALT);
         $ivlen = openssl_cipher_iv_length($sCipher);
         $iv = substr($enc, 0, $ivlen);
         $hmac = substr($enc, $ivlen, $sha2len=32);
@@ -78,21 +84,26 @@ class Helper
         return base64_encode(base64_decode($string)) === $string;
     }
 
-    public static function getSetting($key='wp_camoo_sms_settings')
+    public static function sanitizer($value, $type=null)
     {
-        return isset($key)? self::onAfterGetSettings(get_option($key)) : null;
-    }
+        $hMapTypes = [
+            'number' => function ($value) {
+                return (int) sanitize_key($value);
+            },
+            'text' => function ($value) {
+                return sanitize_text_field($value);
+            },
+            'email' => function ($value) {
+                return sanitize_email($value);
+            },
+            'textarea' => function ($value) {
+                return sanitize_textarea_field($value);
+            },
+        ];
 
-    public static function onAfterGetSettings($xData)
-    {
-        if (is_array($xData)) {
-            if (!empty($xData['gateway_username'])) {
-                $xData['gateway_username'] = Helper::decrypt($xData['gateway_username']);
-            }
-            if (!empty($xData['gateway_password'])) {
-                $xData['gateway_password'] = Helper::decrypt($xData['gateway_password']);
-            }
+        if (null === $type || !array_key_exists($type, $hMapTypes)) {
+            return sanitize_text_field($value);
         }
-        return $xData;
+        return call_user_func($hMapTypes['text'], $value);
     }
 }

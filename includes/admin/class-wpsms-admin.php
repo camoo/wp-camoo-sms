@@ -96,12 +96,12 @@ class Admin
     public function admin_menu()
     {
         $hook_suffix = array();
-        add_menu_page(__('Camoo SMS', 'wp-camoo-sms'), __('Camoo SMS', 'wp-camoo-sms'), 'wpsms_sendsms', 'wp-camoo-sms', array( $this, 'send_sms_callback' ), 'dashicons-email-alt');
-        add_submenu_page('wp-camoo-sms', __('Send SMS', 'wp-camoo-sms'), __('Send SMS', 'wp-camoo-sms'), 'wpsms_sendsms', 'wp-camoo-sms', array( $this, 'send_sms_callback' ));
-        add_submenu_page('wp-camoo-sms', __('Outbox', 'wp-camoo-sms'), __('Outbox', 'wp-camoo-sms'), 'wpsms_outbox', 'wp-camoo-sms-outbox', array( $this, 'outbox_callback' ));
+        add_menu_page(__('Camoo SMS', 'wp-camoo-sms'), __('Camoo SMS', 'wp-camoo-sms'), 'wpcamoosms_sendsms', 'wp-camoo-sms', array( $this, 'send_sms_callback' ), 'dashicons-email-alt');
+        add_submenu_page('wp-camoo-sms', __('Send SMS', 'wp-camoo-sms'), __('Send SMS', 'wp-camoo-sms'), 'wpcamoosms_sendsms', 'wp-camoo-sms', array( $this, 'send_sms_callback' ));
+        add_submenu_page('wp-camoo-sms', __('Outbox', 'wp-camoo-sms'), __('Outbox', 'wp-camoo-sms'), 'wpcamoosms_outbox', 'wp-camoo-sms-outbox', array( $this, 'outbox_callback' ));
 
-        $hook_suffix['subscribers'] = add_submenu_page('wp-camoo-sms', __('Subscribers', 'wp-camoo-sms'), __('Subscribers', 'wp-camoo-sms'), 'wpsms_subscribers', 'wp-camoo-sms-subscribers', array( $this, 'subscribers_callback' ));
-        $hook_suffix['groups']      = add_submenu_page('wp-camoo-sms', __('Groups', 'wp-camoo-sms'), __('Groups', 'wp-camoo-sms'), 'wpsms_subscribers', 'wp-camoo-sms-subscribers-group', array( $this, 'groups_callback' ));
+        $hook_suffix['subscribers'] = add_submenu_page('wp-camoo-sms', __('Subscribers', 'wp-camoo-sms'), __('Subscribers', 'wp-camoo-sms'), 'wpcamoosms_subscribers', 'wp-camoo-sms-subscribers', array( $this, 'subscribers_callback' ));
+        $hook_suffix['groups']      = add_submenu_page('wp-camoo-sms', __('Groups', 'wp-camoo-sms'), __('Groups', 'wp-camoo-sms'), 'wpcamoosms_subscribers', 'wp-camoo-sms-subscribers-group', array( $this, 'groups_callback' ));
 
         // Check GDPR compliance for Privacy menu
         if (isset($this->options['gdpr_compliance']) and $this->options['gdpr_compliance'] == 1) {
@@ -277,10 +277,10 @@ class Admin
         // Get administrator role
         $role = get_role('administrator');
 
-        $role->add_cap('wpsms_sendsms');
-        $role->add_cap('wpsms_outbox');
-        $role->add_cap('wpsms_subscribers');
-        $role->add_cap('wpsms_setting');
+        $role->add_cap('wpcamoosms_sendsms');
+        $role->add_cap('wpcamoosms_outbox');
+        $role->add_cap('wpcamoosms_subscribers');
+        $role->add_cap('wpcamoosms_setting');
     }
 
     /**
@@ -290,11 +290,11 @@ class Admin
     {
         if (isset($_GET['action'])) {
             if ($_GET['action'] == 'wpsms-hide-newsletter') {
-                update_option('wpsms_hide_newsletter', true);
+                update_option('wpcamoosms_hide_newsletter', true);
             }
         }
 
-        if (! get_option('wpsms_hide_newsletter')) {
+        if (! get_option('wpcamoosms_hide_newsletter')) {
             add_action('wp_camoo_sms_settings_page', array( $this, 'admin_newsletter' ));
         }
 

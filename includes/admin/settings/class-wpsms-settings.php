@@ -11,12 +11,11 @@ class Settings
 {
     public $setting_name;
     public $options = array();
-
     public function __construct()
     {
-        $this->setting_name = 'wp_camoo_sms_settings';
+        $this->setting_name = \CAMOO_SMS\Option::MAIN_SETTING_KEY;
         $this->get_settings();
-        $this->options = Helper::onAfterGetSettings(get_option($this->setting_name));
+        $this->options = \CAMOO_SMS\Option::getOptions($this->setting_name);
 
         if (empty($this->options)) {
             update_option($this->setting_name, array());
@@ -24,7 +23,12 @@ class Settings
 
         add_action('admin_menu', array( $this, 'add_settings_menu' ), 11);
 
-        if (isset($_GET['page']) and $_GET['page'] == 'wp-camoo-sms-settings' or isset($_POST['option_page']) and $_POST['option_page'] == 'wp_camoo_sms_settings') {
+        if (isset($_POST['_wp_http_referer'])) {
+            add_filter('wp_camoo_sms_settings_sanitize', [\CAMOO_SMS\Admin\Helper::class, 'sanitizer'], 10, 2);
+            add_filter('wp_camoo_sms_settings_beforesave', [\CAMOO_SMS\Option::class, 'beforeSave']);
+        }
+
+        if (isset($_GET['page']) && $_GET['page'] == 'wp-camoo-sms-settings' || isset($_POST['option_page']) && $_POST['option_page'] == 'wp_camoo_sms_settings') {
             add_action('admin_init', array( $this, 'register_settings' ));
         }
     }
@@ -34,7 +38,7 @@ class Settings
      * */
     public function add_settings_menu()
     {
-        add_submenu_page('wp-camoo-sms', __('Settings', 'wp-camoo-sms'), __('Settings', 'wp-camoo-sms'), 'wpsms_setting', 'wp-camoo-sms-settings', array(
+        add_submenu_page('wp-camoo-sms', __('Settings', 'wp-camoo-sms'), __('Settings', 'wp-camoo-sms'), 'wpcamoosms_setting', 'wp-camoo-sms-settings', array(
             $this,
             'render_settings'
         ));
@@ -48,13 +52,13 @@ class Settings
      */
     public function get_settings()
     {
-        $settings = Helper::onAfterGetSettings(get_option($this->setting_name));
+        $settings =  get_option($this->setting_name);
         if (! $settings) {
             update_option($this->setting_name, array(
                 'rest_api_status' => 1,
             ));
         }
-        return apply_filters('wpsms_get_settings', $settings);
+        return apply_filters('wp_camoo_sms_get_settings', $settings);
     }
 
     /**
@@ -153,25 +157,15 @@ class Settings
             // Get the setting type (checkbox, select, etc)
             $type = isset($settings[ $tab ][ $key ]['type']) ? $settings[ $tab ][ $key ]['type'] : false;
 
-            if ($type) {
-                // Field type specific filter
-                $input[ $key ] = apply_filters('wp_camoo_sms_settings_sanitize_' . $type, $value, $key);
-            }
-
             // General filter
-            $input[ $key ] = apply_filters('wp_camoo_sms_settings_sanitize', $value, $key);
+            $input[ $key ] = apply_filters('wp_camoo_sms_settings_sanitize', $value, $type);
 
             if (in_array($key, ['bulk_chunk','bulk_threshold'])) {
                 if (!Gateway::can_bulk_send()) {
                     unset($input[$key]);
                 } elseif ((int) $value > 50 || empty($value)) {
-                    $input[ $key ] = apply_filters('wp_camoo_sms_settings_sanitize_number', 50, $key);
+                    $input[ $key ] = apply_filters('wp_camoo_sms_settings_sanitize', 50, 'number');
                 }
-            }
-
-            // encrypt api secret key
-            if (in_array($key, ['gateway_password', 'gateway_username'])) {
-                $input[ $key ] = apply_filters('wp_camoo_sms_settings_sanitize', Helper::encrypt($value), $key);
             }
         }
 
@@ -190,7 +184,7 @@ class Settings
         }
 
         // Merge our new settings with the existing
-        $output = array_merge($this->options, $input);
+        $output = apply_filters('wp_camoo_sms_settings_beforesave', array_merge($this->options, $input));
 
         add_settings_error('wpsms-notices', '', __('Settings updated', 'wp-camoo-sms'), 'updated');
 
@@ -288,7 +282,7 @@ class Settings
                     'id'   => 'encrypt_sms',
                     'name'    => __('Encrypt SMS', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
-                    'options' => ['disabled' => Helper::getPhpVersion() < CAMOO_SMS_MIN_PHP_VERSION || $this->options['gateway_name'] !== 'camoo'],
+                    'options' => ['disabled' => Helper::getPhpVersion() < CAMOO_SMS_MIN_PHP_VERSION || (!empty($this->options['gateway_name']) && $this->options['gateway_name'] !== 'camoo')],
                     'desc' => __('Encrypt  SMS to ensure an end to end encryption between your server and the Camoo\'s server', 'wp-camoo-sms')
                 ),
                 // Gateway status
@@ -1075,7 +1069,7 @@ class Settings
         }
 
         $size = (isset($args['size']) && ! is_null($args['size'])) ? $args['size'] : 'regular';
-        $html = '<input type="text" class="' . $size . '-text wpsms_upload_field" id="wp_camoo_sms_settings[' . $args['id'] . ']" name="wp_camoo_sms_settings[' . $args['id'] . ']" value="' . esc_attr(stripslashes($value)) . '"/>';
+        $html = '<input type="text" class="' . $size . '-text wpcamoosms_upload_field" id="wp_camoo_sms_settings[' . $args['id'] . ']" name="wp_camoo_sms_settings[' . $args['id'] . ']" value="' . esc_attr(stripslashes($value)) . '"/>';
         $html .= '<span>&nbsp;<input type="button" class="wp_camoo_sms_settings_upload_button button-secondary" value="' . __('Upload File', 'wpsms') . '"/></span>';
         $html .= '<p class="description"> ' . $args['desc'] . '</p>';
 

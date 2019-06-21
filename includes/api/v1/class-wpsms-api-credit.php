@@ -61,7 +61,7 @@ class Credit extends \CAMOO_SMS\RestApi
      */
     public function get_item_permissions_check($request)
     {
-        return current_user_can('wpsms_setting');
+        return current_user_can('wpcamoosms_setting');
     }
 }
 
