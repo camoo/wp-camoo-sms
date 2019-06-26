@@ -9,7 +9,7 @@ use CAMOO_SMS\Admin\Helper;
 
 class Option
 {
-    public const MAIN_SETTING_KEY = 'wp_camoo_sms_settings';
+    const MAIN_SETTING_KEY = 'wp_camoo_sms_settings';
 
     /**
      * Get the whole Plugin Options

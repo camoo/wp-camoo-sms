@@ -18,8 +18,8 @@ class CAMOO_SMS
          */
         require_once WP_CAMOO_SMS_DIR . 'includes/class-wpsms-install.php';
 
-        register_activation_hook(WP_CAMOO_SMS_DIR . 'wp-camoo-sms.php', array( '\CAMOO_SMS\Install', 'install' ));
-        register_deactivation_hook(WP_CAMOO_SMS_DIR . 'wp-camoo-sms.php', [$this, 'sms_status_plugin_deactivate']);
+        register_activation_hook(WP_CAMOO_SMS_DIR . 'camoo-sms.php', array( '\CAMOO_SMS\Install', 'install' ));
+        register_deactivation_hook(WP_CAMOO_SMS_DIR . 'camoo-sms.php', [$this, 'sms_status_plugin_deactivate']);
     }
 
     /**

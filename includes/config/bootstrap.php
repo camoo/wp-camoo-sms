@@ -10,7 +10,7 @@ use CAMOO_SMS\Gateway;
 
 class Bootstrap
 {
-    public const PLUGIN_MAIN_FILE = 'wp-camoo-sms/wp-camoo-sms.php';
+    public const PLUGIN_MAIN_FILE = 'camoo-sms/camoo-sms.php';
     public function initialze()
     {
         require_once dirname(plugin_dir_path(__FILE__)) . '/defines.php';

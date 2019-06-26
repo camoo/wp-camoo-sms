@@ -30,7 +30,7 @@ class Version
      */
     public function pro_meta_links($links, $file)
     {
-        if (strpos($file, 'wp-camoo-sms.php') !== false) {
+        if (strpos($file, 'camoo-sms.php') !== false) {
             $links[] = sprintf(__('<b><a href="%s" target="_blank" class="wpsms-plugin-meta-link wp-camoo-sms-pro" title="Join Camoo now">Join Camoo Now!</a></b>', 'wp-camoo-sms'), WP_CAMOO_SMS_SITE . '/join');
         }
 

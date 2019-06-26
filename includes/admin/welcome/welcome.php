@@ -4,7 +4,7 @@
 
         <p class="about-text">
             <?php _e('Thank you for updating to the latest version!', 'wp-camoo-sms'); ?>
-            <a href="https://wwww.camoo.cm" target="_blank"><img src="<?php echo plugins_url('wp-camoo-sms/assets/images/logo.svg'); ?>"/></a>
+            <a href="https://wwww.camoo.cm" target="_blank"><img src="<?php echo plugins_url('camoo-sms/assets/images/logo.svg'); ?>"/></a>
         </p>
 
         <div class="wp-badge"><?php printf(__('Version %s', 'wp-camoo-sms'), WP_CAMOO_SMS_VERSION); ?></div>
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="right text-center">
-                    <img src="<?php echo plugins_url('wp-camoo-sms/assets/images/welcome/what-is-new/wc-order-box.png'); ?>"/>
+                    <img src="<?php echo plugins_url('camoo-sms/assets/images/welcome/what-is-new/wc-order-box.png'); ?>"/>
                 </div>
             </section>
 
@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="left text-center">
-                    <img src="<?php echo plugins_url('wp-camoo-sms/assets/images/welcome/what-is-new/wc-order-box-note.png'); ?>"/>
+                    <img src="<?php echo plugins_url('camoo-sms/assets/images/welcome/what-is-new/wc-order-box-note.png'); ?>"/>
                 </div>
             </section>
 

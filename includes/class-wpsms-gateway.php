@@ -67,8 +67,8 @@ class Gateway
 
         if (is_file(WP_CAMOO_SMS_DIR . 'includes/gateways/class-wpsms-gateway-' . $gateway_name . '.php')) {
             include_once WP_CAMOO_SMS_DIR . 'includes/gateways/class-wpsms-gateway-' . $gateway_name . '.php';
-        } elseif (is_file(WP_PLUGIN_DIR . '/wp-camoo-sms/includes/gateways/class-wpsms-pro-gateway-' . $gateway_name . '.php')) {
-            include_once(WP_PLUGIN_DIR . '/wp-camoo-sms/includes/gateways/class-wpsms-pro-gateway-' . $gateway_name . '.php');
+        } elseif (is_file(WP_PLUGIN_DIR . '/camoo-sms/includes/gateways/class-wpsms-pro-gateway-' . $gateway_name . '.php')) {
+            include_once(WP_PLUGIN_DIR . '/camoo-sms/includes/gateways/class-wpsms-pro-gateway-' . $gateway_name . '.php');
         } else {
             return new $class_name();
         }

@@ -42,14 +42,14 @@ fi
 PHP7=$(getPhp7Version)
 if [ -z "$PHP7" -o $PHP7 -lt 70100 ]; then
 
-	if [ -d "${SRC}/wp-camoo-sms/includes/gateways/libraries/camoo-legacy" ]; then
-		cd ${SRC}/wp-camoo-sms/includes/gateways/libraries/camoo-legacy
+	if [ -d "${SRC}/camoo-sms/includes/gateways/libraries/camoo-legacy" ]; then
+		cd ${SRC}/camoo-sms/includes/gateways/libraries/camoo-legacy
 		${PHP} ${COMPOSER} require camoo/sms
 	fi
 else
 
-	if [ -d "${SRC}/wp-camoo-sms/includes/gateways/libraries/camoo" ]; then
-		cd ${SRC}/wp-camoo-sms/includes/gateways/libraries/camoo
+	if [ -d "${SRC}/camoo-sms/includes/gateways/libraries/camoo" ]; then
+		cd ${SRC}/camoo-sms/includes/gateways/libraries/camoo
 		${PHP} ${COMPOSER} require camoo/sms
 	fi
 fi
