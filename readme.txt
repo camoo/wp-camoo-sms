@@ -41,6 +41,34 @@ Using WP SMS you can enjoy many features, You can
 * Importing/Exporting Subscribers.
 * GPG SMS encryption
 * Handle status report
+
+== Frequently Asked Questions ==
+= PHP 7 Support? =
+Yes! CAMOO SMS is compatible with PHP version 7.3. We strongly recommend at least the use of PHP 7.1 to enjoy all the features offered
+
+= How to get my access keys? =
+All you need is just to [create an account](https://www.camoo.cm/join) and then ask our team for SMS acess keys.
+
+= Can I send Bulk SMS? =
+Yes! But to be able to do so, you running PHP version should be at leat PHP 7.1.
+
+= Do I get delivered status for sending SMS? =
+Yes you do! CAMOO SMS handle automatically status and show it up in your outbox section. The following status are available:
+* 'delivered'		  Message successfuly delivered
+* 'scheduled'		  Message has been scheduled for delivery
+* 'buffered'		  Message has been buffered
+* 'sent'			  Message is sent, but not yet delivered
+* 'expired'			  Delivery period over for the message (Failed)
+* 'delivery_failed	  Message couldn't be delivered
+
+= Is it possible to encrypt messages before sending? =
+Yes! CAMOO SMS uses GPG encryption to ensure the end to end encryption between your WordPress site and our server
+
+== Screenshots ==
+1. Send SMS Page.
+
+== Upgrade Notice ==
+
 == Changelog ==
 = 1.0 =
 * Start plugin
