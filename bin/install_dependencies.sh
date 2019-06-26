@@ -40,7 +40,7 @@ if [ -z "$COMPOSER" ]; then
 fi
 
 PHP7=$(getPhp7Version)
-if [ -z "$PHP7" -o $PHP7 -lt 70100 ]; then
+if [ -z "$PHP7" -o $PHP7 -lt 70000 ]; then
 
 	if [ -d "${SRC}/camoo-sms/includes/gateways/libraries/camoo-legacy" ]; then
 		cd ${SRC}/camoo-sms/includes/gateways/libraries/camoo-legacy

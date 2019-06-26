@@ -28,4 +28,4 @@ if (!defined('CAMOO_SMS_MOBILE_REGEX')){
 if (!defined('CAMOO_SMS_CURRENT_DATE')){
     define('CAMOO_SMS_CURRENT_DATE', date('Y-m-d H:i:s', current_time('timestamp')));
 }
-define('CAMOO_SMS_MIN_PHP_VERSION', 70100);
+define('CAMOO_SMS_MIN_PHP_VERSION', 70000);

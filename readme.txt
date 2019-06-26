@@ -44,13 +44,13 @@ Using WP SMS you can enjoy many features, You can
 
 == Frequently Asked Questions ==
 = PHP 7 Support? =
-Yes! CAMOO SMS is compatible with PHP version 7.3. We strongly recommend at least the use of PHP 7.1 to enjoy all the features offered
+Yes! CAMOO SMS is compatible with PHP version 7.3. We strongly recommend at least the use of PHP 7.0 to enjoy all the features offered
 
 = How to get my access keys? =
 All you need is just to [create an account](https://www.camoo.cm/join) and then ask our team for SMS acess keys.
 
 = Can I send Bulk SMS? =
-Yes! But to be able to do so, your running PHP version should be at least PHP 7.1 and the function `shell_exec` enabled.
+Yes! But to be able to do so, your running PHP version should be at least PHP 7.0 and the function `shell_exec` enabled.
 
 = Do I get delivered status for sending SMS? =
 Yes you do! CAMOO SMS handle automatically status and show it up in your outbox section. The following status are available:
