@@ -37,7 +37,7 @@ class Welcome
      */
     public function menu()
     {
-        add_submenu_page(__('WP-SMS Welcome', 'wp-camoo-sms'), __('WP-SMS Welcome', 'wp-camoo-sms'), __('WP-SMS Welcome', 'wp-camoo-sms'), 'administrator', 'wp-camoo-sms-welcome', array( $this, 'page_callback' ));
+        add_submenu_page(__('CAMOO-SMS Welcome', 'wp-camoo-sms'), __('CAMOO-SMS Welcome', 'wp-camoo-sms'), __('CAMOO-SMS Welcome', 'wp-camoo-sms'), 'administrator', 'wp-camoo-sms-welcome', array( $this, 'page_callback' ));
     }
 
     /**

@@ -503,7 +503,7 @@ class Settings
                     'name'    => __('REST API status', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
                     'options' => $options,
-                    'desc'    => __('Add WP-SMS endpoints to the WP Rest API', 'wp-camoo-sms')
+                    'desc'    => __('Add CAMOO-SMS endpoints to the WP Rest API', 'wp-camoo-sms')
                 ),
             )),
             // Notifications tab
@@ -1106,7 +1106,7 @@ class Settings
                 <ul class="wpsms-tab">
                     <li id="wpsms-logo">
                         <img src="<?php echo WP_CAMOO_SMS_URL; ?>assets/images/logo.svg"/>
-                        <p><?php echo sprintf(__('WP-SMS v%s', 'wp-camoo-sms'), WP_CAMOO_SMS_VERSION); ?></p>
+                        <p><?php echo sprintf(__('CAMOO-SMS v%s', 'wp-camoo-sms'), WP_CAMOO_SMS_VERSION); ?></p>
                         <?php do_action('wp_camoo_sms_after_setting_logo'); ?>
                     </li>
                     <?php

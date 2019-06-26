@@ -1,6 +1,6 @@
 <div class="wrap wps-wrap about-wrap full-width-layout">
     <div class="wp-camoo-sms-welcome">
-        <h1><?php printf(__('Welcome to WP-CAMOO-SMS&nbsp;%s', 'wp-camoo-sms'), WP_CAMOO_SMS_VERSION); ?></h1>
+        <h1><?php printf(__('Welcome to CAMOO-SMS&nbsp;%s', 'wp-camoo-sms'), WP_CAMOO_SMS_VERSION); ?></h1>
 
         <p class="about-text">
             <?php _e('Thank you for updating to the latest version!', 'wp-camoo-sms'); ?>
@@ -17,7 +17,7 @@
             <section class="center-section">
                 <div class="left">
                     <div class="content-padding">
-                        <h2><?php _e('Improvement feature for WP-SMS', 'wp-camoo-sms'); ?></h2>
+                        <h2><?php _e('Improvement feature for CAMOO-SMS', 'wp-camoo-sms'); ?></h2>
                     </div>
                 </div>
             </section>
@@ -52,35 +52,16 @@
 
         <div data-content="credit" class="tab-content">
             <div class="about-wrap-content">
-                <p class="about-description"><?php echo sprintf(__('WP-SMS is created by some people and is one of the <a href="%s" target="_blank">VeronaLabs.com</a> projects.', 'wp-camoo-sms'), 'https://camoo.cm'); ?></p>
+                <p class="about-description"><?php echo sprintf(__('CAMOO-SMS is created by some people and is one of the <a href="%s" target="_blank">Camoo.cm</a> projects.', 'wp-camoo-sms'), 'https://www.camoo.cm'); ?></p>
                 <h3 class="wp-people-group"><?php _e('Project Leaders', 'wp-camoo-sms'); ?></h3>
                 <ul class="wp-people-group ">
                     <li class="wp-person">
-                        <a href="https://profiles.wordpress.org/mostafas1990" class="web"><?php echo get_avatar('mst404@gmail.com', 62, '', '', array( 'class' => 'gravatar' )); ?><?php _e('Mostafa Soufi', 'wp-camoo-sms'); ?></a>
+                        <a href="https://profiles.wordpress.org/camoo" class="web"><?php echo get_avatar('wordpress@camoo.sarl', 62, '', '', array( 'class' => 'gravatar' )); ?><?php _e('Camoo Sarl', 'wp-camoo-sms'); ?></a>
                         <span class="title"><?php _e('Original Author', 'wp-camoo-sms'); ?></span>
                     </li>
                 </ul>
-                <h3 class="wp-people-group"><?php _e('Other Contributors', 'wp-camoo-sms'); ?></h3>
-                <ul class="wp-people-group">
-                    <li class="wp-person">
-                        <a href="https://profiles.wordpress.org/ghasemi71ir" class="web"><?php echo get_avatar('ghasemi71ir@gmail.com', 62, '', '', array( 'class' => 'gravatar' )); ?><?php _e('Mohammad Ghasemi', 'wp-camoo-sms'); ?></a>
-                        <span class="title"><?php _e('Core Contributor', 'wp-camoo-sms'); ?></span>
-                    </li>
-                    <li class="wp-person">
-                        <a href="https://profiles.wordpress.org/mehrshaddarzi" class="web"><?php echo get_avatar('mehrshad198@gmail.com', 62, '', '', array( 'class' => 'gravatar' )); ?><?php _e('Mehrshad Darzi', 'wp-camoo-sms'); ?></a>
-                        <span class="title"><?php _e('Core Contributor', 'wp-camoo-sms'); ?></span>
-                    </li>
-                    <li class="wp-person">
-                        <a href="https://profiles.wordpress.org/kamrankhorsandi" class="web"><?php echo get_avatar('kamran.khorsandi@gmail.com', 62, '', '', array( 'class' => 'gravatar' )); ?><?php _e('Kamran Khorsandi', 'wp-camoo-sms'); ?></a>
-                        <span class="title"><?php _e('Core Contributor', 'wp-camoo-sms'); ?></span>
-                    </li>
-                    <li class="wp-person">
-                        <a href="https://profiles.wordpress.org/pedromendonca" class="web"><?php echo get_avatar('ped.gaspar@gmail.com', 62, '', '', array( 'class' => 'gravatar' )); ?><?php _e('Pedro Mendonça', 'wp-camoo-sms'); ?></a>
-                        <span class="title"><?php _e('Language Contributor', 'wp-camoo-sms'); ?></span>
-                    </li>
-                </ul>
 
-                <p class="clear"><?php echo sprintf(__('WP-CAMOO-SMS is a fork of WP-SMS and is being developed on GitHub, if you’re interested in contributing to the plugin, please look at the <a href="%s" target="_blank">GitHub page</a>.', 'wp-camoo-sms'), 'https://github.com/camoo/wp-camoo-sms'); ?></p>
+                <p class="clear"><?php echo sprintf(__('CAMOO-SMS is a fork of WP-SMS and is being developed on GitHub, if you’re interested in contributing to the plugin, please look at the <a href="%s" target="_blank">GitHub page</a>.', 'wp-camoo-sms'), 'https://github.com/camoo/wp-camoo-sms'); ?></p>
             </div>
         </div>
 
@@ -89,7 +70,7 @@
         </div>
         <hr style="clear: both;">
         <div class="wps-return-to-dashboard">
-            <a href="admin.php?page=wp-camoo-sms-settings"><?php _e('Go to WP-SMS &rarr; Settings', 'wp-camoo-sms'); ?></a>
+            <a href="admin.php?page=wp-camoo-sms-settings"><?php _e('Go to CAMOO-SMS &rarr; Settings', 'wp-camoo-sms'); ?></a>
         </div>
     </div>
 </div>

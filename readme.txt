@@ -66,6 +66,10 @@ Yes! CAMOO SMS uses GPG encryption to ensure the end to end encryption between y
 
 == Screenshots ==
 1. Send SMS Page.
+2. Gateway configuration.
+3. Bulk SMS configuration.
+4. SMS outbox example.
+5. Features Page
 
 == Upgrade Notice ==
 N/A

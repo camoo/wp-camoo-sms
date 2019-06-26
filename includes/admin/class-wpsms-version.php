@@ -51,7 +51,7 @@ class Version
      */
     public function version_notice()
     {
-        Helper::notice(sprintf(__('The <a href="%s" target="_blank">CAMOO SMS</a> is out of date and not compatible with new version of WP-SMS, Please update the plugin to the <a href="%s" target="_blank">latest version</a>.', 'wp-camoo-sms'), WP_CAMOO_SMS_SITE, 'https://github.com/camoo/wp-camoo-sms/releases'), 'error');
+        Helper::notice(sprintf(__('The <a href="%s" target="_blank">CAMOO SMS</a> is out of date and not compatible with new version of CAMOO-SMS, Please update the plugin to the <a href="%s" target="_blank">latest version</a>.', 'wp-camoo-sms'), WP_CAMOO_SMS_SITE, 'https://github.com/camoo/wp-camoo-sms/releases'), 'error');
     }
 }
 
