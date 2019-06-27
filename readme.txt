@@ -1,8 +1,6 @@
 === CAMOO SMS ===
-Forked from WP SMS
 Contributors: camoo
-Donate link: https://wp-sms-pro.com/donate
-Tags: sms, wordpress, send, subscribe, message, register, notification, webservice, sms panel, woocommerce, subscribes-sms, EDD, twilio, bulksms, nexmo, camoo sarl, bulk sms
+Tags: sms, cameroon, subscribe, , sms panel, subscribes-sms, camoo sarl, bulk sms
 Requires at least: 3.0
 Tested up to: 5.2.2
 Requires PHP: 5.6
@@ -10,18 +8,16 @@ Stable tag: 1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-CAMOO SMS A powerful texting plugin for WordPress
+With CAMOO SMS, you have the ability to send (Bulk) SMS to a group, to a user, to a number, to members of SMS newsletter or to every signle event in your site. The usage of this plugin is completely free.
 
 == Description ==
-By CAMOO SMS you can add the ability of SMS sending to your WordPress product. So you can send SMS to your newsletter subscribers or your users and get their attentions to your site and products.
-
-Using WP SMS you can enjoy many features, You can
+Using CAMOO SMS adds to WordPress, the ability to :
 
 * Send SMS to either your users’ numbers or specific numbers
 * Get your users’ mobile numbers when they subscribe to your newsletters
 * Send SMS automatically to users and admins in different situations
 * Increase the security by two step verification
-* Login with your mobile number in case that you forget your password
+* Send SMS to members of SMS newsletter
 * And many more!
 
 = Features =
