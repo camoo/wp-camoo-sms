@@ -48,7 +48,7 @@
         <?php if (wp_camoo_sms_get_option('gdpr_compliance') == 1) { ?>
             <div class="wpsms-subscribe-form">
                 <label><input id="wpsms-gdpr-confirmation" type="checkbox" <?php echo wp_camoo_sms_get_option('newsletter_form_gdpr_confirm_checkbox') == 'checked' ? 'checked="checked"' : ''; ?>>
-                    <?php echo wp_camoo_sms_get_option('newsletter_form_gdpr_text') ? wp_camoo_sms_get_option('newsletter_form_gdpr_text') : 'GDPR text...'; ?>
+                    <?php echo wp_camoo_sms_get_option('newsletter_form_gdpr_text') ? esc_html(trim(wp_camoo_sms_get_option('newsletter_form_gdpr_text'))) : 'GDPR text...'; ?>
                 </label>
             </div>
         <?php } ?>
