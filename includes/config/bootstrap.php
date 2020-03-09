@@ -8,7 +8,7 @@ if (! defined('ABSPATH')) {
 
 use CAMOO_SMS\Gateway;
 
-class Bootstrap
+final class Bootstrap
 {
     const PLUGIN_MAIN_FILE = 'camoo-sms/camoo-sms.php';
     public function initialze()

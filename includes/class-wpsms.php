@@ -145,6 +145,8 @@ class CAMOO_SMS
 
             // System info class.
             require_once WP_CAMOO_SMS_DIR . 'includes/admin/system-info/class-wpsms-system-info.php';
+            // Controller stuff
+            include_once WP_CAMOO_SMS_DIR . 'vendor/autoload.php';
         }
 
         if (! is_admin()) {

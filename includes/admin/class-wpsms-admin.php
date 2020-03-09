@@ -6,6 +6,7 @@ if (! defined('ABSPATH')) {
 } // Exit if accessed directly
 
 use CAMOO_SMS\Option;
+use WP_CAMOO\SMS\Controller\ScheduledMessageController;
 
 class Admin
 {
@@ -100,13 +101,14 @@ class Admin
      */
     public function admin_menu()
     {
-        $hook_suffix = array();
+        $hook_suffix = [];
         add_menu_page(__('Camoo SMS', 'wp-camoo-sms'), __('Camoo SMS', 'wp-camoo-sms'), 'wpcamoosms_sendsms', 'wp-camoo-sms', array( $this, 'send_sms_callback' ), 'dashicons-email-alt');
         add_submenu_page('wp-camoo-sms', __('Send SMS', 'wp-camoo-sms'), __('Send SMS', 'wp-camoo-sms'), 'wpcamoosms_sendsms', 'wp-camoo-sms', array( $this, 'send_sms_callback' ));
         add_submenu_page('wp-camoo-sms', __('Outbox', 'wp-camoo-sms'), __('Outbox', 'wp-camoo-sms'), 'wpcamoosms_outbox', 'wp-camoo-sms-outbox', array( $this, 'outbox_callback' ));
 
         $hook_suffix['subscribers'] = add_submenu_page('wp-camoo-sms', __('Subscribers', 'wp-camoo-sms'), __('Subscribers', 'wp-camoo-sms'), 'wpcamoosms_subscribers', 'wp-camoo-sms-subscribers', array( $this, 'subscribers_callback' ));
         $hook_suffix['groups']      = add_submenu_page('wp-camoo-sms', __('Groups', 'wp-camoo-sms'), __('Groups', 'wp-camoo-sms'), 'wpcamoosms_subscribers', 'wp-camoo-sms-subscribers-group', array( $this, 'groups_callback' ));
+        $hook_suffix['WP_CAMOO\SMS\Controller\ScheduledMessageController'] = add_submenu_page('wp-camoo-sms', __('Scheduled message', 'wp-camoo-sms'), __('Scheduled Message', 'wp-camoo-sms'), 'manage_options', 'wp-camoo-sms-scheduled-message', array( $this, 'scheduledMessageCallback' ));
 
         // Check GDPR compliance for Privacy menu
         if (isset($this->options['gdpr_compliance']) and $this->options['gdpr_compliance'] == 1) {
@@ -117,7 +119,11 @@ class Admin
 
         // Add styles to menu pages
         foreach ($hook_suffix as $menu => $hook) {
-            add_action("load-{$hook}", array( $this, $menu . '_assets' ));
+            if (!class_exists($menu)) {
+                add_action("load-{$hook}", [$this, $menu . '_assets' ]);
+            } elseif (method_exists($menu, 'addAssets')) {
+                $menu::addAssets();
+            }
         }
     }
 
@@ -184,6 +190,12 @@ class Admin
     {
         $page = new SystemInfo();
         $page->render_page();
+    }
+
+    public function scheduledMessageCallback()
+    {
+        $oController = new ScheduledMessageController();
+        $oController->index();
     }
 
     /**
