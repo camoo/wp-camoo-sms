@@ -4,70 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "75b94f4d983429578c062309a3f417b0",
+    "content-hash": "95bb89bb8cec316b54dd82190351df2a",
     "packages": [
-        {
-            "name": "camoo/sms",
-            "version": "v3.1.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/camoo/sms.git",
-                "reference": "a1714ad5f8ea450c820d43643adf663919d54fed"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/camoo/sms/zipball/a1714ad5f8ea450c820d43643adf663919d54fed",
-                "reference": "a1714ad5f8ea450c820d43643adf663919d54fed",
-                "shasum": ""
-            },
-            "require": {
-                "ext-mbstring": "*",
-                "giggsey/libphonenumber-for-php": "^8.10",
-                "guzzlehttp/guzzle": "^6.3",
-                "nicoswd/php-gpg": "^1.7",
-                "php": ">=7.0",
-                "vlucas/valitron": "^1.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^8.4"
-            },
-            "suggest": {
-                "phpunit/phpunit": "Allows automated tests to be run without system-wide install."
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Camoo\\Sms\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "CAMOO SARL",
-                    "email": "sms@camoo.sarl"
-                }
-            ],
-            "description": "CAMOO API Packages",
-            "homepage": "https://camoo.cm",
-            "keywords": [
-                "API-SMS",
-                "CAMOO",
-                "GPG SMS encrytion",
-                "Plugin camoo sms",
-                "bulk sms",
-                "sms",
-                "sms gateway"
-            ],
-            "support": {
-                "issues": "https://github.com/camoo/sms/issues",
-                "source": "https://github.com/camoo/sms",
-                "wiki": "https://github.com/camoo/sms/wiki"
-            },
-            "time": "2020-06-20T14:21:22+00:00"
-        },
         {
             "name": "giggsey/libphonenumber-for-php",
             "version": "8.12.15",
@@ -396,95 +334,36 @@
             "time": "2020-09-30T07:37:11+00:00"
         },
         {
-            "name": "nicoswd/php-gpg",
-            "version": "1.7.1",
+            "name": "nimbuz/sms",
+            "version": "v1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nicoSWD/php-gpg.git",
-                "reference": "868cf938c3c03b64c4001acf25ade7b0d8fb43c3"
+                "url": "https://github.com/camoo/nimbuz-sms.git",
+                "reference": "ee08e8b0e11ed463384d6fe2aafd13485c3225a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nicoSWD/php-gpg/zipball/868cf938c3c03b64c4001acf25ade7b0d8fb43c3",
-                "reference": "868cf938c3c03b64c4001acf25ade7b0d8fb43c3",
+                "url": "https://api.github.com/repos/camoo/nimbuz-sms/zipball/ee08e8b0e11ed463384d6fe2aafd13485c3225a5",
+                "reference": "ee08e8b0e11ed463384d6fe2aafd13485c3225a5",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.0",
-                "phpseclib/phpseclib": "^2.0"
+                "ext-mbstring": "*",
+                "giggsey/libphonenumber-for-php": "^8.10",
+                "guzzlehttp/guzzle": "^6.3",
+                "php": ">=7.1",
+                "vlucas/valitron": "^1.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "nicoSWD\\GPG\\": "src"
-                },
-                "files": [
-                    "src/globals.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-1.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Jason Hinkle"
-                },
-                {
-                    "name": "Ian Carroll"
-                },
-                {
-                    "name": "Nicolas Oelgart"
-                }
-            ],
-            "description": "Pure PHP GPG implementation, forked from php-gpg.",
-            "keywords": [
-                "PGP",
-                "gpg"
-            ],
-            "support": {
-                "source": "https://github.com/nicoSWD/php-gpg/tree/master"
-            },
-            "time": "2018-04-09T09:19:41+00:00"
-        },
-        {
-            "name": "phpseclib/phpseclib",
-            "version": "2.0.30",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "136b9ca7eebef78be14abf90d65c5e57b6bc5d36"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/136b9ca7eebef78be14abf90d65c5e57b6bc5d36",
-                "reference": "136b9ca7eebef78be14abf90d65c5e57b6bc5d36",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "phing/phing": "~2.7",
-                "phpunit/phpunit": "^4.8.35|^5.7|^6.0|^9.4",
-                "squizlabs/php_codesniffer": "~2.0"
+                "phpunit/phpunit": "^7.0"
             },
             "suggest": {
-                "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.",
-                "ext-libsodium": "SSH2/SFTP can make use of some algorithms provided by the libsodium-php extension.",
-                "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
-                "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
+                "phpunit/phpunit": "Allows automated tests to be run without system-wide install."
             },
             "type": "library",
             "autoload": {
-                "files": [
-                    "phpseclib/bootstrap.php"
-                ],
                 "psr-4": {
-                    "phpseclib\\": "phpseclib/"
+                    "Nimbuz\\Sms\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -493,71 +372,26 @@
             ],
             "authors": [
                 {
-                    "name": "Jim Wigginton",
-                    "email": "terrafrost@php.net",
-                    "role": "Lead Developer"
-                },
-                {
-                    "name": "Patrick Monnerat",
-                    "email": "pm@datasphere.ch",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Andreas Fischer",
-                    "email": "bantu@phpbb.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Hans-Jürgen Petrich",
-                    "email": "petrich@tronic-media.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Graham Campbell",
-                    "email": "graham@alt-three.com",
-                    "role": "Developer"
+                    "name": "CAMOO SARL",
+                    "email": "sms@camoo.sarl"
                 }
             ],
-            "description": "PHP Secure Communications Library - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.",
-            "homepage": "http://phpseclib.sourceforge.net",
+            "description": "CAMOO API Packages",
+            "homepage": "https://camoo.cm",
             "keywords": [
-                "BigInteger",
-                "aes",
-                "asn.1",
-                "asn1",
-                "blowfish",
-                "crypto",
-                "cryptography",
-                "encryption",
-                "rsa",
-                "security",
-                "sftp",
-                "signature",
-                "signing",
-                "ssh",
-                "twofish",
-                "x.509",
-                "x509"
+                "API-SMS",
+                "CAMOO",
+                "Plugin camoo sms",
+                "bulk sms",
+                "sms",
+                "sms gateway"
             ],
             "support": {
-                "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.30"
+                "issues": "https://github.com/camoo/nimbuz-sms/issues",
+                "source": "https://github.com/camoo/nimbuz-sms",
+                "wiki": "https://github.com/camoo/nimbuz-sms/wiki"
             },
-            "funding": [
-                {
-                    "url": "https://github.com/terrafrost",
-                    "type": "github"
-                },
-                {
-                    "url": "https://www.patreon.com/phpseclib",
-                    "type": "patreon"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/phpseclib/phpseclib",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2020-12-17T05:42:04+00:00"
+            "time": "2021-01-09T11:00:44+00:00"
         },
         {
             "name": "psr/http-message",

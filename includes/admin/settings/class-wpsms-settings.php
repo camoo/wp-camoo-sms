@@ -283,7 +283,7 @@ class Settings
                     'id'   => 'encrypt_sms',
                     'name'    => __('Encrypt SMS', 'wp-camoo-sms'),
                     'type'    => 'checkbox',
-                    'options' => ['disabled' => Helper::getPhpVersion() < CAMOO_SMS_MIN_PHP_VERSION || (!empty($this->options['gateway_name']) && $this->options['gateway_name'] !== 'camoo')],
+                    'options' => ['class' => 'encrypt-sms', 'disabled' => Helper::getPhpVersion() < CAMOO_SMS_MIN_PHP_VERSION || (!empty($this->options['gateway_name']) && $this->options['gateway_name'] !== 'camoo')],
                     'desc' => __('Encrypt  SMS to ensure an end to end encryption between your server and the Camoo\'s server', 'wp-camoo-sms')
                 ),
                 // Gateway status
@@ -935,7 +935,7 @@ class Settings
             $value = isset($args['std']) ? $args['std'] : '';
         }
 
-        $html     = '<select id="wp_camoo_sms_settings[' . $args['id'] . ']" name="wp_camoo_sms_settings[' . $args['id'] . '][]" multiple="true" class="chosen-select"/>';
+        $html     = '<select id="wp_camoo_sms_settings[' . $args['id'] . ']" name="wp_camoo_sms_settings[' . $args['id'] . '][]" multiple="true" class="chosen-select camoo-sms-et"/>';
         $selected = '';
 
         foreach ($args['options'] as $k => $name) :
@@ -996,7 +996,7 @@ class Settings
         if (is_rtl()) {
             $class_name = 'chosen-select chosen-rtl';
         } else {
-            $class_name = 'chosen-select';
+            $class_name = 'chosen-select camoo-sms-et';
         }
 
         $html = '<select class="' . $class_name . '" id="wp_camoo_sms_settings[' . $args['id'] . ']" name="wp_camoo_sms_settings[' . $args['id'] . ']"/>';

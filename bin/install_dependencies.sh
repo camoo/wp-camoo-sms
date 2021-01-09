@@ -44,14 +44,20 @@ if [ -z "$PHP7" -o $PHP7 -lt 70000 ]; then
 
 	if [ -d "${SRC}/camoo-sms/includes/gateways/libraries/camoo-legacy" ]; then
 		cd ${SRC}/camoo-sms/includes/gateways/libraries/camoo-legacy
-		${PHP} ${COMPOSER} require camoo/sms
+		${PHP} ${COMPOSER} require camoo/sms --no-dev
 	fi
 else
 
 	if [ -d "${SRC}/camoo-sms/includes/gateways/libraries/camoo" ]; then
 		cd ${SRC}/camoo-sms/includes/gateways/libraries/camoo
-		${PHP} ${COMPOSER} require camoo/sms
+		${PHP} ${COMPOSER} require camoo/sms --no-dev
 	fi
+
+	if [ -d "${SRC}/camoo-sms/includes/gateways/libraries/nimbuz" ]; then
+		cd ${SRC}/camoo-sms/includes/gateways/libraries/nimbuz
+		${PHP} ${COMPOSER} require nimbuz/sms --no-dev
+	fi
+
 fi
 echo "[DONE]"
 exit 0;

@@ -1,0 +1,5 @@
+{
+    "require": {
+        "nimbuz/sms": "^1.0"
+    }
+}

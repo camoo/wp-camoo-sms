@@ -227,6 +227,7 @@ class Gateway
             ),
             'camoo' => array(
                 'camoo'       => 'camoo.cm' .$sCamoo,
+                'nimbuz'      => 'sms.nimbuz.cm',
                 'camoolegacy' => 'camoo.cm Legacy version' .$sCamooLegacy,
             ),
         );
