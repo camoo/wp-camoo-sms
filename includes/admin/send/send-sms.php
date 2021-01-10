@@ -33,9 +33,16 @@
         })
     });
 </script>
+<?php
+$options = \CAMOO_SMS\Option::getOptions('wp_camoo_sms_settings');
+$gateway_name = $options['gateway_name'];
+$posCamoo = strpos($gateway_name, 'camoo');
+$isCamoo = $posCamoo !== false;
+$currency = $isCamoo ? 'XAF' : 'Units';
+?>
 
 <div class="wrap">
-    <h2><?php _e('Send SMS', 'wp-camoo-sms'); ?></h2>
+<h2><?php _e('Send SMS', 'wp-camoo-sms'); ?> via <?php echo strtoupper($gateway_name);?></h2>
     <div class="postbox-container" style="padding-top: 20px;">
         <div class="meta-box-sortables">
             <div class="postbox">
@@ -123,11 +130,14 @@
                                 <td>
                                     <textarea dir="auto" cols="80" rows="5" name="wp_get_message" id="wp_get_message"></textarea><br/>
                                     <p class="number">
-                                        <?php echo __('Your account credit', 'wp-camoo-sms') . ': XAF ' . $credit; ?>
+                                        <?php echo __('Your account credit', 'wp-camoo-sms') . ': '. sprintf('%s %s', $currency, $credit); ?>
                                     </p>
                                 </td>
                             </tr>
-                            <?php if ($this->sms->flash == "enable") { ?>
+							<?php 
+								 if ($isCamoo === true) {
+
+							if ($this->sms->flash == "enable") { ?>
                                 <tr>
                                     <td><?php _e('Send a Flash', 'wp-camoo-sms'); ?>:</td>
                                     <td>
@@ -139,7 +149,9 @@
                                         <p class="description"><?php _e('Flash is possible to send messages without being asked, opens', 'wp-camoo-sms'); ?></p>
                                     </td>
                                 </tr>
-                            <?php } ?>
+							<?php 
+								}
+								?>
                                 <tr>
                                     <td><?php _e('SMS route', 'wp-camoo-sms'); ?>:</td>
                                     <td>
@@ -150,7 +162,10 @@
                                         <br/>
                                         <p class="description"><?php echo sprintf(__("The SMS route that is used to send the message. <span style='color:#ff0000;'>The classic route works only for cameroonian mobile phone numbers.</span> <a href='%s' target='_blank'>Check Wiki for more explanation</a>", 'wp-camoo-sms'), 'https://github.com/camoo/sms/wiki/Send-a-message#optional-parameters'); ?></p>
                                     </td>
-                                </tr>
+								</tr>
+								<?php
+								}
+								?>
                             <tr>
                                 <td>
                                     <p class="submit" style="padding: 0;">

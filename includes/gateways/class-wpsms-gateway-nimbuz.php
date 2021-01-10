@@ -7,9 +7,9 @@ class Nimbuz extends \CAMOO_SMS\Gateway
     private $client = null;
     private $http;
     public $tariff = "";
-    public $unitrial = false;
+    public $unitrial = true;
     public $unit;
-    public $flash = "enable";
+    public $flash = "disable";
     public $isflash = false;
     public $encrypt_sms = false;
     public $isUnicode = false;
@@ -98,7 +98,7 @@ class Nimbuz extends \CAMOO_SMS\Gateway
                     'variables' => [
                         'message'    => 'message',
                         'recipient'  => 'to',
-                        'message_id' => 'message_id',
+                        'message_id' => 'id',
                         'sender'	 => 'from',
                         'response'	 => 'response',
                     ]
@@ -106,7 +106,12 @@ class Nimbuz extends \CAMOO_SMS\Gateway
                 $oResult = $oMessage->sendBulk($hCallback);
             } else {
                 $oResult = $oMessage->send();
-                $hLog['message_id'] = \Nimbuz\Sms\Lib\Utils::getMessageKey($oResult, 'id');
+                if ($oResult->getResponseStatus() === 'KO') {
+                    $hLog['response'] = $oResult->getBody();
+                    $this->log($hLog, 'error');
+                    return new \WP_Error('send-sms', 'Message could not be sent');
+                }
+                $hLog['message_id'] = $oResult->getId();
                 $hLog['response'] = $oResult;
                 $this->log($hLog);
             }
@@ -137,7 +142,7 @@ class Nimbuz extends \CAMOO_SMS\Gateway
         $oBalance = call_user_func_array($this->oBalance, [$this->username, $this->password]);
         try {
             $ohBalance = $oBalance->get();
-            return $ohBalance->balance->balance;
+            return $ohBalance->getValue();
         } catch (\Nimbuz\Sms\Exception\NimbuzSmsException $e) {
             return new \WP_Error('account-credit', $e->getMessage());
         }
