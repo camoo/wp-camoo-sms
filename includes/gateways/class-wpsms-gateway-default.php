@@ -16,7 +16,7 @@ class Default_Gateway extends Gateway
 
     public function __construct()
     {
-        $this->validateNumber = "1xxxxxxxxxx";
+        $this->validateNumber = "237xxxxxxxxxx";
     }
 
     public function sendSMS()

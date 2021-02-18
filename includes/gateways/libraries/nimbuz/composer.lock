@@ -339,12 +339,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/camoo/nimbuz-sms.git",
-                "reference": "ee08e8b0e11ed463384d6fe2aafd13485c3225a5"
+                "reference": "7befd89baf5ce09a307fda153452220349d7e9d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/camoo/nimbuz-sms/zipball/ee08e8b0e11ed463384d6fe2aafd13485c3225a5",
-                "reference": "ee08e8b0e11ed463384d6fe2aafd13485c3225a5",
+                "url": "https://api.github.com/repos/camoo/nimbuz-sms/zipball/7befd89baf5ce09a307fda153452220349d7e9d3",
+                "reference": "7befd89baf5ce09a307fda153452220349d7e9d3",
                 "shasum": ""
             },
             "require": {
@@ -391,7 +391,7 @@
                 "source": "https://github.com/camoo/nimbuz-sms",
                 "wiki": "https://github.com/camoo/nimbuz-sms/wiki"
             },
-            "time": "2021-01-09T11:00:44+00:00"
+            "time": "2021-01-10T16:20:03+00:00"
         },
         {
             "name": "psr/http-message",

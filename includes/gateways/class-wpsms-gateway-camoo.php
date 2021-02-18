@@ -45,8 +45,6 @@ class Camoo extends \CAMOO_SMS\Gateway
         /**
          * Modify Receiver number
          *
-         * @since 3.4
-         *
          * @param array $this ->to receiver number
          */
         $this->to = apply_filters('wp_camoo_sms_to', $this->to);
@@ -115,10 +113,9 @@ class Camoo extends \CAMOO_SMS\Gateway
                 $hLog['response'] = $oResult;
                 $this->log($hLog);
             }
+
             /**
              * Run hook after send sms.
-             *
-             * @since 2.4
              *
              * @param string $result result output.
              */
@@ -143,6 +140,7 @@ class Camoo extends \CAMOO_SMS\Gateway
         }
 
         $oBalance = call_user_func_array($this->oBalance, [$this->username, $this->password]);
+
         try {
             $ohBalance = $oBalance->get();
             return $ohBalance->balance->balance;
